@@ -1,0 +1,2056 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: support@cybrid.app
+    name: Cybrid Support
+  description: |
+    # Welcome
+
+    Welcome to the Cybrid platform; enabling turnkey crypto banking services!
+
+    In these documents, you will find information on the operations provided by our platform, as well as details on how our REST API operates more generally.
+
+    Our complete set of APIs allows you to manage all your resources: your Organization, your banks and your identities. The complete set of APIs can be found on the following pages:
+
+    | API                                                            | Description                  |
+    |----------------------------------------------------------------|------------------------------|
+    | [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui) | APIs to manage organizations |
+    | [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                 | APIs to manage banks         |
+    | [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                     | APIs to manage identities    |
+
+    When you're ready, [request access](https://www.cybrid.xyz/access) to your Dashboard to view and administer your Organization. Once you've logged in, you can begin creating Banks, either for sandbox or production usage, and start enabling your customers to leverage DeFi and web3 with confidence.
+
+    If you have any questions, please contact [Support](mailto:support@cybrid.app) at any time so that we can help.
+
+    ## Authentication
+
+    The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create Organization and Bank tokens can be generated via your Dashboard ([request access](https://www.cybrid.xyz/access)).
+
+    An Organization Token applies broadly to the whole Organization and all of its Banks, whereas, a Bank Token is specific to an individual Bank.
+
+    Both Organization and Bank tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique Client ID and Secret that allows for machine-to-machine authentication.
+
+    **Never share your Client ID or Secret publicly or in your source code repository**
+
+    Your Client ID and Secret can be exchanged for a time-limited Bearer Token by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document:
+
+    ```
+    curl -X POST https://id.demo.cybrid.app/oauth/token -d '{
+        "grant_type": "client_credentials",
+        "client_id": "<Your Client ID>",
+        "client_secret": "<Your Secret>",
+        "scope": "<Your requested scopes -- space separated>"
+      }' -H "Content-Type: application/json"
+    ```
+
+    ## Scopes
+
+    The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.
+
+    The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
+
+    | Resource      | Read scope         | Write scope          | Execute scope     | Token Type         |
+    |---------------|--------------------|----------------------|-------------------|--------------------|
+    | Organizations | organizations:read | organizations:write  |                   | Organization/ Bank |
+    | Banks         | banks:read         | banks:write          | banks:execute     | Organization/ Bank |
+    | Customers     | customers:read     | customers:write      | customers:execute | Bank               |
+    | Assets        | prices:read        |                      |                   | Bank               |
+    | Accounts      | accounts:read      |                      | accounts:execute  | Bank               |
+    | Prices        | prices:read        |                      |                   | Bank               |
+    | Symbols       | prices:read        |                      |                   | Bank               |
+    | Quotes        | quotes:read        |                      | quotes:execute    | Bank               |
+    | Trades        | trades:read        |                      | trades:execute    | Bank               |
+
+    ## Organizations
+
+    An Organization is meant to model the organization partnering with Cybrid to use our platform.
+
+    An Organization does not directly interact with customers. Instead, an Organization has one or more banks, which encompass the financial service offerings of the platform.
+
+    ## Banks
+
+    A Bank is owned by an Organization and can be thought of as an environment or container for Customers and product offerings. An example of a Bank would be your customer facing banking website, or an internal staging environment for testing and integration.
+
+    An Organization can have multiple banks, in sandbox or production environments. A sandbox Bank will be backed by stubbed data and process flows. For instance, identity record and funding source processes will be simulated rather than performed.
+
+    ## Customers
+
+    Customers represent your banking users on the platform. At present, we offer support for Individuals as Customers.
+
+    Customers must be verified in our system before they can play any part on the platform. See the Identity Records section for more details on how a customer can be verified.
+
+    Customers must also have an account to be able to transact. See the Accounts APIs for more details on setting up accounts for the customer.
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.cybrid.xyz/tos
+  title: Cybrid Bank API
+  version: v0.3.13
+servers:
+- url: https://bank.demo.cybrid.app
+  variables:
+    defaultHost:
+      default: https://bank.demo.cybrid.app
+paths:
+  /api/assets:
+    get:
+      description: |-
+        Retrieves a listing of assets.
+
+        Required scope: **prices:read**
+      operationId: listAssets
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssetList'
+          description: get list of assets
+      security:
+      - BearerAuth: []
+        oauth2:
+        - prices:read
+      summary: Get assets list
+      tags:
+      - Assets
+      x-accepts: application/json
+  /api/banks:
+    get:
+      description: |-
+        Retrieves a listing of bank.
+
+        Required scope: **banks:read**
+      operationId: listBanks
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankList'
+          description: get list of banks
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get banks list
+      tags:
+      - Banks
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a bank.
+
+        ## Bank Type
+
+        Bank's can be created in either `sandbox` or `production` mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.
+
+        Via the API, only `sandbox` banks can be created. In order to enable a `production` bank please contact [Support](mailto:support@cybrid.app).
+
+        ## Backstopped Funding Source
+
+        A Backstopped Funding Source is an agreement between the Organization and Cybrid on transaction settlement. A Backstopped Funding Source is an escrow bank account that the Organization tops up on a regular basis and is drawn down by the Cybrid Platform when trades are executed by the Bank for its customers.
+
+        This feature must specifically be enabled in the Bank's `features` array by including the `backstopped_funding_source` flag. At present, backstopped funding sources is the supported method for funding trades on the platform.
+
+        Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.
+
+        ## Attestation Identity Records
+
+        Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank's customers. Please see the documentation under the create Identity Record API for more technical detail.
+
+        This feature must specifically be enabled in the Bank's `features` array by including the `attestation_identity_records` flag. At present, attestation identity records is the supported method for verifying a customer's identity on the platform.
+
+        Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.
+
+
+
+        Required scope: **banks:execute**
+      operationId: createBank
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostBank'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bank'
+          description: Bank created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:execute
+      summary: Create Bank
+      tags:
+      - Banks
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/banks/{bank_guid}:
+    get:
+      description: |-
+        Retrieves a bank.
+
+        Required scope: **banks:read**
+      operationId: getBank
+      parameters:
+      - description: Identifier for the bank.
+        explode: false
+        in: path
+        name: bank_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bank'
+          description: bank found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get Bank
+      tags:
+      - Banks
+      x-accepts: application/json
+  /api/customers:
+    get:
+      description: |-
+        Retrieves a listing of customers.
+
+        Required scope: **customers:read**
+      operationId: listCustomers
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerList'
+          description: get list of customers
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:read
+      summary: Get customers list
+      tags:
+      - Customers
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a customer.
+
+        ## Customer Type
+
+        Customer resources are an abstraction for real world individuals and businesses on the Cybrid Platform and are used throughout the platform to perform high level operations, e.g., create a quote, execute a trade, etc..
+
+        Customers can have additional resources attached to them, e.g., identity records, accounts, etc.
+
+        At present, Customer's can be created with type `individual`.
+
+
+
+        Required scope: **customers:execute**
+      operationId: createCustomer
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCustomer'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: customer created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:execute
+      summary: Create Customer
+      tags:
+      - Customers
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/customers/{customer_guid}:
+    get:
+      description: |-
+        Retrieves a customer.
+
+        Required scope: **customers:read**
+      operationId: getCustomer
+      parameters:
+      - description: Identifier for the customer.
+        explode: false
+        in: path
+        name: customer_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: customer found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:read
+      summary: Get Customer
+      tags:
+      - Customers
+      x-accepts: application/json
+  /api/identity_records:
+    post:
+      description: |-
+        Creates an identity record.
+
+        ## Identity Records
+
+        Identity Records verify an individual for inclusion on the platform. This know-your-customer (KYC) process is a requirement for individuals to be able to transact. At present, we offer support for Attestation Identity Records.
+
+        Once an Identity Record has been submitted, it will be reviewed by our system and transit through a lifecycle before ultimately being `verified` or `failed`. If an Identity Record is ends up `failed`, contextual information as to the reason may be provided on the resource and additional attempts can be made.
+
+        ## Attestation Identity Records
+
+        An Attestation Identity Record is a confirmation of fact that the Organization has completed their own KYC process and can vouch for its correctness.
+
+        Prior to uploading `verified` attestation identity records, an Organization must register their signing public key with their Bank through the create Verification Key API.
+
+        To create an attestation identity record, a signed JWT is required as proof that the Customer's identity has been verified by the Organization. When creating the JWT, the Organization must use the RS512 signing algorithm.
+
+        The JWT must contain the following headers:
+
+        - **alg**: The RS512 algorithm value, e.g., 'RS512'.
+        - **kid**: Set to the guid of the verification key that has been registered for the Bank
+
+        The JWT must contain the following claims:
+
+        - **iss**: Set to http://api.cybrid.app/banks/{bank_guid}
+        - **aud**: Set to http://api.cybrid.app
+        - **sub**: Set to http://api.cybrid.app/customers/{customer_guid}
+        - **iat**: Set to the time at which the JWT was issued
+        - **exp**: Set to the time after which the JWT expires
+        - **jti**: Set to a unique identifier for the JWT
+
+        Example code (python) for generating an Attestation Identity Record JWT token:
+
+        ```python
+        # Assumes an RSA private key has been generated (`private_key`), a Verification Key has been created and a `verification_key_guid` is available.
+        #
+        # `customer_guid` should be set to the guid assigned to a Customer that has been created.
+        # `bank_guid` should be set to the guid of your bank
+        #
+
+        import uuid
+
+        from datetime import datetime, timezone, timedelta
+        from jwcrypto import jwt, jwk
+        from cryptography.hazmat.primitives import serialization
+
+        algorithm = 'RS512'
+        issued_at = datetime.now(timezone.utc)
+        expired_at = issued_at + timedelta(days=365)
+
+        signing_key = jwk.JWK.from_pem(
+            private_key.private_bytes(
+                encoding=serialization.Encoding.PEM,
+                format=serialization.PrivateFormat.PKCS8,
+                encryption_algorithm=serialization.NoEncryption()
+            )
+        )
+        signing_key.update({"kid": verification_key_guid})
+
+        attestation_jwt = jwt.JWT(
+            header={
+                "alg": algorithm,
+                "kid": verification_key_guid
+            },
+            claims={
+                "iss": f"http://api.cybrid.app/banks/{bank_guid}",
+                "aud": "http://api.cybrid.app",
+                "sub": f"http://api.cybrid.app/customers/{customer_guid}",
+                "iat": int(issued_at.timestamp()),
+                "exp": int(expired_at.timestamp()),
+                "jti": str(uuid.uuid4())
+            },
+            key=signing_key,
+            algs=[algorithm]
+        )
+        attestation_jwt.make_signed_token(signing_key)
+
+        token = attestation_jwt.serialize(compact=True)
+        ```
+
+        ## Attestation State
+
+        | State | Description |
+        |-------|-------------|
+        | storing | The Platform is storing the attestation in our private store |
+        | pending | The Platform is verifying the attestation's JWT |
+        | verified | The Platform has verified the attestation and the customer is able to transact |
+        | failed | The Platform was not able to verify the attestation and the customer is not able to transact |
+
+
+
+        Required scope: **customers:write**
+      operationId: createIdentityRecord
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostIdentityRecord'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityRecord'
+          description: Identity Record created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:write
+      summary: Create Identity Record
+      tags:
+      - Identity Records
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/identity_records/{identity_record_guid}:
+    get:
+      description: |-
+        Retrieves an identity record.
+
+        Required scope: **customers:read**
+      operationId: getIdentityRecord
+      parameters:
+      - description: Identifier for the identity record.
+        explode: false
+        in: path
+        name: identity_record_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityRecord'
+          description: Identity Record found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:read
+      summary: Get Identity Record
+      tags:
+      - Identity Records
+      x-accepts: application/json
+  /api/accounts:
+    get:
+      description: |-
+        Retrieves a list of accounts.
+
+        Required scope: **accounts:read**
+      operationId: listAccounts
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated account_guids to list accounts for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountList'
+          description: get list of accounts
+      security:
+      - BearerAuth: []
+        oauth2:
+        - accounts:read
+      summary: List Accounts
+      tags:
+      - Accounts
+      x-accepts: application/json
+    post:
+      description: "Creates an account.\n\n## Account Type\n\nAn Account is tied to\
+        \ a specific cryptocurrency and is comprised of transactions and a current\
+        \ balance.\n\nAn account is required to allow a Customer to hold cryptocurrency\
+        \ on the Cybrid Platform.\n\nAt present, account's can be created as `trading`\
+        \ accounts and are required before a Customer can generate a quote and execute\
+        \ a trade.\n\n## Asset\n\nThe asset is the specific cryptocurrency that the\
+        \ account holds, e.g., 'BTC' for Bitcoin. See the Symbols API for a complete\
+        \ list of cryptocurrencies supported. \n\n\n\nRequired scope: **accounts:execute**"
+      operationId: createAccount
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostAccount'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: account created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - accounts:execute
+      summary: Create Account
+      tags:
+      - Accounts
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/accounts/{account_guid}:
+    get:
+      description: |-
+        Retrieves an account.
+
+        Required scope: **accounts:read**
+      operationId: getAccount
+      parameters:
+      - description: Identifier for the account.
+        explode: false
+        in: path
+        name: account_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+          description: account found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - accounts:read
+      summary: Get Account
+      tags:
+      - Accounts
+      x-accepts: application/json
+  /api/prices:
+    get:
+      description: |-
+        Retrieves a listing of symbol prices.
+
+        ## Symbols
+
+        Symbol are pairs and are in the format asset-counter_asset, e.g., 'BTC-USD' for the Bitcoin/ USD pair. See the Symbols API for a complete list of cryptocurrencies supported.
+
+
+
+        Required scope: **prices:read**
+      operationId: listPrices
+      parameters:
+      - description: Comma separated symbols to list prices for.
+        explode: true
+        in: query
+        name: symbol
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SymbolPriceResponse'
+          description: get list of price
+      security:
+      - BearerAuth: []
+        oauth2:
+        - prices:read
+      summary: Get Price
+      tags:
+      - Prices
+      x-accepts: application/json
+  /api/quotes:
+    get:
+      description: |-
+        Retrieves a listing of quotes for all customers of a bank.
+
+        Required scope: **quotes:read**
+      operationId: listQuotes
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuoteList'
+          description: get list of quotes
+      security:
+      - BearerAuth: []
+        oauth2:
+        - quotes:read
+      summary: Get quotes list
+      tags:
+      - Quotes
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a quote.
+
+        Required scope: **quotes:execute**
+      operationId: createQuote
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostQuote'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+          description: quote created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - quotes:execute
+      summary: Create Quote
+      tags:
+      - Quotes
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/quotes/{quote_guid}:
+    get:
+      description: |-
+        Retrieves a quote.
+
+        Required scope: **quotes:read**
+      operationId: getQuote
+      parameters:
+      - description: Identifier for the quote.
+        explode: false
+        in: path
+        name: quote_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+          description: quote found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - quotes:read
+      summary: Get Quote
+      tags:
+      - Quotes
+      x-accepts: application/json
+  /api/symbols:
+    get:
+      description: |-
+        Retrieves a listing of symbols.
+
+        Required scope: **prices:read**
+      operationId: listSymbols
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Symbols'
+          description: get list of symbols
+      security:
+      - BearerAuth: []
+        oauth2:
+        - prices:read
+      summary: Get Symbols list
+      tags:
+      - Symbols
+      x-accepts: application/json
+  /api/trades:
+    get:
+      description: |-
+        Retrieves a listing of trades.
+
+        Required scope: **trades:read**
+      operationId: listTrades
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated trade_guids to list trades for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The customer's identifier.
+        explode: true
+        in: query
+        name: customer_guid
+        required: true
+        schema:
+          type: string
+        style: form
+      - description: The account's identifier.
+        explode: true
+        in: query
+        name: account_guid
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradeList'
+          description: get list of trades
+      security:
+      - BearerAuth: []
+        oauth2:
+        - trades:read
+      summary: Get trades list
+      tags:
+      - Trades
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a trade.
+
+        ## State
+
+        | State | Description |
+        |-------|-------------|
+        | storing | The Platform is storing the trade details in our private store |
+        | initiating | The Platform has begun to perform the trade |
+        | pending | The Platform is executing the trade |
+        | completed | The Platform has successfully completed the trade |
+        | failed | The Platform was not able to successfully complete the trade |
+
+
+
+        Required scope: **trades:execute**
+      operationId: createTrade
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTrade'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+          description: Trade created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - trades:execute
+      summary: Create Trade
+      tags:
+      - Trades
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/trades/{trade_guid}:
+    get:
+      description: |-
+        Retrieves a trade.
+
+        Required scope: **trades:read**
+      operationId: getTrade
+      parameters:
+      - description: Identifier for the trade.
+        explode: false
+        in: path
+        name: trade_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trade'
+          description: trade found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - trades:read
+      summary: Get Trade
+      tags:
+      - Trades
+      x-accepts: application/json
+  /api/banks/{bank_guid}/verification_keys:
+    get:
+      description: |-
+        Retrieves a listing of verification keys of a bank.
+
+        Required scope: **banks:read**
+      operationId: listVerificationKeys
+      parameters:
+      - description: Identifier for the bank.
+        explode: false
+        in: path
+        name: bank_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKeyList'
+          description: get list of verification keys
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get Verification Keys list
+      tags:
+      - Verification Keys
+      x-accepts: application/json
+    post:
+      description: "Creates a verification key. \n\nExample code (python) for generating\
+        \ a Verification Key\n\n```python\nimport base64\n\nfrom cryptography.hazmat.primitives\
+        \ import hashes\nfrom cryptography.hazmat.primitives import serialization\n\
+        from cryptography.hazmat.primitives.asymmetric import padding\nfrom cryptography.hazmat.primitives.asymmetric\
+        \ import rsa\n\nnonce = \"wen moon\"\nprivate_key = rsa.generate_private_key(public_exponent=65537,\
+        \ key_size=2048)\nsignature = base64.b64encode(private_key.sign(\n    data=nonce.encode('ascii'),\
+        \ padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode('ascii')\n\
+        public_key = base64.b64encode(private_key.public_key().public_bytes(\n   \
+        \ encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode('ascii')\n\
+        ````\n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
+        \ | The Platform is storing the verification in our private key store |\n\
+        | pending | The Platform is verifying the verification key's signature |\n\
+        | verified | The Platform has verified the verification key's signature and\
+        \ the key can be used |\n| failed | The Platform was not able to verify the\
+        \ verification key's signature and the key cannot be used |\n\n\n\nRequired\
+        \ scope: **banks:write**"
+      operationId: createVerificationKey
+      parameters:
+      - description: Identifier for the bank.
+        explode: false
+        in: path
+        name: bank_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostVerificationKey'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKey'
+          description: verification key created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:write
+      summary: Create VerificationKey
+      tags:
+      - Verification Keys
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/banks/{bank_guid}/verification_keys/{verification_key_guid}:
+    get:
+      description: |-
+        Retrieves a verification key.
+
+        Required scope: **banks:read**
+      operationId: getVerificationKey
+      parameters:
+      - description: Identifier for the bank.
+        explode: false
+        in: path
+        name: bank_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Identifier for the verification key.
+        explode: false
+        in: path
+        name: verification_key_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKey'
+          description: Verification Key found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get VerificationKey
+      tags:
+      - Verification Keys
+      x-accepts: application/json
+components:
+  schemas:
+    Asset:
+      example:
+        symbol: symbol
+        code: code
+        decimals: 0
+        name: name
+        type: fiat
+      properties:
+        type:
+          description: The asset type.
+          enum:
+          - fiat
+          - crypto
+          type: string
+        code:
+          description: The unique code for the asset.
+          maxLength: 8
+          minLength: 1
+          type: string
+        name:
+          description: The name of the asset.
+          maxLength: 128
+          minLength: 1
+          type: string
+        symbol:
+          description: The currency symbol for the asset.
+          maxLength: 8
+          minLength: 1
+          type: string
+        decimals:
+          description: The number of decimals for the default unit of the asset.
+          minimum: 0
+          type: integer
+      required:
+      - code
+      - decimals
+      - name
+      - symbol
+      - type
+      type: object
+    AssetList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - symbol: symbol
+          code: code
+          decimals: 0
+          name: name
+          type: fiat
+        - symbol: symbol
+          code: code
+          decimals: 0
+          name: name
+          type: fiat
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of bank entities
+          items:
+            $ref: '#/components/schemas/Asset'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    Bank:
+      example:
+        features:
+        - attestation_identity_records
+        - attestation_identity_records
+        name: name
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        organization_guid: organization_guid
+        type: sandbox
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the bank.
+          maxLength: 32
+          minLength: 32
+          type: string
+        organization_guid:
+          description: The organization's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        name:
+          description: The bank's name.
+          maxLength: 128
+          minLength: 1
+          type: string
+        type:
+          description: The bank's type.
+          enum:
+          - sandbox
+          type: string
+        features:
+          description: The bank's enabled features.
+          items:
+            enum:
+            - attestation_identity_records
+            - backstopped_funding_source
+            type: string
+          type: array
+        created_at:
+          description: ISO8601 datetime the bank was created at.
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - features
+      - guid
+      - name
+      - organization_guid
+      - type
+      type: object
+    BankList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - features:
+          - attestation_identity_records
+          - attestation_identity_records
+          name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          organization_guid: organization_guid
+          type: sandbox
+        - features:
+          - attestation_identity_records
+          - attestation_identity_records
+          name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          organization_guid: organization_guid
+          type: sandbox
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of bank entities
+          items:
+            $ref: '#/components/schemas/Bank'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    Customer:
+      example:
+        customer_type: individual
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_type:
+          description: The customer's type.
+          enum:
+          - individual
+          type: string
+        created_at:
+          description: ISO8601 datetime the customer was created at.
+          format: date-time
+          type: string
+      type: object
+    CustomerList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - customer_type: individual
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+        - customer_type: individual
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/Customer'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    IdentityRecord:
+      example:
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        attestation_details:
+          state: storing
+        type: attestation
+        customer_guid: customer_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the identity record.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The customer's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: The identity record's type.
+          enum:
+          - attestation
+          type: string
+        attestation_details:
+          $ref: '#/components/schemas/AttestationDetails'
+        created_at:
+          description: ISO8601 datetime the customer was created at.
+          format: date-time
+          type: string
+      type: object
+    AttestationDetails:
+      example:
+        state: storing
+      properties:
+        state:
+          description: The state of an identity record attestation
+          enum:
+          - storing
+          - pending
+          - verified
+          - failed
+          type: string
+      type: object
+    SymbolPrice:
+      example:
+        symbol: symbol
+        sell_price: 6
+        sell_price_last_updated_at: 2000-01-23T04:56:07.000+00:00
+        buy_price: 0
+        buy_price_last_updated_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        symbol:
+          description: The trade symbol the pricing is related to. Format is asset-counter_asset,
+            e.g., BTC-USD.
+          maxLength: 16
+          minLength: 1
+          type: string
+        buy_price:
+          description: The purchase price (in base units) for the asset denominated
+            in the counter asset currency.
+          nullable: true
+          type: integer
+        sell_price:
+          description: The sale price (in base units) for the asset denominated in
+            the counter asset currency.
+          nullable: true
+          type: integer
+        buy_price_last_updated_at:
+          description: ISO8601 datetime the purchase price was generated at.
+          format: date-time
+          nullable: true
+          type: string
+        sell_price_last_updated_at:
+          description: ISO8601 datetime the sale price was generated at.
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    SymbolPriceResponse:
+      description: Array of SymbolPrice entities
+      items:
+        $ref: '#/components/schemas/SymbolPrice'
+      type: array
+    PostQuote:
+      properties:
+        customer_guid:
+          description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          type: string
+        symbol:
+          description: Symbol the quote is being requested for. Format is "asset-counter_asset"
+            in uppercase. See the Symbols API for a complete list of cryptocurrencies
+            supported.
+          maxLength: 16
+          minLength: 1
+          type: string
+        side:
+          description: 'The direction of the quote: either ''buy'' or ''sell''.'
+          enum:
+          - buy
+          - sell
+          type: string
+        receive_amount:
+          description: 'The amount to be received in base units of the currency: currency
+            is "asset" for buy and "counter_asset" for sell.'
+          type: integer
+        deliver_amount:
+          description: 'The amount to be delivered in base units of the currency:
+            currency is "counter_asset" for buy and "asset" for sell.'
+          type: integer
+      required:
+      - customer_guid
+      - side
+      - symbol
+      type: object
+    Quote:
+      example:
+        symbol: symbol
+        side: buy
+        expires_at: 2000-01-23T04:56:07.000+00:00
+        fee: 2
+        guid: guid
+        receive_amount: 5
+        issued_at: 2000-01-23T04:56:07.000+00:00
+        customer_guid: customer_guid
+        deliver_amount: 5
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the quote.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          type: string
+        symbol:
+          description: Symbol the quote is being requested for. Format is "asset-counter_asset"
+            in uppercase.
+          maxLength: 16
+          minLength: 1
+          type: string
+        side:
+          description: 'The direction of the quote: either ''buy'' or ''sell''.'
+          enum:
+          - buy
+          - sell
+          type: string
+        receive_amount:
+          description: 'The amount to be received in base units of the currency: currency
+            is "asset" for buy and "counter_asset" for sell.'
+          type: integer
+        deliver_amount:
+          description: 'The amount to be delivered in base units of the currency:
+            currency is "counter_asset" for buy and "asset" for sell.'
+          type: integer
+        fee:
+          description: The fee associated with the trade. Denominated in "counter_asset"
+            base units
+          type: integer
+        issued_at:
+          description: ISO8601 datetime the quote was created at.
+          format: date-time
+          type: string
+        expires_at:
+          description: ISO8601 datetime the quote is expiring at.
+          format: date-time
+          type: string
+      type: object
+    QuoteList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - symbol: symbol
+          side: buy
+          expires_at: 2000-01-23T04:56:07.000+00:00
+          fee: 2
+          guid: guid
+          receive_amount: 5
+          issued_at: 2000-01-23T04:56:07.000+00:00
+          customer_guid: customer_guid
+          deliver_amount: 5
+        - symbol: symbol
+          side: buy
+          expires_at: 2000-01-23T04:56:07.000+00:00
+          fee: 2
+          guid: guid
+          receive_amount: 5
+          issued_at: 2000-01-23T04:56:07.000+00:00
+          customer_guid: customer_guid
+          deliver_amount: 5
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/Quote'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    Symbols:
+      description: The list of symbols supported for trading.
+      items:
+        type: string
+      type: array
+    Trade:
+      example:
+        symbol: symbol
+        side: buy
+        quote_guid: quote_guid
+        fee: 2
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        receive_amount: 5
+        state: storing
+        customer_guid: customer_guid
+        deliver_amount: 5
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the trade.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The associated customer's identifier.
+          type: string
+        quote_guid:
+          description: The associated quote's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        symbol:
+          description: The trade symbol the pricing is related to. Format is asset-counter_asset,
+            e.g., BTC-USD.
+          type: string
+        side:
+          description: 'The direction of the quote: either ''buy'' or ''sell''.'
+          enum:
+          - buy
+          - sell
+          type: string
+        state:
+          description: The trade's state
+          enum:
+          - storing
+          - initiating
+          - pending
+          - completed
+          - failed
+          type: string
+        receive_amount:
+          description: 'The amount to be received in base units of the currency: currency
+            is "asset" for buy and "counter_asset" for sell.'
+          type: integer
+        deliver_amount:
+          description: 'The amount to be delivered in base units of the currency:
+            currency is "counter_asset" for buy and "asset" for sell.'
+          type: integer
+        fee:
+          description: The fee associated with the trade. Denominated in "counter_asset"
+            base units
+          type: integer
+        created_at:
+          description: ISO8601 datetime the bank was created at.
+          format: date-time
+          type: string
+      type: object
+    TradeList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - symbol: symbol
+          side: buy
+          quote_guid: quote_guid
+          fee: 2
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          receive_amount: 5
+          state: storing
+          customer_guid: customer_guid
+          deliver_amount: 5
+        - symbol: symbol
+          side: buy
+          quote_guid: quote_guid
+          fee: 2
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          receive_amount: 5
+          state: storing
+          customer_guid: customer_guid
+          deliver_amount: 5
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of trade entities
+          items:
+            $ref: '#/components/schemas/Trade'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    Account:
+      example:
+        name: name
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        type: backstopped
+        asset: asset
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      properties:
+        type:
+          description: The account type.
+          enum:
+          - backstopped
+          - trading
+          type: string
+        guid:
+          description: Auto-generated unique identifier for the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the account was created at.
+          format: date-time
+          type: string
+        asset:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+        bank_guid:
+          description: The bank identifier associated with the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The customer identifier associated with the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+      type: object
+    AccountList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          type: backstopped
+          asset: asset
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        - name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          type: backstopped
+          asset: asset
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of account entities
+          items:
+            $ref: '#/components/schemas/Account'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    VerificationKey:
+      example:
+        fingerprint: fingerprint
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        state: storing
+        type: attestation
+        bank_guid: bank_guid
+        algorithm: RS512
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the verification key.
+          maxLength: 32
+          minLength: 32
+          type: string
+        bank_guid:
+          description: The banks's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: The verification key's type.
+          enum:
+          - attestation
+          type: string
+        state:
+          description: The verification key's state.
+          enum:
+          - storing
+          - pending
+          - verified
+          - failed
+          type: string
+        algorithm:
+          description: The verification key's algorithm.
+          enum:
+          - RS512
+          type: string
+        fingerprint:
+          description: The verification key's cryptographic fingerprint.
+          maxLength: 128
+          minLength: 1
+          type: string
+        created_at:
+          description: ISO8601 datetime the verification key was created at.
+          format: date-time
+          type: string
+      type: object
+    VerificationKeyList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - fingerprint: fingerprint
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+          type: attestation
+          bank_guid: bank_guid
+          algorithm: RS512
+        - fingerprint: fingerprint
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+          type: attestation
+          bank_guid: bank_guid
+          algorithm: RS512
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of VerificationKey entities
+          items:
+            $ref: '#/components/schemas/VerificationKey'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    SystemAccount:
+      properties:
+        type:
+          description: The account type.
+          enum:
+          - fiat
+          - crypto
+          type: string
+        guid:
+          description: Auto-generated unique identifier for the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the account was created at.
+          format: date-time
+          type: string
+        asset_code:
+          description: The asset code.
+          maxLength: 128
+          minLength: 1
+          type: string
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+      type: object
+    ExchangeAccount:
+      properties:
+        type:
+          description: The exchange account type.
+          enum:
+          - fiat
+          - crypto
+          type: string
+        guid:
+          description: Auto-generated unique identifier for exchange account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the exchange account was created at.
+          format: date-time
+          type: string
+        exchange_guid:
+          description: The identifier of the exchange that owns this exchange account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        asset_code:
+          description: The asset code of the exchange account.
+          maxLength: 128
+          minLength: 1
+          type: string
+      type: object
+    Exchange:
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the exchange.
+          maxLength: 32
+          minLength: 32
+          type: string
+        name:
+          description: The name of the exchange.
+          maxLength: 128
+          minLength: 1
+          type: string
+        provider:
+          description: The provider for the exchange.
+          enum:
+          - aquanow
+          - dv_chain
+          type: string
+        environment:
+          description: The environment that the exchange is operating in.
+          enum:
+          - sandbox
+          - production
+          type: string
+        created_at:
+          description: ISO8601 datetime the exchange was created at.
+          format: date-time
+          type: string
+      type: object
+    ListRequestPage:
+      default: 0
+      description: The page index to retrieve.
+      minimum: 0
+      type: integer
+    ListRequestPerPage:
+      default: 10
+      description: The number of entities per page to return.
+      maximum: 100
+      minimum: 1
+      type: integer
+    PostBank:
+      properties:
+        name:
+          description: The bank's name.
+          maxLength: 128
+          minLength: 1
+          type: string
+        type:
+          description: The bank's type. At present, only **sandbox** is supported.
+          enum:
+          - sandbox
+          type: string
+        features:
+          description: The bank's enabled features. At present, both **attestation_identity_records**
+            and **backstopped_funding_source** must be set.
+          items:
+            enum:
+            - attestation_identity_records
+            - backstopped_funding_source
+            type: string
+          type: array
+      required:
+      - features
+      - name
+      - type
+      type: object
+    PostCustomer:
+      properties:
+        type:
+          description: The customer's type.
+          enum:
+          - individual
+          type: string
+      required:
+      - type
+      type: object
+    PostIdentityRecord:
+      properties:
+        customer_guid:
+          description: The customer's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: The identity record's type.
+          enum:
+          - attestation
+          type: string
+        attestation_details:
+          $ref: '#/components/schemas/PostIdentityRecord_attestation_details'
+      required:
+      - attestation_details
+      - customer_guid
+      - type
+      type: object
+    PostAccount:
+      properties:
+        type:
+          description: The account type.
+          enum:
+          - trading
+          type: string
+        customer_guid:
+          description: The customer identifier associated with the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        asset:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+      required:
+      - asset
+      - customer_guid
+      - name
+      - type
+      type: object
+    PostTrade:
+      properties:
+        quote_guid:
+          description: The associated quote's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+      required:
+      - quote_guid
+      type: object
+    PostVerificationKey:
+      properties:
+        type:
+          description: The verification key's type.
+          enum:
+          - attestation
+          type: string
+        algorithm:
+          description: The verification key's algorithm.
+          enum:
+          - RS512
+          type: string
+        public_key:
+          description: DER encoded public key in Base64 format.
+          maxLength: 6000
+          minLength: 1
+          type: string
+        nonce:
+          description: Value signed in the **signature** field.
+          maxLength: 256
+          minLength: 1
+          type: string
+        signature:
+          description: Signature on **nonce** using PKCS1v15 padding and the SHA512
+            hashing algorithm in Base64 format.
+          maxLength: 6000
+          minLength: 1
+          type: string
+      required:
+      - algorithm
+      - nonce
+      - public_key
+      - signature
+      - type
+      type: object
+    PostIdentityRecord_attestation_details:
+      properties:
+        token:
+          description: Customer attestation token.
+          maxLength: 2048
+          minLength: 1
+          type: string
+      type: object
+  securitySchemes:
+    oauth2:
+      flows:
+        clientCredentials:
+          scopes:
+            banks:read: banks read
+            banks:write: banks write
+            accounts:read: accounts read
+            accounts:execute: accounts execute
+            customers:read: customers read
+            customers:write: customers write
+            customers:execute: customers execute
+            prices:read: prices read
+            quotes:execute: quotes execute
+            quotes:read: quotes read
+            trades:execute: trades execute
+            trades:read: trades read
+          tokenUrl: https://id.demo.cybrid.app/oauth/token
+      type: oauth2
+    BearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+

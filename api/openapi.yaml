@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.3.32
+  version: v0.4.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1618,9 +1618,11 @@ components:
       type: object
     Account:
       example:
+        platform_available: 5
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
+        platform_balance: 5
         type: backstopped
         asset: asset
         bank_guid: bank_guid
@@ -1661,22 +1663,34 @@ components:
           maxLength: 32
           minLength: 32
           type: string
+        platform_balance:
+          description: The amount of funds that are in the account, in base units
+            of the asset.
+          type: integer
+        platform_available:
+          description: The amount of funds that are in the account, in base units
+            of the asset, that are available for use on the platform.
+          type: integer
       type: object
     AccountList:
       example:
         per_page: 0
         total: 0
         objects:
-        - name: name
+        - platform_available: 5
+          name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          platform_balance: 5
           type: backstopped
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
-        - name: name
+        - platform_available: 5
+          name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          platform_balance: 5
           type: backstopped
           asset: asset
           bank_guid: bank_guid

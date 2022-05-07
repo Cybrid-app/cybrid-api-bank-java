@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.5.0
+  version: v0.6.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -911,6 +911,103 @@ paths:
       summary: Get Trade
       tags:
       - Trades
+      x-accepts: application/json
+  /api/trading_configurations:
+    get:
+      description: |-
+        Retrieves a listing of trading configurations for a bank.
+
+        Required scope: **banks:read**
+      operationId: listTradingConfigurations
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingConfigurationList'
+          description: get list of trading configurations
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: List trading configurations
+      tags:
+      - TradingConfigurations
+      x-accepts: application/json
+    post:
+      description: |-
+        Creates a trading configuration.
+
+        Required scope: **banks:write**
+      operationId: createTradingConfiguration
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTradingConfiguration'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingConfiguration'
+          description: trading configuration created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:write
+      summary: Create TradingConfiguration
+      tags:
+      - TradingConfigurations
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/trading_configurations/{trading_configuration_guid}:
+    get:
+      description: |-
+        Retrieves a trading configuration.
+
+        Required scope: **banks:read**
+      operationId: getTradingConfiguration
+      parameters:
+      - description: Identifier for the trading configuration.
+        explode: false
+        in: path
+        name: trading_configuration_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TradingConfiguration'
+          description: trading configuration found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get TradingConfiguration
+      tags:
+      - TradingConfigurations
       x-accepts: application/json
   /api/banks/{bank_guid}/verification_keys:
     get:
@@ -1897,6 +1994,113 @@ components:
           format: date-time
           type: string
       type: object
+    Fee:
+      example:
+        spread_fee: 5
+        fixed_fee: 5
+        type: spread
+      properties:
+        type:
+          description: The fee's type
+          enum:
+          - spread
+          - fixed
+          type: string
+        spread_fee:
+          description: The percentage amount, in basis points, to apply when charging
+            a fee.
+          type: integer
+        fixed_fee:
+          description: The fixed amount, in the currency of the parent trading configuration,
+            to apply when charging a fee.
+          type: integer
+      type: object
+    TradingConfiguration:
+      example:
+        fees:
+        - spread_fee: 5
+          fixed_fee: 5
+          type: spread
+        - spread_fee: 5
+          fixed_fee: 5
+          type: spread
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        asset: asset
+        bank_guid: bank_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the exchange.
+          maxLength: 32
+          minLength: 32
+          type: string
+        bank_guid:
+          description: The bank identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        asset:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        created_at:
+          description: ISO8601 datetime the bank was created at.
+          format: date-time
+          type: string
+        fees:
+          description: The fees associated with the configuration
+          items:
+            $ref: '#/components/schemas/Fee'
+          type: array
+      type: object
+    TradingConfigurationList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - fees:
+          - spread_fee: 5
+            fixed_fee: 5
+            type: spread
+          - spread_fee: 5
+            fixed_fee: 5
+            type: spread
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset: asset
+          bank_guid: bank_guid
+        - fees:
+          - spread_fee: 5
+            fixed_fee: 5
+            type: spread
+          - spread_fee: 5
+            fixed_fee: 5
+            type: spread
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          asset: asset
+          bank_guid: bank_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/TradingConfiguration'
+          type: array
+      type: object
     ListRequestPage:
       default: 0
       description: The page index to retrieve.
@@ -2035,6 +2239,41 @@ components:
       - public_key
       - signature
       - type
+      type: object
+    PostFee:
+      properties:
+        type:
+          description: The fee's type
+          enum:
+          - spread
+          - fixed
+          type: string
+        spread_fee:
+          description: The percentage amount, in basis points, to apply when charging
+            a fee.
+          type: integer
+        fixed_fee:
+          description: The fixed amount, in the currency of the parent trading configuration,
+            to apply when charging a fee.
+          type: integer
+      required:
+      - type
+      type: object
+    PostTradingConfiguration:
+      properties:
+        asset:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        fees:
+          description: The fees associated with the configuration
+          items:
+            $ref: '#/components/schemas/PostFee'
+          type: array
+      required:
+      - asset
+      - fees
       type: object
     PostIdentityRecord_attestation_details:
       properties:

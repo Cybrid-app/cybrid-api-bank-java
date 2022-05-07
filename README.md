@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.5.0
+- API version: v0.6.0
 
-- Build date: 2022-05-05T18:51:10.051052Z[Etc/UTC]
+- Build date: 2022-05-07T02:31:48.326219Z[Etc/UTC]
 
 # Welcome
 
@@ -118,7 +118,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.5.0</version>
+  <version>v0.6.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -134,7 +134,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.5.0"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.6.0"
   }
 ```
 
@@ -148,7 +148,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.5.0.jar`
+- `target/cybrid-api-bank-java-v0.6.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -219,6 +219,9 @@ Class | Method | HTTP request | Description
 *TradesBankApi* | [**createTrade**](docs/TradesBankApi.md#createTrade) | **POST** /api/trades | Create Trade
 *TradesBankApi* | [**getTrade**](docs/TradesBankApi.md#getTrade) | **GET** /api/trades/{trade_guid} | Get Trade
 *TradesBankApi* | [**listTrades**](docs/TradesBankApi.md#listTrades) | **GET** /api/trades | Get trades list
+*TradingConfigurationsBankApi* | [**createTradingConfiguration**](docs/TradingConfigurationsBankApi.md#createTradingConfiguration) | **POST** /api/trading_configurations | Create TradingConfiguration
+*TradingConfigurationsBankApi* | [**getTradingConfiguration**](docs/TradingConfigurationsBankApi.md#getTradingConfiguration) | **GET** /api/trading_configurations/{trading_configuration_guid} | Get TradingConfiguration
+*TradingConfigurationsBankApi* | [**listTradingConfigurations**](docs/TradingConfigurationsBankApi.md#listTradingConfigurations) | **GET** /api/trading_configurations | List trading configurations
 *VerificationKeysBankApi* | [**createVerificationKey**](docs/VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/banks/{bank_guid}/verification_keys | Create VerificationKey
 *VerificationKeysBankApi* | [**getVerificationKey**](docs/VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/banks/{bank_guid}/verification_keys/{verification_key_guid} | Get VerificationKey
 *VerificationKeysBankApi* | [**listVerificationKeys**](docs/VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/banks/{bank_guid}/verification_keys | Get Verification Keys list
@@ -237,14 +240,17 @@ Class | Method | HTTP request | Description
  - [CustomerListBankModel](docs/CustomerListBankModel.md)
  - [ExchangeAccountBankModel](docs/ExchangeAccountBankModel.md)
  - [ExchangeBankModel](docs/ExchangeBankModel.md)
+ - [FeeBankModel](docs/FeeBankModel.md)
  - [IdentityRecordBankModel](docs/IdentityRecordBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
  - [PostCustomerBankModel](docs/PostCustomerBankModel.md)
+ - [PostFeeBankModel](docs/PostFeeBankModel.md)
  - [PostIdentityRecordAttestationDetailsBankModel](docs/PostIdentityRecordAttestationDetailsBankModel.md)
  - [PostIdentityRecordBankModel](docs/PostIdentityRecordBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
+ - [PostTradingConfigurationBankModel](docs/PostTradingConfigurationBankModel.md)
  - [PostVerificationKeyBankModel](docs/PostVerificationKeyBankModel.md)
  - [QuoteBankModel](docs/QuoteBankModel.md)
  - [QuoteListBankModel](docs/QuoteListBankModel.md)
@@ -252,6 +258,8 @@ Class | Method | HTTP request | Description
  - [SystemAccountBankModel](docs/SystemAccountBankModel.md)
  - [TradeBankModel](docs/TradeBankModel.md)
  - [TradeListBankModel](docs/TradeListBankModel.md)
+ - [TradingConfigurationBankModel](docs/TradingConfigurationBankModel.md)
+ - [TradingConfigurationListBankModel](docs/TradingConfigurationListBankModel.md)
  - [VerificationKeyBankModel](docs/VerificationKeyBankModel.md)
  - [VerificationKeyListBankModel](docs/VerificationKeyListBankModel.md)
 

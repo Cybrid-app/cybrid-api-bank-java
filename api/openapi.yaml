@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.6.17
+  version: v0.7.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -130,6 +130,115 @@ paths:
       summary: Get assets list
       tags:
       - Assets
+      x-accepts: application/json
+  /api/bank_verification_keys:
+    get:
+      description: |-
+        Retrieves a listing of verification keys of a bank.
+
+        Required scope: **banks:read**
+      operationId: listVerificationKeys
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKeyList'
+          description: get list of verification keys
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get Verification Keys list
+      tags:
+      - Verification Keys
+      x-accepts: application/json
+    post:
+      description: "Creates a verification key. \n\nExample code (python) for generating\
+        \ a Verification Key\n\n```python\nimport base64\n\nfrom cryptography.hazmat.primitives\
+        \ import hashes\nfrom cryptography.hazmat.primitives import serialization\n\
+        from cryptography.hazmat.primitives.asymmetric import padding\nfrom cryptography.hazmat.primitives.asymmetric\
+        \ import rsa\n\nnonce = \"wen moon\"\nprivate_key = rsa.generate_private_key(public_exponent=65537,\
+        \ key_size=2048)\nsignature = base64.b64encode(private_key.sign(\n    data=nonce.encode('ascii'),\
+        \ padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode('ascii')\n\
+        public_key = base64.b64encode(private_key.public_key().public_bytes(\n   \
+        \ encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode('ascii')\n\
+        ````\n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
+        \ | The Platform is storing the verification in our private key store |\n\
+        | pending | The Platform is verifying the verification key's signature |\n\
+        | verified | The Platform has verified the verification key's signature and\
+        \ the key can be used |\n| failed | The Platform was not able to verify the\
+        \ verification key's signature and the key cannot be used |\n\n\n\nRequired\
+        \ scope: **banks:write**"
+      operationId: createVerificationKey
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostVerificationKey'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKey'
+          description: verification key created
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:write
+      summary: Create VerificationKey
+      tags:
+      - Verification Keys
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/bank_verification_keys/{verification_key_guid}:
+    get:
+      description: |-
+        Retrieves a verification key.
+
+        Required scope: **banks:read**
+      operationId: getVerificationKey
+      parameters:
+      - description: Identifier for the verification key.
+        explode: false
+        in: path
+        name: verification_key_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificationKey'
+          description: Verification Key found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - banks:read
+      summary: Get VerificationKey
+      tags:
+      - Verification Keys
       x-accepts: application/json
   /api/banks:
     get:
@@ -1008,139 +1117,6 @@ paths:
       summary: Get TradingConfiguration
       tags:
       - TradingConfigurations
-      x-accepts: application/json
-  /api/banks/{bank_guid}/verification_keys:
-    get:
-      description: |-
-        Retrieves a listing of verification keys of a bank.
-
-        Required scope: **banks:read**
-      operationId: listVerificationKeys
-      parameters:
-      - description: Identifier for the bank.
-        explode: false
-        in: path
-        name: bank_guid
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          $ref: '#/components/schemas/ListRequestPage'
-        style: form
-      - explode: true
-        in: query
-        name: per_page
-        required: false
-        schema:
-          $ref: '#/components/schemas/ListRequestPerPage'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationKeyList'
-          description: get list of verification keys
-      security:
-      - BearerAuth: []
-        oauth2:
-        - banks:read
-      summary: Get Verification Keys list
-      tags:
-      - Verification Keys
-      x-accepts: application/json
-    post:
-      description: "Creates a verification key. \n\nExample code (python) for generating\
-        \ a Verification Key\n\n```python\nimport base64\n\nfrom cryptography.hazmat.primitives\
-        \ import hashes\nfrom cryptography.hazmat.primitives import serialization\n\
-        from cryptography.hazmat.primitives.asymmetric import padding\nfrom cryptography.hazmat.primitives.asymmetric\
-        \ import rsa\n\nnonce = \"wen moon\"\nprivate_key = rsa.generate_private_key(public_exponent=65537,\
-        \ key_size=2048)\nsignature = base64.b64encode(private_key.sign(\n    data=nonce.encode('ascii'),\
-        \ padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode('ascii')\n\
-        public_key = base64.b64encode(private_key.public_key().public_bytes(\n   \
-        \ encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode('ascii')\n\
-        ````\n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
-        \ | The Platform is storing the verification in our private key store |\n\
-        | pending | The Platform is verifying the verification key's signature |\n\
-        | verified | The Platform has verified the verification key's signature and\
-        \ the key can be used |\n| failed | The Platform was not able to verify the\
-        \ verification key's signature and the key cannot be used |\n\n\n\nRequired\
-        \ scope: **banks:write**"
-      operationId: createVerificationKey
-      parameters:
-      - description: Identifier for the bank.
-        explode: false
-        in: path
-        name: bank_guid
-        required: true
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostVerificationKey'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationKey'
-          description: verification key created
-      security:
-      - BearerAuth: []
-        oauth2:
-        - banks:write
-      summary: Create VerificationKey
-      tags:
-      - Verification Keys
-      x-contentType: application/json
-      x-accepts: application/json
-  /api/banks/{bank_guid}/verification_keys/{verification_key_guid}:
-    get:
-      description: |-
-        Retrieves a verification key.
-
-        Required scope: **banks:read**
-      operationId: getVerificationKey
-      parameters:
-      - description: Identifier for the bank.
-        explode: false
-        in: path
-        name: bank_guid
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: Identifier for the verification key.
-        explode: false
-        in: path
-        name: verification_key_guid
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VerificationKey'
-          description: Verification Key found
-      security:
-      - BearerAuth: []
-        oauth2:
-        - banks:read
-      summary: Get VerificationKey
-      tags:
-      - Verification Keys
       x-accepts: application/json
 components:
   schemas:

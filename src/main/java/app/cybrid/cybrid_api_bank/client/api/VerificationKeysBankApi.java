@@ -27,7 +27,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-11T15:18:08.051368Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-11T15:51:38.002818Z[Etc/UTC]")
 public class VerificationKeysBankApi {
     private ApiClient apiClient;
 
@@ -52,25 +52,18 @@ public class VerificationKeysBankApi {
      * Create VerificationKey
      * Creates a verification key.   Example code (python) for generating a Verification Key  &#x60;&#x60;&#x60;python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce &#x3D; \&quot;wen moon\&quot; private_key &#x3D; rsa.generate_private_key(public_exponent&#x3D;65537, key_size&#x3D;2048) signature &#x3D; base64.b64encode(private_key.sign(     data&#x3D;nonce.encode(&#39;ascii&#39;), padding&#x3D;padding.PKCS1v15(), algorithm&#x3D;hashes.SHA512())).decode(&#39;ascii&#39;) public_key &#x3D; base64.b64encode(private_key.public_key().public_bytes(     encoding&#x3D;serialization.Encoding.DER, format&#x3D;serialization.PublicFormat.SubjectPublicKeyInfo)).decode(&#39;ascii&#39;) &#x60;&#x60;&#x60;&#x60;  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key&#39;s signature | | verified | The Platform has verified the verification key&#39;s signature and the key can be used | | failed | The Platform was not able to verify the verification key&#39;s signature and the key cannot be used |    Required scope: **banks:write**
      * <p><b>201</b> - verification key created
-     * @param bankGuid Identifier for the bank.
      * @param postVerificationKeyBankModel The postVerificationKeyBankModel parameter
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec createVerificationKeyRequestCreation(String bankGuid, PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
+    private ResponseSpec createVerificationKeyRequestCreation(PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
         Object postBody = postVerificationKeyBankModel;
-        // verify the required parameter 'bankGuid' is set
-        if (bankGuid == null) {
-            throw new WebClientResponseException("Missing the required parameter 'bankGuid' when calling createVerificationKey", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
         // verify the required parameter 'postVerificationKeyBankModel' is set
         if (postVerificationKeyBankModel == null) {
             throw new WebClientResponseException("Missing the required parameter 'postVerificationKeyBankModel' when calling createVerificationKey", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
         }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
-
-        pathParams.put("bank_guid", bankGuid);
 
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
@@ -89,42 +82,36 @@ public class VerificationKeysBankApi {
         String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
 
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return apiClient.invokeAPI("/api/banks/{bank_guid}/verification_keys", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+        return apiClient.invokeAPI("/api/bank_verification_keys", HttpMethod.POST, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
     /**
      * Create VerificationKey
      * Creates a verification key.   Example code (python) for generating a Verification Key  &#x60;&#x60;&#x60;python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce &#x3D; \&quot;wen moon\&quot; private_key &#x3D; rsa.generate_private_key(public_exponent&#x3D;65537, key_size&#x3D;2048) signature &#x3D; base64.b64encode(private_key.sign(     data&#x3D;nonce.encode(&#39;ascii&#39;), padding&#x3D;padding.PKCS1v15(), algorithm&#x3D;hashes.SHA512())).decode(&#39;ascii&#39;) public_key &#x3D; base64.b64encode(private_key.public_key().public_bytes(     encoding&#x3D;serialization.Encoding.DER, format&#x3D;serialization.PublicFormat.SubjectPublicKeyInfo)).decode(&#39;ascii&#39;) &#x60;&#x60;&#x60;&#x60;  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key&#39;s signature | | verified | The Platform has verified the verification key&#39;s signature and the key can be used | | failed | The Platform was not able to verify the verification key&#39;s signature and the key cannot be used |    Required scope: **banks:write**
      * <p><b>201</b> - verification key created
-     * @param bankGuid Identifier for the bank.
      * @param postVerificationKeyBankModel The postVerificationKeyBankModel parameter
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<VerificationKeyBankModel> createVerificationKey(String bankGuid, PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
+    public Mono<VerificationKeyBankModel> createVerificationKey(PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return createVerificationKeyRequestCreation(bankGuid, postVerificationKeyBankModel).bodyToMono(localVarReturnType);
+        return createVerificationKeyRequestCreation(postVerificationKeyBankModel).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<VerificationKeyBankModel>> createVerificationKeyWithHttpInfo(String bankGuid, PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
+    public Mono<ResponseEntity<VerificationKeyBankModel>> createVerificationKeyWithHttpInfo(PostVerificationKeyBankModel postVerificationKeyBankModel) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return createVerificationKeyRequestCreation(bankGuid, postVerificationKeyBankModel).toEntity(localVarReturnType);
+        return createVerificationKeyRequestCreation(postVerificationKeyBankModel).toEntity(localVarReturnType);
     }
     /**
      * Get VerificationKey
      * Retrieves a verification key.  Required scope: **banks:read**
      * <p><b>200</b> - Verification Key found
-     * @param bankGuid Identifier for the bank.
      * @param verificationKeyGuid Identifier for the verification key.
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getVerificationKeyRequestCreation(String bankGuid, String verificationKeyGuid) throws WebClientResponseException {
+    private ResponseSpec getVerificationKeyRequestCreation(String verificationKeyGuid) throws WebClientResponseException {
         Object postBody = null;
-        // verify the required parameter 'bankGuid' is set
-        if (bankGuid == null) {
-            throw new WebClientResponseException("Missing the required parameter 'bankGuid' when calling getVerificationKey", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
         // verify the required parameter 'verificationKeyGuid' is set
         if (verificationKeyGuid == null) {
             throw new WebClientResponseException("Missing the required parameter 'verificationKeyGuid' when calling getVerificationKey", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
@@ -132,7 +119,6 @@ public class VerificationKeysBankApi {
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
 
-        pathParams.put("bank_guid", bankGuid);
         pathParams.put("verification_key_guid", verificationKeyGuid);
 
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
@@ -150,47 +136,39 @@ public class VerificationKeysBankApi {
         String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
 
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return apiClient.invokeAPI("/api/banks/{bank_guid}/verification_keys/{verification_key_guid}", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+        return apiClient.invokeAPI("/api/bank_verification_keys/{verification_key_guid}", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
     /**
      * Get VerificationKey
      * Retrieves a verification key.  Required scope: **banks:read**
      * <p><b>200</b> - Verification Key found
-     * @param bankGuid Identifier for the bank.
      * @param verificationKeyGuid Identifier for the verification key.
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<VerificationKeyBankModel> getVerificationKey(String bankGuid, String verificationKeyGuid) throws WebClientResponseException {
+    public Mono<VerificationKeyBankModel> getVerificationKey(String verificationKeyGuid) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return getVerificationKeyRequestCreation(bankGuid, verificationKeyGuid).bodyToMono(localVarReturnType);
+        return getVerificationKeyRequestCreation(verificationKeyGuid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<VerificationKeyBankModel>> getVerificationKeyWithHttpInfo(String bankGuid, String verificationKeyGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<VerificationKeyBankModel>> getVerificationKeyWithHttpInfo(String verificationKeyGuid) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyBankModel>() {};
-        return getVerificationKeyRequestCreation(bankGuid, verificationKeyGuid).toEntity(localVarReturnType);
+        return getVerificationKeyRequestCreation(verificationKeyGuid).toEntity(localVarReturnType);
     }
     /**
      * Get Verification Keys list
      * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of verification keys
-     * @param bankGuid Identifier for the bank.
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @return VerificationKeyListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listVerificationKeysRequestCreation(String bankGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    private ResponseSpec listVerificationKeysRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
         Object postBody = null;
-        // verify the required parameter 'bankGuid' is set
-        if (bankGuid == null) {
-            throw new WebClientResponseException("Missing the required parameter 'bankGuid' when calling listVerificationKeys", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
-
-        pathParams.put("bank_guid", bankGuid);
 
         final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
         final HttpHeaders headerParams = new HttpHeaders();
@@ -210,26 +188,25 @@ public class VerificationKeysBankApi {
         String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
 
         ParameterizedTypeReference<VerificationKeyListBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyListBankModel>() {};
-        return apiClient.invokeAPI("/api/banks/{bank_guid}/verification_keys", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+        return apiClient.invokeAPI("/api/bank_verification_keys", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     }
 
     /**
      * Get Verification Keys list
      * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of verification keys
-     * @param bankGuid Identifier for the bank.
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @return VerificationKeyListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<VerificationKeyListBankModel> listVerificationKeys(String bankGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<VerificationKeyListBankModel> listVerificationKeys(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyListBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyListBankModel>() {};
-        return listVerificationKeysRequestCreation(bankGuid, page, perPage).bodyToMono(localVarReturnType);
+        return listVerificationKeysRequestCreation(page, perPage).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<VerificationKeyListBankModel>> listVerificationKeysWithHttpInfo(String bankGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<ResponseEntity<VerificationKeyListBankModel>> listVerificationKeysWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
         ParameterizedTypeReference<VerificationKeyListBankModel> localVarReturnType = new ParameterizedTypeReference<VerificationKeyListBankModel>() {};
-        return listVerificationKeysRequestCreation(bankGuid, page, perPage).toEntity(localVarReturnType);
+        return listVerificationKeysRequestCreation(page, perPage).toEntity(localVarReturnType);
     }
 }

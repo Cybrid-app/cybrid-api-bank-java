@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.6.17
+- API version: v0.7.0
 
-- Build date: 2022-05-11T15:18:08.051368Z[Etc/UTC]
+- Build date: 2022-05-11T15:51:38.002818Z[Etc/UTC]
 
 # Welcome
 
@@ -118,7 +118,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.6.17</version>
+  <version>v0.7.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -134,7 +134,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.6.17"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.7.0"
   }
 ```
 
@@ -148,7 +148,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.6.17.jar`
+- `target/cybrid-api-bank-java-v0.7.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -222,9 +222,9 @@ Class | Method | HTTP request | Description
 *TradingConfigurationsBankApi* | [**createTradingConfiguration**](docs/TradingConfigurationsBankApi.md#createTradingConfiguration) | **POST** /api/trading_configurations | Create TradingConfiguration
 *TradingConfigurationsBankApi* | [**getTradingConfiguration**](docs/TradingConfigurationsBankApi.md#getTradingConfiguration) | **GET** /api/trading_configurations/{trading_configuration_guid} | Get TradingConfiguration
 *TradingConfigurationsBankApi* | [**listTradingConfigurations**](docs/TradingConfigurationsBankApi.md#listTradingConfigurations) | **GET** /api/trading_configurations | List trading configurations
-*VerificationKeysBankApi* | [**createVerificationKey**](docs/VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/banks/{bank_guid}/verification_keys | Create VerificationKey
-*VerificationKeysBankApi* | [**getVerificationKey**](docs/VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/banks/{bank_guid}/verification_keys/{verification_key_guid} | Get VerificationKey
-*VerificationKeysBankApi* | [**listVerificationKeys**](docs/VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/banks/{bank_guid}/verification_keys | Get Verification Keys list
+*VerificationKeysBankApi* | [**createVerificationKey**](docs/VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/bank_verification_keys | Create VerificationKey
+*VerificationKeysBankApi* | [**getVerificationKey**](docs/VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/bank_verification_keys/{verification_key_guid} | Get VerificationKey
+*VerificationKeysBankApi* | [**listVerificationKeys**](docs/VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/bank_verification_keys | Get Verification Keys list
 
 
 ## Documentation for Models

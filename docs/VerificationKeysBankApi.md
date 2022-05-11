@@ -4,15 +4,15 @@ All URIs are relative to *https://bank.demo.cybrid.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**createVerificationKey**](VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/banks/{bank_guid}/verification_keys | Create VerificationKey
-[**getVerificationKey**](VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/banks/{bank_guid}/verification_keys/{verification_key_guid} | Get VerificationKey
-[**listVerificationKeys**](VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/banks/{bank_guid}/verification_keys | Get Verification Keys list
+[**createVerificationKey**](VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/bank_verification_keys | Create VerificationKey
+[**getVerificationKey**](VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/bank_verification_keys/{verification_key_guid} | Get VerificationKey
+[**listVerificationKeys**](VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/bank_verification_keys | Get Verification Keys list
 
 
 
 ## createVerificationKey
 
-> VerificationKeyBankModel createVerificationKey(bankGuid, postVerificationKeyBankModel)
+> VerificationKeyBankModel createVerificationKey(postVerificationKeyBankModel)
 
 Create VerificationKey
 
@@ -43,10 +43,9 @@ public class Example {
         oauth2.setAccessToken("YOUR ACCESS TOKEN");
 
         VerificationKeysBankApi apiInstance = new VerificationKeysBankApi(defaultClient);
-        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
         PostVerificationKeyBankModel postVerificationKeyBankModel = new PostVerificationKeyBankModel(); // PostVerificationKeyBankModel | 
         try {
-            VerificationKeyBankModel result = apiInstance.createVerificationKey(bankGuid, postVerificationKeyBankModel);
+            VerificationKeyBankModel result = apiInstance.createVerificationKey(postVerificationKeyBankModel);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling VerificationKeysBankApi#createVerificationKey");
@@ -64,7 +63,6 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bankGuid** | **String**| Identifier for the bank. |
  **postVerificationKeyBankModel** | [**PostVerificationKeyBankModel**](PostVerificationKeyBankModel.md)|  |
 
 ### Return type
@@ -89,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## getVerificationKey
 
-> VerificationKeyBankModel getVerificationKey(bankGuid, verificationKeyGuid)
+> VerificationKeyBankModel getVerificationKey(verificationKeyGuid)
 
 Get VerificationKey
 
@@ -120,10 +118,9 @@ public class Example {
         oauth2.setAccessToken("YOUR ACCESS TOKEN");
 
         VerificationKeysBankApi apiInstance = new VerificationKeysBankApi(defaultClient);
-        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
         String verificationKeyGuid = "verificationKeyGuid_example"; // String | Identifier for the verification key.
         try {
-            VerificationKeyBankModel result = apiInstance.getVerificationKey(bankGuid, verificationKeyGuid);
+            VerificationKeyBankModel result = apiInstance.getVerificationKey(verificationKeyGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling VerificationKeysBankApi#getVerificationKey");
@@ -141,7 +138,6 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bankGuid** | **String**| Identifier for the bank. |
  **verificationKeyGuid** | **String**| Identifier for the verification key. |
 
 ### Return type
@@ -166,7 +162,7 @@ Name | Type | Description  | Notes
 
 ## listVerificationKeys
 
-> VerificationKeyListBankModel listVerificationKeys(bankGuid, page, perPage)
+> VerificationKeyListBankModel listVerificationKeys(page, perPage)
 
 Get Verification Keys list
 
@@ -197,11 +193,10 @@ public class Example {
         oauth2.setAccessToken("YOUR ACCESS TOKEN");
 
         VerificationKeysBankApi apiInstance = new VerificationKeysBankApi(defaultClient);
-        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
         try {
-            VerificationKeyListBankModel result = apiInstance.listVerificationKeys(bankGuid, page, perPage);
+            VerificationKeyListBankModel result = apiInstance.listVerificationKeys(page, perPage);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling VerificationKeysBankApi#listVerificationKeys");
@@ -219,7 +214,6 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **bankGuid** | **String**| Identifier for the bank. |
  **page** | **java.math.BigInteger**|  | [optional] [default to 0]
  **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
 

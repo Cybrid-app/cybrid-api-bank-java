@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## getCustomer
 
-> CustomerBankModel getCustomer(customerGuid)
+> CustomerBankModel getCustomer(customerGuid, bankGuid)
 
 Get Customer
 
@@ -119,8 +119,9 @@ public class Example {
 
         CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
         String customerGuid = "customerGuid_example"; // String | Identifier for the customer.
+        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
         try {
-            CustomerBankModel result = apiInstance.getCustomer(customerGuid);
+            CustomerBankModel result = apiInstance.getCustomer(customerGuid, bankGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CustomersBankApi#getCustomer");
@@ -139,6 +140,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerGuid** | **String**| Identifier for the customer. |
+ **bankGuid** | **String**| Identifier for the bank. | [optional]
 
 ### Return type
 
@@ -162,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## listCustomers
 
-> CustomerListBankModel listCustomers(page, perPage)
+> CustomerListBankModel listCustomers(page, perPage, bankGuid, guid)
 
 Get customers list
 
@@ -195,8 +197,10 @@ public class Example {
         CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
+        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
+        String guid = "guid_example"; // String | Comma separated customer_guid to list customers for.
         try {
-            CustomerListBankModel result = apiInstance.listCustomers(page, perPage);
+            CustomerListBankModel result = apiInstance.listCustomers(page, perPage, bankGuid, guid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CustomersBankApi#listCustomers");
@@ -216,6 +220,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **java.math.BigInteger**|  | [optional] [default to 0]
  **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
+ **bankGuid** | **String**| Identifier for the bank. | [optional]
+ **guid** | **String**| Comma separated customer_guid to list customers for. | [optional]
 
 ### Return type
 

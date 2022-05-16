@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **organizationGuid** | **String** | The organization&#39;s identifier. | 
 **name** | **String** | The bank&#39;s name. | 
 **type** | [**TypeEnum**](#TypeEnum) | The bank&#39;s type. | 
+**supportedFiatAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat assets. |  [optional]
 **features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The bank&#39;s enabled features. | 
 **createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. | 
 

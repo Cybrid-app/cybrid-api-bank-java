@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **String** | The bank&#39;s name. | 
 **type** | [**TypeEnum**](#TypeEnum) | The bank&#39;s type. At present, only **sandbox** is supported. | 
+**supportedFiatAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat assets. | 
 **features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The bank&#39;s enabled features. At present, both **attestation_identity_records** and **backstopped_funding_source** must be set. | 
 
 

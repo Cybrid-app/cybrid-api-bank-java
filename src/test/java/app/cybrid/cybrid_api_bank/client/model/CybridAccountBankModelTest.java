@@ -13,9 +13,6 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import app.cybrid.cybrid_api_bank.client.model.PostIdentityRecordAttestationDetailsBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,186 +20,72 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.time.OffsetDateTime;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * PostIdentityRecordBankModel
+ * Model tests for CybridAccountBankModel
  */
-@JsonPropertyOrder({
-  PostIdentityRecordBankModel.JSON_PROPERTY_CUSTOMER_GUID,
-  PostIdentityRecordBankModel.JSON_PROPERTY_TYPE,
-  PostIdentityRecordBankModel.JSON_PROPERTY_ATTESTATION_DETAILS
-})
-@JsonTypeName("PostIdentityRecord")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-17T16:39:55.520888Z[Etc/UTC]")
-public class PostIdentityRecordBankModel {
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
+public class CybridAccountBankModelTest {
+    private final CybridAccountBankModel model = new CybridAccountBankModel();
 
-  /**
-   * The identity record&#39;s type.
-   */
-  public enum TypeEnum {
-    ATTESTATION("attestation");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
+    /**
+     * Model tests for CybridAccountBankModel
+     */
+    @Test
+    public void testCybridAccountBankModel() {
+        // TODO: test CybridAccountBankModel
     }
 
-    @JsonValue
-    public String getValue() {
-      return value;
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
     }
 
-    @Override
-    public String toString() {
-      return String.valueOf(value);
+    /**
+     * Test the property 'guid'
+     */
+    @Test
+    public void guidTest() {
+        // TODO: test guid
     }
 
-    @JsonCreator
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    /**
+     * Test the property 'createdAt'
+     */
+    @Test
+    public void createdAtTest() {
+        // TODO: test createdAt
     }
-  }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private TypeEnum type;
-
-  public static final String JSON_PROPERTY_ATTESTATION_DETAILS = "attestation_details";
-  private PostIdentityRecordAttestationDetailsBankModel attestationDetails;
-
-  public PostIdentityRecordBankModel() { 
-  }
-
-  public PostIdentityRecordBankModel customerGuid(String customerGuid) {
-    
-    this.customerGuid = customerGuid;
-    return this;
-  }
-
-   /**
-   * The customer&#39;s identifier.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The customer's identifier.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getCustomerGuid() {
-    return customerGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-
-  public PostIdentityRecordBankModel type(TypeEnum type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The identity record&#39;s type.
-   * @return type
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The identity record's type.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public TypeEnum getType() {
-    return type;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setType(TypeEnum type) {
-    this.type = type;
-  }
-
-
-  public PostIdentityRecordBankModel attestationDetails(PostIdentityRecordAttestationDetailsBankModel attestationDetails) {
-    
-    this.attestationDetails = attestationDetails;
-    return this;
-  }
-
-   /**
-   * Get attestationDetails
-   * @return attestationDetails
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_ATTESTATION_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public PostIdentityRecordAttestationDetailsBankModel getAttestationDetails() {
-    return attestationDetails;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_ATTESTATION_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAttestationDetails(PostIdentityRecordAttestationDetailsBankModel attestationDetails) {
-    this.attestationDetails = attestationDetails;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Test the property 'assetCode'
+     */
+    @Test
+    public void assetCodeTest() {
+        // TODO: test assetCode
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
     }
-    PostIdentityRecordBankModel postIdentityRecord = (PostIdentityRecordBankModel) o;
-    return Objects.equals(this.customerGuid, postIdentityRecord.customerGuid) &&
-        Objects.equals(this.type, postIdentityRecord.type) &&
-        Objects.equals(this.attestationDetails, postIdentityRecord.attestationDetails);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(customerGuid, type, attestationDetails);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PostIdentityRecordBankModel {\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    attestationDetails: ").append(toIndentedString(attestationDetails)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'environment'
+     */
+    @Test
+    public void environmentTest() {
+        // TODO: test environment
     }
-    return o.toString().replace("\n", "\n    ");
-  }
 
 }
-

@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.9.10
+  version: v0.10.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1931,6 +1931,39 @@ components:
       - page
       - per_page
       - total
+      type: object
+    CybridAccount:
+      properties:
+        type:
+          description: The account type.
+          enum:
+          - fee
+          type: string
+        guid:
+          description: Auto-generated unique identifier for the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the account was created at.
+          format: date-time
+          type: string
+        asset_code:
+          description: The asset code.
+          maxLength: 128
+          minLength: 1
+          type: string
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+        environment:
+          description: The environment the account is configured for.
+          enum:
+          - sandbox
+          - production
+          type: string
       type: object
     SystemAccount:
       properties:

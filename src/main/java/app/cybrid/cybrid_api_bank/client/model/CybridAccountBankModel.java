@@ -15,7 +15,6 @@ package app.cybrid.cybrid_api_bank.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import app.cybrid.cybrid_api_bank.client.model.PostIdentityRecordAttestationDetailsBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,28 +22,29 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * PostIdentityRecordBankModel
+ * CybridAccountBankModel
  */
 @JsonPropertyOrder({
-  PostIdentityRecordBankModel.JSON_PROPERTY_CUSTOMER_GUID,
-  PostIdentityRecordBankModel.JSON_PROPERTY_TYPE,
-  PostIdentityRecordBankModel.JSON_PROPERTY_ATTESTATION_DETAILS
+  CybridAccountBankModel.JSON_PROPERTY_TYPE,
+  CybridAccountBankModel.JSON_PROPERTY_GUID,
+  CybridAccountBankModel.JSON_PROPERTY_CREATED_AT,
+  CybridAccountBankModel.JSON_PROPERTY_ASSET_CODE,
+  CybridAccountBankModel.JSON_PROPERTY_NAME,
+  CybridAccountBankModel.JSON_PROPERTY_ENVIRONMENT
 })
-@JsonTypeName("PostIdentityRecord")
+@JsonTypeName("CybridAccount")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-17T16:39:55.520888Z[Etc/UTC]")
-public class PostIdentityRecordBankModel {
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
-
+public class CybridAccountBankModel {
   /**
-   * The identity record&#39;s type.
+   * The account type.
    */
   public enum TypeEnum {
-    ATTESTATION("attestation");
+    FEE("fee");
 
     private String value;
 
@@ -76,53 +76,73 @@ public class PostIdentityRecordBankModel {
   public static final String JSON_PROPERTY_TYPE = "type";
   private TypeEnum type;
 
-  public static final String JSON_PROPERTY_ATTESTATION_DETAILS = "attestation_details";
-  private PostIdentityRecordAttestationDetailsBankModel attestationDetails;
+  public static final String JSON_PROPERTY_GUID = "guid";
+  private String guid;
 
-  public PostIdentityRecordBankModel() { 
-  }
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+  private OffsetDateTime createdAt;
 
-  public PostIdentityRecordBankModel customerGuid(String customerGuid) {
+  public static final String JSON_PROPERTY_ASSET_CODE = "asset_code";
+  private String assetCode;
+
+  public static final String JSON_PROPERTY_NAME = "name";
+  private String name;
+
+  /**
+   * The environment the account is configured for.
+   */
+  public enum EnvironmentEnum {
+    SANDBOX("sandbox"),
     
-    this.customerGuid = customerGuid;
-    return this;
+    PRODUCTION("production");
+
+    private String value;
+
+    EnvironmentEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static EnvironmentEnum fromValue(String value) {
+      for (EnvironmentEnum b : EnvironmentEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
   }
 
-   /**
-   * The customer&#39;s identifier.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The customer's identifier.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public static final String JSON_PROPERTY_ENVIRONMENT = "environment";
+  private EnvironmentEnum environment;
 
-  public String getCustomerGuid() {
-    return customerGuid;
+  public CybridAccountBankModel() { 
   }
 
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-
-  public PostIdentityRecordBankModel type(TypeEnum type) {
+  public CybridAccountBankModel type(TypeEnum type) {
     
     this.type = type;
     return this;
   }
 
    /**
-   * The identity record&#39;s type.
+   * The account type.
    * @return type
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The identity record's type.")
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The account type.")
   @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public TypeEnum getType() {
     return type;
@@ -130,36 +150,144 @@ public class PostIdentityRecordBankModel {
 
 
   @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setType(TypeEnum type) {
     this.type = type;
   }
 
 
-  public PostIdentityRecordBankModel attestationDetails(PostIdentityRecordAttestationDetailsBankModel attestationDetails) {
+  public CybridAccountBankModel guid(String guid) {
     
-    this.attestationDetails = attestationDetails;
+    this.guid = guid;
     return this;
   }
 
    /**
-   * Get attestationDetails
-   * @return attestationDetails
+   * Auto-generated unique identifier for the account.
+   * @return guid
   **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_ATTESTATION_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Auto-generated unique identifier for the account.")
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public PostIdentityRecordAttestationDetailsBankModel getAttestationDetails() {
-    return attestationDetails;
+  public String getGuid() {
+    return guid;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ATTESTATION_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAttestationDetails(PostIdentityRecordAttestationDetailsBankModel attestationDetails) {
-    this.attestationDetails = attestationDetails;
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setGuid(String guid) {
+    this.guid = guid;
+  }
+
+
+  public CybridAccountBankModel createdAt(OffsetDateTime createdAt) {
+    
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO8601 datetime the account was created at.
+   * @return createdAt
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "ISO8601 datetime the account was created at.")
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+
+  public CybridAccountBankModel assetCode(String assetCode) {
+    
+    this.assetCode = assetCode;
+    return this;
+  }
+
+   /**
+   * The asset code.
+   * @return assetCode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The asset code.")
+  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getAssetCode() {
+    return assetCode;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAssetCode(String assetCode) {
+    this.assetCode = assetCode;
+  }
+
+
+  public CybridAccountBankModel name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * The name of the account.
+   * @return name
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The name of the account.")
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getName() {
+    return name;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public CybridAccountBankModel environment(EnvironmentEnum environment) {
+    
+    this.environment = environment;
+    return this;
+  }
+
+   /**
+   * The environment the account is configured for.
+   * @return environment
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The environment the account is configured for.")
+  @JsonProperty(JSON_PROPERTY_ENVIRONMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public EnvironmentEnum getEnvironment() {
+    return environment;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ENVIRONMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEnvironment(EnvironmentEnum environment) {
+    this.environment = environment;
   }
 
 
@@ -171,24 +299,30 @@ public class PostIdentityRecordBankModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PostIdentityRecordBankModel postIdentityRecord = (PostIdentityRecordBankModel) o;
-    return Objects.equals(this.customerGuid, postIdentityRecord.customerGuid) &&
-        Objects.equals(this.type, postIdentityRecord.type) &&
-        Objects.equals(this.attestationDetails, postIdentityRecord.attestationDetails);
+    CybridAccountBankModel cybridAccount = (CybridAccountBankModel) o;
+    return Objects.equals(this.type, cybridAccount.type) &&
+        Objects.equals(this.guid, cybridAccount.guid) &&
+        Objects.equals(this.createdAt, cybridAccount.createdAt) &&
+        Objects.equals(this.assetCode, cybridAccount.assetCode) &&
+        Objects.equals(this.name, cybridAccount.name) &&
+        Objects.equals(this.environment, cybridAccount.environment);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(customerGuid, type, attestationDetails);
+    return Objects.hash(type, guid, createdAt, assetCode, name, environment);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PostIdentityRecordBankModel {\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
+    sb.append("class CybridAccountBankModel {\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    attestationDetails: ").append(toIndentedString(attestationDetails)).append("\n");
+    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    assetCode: ").append(toIndentedString(assetCode)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    environment: ").append(toIndentedString(environment)).append("\n");
     sb.append("}");
     return sb.toString();
   }

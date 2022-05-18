@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## getCustomer
 
-> CustomerBankModel getCustomer(customerGuid, bankGuid)
+> CustomerBankModel getCustomer(customerGuid)
 
 Get Customer
 
@@ -119,9 +119,8 @@ public class Example {
 
         CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
         String customerGuid = "customerGuid_example"; // String | Identifier for the customer.
-        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
         try {
-            CustomerBankModel result = apiInstance.getCustomer(customerGuid, bankGuid);
+            CustomerBankModel result = apiInstance.getCustomer(customerGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CustomersBankApi#getCustomer");
@@ -140,7 +139,6 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **customerGuid** | **String**| Identifier for the customer. |
- **bankGuid** | **String**| Identifier for the bank. | [optional]
 
 ### Return type
 
@@ -197,8 +195,8 @@ public class Example {
         CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
-        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
-        String guid = "guid_example"; // String | Comma separated customer_guid to list customers for.
+        String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list customers for.
+        String guid = "guid_example"; // String | Comma separated customer_guids to list customers for.
         try {
             CustomerListBankModel result = apiInstance.listCustomers(page, perPage, bankGuid, guid);
             System.out.println(result);
@@ -220,8 +218,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **java.math.BigInteger**|  | [optional] [default to 0]
  **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
- **bankGuid** | **String**| Identifier for the bank. | [optional]
- **guid** | **String**| Comma separated customer_guid to list customers for. | [optional]
+ **bankGuid** | **String**| Comma separated bank_guids to list customers for. | [optional]
+ **guid** | **String**| Comma separated customer_guids to list customers for. | [optional]
 
 ### Return type
 

@@ -27,7 +27,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-18T18:17:13.954910Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-18T19:51:02.731486Z[Etc/UTC]")
 public class CustomersBankApi {
     private ApiClient apiClient;
 
@@ -107,11 +107,10 @@ public class CustomersBankApi {
      * Retrieves a customer.  Required scope: **customers:read**
      * <p><b>200</b> - customer found
      * @param customerGuid Identifier for the customer.
-     * @param bankGuid Identifier for the bank.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getCustomerRequestCreation(String customerGuid, String bankGuid) throws WebClientResponseException {
+    private ResponseSpec getCustomerRequestCreation(String customerGuid) throws WebClientResponseException {
         Object postBody = null;
         // verify the required parameter 'customerGuid' is set
         if (customerGuid == null) {
@@ -126,8 +125,6 @@ public class CustomersBankApi {
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
-
-        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -147,18 +144,17 @@ public class CustomersBankApi {
      * Retrieves a customer.  Required scope: **customers:read**
      * <p><b>200</b> - customer found
      * @param customerGuid Identifier for the customer.
-     * @param bankGuid Identifier for the bank.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<CustomerBankModel> getCustomer(String customerGuid, String bankGuid) throws WebClientResponseException {
+    public Mono<CustomerBankModel> getCustomer(String customerGuid) throws WebClientResponseException {
         ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
-        return getCustomerRequestCreation(customerGuid, bankGuid).bodyToMono(localVarReturnType);
+        return getCustomerRequestCreation(customerGuid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<CustomerBankModel>> getCustomerWithHttpInfo(String customerGuid, String bankGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<CustomerBankModel>> getCustomerWithHttpInfo(String customerGuid) throws WebClientResponseException {
         ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
-        return getCustomerRequestCreation(customerGuid, bankGuid).toEntity(localVarReturnType);
+        return getCustomerRequestCreation(customerGuid).toEntity(localVarReturnType);
     }
     /**
      * Get customers list
@@ -166,8 +162,8 @@ public class CustomersBankApi {
      * <p><b>200</b> - get list of customers
      * @param page The page parameter
      * @param perPage The perPage parameter
-     * @param bankGuid Identifier for the bank.
-     * @param guid Comma separated customer_guid to list customers for.
+     * @param bankGuid Comma separated bank_guids to list customers for.
+     * @param guid Comma separated customer_guids to list customers for.
      * @return CustomerListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
@@ -205,8 +201,8 @@ public class CustomersBankApi {
      * <p><b>200</b> - get list of customers
      * @param page The page parameter
      * @param perPage The perPage parameter
-     * @param bankGuid Identifier for the bank.
-     * @param guid Comma separated customer_guid to list customers for.
+     * @param bankGuid Comma separated bank_guids to list customers for.
+     * @param guid Comma separated customer_guids to list customers for.
      * @return CustomerListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */

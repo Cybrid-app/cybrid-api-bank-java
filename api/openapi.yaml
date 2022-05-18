@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.11.0
+  version: v0.12.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -385,7 +385,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
         style: form
-      - description: Identifier for the bank.
+      - description: Comma separated bank_guids to list customers for.
         explode: true
         in: query
         name: bank_guid
@@ -393,7 +393,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: Comma separated customer_guid to list customers for.
+      - description: Comma separated customer_guids to list customers for.
         explode: true
         in: query
         name: guid
@@ -471,14 +471,6 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Identifier for the bank.
-        explode: true
-        in: query
-        name: bank_guid
-        required: false
-        schema:
-          type: string
-        style: form
       responses:
         "200":
           content:

@@ -3,6 +3,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.IdentityRecordBankModel;
+import app.cybrid.cybrid_api_bank.client.model.IdentityRecordListBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostIdentityRecordBankModel;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-19T12:33:25.621731Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-19T14:42:51.671472Z[Etc/UTC]")
 public class IdentityRecordsBankApi {
     private ApiClient apiClient;
 
@@ -154,5 +155,61 @@ public class IdentityRecordsBankApi {
     public Mono<ResponseEntity<IdentityRecordBankModel>> getIdentityRecordWithHttpInfo(String identityRecordGuid) throws WebClientResponseException {
         ParameterizedTypeReference<IdentityRecordBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityRecordBankModel>() {};
         return getIdentityRecordRequestCreation(identityRecordGuid).toEntity(localVarReturnType);
+    }
+    /**
+     * List Identity Records
+     * Retrieves a listing of identity records for a bank.  Required scope: **customers:read**
+     * <p><b>200</b> - list of identity records
+     * @param customerGuid Comma separated customer identifier to list identity records for.
+     * @param page The page parameter
+     * @param perPage The perPage parameter
+     * @return IdentityRecordListBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec listIdentityRecordsRequestCreation(String customerGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+        Object postBody = null;
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
+
+        ParameterizedTypeReference<IdentityRecordListBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityRecordListBankModel>() {};
+        return apiClient.invokeAPI("/api/identity_records", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * List Identity Records
+     * Retrieves a listing of identity records for a bank.  Required scope: **customers:read**
+     * <p><b>200</b> - list of identity records
+     * @param customerGuid Comma separated customer identifier to list identity records for.
+     * @param page The page parameter
+     * @param perPage The perPage parameter
+     * @return IdentityRecordListBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<IdentityRecordListBankModel> listIdentityRecords(String customerGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+        ParameterizedTypeReference<IdentityRecordListBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityRecordListBankModel>() {};
+        return listIdentityRecordsRequestCreation(customerGuid, page, perPage).bodyToMono(localVarReturnType);
+    }
+
+    public Mono<ResponseEntity<IdentityRecordListBankModel>> listIdentityRecordsWithHttpInfo(String customerGuid, java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+        ParameterizedTypeReference<IdentityRecordListBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityRecordListBankModel>() {};
+        return listIdentityRecordsRequestCreation(customerGuid, page, perPage).toEntity(localVarReturnType);
     }
 }

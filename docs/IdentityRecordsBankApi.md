@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createIdentityRecord**](IdentityRecordsBankApi.md#createIdentityRecord) | **POST** /api/identity_records | Create Identity Record
 [**getIdentityRecord**](IdentityRecordsBankApi.md#getIdentityRecord) | **GET** /api/identity_records/{identity_record_guid} | Get Identity Record
+[**listIdentityRecords**](IdentityRecordsBankApi.md#listIdentityRecords) | **GET** /api/identity_records | List Identity Records
 
 
 
@@ -157,4 +158,83 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Identity Record found |  -  |
+
+
+## listIdentityRecords
+
+> IdentityRecordListBankModel listIdentityRecords(customerGuid, page, perPage)
+
+List Identity Records
+
+Retrieves a listing of identity records for a bank.  Required scope: **customers:read**
+
+### Example
+
+```java
+// Import classes:
+import app.cybrid.cybrid_api_bank.client.ApiClient;
+import app.cybrid.cybrid_api_bank.client.ApiException;
+import app.cybrid.cybrid_api_bank.client.Configuration;
+import app.cybrid.cybrid_api_bank.client.auth.*;
+import app.cybrid.cybrid_api_bank.client.models.*;
+import app.cybrid.cybrid_api_bank.client.api.IdentityRecordsBankApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        
+        // Configure HTTP bearer authorization: BearerAuth
+        HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+        BearerAuth.setBearerToken("BEARER TOKEN");
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+        IdentityRecordsBankApi apiInstance = new IdentityRecordsBankApi(defaultClient);
+        String customerGuid = "customerGuid_example"; // String | Comma separated customer identifier to list identity records for.
+        java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
+        java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
+        try {
+            IdentityRecordListBankModel result = apiInstance.listIdentityRecords(customerGuid, page, perPage);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling IdentityRecordsBankApi#listIdentityRecords");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **customerGuid** | **String**| Comma separated customer identifier to list identity records for. | [optional]
+ **page** | **java.math.BigInteger**|  | [optional] [default to 0]
+ **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
+
+### Return type
+
+[**IdentityRecordListBankModel**](IdentityRecordListBankModel.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | list of identity records |  -  |
 

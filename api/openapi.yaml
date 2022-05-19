@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.12.4
+  version: v0.13.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -487,6 +487,51 @@ paths:
       - Customers
       x-accepts: application/json
   /api/identity_records:
+    get:
+      description: |-
+        Retrieves a listing of identity records for a bank.
+
+        Required scope: **customers:read**
+      operationId: listIdentityRecords
+      parameters:
+      - description: Comma separated customer identifier to list identity records
+          for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityRecordList'
+          description: list of identity records
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:read
+      summary: List Identity Records
+      tags:
+      - Identity Records
+      x-accepts: application/json
     post:
       description: |-
         Creates an identity record.
@@ -1429,6 +1474,47 @@ components:
           description: ISO8601 datetime the customer was created at.
           format: date-time
           type: string
+      type: object
+    IdentityRecordList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          attestation_details:
+            state: storing
+          type: attestation
+          customer_guid: customer_guid
+        - guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          attestation_details:
+            state: storing
+          type: attestation
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/IdentityRecord'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
       type: object
     AttestationDetails:
       example:

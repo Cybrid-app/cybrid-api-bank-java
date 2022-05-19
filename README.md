@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.12.4
+- API version: v0.13.0
 
-- Build date: 2022-05-19T12:33:25.621731Z[Etc/UTC]
+- Build date: 2022-05-19T14:42:51.671472Z[Etc/UTC]
 
 # Welcome
 
@@ -118,7 +118,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.12.4</version>
+  <version>v0.13.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -134,7 +134,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.12.4"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.13.0"
   }
 ```
 
@@ -148,7 +148,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.12.4.jar`
+- `target/cybrid-api-bank-java-v0.13.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -211,6 +211,7 @@ Class | Method | HTTP request | Description
 *CustomersBankApi* | [**listCustomers**](docs/CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list
 *IdentityRecordsBankApi* | [**createIdentityRecord**](docs/IdentityRecordsBankApi.md#createIdentityRecord) | **POST** /api/identity_records | Create Identity Record
 *IdentityRecordsBankApi* | [**getIdentityRecord**](docs/IdentityRecordsBankApi.md#getIdentityRecord) | **GET** /api/identity_records/{identity_record_guid} | Get Identity Record
+*IdentityRecordsBankApi* | [**listIdentityRecords**](docs/IdentityRecordsBankApi.md#listIdentityRecords) | **GET** /api/identity_records | List Identity Records
 *PricesBankApi* | [**listPrices**](docs/PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price
 *QuotesBankApi* | [**createQuote**](docs/QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote
 *QuotesBankApi* | [**getQuote**](docs/QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote
@@ -243,6 +244,7 @@ Class | Method | HTTP request | Description
  - [ExchangeBankModel](docs/ExchangeBankModel.md)
  - [FeeBankModel](docs/FeeBankModel.md)
  - [IdentityRecordBankModel](docs/IdentityRecordBankModel.md)
+ - [IdentityRecordListBankModel](docs/IdentityRecordListBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
  - [PostCustomerBankModel](docs/PostCustomerBankModel.md)

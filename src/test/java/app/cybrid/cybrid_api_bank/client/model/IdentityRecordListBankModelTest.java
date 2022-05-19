@@ -13,6 +13,7 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import app.cybrid.cybrid_api_bank.client.model.IdentityRecordBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,55 +21,57 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 
 /**
- * Model tests for PostAccountBankModel
+ * Model tests for IdentityRecordListBankModel
  */
-public class PostAccountBankModelTest {
-    private final PostAccountBankModel model = new PostAccountBankModel();
+public class IdentityRecordListBankModelTest {
+    private final IdentityRecordListBankModel model = new IdentityRecordListBankModel();
 
     /**
-     * Model tests for PostAccountBankModel
+     * Model tests for IdentityRecordListBankModel
      */
     @Test
-    public void testPostAccountBankModel() {
-        // TODO: test PostAccountBankModel
+    public void testIdentityRecordListBankModel() {
+        // TODO: test IdentityRecordListBankModel
     }
 
     /**
-     * Test the property 'type'
+     * Test the property 'total'
      */
     @Test
-    public void typeTest() {
-        // TODO: test type
+    public void totalTest() {
+        // TODO: test total
     }
 
     /**
-     * Test the property 'customerGuid'
+     * Test the property 'page'
      */
     @Test
-    public void customerGuidTest() {
-        // TODO: test customerGuid
+    public void pageTest() {
+        // TODO: test page
     }
 
     /**
-     * Test the property 'asset'
+     * Test the property 'perPage'
      */
     @Test
-    public void assetTest() {
-        // TODO: test asset
+    public void perPageTest() {
+        // TODO: test perPage
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'objects'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
+    public void objectsTest() {
+        // TODO: test objects
     }
 
 }

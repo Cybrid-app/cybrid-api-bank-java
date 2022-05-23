@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.13.6
+  version: v0.14.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -178,6 +178,12 @@ paths:
         \ padding=padding.PKCS1v15(), algorithm=hashes.SHA512())).decode('ascii')\n\
         public_key = base64.b64encode(private_key.public_key().public_bytes(\n   \
         \ encoding=serialization.Encoding.DER, format=serialization.PublicFormat.SubjectPublicKeyInfo)).decode('ascii')\n\
+        \n### DISCLAIMER:- Since NO ENCRYPTION is used in the key storage/formatting.\
+        \ Please DO NOT use this code in production environment.\nprivate_pem = private_key.private_bytes(encoding=serialization.Encoding.PEM,\
+        \ format=serialization.PrivateFormat.TraditionalOpenSSL, \n      encryption_algorithm=serialization.NoEncryption())\n\
+        \n## Store the private_key in a file verification_key.pem\nwith open (\"verification_key.pem\"\
+        , 'wb') as pem_out:\n   pem_out.write(private_pem)\n   pem_out.close()\n\n\
+        print(\"Public Key: \", public_key)\nprint(\"Signature: \", signature)\n\n\
         ````\n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
         \ | The Platform is storing the verification in our private key store |\n\
         | pending | The Platform is verifying the verification key's signature |\n\
@@ -578,11 +584,18 @@ paths:
         from datetime import datetime, timezone, timedelta
         from jwcrypto import jwt, jwk
         from cryptography.hazmat.primitives import serialization
+        from cryptography.hazmat.primitives.serialization import load_pem_private_key
 
         algorithm = 'RS512'
         issued_at = datetime.now(timezone.utc)
         expired_at = issued_at + timedelta(days=365)
 
+        with open("verification_key.pem", 'rb') as pem_in:
+          pem_lines = pem_in.read()
+
+        private_key = load_pem_private_key(pem_lines, None)
+
+        ### DISCLAIMER:- Since NO ENCRYPTION is used in the key storage/formatting. Please DO NOT use this code in production environment.
         signing_key = jwk.JWK.from_pem(
             private_key.private_bytes(
                 encoding=serialization.Encoding.PEM,
@@ -611,6 +624,7 @@ paths:
         attestation_jwt.make_signed_token(signing_key)
 
         token = attestation_jwt.serialize(compact=True)
+        print("Token is : ", token)
         ```
 
         ## Attestation State

@@ -83,4 +83,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of assets |  -  |
+| **400** | Malformed Authentication Header |  -  |
+| **401** | Invalid responses - Authentication failed, invalid subject |  -  |
+| **403** | Invalid scope |  -  |
 

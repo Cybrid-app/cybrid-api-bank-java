@@ -15,7 +15,6 @@ package app.cybrid.cybrid_api_bank.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import app.cybrid.cybrid_api_bank.client.model.CustomerBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,151 +22,110 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * CustomerListBankModel
+ * ErrorResponseBankModel
  */
 @JsonPropertyOrder({
-  CustomerListBankModel.JSON_PROPERTY_TOTAL,
-  CustomerListBankModel.JSON_PROPERTY_PAGE,
-  CustomerListBankModel.JSON_PROPERTY_PER_PAGE,
-  CustomerListBankModel.JSON_PROPERTY_OBJECTS
+  ErrorResponseBankModel.JSON_PROPERTY_STATUS,
+  ErrorResponseBankModel.JSON_PROPERTY_ERROR_MESSAGE,
+  ErrorResponseBankModel.JSON_PROPERTY_MESSAGE_CODE
 })
-@JsonTypeName("CustomerList")
+@JsonTypeName("ErrorResponse")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-25T23:14:50.914668Z[Etc/UTC]")
-public class CustomerListBankModel {
-  public static final String JSON_PROPERTY_TOTAL = "total";
-  private java.math.BigInteger total;
+public class ErrorResponseBankModel {
+  public static final String JSON_PROPERTY_STATUS = "status";
+  private java.math.BigInteger status;
 
-  public static final String JSON_PROPERTY_PAGE = "page";
-  private java.math.BigInteger page;
+  public static final String JSON_PROPERTY_ERROR_MESSAGE = "error_message";
+  private String errorMessage;
 
-  public static final String JSON_PROPERTY_PER_PAGE = "per_page";
-  private java.math.BigInteger perPage;
+  public static final String JSON_PROPERTY_MESSAGE_CODE = "message_code";
+  private String messageCode;
 
-  public static final String JSON_PROPERTY_OBJECTS = "objects";
-  private List<CustomerBankModel> objects = new ArrayList<>();
-
-  public CustomerListBankModel() { 
+  public ErrorResponseBankModel() { 
   }
 
-  public CustomerListBankModel total(java.math.BigInteger total) {
+  public ErrorResponseBankModel status(java.math.BigInteger status) {
     
-    this.total = total;
+    this.status = status;
     return this;
   }
 
    /**
-   * The total number of records available.
-   * minimum: 0
-   * @return total
+   * Status code for Http Request
+   * @return status
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The total number of records available.")
-  @JsonProperty(JSON_PROPERTY_TOTAL)
+  @ApiModelProperty(required = true, value = "Status code for Http Request")
+  @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public java.math.BigInteger getTotal() {
-    return total;
+  public java.math.BigInteger getStatus() {
+    return status;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TOTAL)
+  @JsonProperty(JSON_PROPERTY_STATUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTotal(java.math.BigInteger total) {
-    this.total = total;
+  public void setStatus(java.math.BigInteger status) {
+    this.status = status;
   }
 
 
-  public CustomerListBankModel page(java.math.BigInteger page) {
+  public ErrorResponseBankModel errorMessage(String errorMessage) {
     
-    this.page = page;
+    this.errorMessage = errorMessage;
     return this;
   }
 
    /**
-   * The page index to retrieve.
-   * minimum: 0
-   * @return page
+   * Error message
+   * @return errorMessage
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The page index to retrieve.")
-  @JsonProperty(JSON_PROPERTY_PAGE)
+  @ApiModelProperty(required = true, value = "Error message")
+  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public java.math.BigInteger getPage() {
-    return page;
+  public String getErrorMessage() {
+    return errorMessage;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PAGE)
+  @JsonProperty(JSON_PROPERTY_ERROR_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPage(java.math.BigInteger page) {
-    this.page = page;
+  public void setErrorMessage(String errorMessage) {
+    this.errorMessage = errorMessage;
   }
 
 
-  public CustomerListBankModel perPage(java.math.BigInteger perPage) {
+  public ErrorResponseBankModel messageCode(String messageCode) {
     
-    this.perPage = perPage;
+    this.messageCode = messageCode;
     return this;
   }
 
    /**
-   * The number of entities per page to return.
-   * minimum: 0
-   * @return perPage
+   * Message code for Error
+   * @return messageCode
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The number of entities per page to return.")
-  @JsonProperty(JSON_PROPERTY_PER_PAGE)
+  @ApiModelProperty(required = true, value = "Message code for Error")
+  @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public java.math.BigInteger getPerPage() {
-    return perPage;
+  public String getMessageCode() {
+    return messageCode;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PER_PAGE)
+  @JsonProperty(JSON_PROPERTY_MESSAGE_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPerPage(java.math.BigInteger perPage) {
-    this.perPage = perPage;
-  }
-
-
-  public CustomerListBankModel objects(List<CustomerBankModel> objects) {
-    
-    this.objects = objects;
-    return this;
-  }
-
-  public CustomerListBankModel addObjectsItem(CustomerBankModel objectsItem) {
-    this.objects.add(objectsItem);
-    return this;
-  }
-
-   /**
-   * Get objects
-   * @return objects
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-  @JsonProperty(JSON_PROPERTY_OBJECTS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public List<CustomerBankModel> getObjects() {
-    return objects;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_OBJECTS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setObjects(List<CustomerBankModel> objects) {
-    this.objects = objects;
+  public void setMessageCode(String messageCode) {
+    this.messageCode = messageCode;
   }
 
 
@@ -179,26 +137,24 @@ public class CustomerListBankModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CustomerListBankModel customerList = (CustomerListBankModel) o;
-    return Objects.equals(this.total, customerList.total) &&
-        Objects.equals(this.page, customerList.page) &&
-        Objects.equals(this.perPage, customerList.perPage) &&
-        Objects.equals(this.objects, customerList.objects);
+    ErrorResponseBankModel errorResponse = (ErrorResponseBankModel) o;
+    return Objects.equals(this.status, errorResponse.status) &&
+        Objects.equals(this.errorMessage, errorResponse.errorMessage) &&
+        Objects.equals(this.messageCode, errorResponse.messageCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(total, page, perPage, objects);
+    return Objects.hash(status, errorMessage, messageCode);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CustomerListBankModel {\n");
-    sb.append("    total: ").append(toIndentedString(total)).append("\n");
-    sb.append("    page: ").append(toIndentedString(page)).append("\n");
-    sb.append("    perPage: ").append(toIndentedString(perPage)).append("\n");
-    sb.append("    objects: ").append(toIndentedString(objects)).append("\n");
+    sb.append("class ErrorResponseBankModel {\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    errorMessage: ").append(toIndentedString(errorMessage)).append("\n");
+    sb.append("    messageCode: ").append(toIndentedString(messageCode)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -3,6 +3,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.AssetListBankModel;
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-25T11:25:16.335155Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-25T23:14:50.914668Z[Etc/UTC]")
 public class AssetsBankApi {
     private ApiClient apiClient;
 
@@ -50,6 +51,9 @@ public class AssetsBankApi {
      * Get assets list
      * Retrieves a listing of assets.  Required scope: **prices:read**
      * <p><b>200</b> - get list of assets
+     * <p><b>400</b> - Malformed Authentication Header
+     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return AssetListBankModel
@@ -85,6 +89,9 @@ public class AssetsBankApi {
      * Get assets list
      * Retrieves a listing of assets.  Required scope: **prices:read**
      * <p><b>200</b> - get list of assets
+     * <p><b>400</b> - Malformed Authentication Header
+     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return AssetListBankModel

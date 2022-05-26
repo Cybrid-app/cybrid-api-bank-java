@@ -2,6 +2,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostVerificationKeyBankModel;
 import app.cybrid.cybrid_api_bank.client.model.VerificationKeyBankModel;
 import app.cybrid.cybrid_api_bank.client.model.VerificationKeyListBankModel;
@@ -27,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-26T14:44:05.489052Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-26T23:50:19.788404Z[Etc/UTC]")
 public class VerificationKeysBankApi {
     private ApiClient apiClient;
 
@@ -52,6 +53,9 @@ public class VerificationKeysBankApi {
      * Create VerificationKey
      * Creates a verification key.   Example code (python) for generating a Verification Key  &#x60;&#x60;&#x60;python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce &#x3D; \&quot;wen moon\&quot; private_key &#x3D; rsa.generate_private_key(public_exponent&#x3D;65537, key_size&#x3D;2048) signature &#x3D; base64.b64encode(private_key.sign(     data&#x3D;nonce.encode(&#39;ascii&#39;), padding&#x3D;padding.PKCS1v15(), algorithm&#x3D;hashes.SHA512())).decode(&#39;ascii&#39;) public_key &#x3D; base64.b64encode(private_key.public_key().public_bytes(     encoding&#x3D;serialization.Encoding.DER, format&#x3D;serialization.PublicFormat.SubjectPublicKeyInfo)).decode(&#39;ascii&#39;)  ### DISCLAIMER:- Since NO ENCRYPTION is used in the key storage/formatting. Please DO NOT use this code in production environment. private_pem &#x3D; private_key.private_bytes(encoding&#x3D;serialization.Encoding.PEM, format&#x3D;serialization.PrivateFormat.TraditionalOpenSSL,        encryption_algorithm&#x3D;serialization.NoEncryption())  ## Store the private_key in a file verification_key.pem with open (\&quot;verification_key.pem\&quot;, &#39;wb&#39;) as pem_out:    pem_out.write(private_pem)    pem_out.close()  print(\&quot;Public Key: \&quot;, public_key) print(\&quot;Signature: \&quot;, signature)  &#x60;&#x60;&#x60;&#x60;  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key&#39;s signature | | verified | The Platform has verified the verification key&#39;s signature and the key can be used | | failed | The Platform was not able to verify the verification key&#39;s signature and the key cannot be used |    Required scope: **banks:write**
      * <p><b>201</b> - verification key created
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param postVerificationKeyBankModel The postVerificationKeyBankModel parameter
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -89,6 +93,9 @@ public class VerificationKeysBankApi {
      * Create VerificationKey
      * Creates a verification key.   Example code (python) for generating a Verification Key  &#x60;&#x60;&#x60;python import base64  from cryptography.hazmat.primitives import hashes from cryptography.hazmat.primitives import serialization from cryptography.hazmat.primitives.asymmetric import padding from cryptography.hazmat.primitives.asymmetric import rsa  nonce &#x3D; \&quot;wen moon\&quot; private_key &#x3D; rsa.generate_private_key(public_exponent&#x3D;65537, key_size&#x3D;2048) signature &#x3D; base64.b64encode(private_key.sign(     data&#x3D;nonce.encode(&#39;ascii&#39;), padding&#x3D;padding.PKCS1v15(), algorithm&#x3D;hashes.SHA512())).decode(&#39;ascii&#39;) public_key &#x3D; base64.b64encode(private_key.public_key().public_bytes(     encoding&#x3D;serialization.Encoding.DER, format&#x3D;serialization.PublicFormat.SubjectPublicKeyInfo)).decode(&#39;ascii&#39;)  ### DISCLAIMER:- Since NO ENCRYPTION is used in the key storage/formatting. Please DO NOT use this code in production environment. private_pem &#x3D; private_key.private_bytes(encoding&#x3D;serialization.Encoding.PEM, format&#x3D;serialization.PrivateFormat.TraditionalOpenSSL,        encryption_algorithm&#x3D;serialization.NoEncryption())  ## Store the private_key in a file verification_key.pem with open (\&quot;verification_key.pem\&quot;, &#39;wb&#39;) as pem_out:    pem_out.write(private_pem)    pem_out.close()  print(\&quot;Public Key: \&quot;, public_key) print(\&quot;Signature: \&quot;, signature)  &#x60;&#x60;&#x60;&#x60;  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the verification in our private key store | | pending | The Platform is verifying the verification key&#39;s signature | | verified | The Platform has verified the verification key&#39;s signature and the key can be used | | failed | The Platform was not able to verify the verification key&#39;s signature and the key cannot be used |    Required scope: **banks:write**
      * <p><b>201</b> - verification key created
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param postVerificationKeyBankModel The postVerificationKeyBankModel parameter
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -106,6 +113,10 @@ public class VerificationKeysBankApi {
      * Get VerificationKey
      * Retrieves a verification key.  Required scope: **banks:read**
      * <p><b>200</b> - Verification Key found
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - verification key not found
      * @param verificationKeyGuid Identifier for the verification key.
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -143,6 +154,10 @@ public class VerificationKeysBankApi {
      * Get VerificationKey
      * Retrieves a verification key.  Required scope: **banks:read**
      * <p><b>200</b> - Verification Key found
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - verification key not found
      * @param verificationKeyGuid Identifier for the verification key.
      * @return VerificationKeyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -160,6 +175,9 @@ public class VerificationKeysBankApi {
      * Get Verification Keys list
      * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of verification keys
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @return VerificationKeyListBankModel
@@ -195,6 +213,9 @@ public class VerificationKeysBankApi {
      * Get Verification Keys list
      * Retrieves a listing of verification keys of a bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of verification keys
+     * <p><b>400</b> - Invalid responses - malformed authentication header
+     * <p><b>401</b> - Invalid responses - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @return VerificationKeyListBankModel

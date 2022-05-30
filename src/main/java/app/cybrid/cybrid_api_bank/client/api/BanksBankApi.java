@@ -4,6 +4,7 @@ import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.BankBankModel;
 import app.cybrid.cybrid_api_bank.client.model.BankListBankModel;
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostBankBankModel;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-30T13:58:05.118729Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-30T14:30:41.414925Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -52,6 +53,10 @@ public class BanksBankApi {
      * Create Bank
      * Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Backstopped Funding Source  A Backstopped Funding Source is an agreement between the Organization and Cybrid on transaction settlement. A Backstopped Funding Source is an escrow bank account that the Organization tops up on a regular basis and is drawn down by the Cybrid Platform when trades are executed by the Bank for its customers.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;backstopped_funding_source&#x60; flag. At present, backstopped funding sources is the supported method for funding trades on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
      * <p><b>201</b> - Bank created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>415</b> - Unsupported values
      * @param postBankBankModel The postBankBankModel parameter
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -89,6 +94,10 @@ public class BanksBankApi {
      * Create Bank
      * Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Backstopped Funding Source  A Backstopped Funding Source is an agreement between the Organization and Cybrid on transaction settlement. A Backstopped Funding Source is an escrow bank account that the Organization tops up on a regular basis and is drawn down by the Cybrid Platform when trades are executed by the Bank for its customers.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;backstopped_funding_source&#x60; flag. At present, backstopped funding sources is the supported method for funding trades on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
      * <p><b>201</b> - Bank created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>415</b> - Unsupported values
      * @param postBankBankModel The postBankBankModel parameter
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -106,6 +115,10 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -143,6 +156,10 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -160,6 +177,9 @@ public class BanksBankApi {
      * Get banks list
      * Retrieves a listing of bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of banks
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return BankListBankModel
@@ -195,6 +215,9 @@ public class BanksBankApi {
      * Get banks list
      * Retrieves a listing of bank.  Required scope: **banks:read**
      * <p><b>200</b> - get list of banks
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return BankListBankModel

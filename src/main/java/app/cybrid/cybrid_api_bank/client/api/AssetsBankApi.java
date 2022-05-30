@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-30T13:58:05.118729Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-30T14:30:41.414925Z[Etc/UTC]")
 public class AssetsBankApi {
     private ApiClient apiClient;
 
@@ -51,8 +51,8 @@ public class AssetsBankApi {
      * Get assets list
      * Retrieves a listing of assets.  Required scope: **prices:read**
      * <p><b>200</b> - get list of assets
-     * <p><b>400</b> - Malformed Authentication Header
-     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>400</b> - Invalid requests - Malformed Authentication Header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
@@ -89,8 +89,8 @@ public class AssetsBankApi {
      * Get assets list
      * Retrieves a listing of assets.  Required scope: **prices:read**
      * <p><b>200</b> - get list of assets
-     * <p><b>400</b> - Malformed Authentication Header
-     * <p><b>401</b> - Invalid responses - Authentication failed, invalid subject
+     * <p><b>400</b> - Invalid requests - Malformed Authentication Header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.

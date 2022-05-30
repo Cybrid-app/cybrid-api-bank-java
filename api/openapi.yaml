@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.15.10
+  version: v0.16.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -132,7 +132,7 @@ paths:
                 message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Malformed Authentication Header
+          description: Invalid requests - Malformed Authentication Header
         "401":
           content:
             application/json:
@@ -154,7 +154,7 @@ paths:
                 message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - Authentication failed, invalid subject
+          description: Unauthorized - Authentication failed, invalid subject
         "403":
           content:
             application/json:
@@ -211,7 +211,7 @@ paths:
                 message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - malformed authentication header
+          description: Invalid requests - malformed authentication header
         "401":
           content:
             application/json:
@@ -233,7 +233,7 @@ paths:
                 message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - invalid subject, Authentication failed
+          description: Unauthorized - Authentication failed, invalid subject
         "403":
           content:
             application/json:
@@ -299,7 +299,7 @@ paths:
                 message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - malformed authentication header
+          description: Invalid requests - malformed authentication header
         "401":
           content:
             application/json:
@@ -321,7 +321,7 @@ paths:
                 message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - Authentication failed, invalid subject
+          description: Unauthorized - Authentication failed, invalid subject
         "403":
           content:
             application/json:
@@ -373,7 +373,7 @@ paths:
                 message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - malformed authentication header
+          description: Invalid requests - malformed authentication header
         "401":
           content:
             application/json:
@@ -396,7 +396,7 @@ paths:
                 message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid responses - invalid subject, Authentication failed
+          description: Unauthorized - Authentication failed, invalid subject
         "403":
           content:
             application/json:
@@ -456,6 +456,48 @@ paths:
               schema:
                 $ref: '#/components/schemas/BankList'
           description: get list of banks
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - invalid subject, Authentication failed
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: banks:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -508,6 +550,72 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bank'
           description: Bank created
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: 'Missing parameter. Required: name, type, features,
+                  supported_fiat_assets'
+                message_code: missing_parameter
+              - status: 400
+                error_message: 'Invalid value exception. Parameter: type supported
+                  values: [ sandbox ]'
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - Authentication failed, invalid subject
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: banks:execute'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "415":
+          content:
+            application/json:
+              example:
+              - status: 415
+                error_message: 'Unsupported value exception. Parameter: supported_fiat_assets
+                  supported values: [ USD ]'
+                message_code: unsupported_value
+              - status: 415
+                error_message: 'Unsupported value exception. Parameter: features supported
+                  values: [ attestation_identity_records backstopped_funding_source
+                  ]'
+                message_code: unsupported_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unsupported values
       security:
       - BearerAuth: []
         oauth2:
@@ -540,6 +648,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bank'
           description: bank found
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - invalid subject, Authentication failed
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: banks:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              example:
+                status: 404
+                error_message: bank not found
+                message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bank not found
       security:
       - BearerAuth: []
         oauth2:

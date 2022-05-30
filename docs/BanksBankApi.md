@@ -83,6 +83,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Bank created |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
+| **403** | Invalid scope |  -  |
+| **415** | Unsupported values |  -  |
 
 
 ## getBank
@@ -158,6 +162,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - invalid subject, Authentication failed |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | bank not found |  -  |
 
 
 ## listBanks
@@ -235,4 +243,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of banks |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - invalid subject, Authentication failed |  -  |
+| **403** | Invalid scope |  -  |
 

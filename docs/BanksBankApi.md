@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
 | **400** | Invalid requests - malformed authentication header |  -  |
-| **401** | Unauthorized - invalid subject, Authentication failed |  -  |
+| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | bank not found |  -  |
 

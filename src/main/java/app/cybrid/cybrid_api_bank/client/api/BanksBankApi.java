@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-31T13:11:40.148075Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-31T14:13:29.211754Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -116,7 +116,7 @@ public class BanksBankApi {
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
      * <p><b>400</b> - Invalid requests - malformed authentication header
-     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
@@ -157,7 +157,7 @@ public class BanksBankApi {
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
      * <p><b>400</b> - Invalid requests - malformed authentication header
-     * <p><b>401</b> - Unauthorized - invalid subject, Authentication failed
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.

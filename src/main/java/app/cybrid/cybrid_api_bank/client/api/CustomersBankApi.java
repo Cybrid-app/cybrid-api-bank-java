@@ -4,6 +4,7 @@ import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.CustomerBankModel;
 import app.cybrid.cybrid_api_bank.client.model.CustomerListBankModel;
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostCustomerBankModel;
 
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-31T13:11:40.148075Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-05-31T14:13:29.211754Z[Etc/UTC]")
 public class CustomersBankApi {
     private ApiClient apiClient;
 
@@ -52,6 +53,9 @@ public class CustomersBankApi {
      * Create Customer
      * Creates a customer.  ## Customer Type  Customer resources are an abstraction for real world individuals and businesses on the Cybrid Platform and are used throughout the platform to perform high level operations, e.g., create a quote, execute a trade, etc..  Customers can have additional resources attached to them, e.g., identity records, accounts, etc.  At present, Customer&#39;s can be created with type &#x60;individual&#x60;.    Required scope: **customers:execute**
      * <p><b>201</b> - customer created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param postCustomerBankModel The postCustomerBankModel parameter
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -89,6 +93,9 @@ public class CustomersBankApi {
      * Create Customer
      * Creates a customer.  ## Customer Type  Customer resources are an abstraction for real world individuals and businesses on the Cybrid Platform and are used throughout the platform to perform high level operations, e.g., create a quote, execute a trade, etc..  Customers can have additional resources attached to them, e.g., identity records, accounts, etc.  At present, Customer&#39;s can be created with type &#x60;individual&#x60;.    Required scope: **customers:execute**
      * <p><b>201</b> - customer created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
      * @param postCustomerBankModel The postCustomerBankModel parameter
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -106,6 +113,10 @@ public class CustomersBankApi {
      * Get Customer
      * Retrieves a customer.  Required scope: **customers:read**
      * <p><b>200</b> - customer found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - customer not found
      * @param customerGuid Identifier for the customer.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -143,6 +154,10 @@ public class CustomersBankApi {
      * Get Customer
      * Retrieves a customer.  Required scope: **customers:read**
      * <p><b>200</b> - customer found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - customer not found
      * @param customerGuid Identifier for the customer.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -160,6 +175,9 @@ public class CustomersBankApi {
      * Get customers list
      * Retrieves a listing of customers.  Required scope: **customers:read**
      * <p><b>200</b> - get list of customers
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject,
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param bankGuid Comma separated bank_guids to list customers for.
@@ -199,6 +217,9 @@ public class CustomersBankApi {
      * Get customers list
      * Retrieves a listing of customers.  Required scope: **customers:read**
      * <p><b>200</b> - get list of customers
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject,
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param bankGuid Comma separated bank_guids to list customers for.

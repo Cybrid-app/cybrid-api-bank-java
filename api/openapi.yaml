@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.16.4
+  version: v0.17.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -679,7 +679,7 @@ paths:
                 message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Unauthorized - invalid subject, Authentication failed
+          description: Unauthorized - Authentication failed, invalid subject
         "403":
           content:
             application/json:
@@ -753,6 +753,56 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomerList'
           description: get list of customers
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: comma separated customer guids must be at the most
+                  4096 characters long
+                message_code: invalid_parameter
+              - status: 400
+                error_message: comma separated bank guids must be at the most 4096
+                  characters long
+                message_code: invalid_parameter
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - Authentication failed, invalid subject,
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: customers:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -791,6 +841,55 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
           description: customer created
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: 'Missing parameter. Required: type'
+                message_code: missing_parameter
+              - status: 400
+                error_message: 'Invalid value exception. Parameter: type supported
+                  values: [ individual ]'
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - Authentication failed, invalid subject
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: customers:execute'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -823,6 +922,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
           description: customer found
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - Authentication failed, invalid subject
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: customers:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              example:
+                status: 404
+                error_message: customer not found
+                message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: customer not found
       security:
       - BearerAuth: []
         oauth2:

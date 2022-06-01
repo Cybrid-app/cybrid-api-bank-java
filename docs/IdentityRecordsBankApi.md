@@ -83,6 +83,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Identity Record created |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed, |  -  |
+| **403** | Invalid scope |  -  |
 
 
 ## getIdentityRecord
@@ -158,6 +161,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Identity Record found |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | identity record not found |  -  |
 
 
 ## listIdentityRecords
@@ -237,4 +244,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | list of identity records |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
 

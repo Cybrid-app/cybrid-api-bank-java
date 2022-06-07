@@ -83,6 +83,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | account created |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
 
 
 ## getAccount
@@ -158,6 +161,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | account found |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | account not found |  -  |
 
 
 ## listAccounts
@@ -241,4 +248,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of accounts |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
 

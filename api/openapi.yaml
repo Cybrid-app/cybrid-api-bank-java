@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.20.4
+  version: v0.21.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -652,12 +652,12 @@ paths:
           content:
             application/json:
               example:
-              - status: 400
-                error_message: Authorization header is malformed.
-                message_code: authentication_malformed
+                status: 400
+                error_message: invalid bank_guid value
+                message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests - malformed authentication header
+          description: Invalid requests - invalid value in request
         "401":
           content:
             application/json:
@@ -690,16 +690,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Invalid scope
-        "404":
-          content:
-            application/json:
-              example:
-                status: 404
-                error_message: bank not found
-                message_code: not_found
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: bank not found
       security:
       - BearerAuth: []
         oauth2:
@@ -760,11 +750,11 @@ paths:
               - status: 400
                 error_message: comma separated customer guids must be at the most
                   4096 characters long
-                message_code: invalid_parameter
+                message_code: invalid_value
               - status: 400
                 error_message: comma separated bank guids must be at the most 4096
                   characters long
-                message_code: invalid_parameter
+                message_code: invalid_value
               - status: 400
                 error_message: Authorization header is malformed.
                 message_code: authentication_malformed
@@ -1027,7 +1017,7 @@ paths:
               - status: 400
                 error_message: comma separated customer guids must be at the most
                   4096 characters long
-                message_code: invalid_parameter
+                message_code: invalid_value
               - status: 400
                 error_message: Authorization header is malformed.
                 message_code: authentication_malformed
@@ -1200,7 +1190,7 @@ paths:
                 message_code: missing_parameter
               - status: 400
                 error_message: token must be at the most 2048 characters long
-                message_code: invalid_parameter
+                message_code: invalid_value
               - status: 400
                 error_message: Authorization header is malformed.
                 message_code: authentication_malformed
@@ -1386,6 +1376,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccountList'
           description: get list of accounts
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: comma separated guids must be at the most 4096 characters
+                  long
+                message_code: invalid_value
+              - status: 400
+                error_message: comma separated customer guids must be at the most
+                  4096 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: comma separated bank guids must be at the most 4096
+                  characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: accounts:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -1418,6 +1462,65 @@ paths:
               schema:
                 $ref: '#/components/schemas/Account'
           description: account created
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: 'Missing parameter. Required: type, customer_guid,
+                  asset, name'
+                message_code: missing_parameter
+              - status: 400
+                error_message: 'Invalid value exception. Parameter: type supported
+                  values: [ trading ]'
+                message_code: invalid_value
+              - status: 400
+                error_message: customer guids must be at the most 32 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: asset type must be at the most 8 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: name must be at the most 128 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: accounts:execute'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -1450,6 +1553,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/Account'
           description: account found
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: accounts:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              example:
+                status: 404
+                error_message: account not found
+                message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: account not found
       security:
       - BearerAuth: []
         oauth2:

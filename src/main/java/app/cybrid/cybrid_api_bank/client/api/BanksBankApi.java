@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-07T16:12:45.563450Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-07T18:10:10.305188Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -115,10 +115,9 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests - invalid value in request
      * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -156,10 +155,9 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests - invalid value in request
      * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API

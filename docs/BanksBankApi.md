@@ -162,10 +162,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests - invalid value in request |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
-| **404** | bank not found |  -  |
 
 
 ## listBanks

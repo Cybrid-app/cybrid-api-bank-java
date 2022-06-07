@@ -36,6 +36,7 @@ Name | Value
 STORING | &quot;storing&quot;
 INITIATING | &quot;initiating&quot;
 PENDING | &quot;pending&quot;
+SETTLING | &quot;settling&quot;
 COMPLETED | &quot;completed&quot;
 FAILED | &quot;failed&quot;
 

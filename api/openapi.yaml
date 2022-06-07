@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.19.1
+  version: v0.20.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1688,6 +1688,7 @@ paths:
         | storing | The Platform is storing the trade details in our private store |
         | initiating | The Platform has begun to perform the trade |
         | pending | The Platform is executing the trade |
+        | settling | The Platform is settling the trade |
         | completed | The Platform has successfully completed the trade |
         | failed | The Platform was not able to successfully complete the trade |
 
@@ -2402,6 +2403,7 @@ components:
           - storing
           - initiating
           - pending
+          - settling
           - completed
           - failed
           type: string

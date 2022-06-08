@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.21.5
+  version: v0.21.6
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -3157,6 +3157,14 @@ components:
           description: The associated quote's identifier.
           maxLength: 32
           minLength: 32
+          type: string
+        expected_error:
+          description: The optional expected error to simulate trade failure.
+          enum:
+          - unexpected_error
+          - invalid_quote_guid
+          - expired_quote
+          - non_sufficient_funds
           type: string
       required:
       - quote_guid

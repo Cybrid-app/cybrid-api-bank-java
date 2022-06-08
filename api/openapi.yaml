@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.23.1
+  version: v0.24.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1889,19 +1889,27 @@ paths:
         schema:
           type: string
         style: form
-      - description: The customer's identifier.
+      - description: Comma separated bank_guids to list trades for.
         explode: true
         in: query
-        name: customer_guid
-        required: true
+        name: bank_guid
+        required: false
         schema:
           type: string
         style: form
-      - description: The account's identifier.
+      - description: Comma separated customer_guids to list trades for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated account_guids to list trades for.
         explode: true
         in: query
         name: account_guid
-        required: true
+        required: false
         schema:
           type: string
         style: form

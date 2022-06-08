@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ## listTrades
 
-> TradeListBankModel listTrades(customerGuid, accountGuid, page, perPage, guid)
+> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid)
 
 Get trades list
 
@@ -193,13 +193,14 @@ public class Example {
         oauth2.setAccessToken("YOUR ACCESS TOKEN");
 
         TradesBankApi apiInstance = new TradesBankApi(defaultClient);
-        String customerGuid = "customerGuid_example"; // String | The customer's identifier.
-        String accountGuid = "accountGuid_example"; // String | The account's identifier.
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
         String guid = "guid_example"; // String | Comma separated trade_guids to list trades for.
+        String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list trades for.
+        String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list trades for.
+        String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list trades for.
         try {
-            TradeListBankModel result = apiInstance.listTrades(customerGuid, accountGuid, page, perPage, guid);
+            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TradesBankApi#listTrades");
@@ -217,11 +218,12 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **customerGuid** | **String**| The customer&#39;s identifier. |
- **accountGuid** | **String**| The account&#39;s identifier. |
  **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] [default to 0]
  **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] [default to 10]
  **guid** | **String**| Comma separated trade_guids to list trades for. | [optional]
+ **bankGuid** | **String**| Comma separated bank_guids to list trades for. | [optional]
+ **customerGuid** | **String**| Comma separated customer_guids to list trades for. | [optional]
+ **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional]
 
 ### Return type
 

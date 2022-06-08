@@ -27,7 +27,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T16:15:59.418182Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T20:31:27.325198Z[Etc/UTC]")
 public class TradesBankApi {
     private ApiClient apiClient;
 
@@ -160,24 +160,17 @@ public class TradesBankApi {
      * Get trades list
      * Retrieves a listing of trades.  Required scope: **trades:read**
      * <p><b>200</b> - get list of trades
-     * @param customerGuid The customer&#39;s identifier.
-     * @param accountGuid The account&#39;s identifier.
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @param guid Comma separated trade_guids to list trades for.
+     * @param bankGuid Comma separated bank_guids to list trades for.
+     * @param customerGuid Comma separated customer_guids to list trades for.
+     * @param accountGuid Comma separated account_guids to list trades for.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTradesRequestCreation(String customerGuid, String accountGuid, java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    private ResponseSpec listTradesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
         Object postBody = null;
-        // verify the required parameter 'customerGuid' is set
-        if (customerGuid == null) {
-            throw new WebClientResponseException("Missing the required parameter 'customerGuid' when calling listTrades", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
-        // verify the required parameter 'accountGuid' is set
-        if (accountGuid == null) {
-            throw new WebClientResponseException("Missing the required parameter 'accountGuid' when calling listTrades", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
-        }
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
 
@@ -189,6 +182,7 @@ public class TradesBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "account_guid", accountGuid));
 
@@ -209,21 +203,22 @@ public class TradesBankApi {
      * Get trades list
      * Retrieves a listing of trades.  Required scope: **trades:read**
      * <p><b>200</b> - get list of trades
-     * @param customerGuid The customer&#39;s identifier.
-     * @param accountGuid The account&#39;s identifier.
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @param guid Comma separated trade_guids to list trades for.
+     * @param bankGuid Comma separated bank_guids to list trades for.
+     * @param customerGuid Comma separated customer_guids to list trades for.
+     * @param accountGuid Comma separated account_guids to list trades for.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TradeListBankModel> listTrades(String customerGuid, String accountGuid, java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    public Mono<TradeListBankModel> listTrades(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(customerGuid, accountGuid, page, perPage, guid).bodyToMono(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(String customerGuid, String accountGuid, java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(customerGuid, accountGuid, page, perPage, guid).toEntity(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid).toEntity(localVarReturnType);
     }
 }

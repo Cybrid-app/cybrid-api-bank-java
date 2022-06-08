@@ -2,6 +2,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.SymbolPriceBankModel;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T14:20:15.122114Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T15:10:09.002399Z[Etc/UTC]")
 public class PricesBankApi {
     private ApiClient apiClient;
 
@@ -50,6 +51,9 @@ public class PricesBankApi {
      * Get Price
      * Retrieves a listing of symbol prices.  ## Symbols  Symbol are pairs and are in the format asset-counter_asset, e.g., &#39;BTC-USD&#39; for the Bitcoin/ USD pair. See the Symbols API for a complete list of cryptocurrencies supported.    Required scope: **prices:read**
      * <p><b>200</b> - get list of price
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param symbol Comma separated symbols to list prices for.
      * @return List&lt;SymbolPriceBankModel&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -83,6 +87,9 @@ public class PricesBankApi {
      * Get Price
      * Retrieves a listing of symbol prices.  ## Symbols  Symbol are pairs and are in the format asset-counter_asset, e.g., &#39;BTC-USD&#39; for the Bitcoin/ USD pair. See the Symbols API for a complete list of cryptocurrencies supported.    Required scope: **prices:read**
      * <p><b>200</b> - get list of price
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param symbol Comma separated symbols to list prices for.
      * @return List&lt;SymbolPriceBankModel&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API

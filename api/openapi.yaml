@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.22.0
+  version: v0.23.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1660,6 +1660,52 @@ paths:
               schema:
                 $ref: '#/components/schemas/SymbolPriceResponse'
           description: get list of price
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: comma separated symbols must be at the most 4096 characters
+                  long
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: prices:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:

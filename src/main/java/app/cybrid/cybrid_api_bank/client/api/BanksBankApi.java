@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T13:53:50.652361Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-08T14:20:15.122114Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -115,9 +115,10 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
-     * <p><b>400</b> - Invalid requests - invalid value in request
+     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -155,9 +156,10 @@ public class BanksBankApi {
      * Get Bank
      * Retrieves a bank.  Required scope: **banks:read**
      * <p><b>200</b> - bank found
-     * <p><b>400</b> - Invalid requests - invalid value in request
+     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
      * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - bank not found
      * @param bankGuid Identifier for the bank.
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -180,10 +182,11 @@ public class BanksBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param guid Comma separated bank_guids to list banks for.
      * @return BankListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listBanksRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    private ResponseSpec listBanksRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -195,6 +198,7 @@ public class BanksBankApi {
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -218,16 +222,17 @@ public class BanksBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param guid Comma separated bank_guids to list banks for.
      * @return BankListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<BankListBankModel> listBanks(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<BankListBankModel> listBanks(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
         ParameterizedTypeReference<BankListBankModel> localVarReturnType = new ParameterizedTypeReference<BankListBankModel>() {};
-        return listBanksRequestCreation(page, perPage).bodyToMono(localVarReturnType);
+        return listBanksRequestCreation(page, perPage, guid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<BankListBankModel>> listBanksWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<ResponseEntity<BankListBankModel>> listBanksWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
         ParameterizedTypeReference<BankListBankModel> localVarReturnType = new ParameterizedTypeReference<BankListBankModel>() {};
-        return listBanksRequestCreation(page, perPage).toEntity(localVarReturnType);
+        return listBanksRequestCreation(page, perPage, guid).toEntity(localVarReturnType);
     }
 }

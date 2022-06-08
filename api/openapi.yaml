@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.21.8
+  version: v0.22.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -449,6 +449,14 @@ paths:
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
         style: form
+      - description: Comma separated bank_guids to list banks for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -652,12 +660,12 @@ paths:
           content:
             application/json:
               example:
-                status: 400
-                error_message: invalid bank_guid value
-                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests - invalid value in request
+          description: Invalid requests - malformed authentication header
         "401":
           content:
             application/json:
@@ -690,6 +698,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Invalid scope
+        "404":
+          content:
+            application/json:
+              example:
+                status: 400
+                error_message: invalid bank_guid value
+                message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: bank not found
       security:
       - BearerAuth: []
         oauth2:
@@ -1671,6 +1689,30 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated quote_guids to list quotes for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list quotes for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list quotes for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
         style: form
       responses:
         "200":

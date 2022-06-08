@@ -162,14 +162,15 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
-| **400** | Invalid requests - invalid value in request |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
+| **404** | bank not found |  -  |
 
 
 ## listBanks
 
-> BankListBankModel listBanks(page, perPage)
+> BankListBankModel listBanks(page, perPage, guid)
 
 Get banks list
 
@@ -202,8 +203,9 @@ public class Example {
         BanksBankApi apiInstance = new BanksBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
+        String guid = "guid_example"; // String | Comma separated bank_guids to list banks for.
         try {
-            BankListBankModel result = apiInstance.listBanks(page, perPage);
+            BankListBankModel result = apiInstance.listBanks(page, perPage, guid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BanksBankApi#listBanks");
@@ -223,6 +225,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] [default to 0]
  **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] [default to 10]
+ **guid** | **String**| Comma separated bank_guids to list banks for. | [optional]
 
 ### Return type
 

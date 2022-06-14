@@ -13,8 +13,7 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
+import app.cybrid.cybrid_api_bank.client.model.ExchangeBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,219 +21,57 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * PostAccountBankModel
+ * Model tests for ExchangeListBankModel
  */
-@JsonPropertyOrder({
-  PostAccountBankModel.JSON_PROPERTY_TYPE,
-  PostAccountBankModel.JSON_PROPERTY_CUSTOMER_GUID,
-  PostAccountBankModel.JSON_PROPERTY_ASSET,
-  PostAccountBankModel.JSON_PROPERTY_NAME
-})
-@JsonTypeName("PostAccount")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
-public class PostAccountBankModel {
-  /**
-   * The account type.
-   */
-  public enum TypeEnum {
-    TRADING("trading");
+public class ExchangeListBankModelTest {
+    private final ExchangeListBankModel model = new ExchangeListBankModel();
 
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
+    /**
+     * Model tests for ExchangeListBankModel
+     */
+    @Test
+    public void testExchangeListBankModel() {
+        // TODO: test ExchangeListBankModel
     }
 
-    @JsonValue
-    public String getValue() {
-      return value;
+    /**
+     * Test the property 'total'
+     */
+    @Test
+    public void totalTest() {
+        // TODO: test total
     }
 
-    @Override
-    public String toString() {
-      return String.valueOf(value);
+    /**
+     * Test the property 'page'
+     */
+    @Test
+    public void pageTest() {
+        // TODO: test page
     }
 
-    @JsonCreator
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    /**
+     * Test the property 'perPage'
+     */
+    @Test
+    public void perPageTest() {
+        // TODO: test perPage
     }
-  }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private TypeEnum type;
-
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
-
-  public static final String JSON_PROPERTY_ASSET = "asset";
-  private String asset;
-
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
-
-  public PostAccountBankModel() { 
-  }
-
-  public PostAccountBankModel type(TypeEnum type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The account type.
-   * @return type
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The account type.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public TypeEnum getType() {
-    return type;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setType(TypeEnum type) {
-    this.type = type;
-  }
-
-
-  public PostAccountBankModel customerGuid(String customerGuid) {
-    
-    this.customerGuid = customerGuid;
-    return this;
-  }
-
-   /**
-   * The customer identifier associated with the account.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The customer identifier associated with the account.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getCustomerGuid() {
-    return customerGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-
-  public PostAccountBankModel asset(String asset) {
-    
-    this.asset = asset;
-    return this;
-  }
-
-   /**
-   * The asset code.
-   * @return asset
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The asset code.")
-  @JsonProperty(JSON_PROPERTY_ASSET)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getAsset() {
-    return asset;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_ASSET)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setAsset(String asset) {
-    this.asset = asset;
-  }
-
-
-  public PostAccountBankModel name(String name) {
-    
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * The name of the account.
-   * @return name
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The name of the account.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public String getName() {
-    return name;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Test the property 'objects'
+     */
+    @Test
+    public void objectsTest() {
+        // TODO: test objects
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PostAccountBankModel postAccount = (PostAccountBankModel) o;
-    return Objects.equals(this.type, postAccount.type) &&
-        Objects.equals(this.customerGuid, postAccount.customerGuid) &&
-        Objects.equals(this.asset, postAccount.asset) &&
-        Objects.equals(this.name, postAccount.name);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(type, customerGuid, asset, name);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PostAccountBankModel {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
-    sb.append("    asset: ").append(toIndentedString(asset)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
-  }
 
 }
-

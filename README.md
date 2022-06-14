@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.26.1
+- API version: v0.26.2
 
-- Build date: 2022-06-14T17:32:21.706311Z[Etc/UTC]
+- Build date: 2022-06-14T18:31:50.519571Z[Etc/UTC]
 
 # Welcome
 
@@ -118,7 +118,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.26.1</version>
+  <version>v0.26.2</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -134,7 +134,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.26.1"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.26.2"
   }
 ```
 
@@ -148,7 +148,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.26.1.jar`
+- `target/cybrid-api-bank-java-v0.26.2.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -243,6 +243,7 @@ Class | Method | HTTP request | Description
  - [ErrorResponseBankModel](docs/ErrorResponseBankModel.md)
  - [ExchangeAccountBankModel](docs/ExchangeAccountBankModel.md)
  - [ExchangeBankModel](docs/ExchangeBankModel.md)
+ - [ExchangeListBankModel](docs/ExchangeListBankModel.md)
  - [FeeBankModel](docs/FeeBankModel.md)
  - [IdentityRecordBankModel](docs/IdentityRecordBankModel.md)
  - [IdentityRecordListBankModel](docs/IdentityRecordListBankModel.md)

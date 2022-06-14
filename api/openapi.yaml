@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.26.1
+  version: v0.26.2
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -3252,6 +3252,31 @@ components:
           description: ISO8601 datetime the exchange was created at.
           format: date-time
           type: string
+      type: object
+    ExchangeList:
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of exchange entities
+          items:
+            $ref: '#/components/schemas/Exchange'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
       type: object
     Fee:
       example:

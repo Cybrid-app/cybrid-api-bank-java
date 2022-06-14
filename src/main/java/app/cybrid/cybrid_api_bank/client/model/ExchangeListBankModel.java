@@ -15,6 +15,7 @@ package app.cybrid.cybrid_api_bank.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import app.cybrid.cybrid_api_bank.client.model.ExchangeBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,208 +23,151 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * SystemAccountBankModel
+ * ExchangeListBankModel
  */
 @JsonPropertyOrder({
-  SystemAccountBankModel.JSON_PROPERTY_TYPE,
-  SystemAccountBankModel.JSON_PROPERTY_GUID,
-  SystemAccountBankModel.JSON_PROPERTY_CREATED_AT,
-  SystemAccountBankModel.JSON_PROPERTY_ASSET_CODE,
-  SystemAccountBankModel.JSON_PROPERTY_NAME
+  ExchangeListBankModel.JSON_PROPERTY_TOTAL,
+  ExchangeListBankModel.JSON_PROPERTY_PAGE,
+  ExchangeListBankModel.JSON_PROPERTY_PER_PAGE,
+  ExchangeListBankModel.JSON_PROPERTY_OBJECTS
 })
-@JsonTypeName("SystemAccount")
+@JsonTypeName("ExchangeList")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
-public class SystemAccountBankModel {
-  /**
-   * The account type.
-   */
-  public enum TypeEnum {
-    FIAT("fiat"),
-    
-    CRYPTO("crypto");
+public class ExchangeListBankModel {
+  public static final String JSON_PROPERTY_TOTAL = "total";
+  private java.math.BigInteger total;
 
-    private String value;
+  public static final String JSON_PROPERTY_PAGE = "page";
+  private java.math.BigInteger page;
 
-    TypeEnum(String value) {
-      this.value = value;
-    }
+  public static final String JSON_PROPERTY_PER_PAGE = "per_page";
+  private java.math.BigInteger perPage;
 
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
+  public static final String JSON_PROPERTY_OBJECTS = "objects";
+  private List<ExchangeBankModel> objects = new ArrayList<>();
 
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
+  public ExchangeListBankModel() { 
   }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private TypeEnum type;
-
-  public static final String JSON_PROPERTY_GUID = "guid";
-  private String guid;
-
-  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
-  private OffsetDateTime createdAt;
-
-  public static final String JSON_PROPERTY_ASSET_CODE = "asset_code";
-  private String assetCode;
-
-  public static final String JSON_PROPERTY_NAME = "name";
-  private String name;
-
-  public SystemAccountBankModel() { 
-  }
-
-  public SystemAccountBankModel type(TypeEnum type) {
+  public ExchangeListBankModel total(java.math.BigInteger total) {
     
-    this.type = type;
+    this.total = total;
     return this;
   }
 
    /**
-   * The account type.
-   * @return type
+   * The total number of records available.
+   * minimum: 0
+   * @return total
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account type.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The total number of records available.")
+  @JsonProperty(JSON_PROPERTY_TOTAL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public TypeEnum getType() {
-    return type;
+  public java.math.BigInteger getTotal() {
+    return total;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setType(TypeEnum type) {
-    this.type = type;
+  @JsonProperty(JSON_PROPERTY_TOTAL)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setTotal(java.math.BigInteger total) {
+    this.total = total;
   }
 
 
-  public SystemAccountBankModel guid(String guid) {
+  public ExchangeListBankModel page(java.math.BigInteger page) {
     
-    this.guid = guid;
+    this.page = page;
     return this;
   }
 
    /**
-   * Auto-generated unique identifier for the account.
-   * @return guid
+   * The page index to retrieve.
+   * minimum: 0
+   * @return page
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Auto-generated unique identifier for the account.")
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The page index to retrieve.")
+  @JsonProperty(JSON_PROPERTY_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getGuid() {
-    return guid;
+  public java.math.BigInteger getPage() {
+    return page;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setGuid(String guid) {
-    this.guid = guid;
+  @JsonProperty(JSON_PROPERTY_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setPage(java.math.BigInteger page) {
+    this.page = page;
   }
 
 
-  public SystemAccountBankModel createdAt(OffsetDateTime createdAt) {
+  public ExchangeListBankModel perPage(java.math.BigInteger perPage) {
     
-    this.createdAt = createdAt;
+    this.perPage = perPage;
     return this;
   }
 
    /**
-   * ISO8601 datetime the account was created at.
-   * @return createdAt
+   * The number of entities per page to return.
+   * minimum: 0
+   * @return perPage
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "ISO8601 datetime the account was created at.")
-  @JsonProperty(JSON_PROPERTY_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The number of entities per page to return.")
+  @JsonProperty(JSON_PROPERTY_PER_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public OffsetDateTime getCreatedAt() {
-    return createdAt;
+  public java.math.BigInteger getPerPage() {
+    return perPage;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CREATED_AT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCreatedAt(OffsetDateTime createdAt) {
-    this.createdAt = createdAt;
+  @JsonProperty(JSON_PROPERTY_PER_PAGE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setPerPage(java.math.BigInteger perPage) {
+    this.perPage = perPage;
   }
 
 
-  public SystemAccountBankModel assetCode(String assetCode) {
+  public ExchangeListBankModel objects(List<ExchangeBankModel> objects) {
     
-    this.assetCode = assetCode;
+    this.objects = objects;
+    return this;
+  }
+
+  public ExchangeListBankModel addObjectsItem(ExchangeBankModel objectsItem) {
+    this.objects.add(objectsItem);
     return this;
   }
 
    /**
-   * The asset code.
-   * @return assetCode
+   * Array of exchange entities
+   * @return objects
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The asset code.")
-  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "Array of exchange entities")
+  @JsonProperty(JSON_PROPERTY_OBJECTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public String getAssetCode() {
-    return assetCode;
+  public List<ExchangeBankModel> getObjects() {
+    return objects;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAssetCode(String assetCode) {
-    this.assetCode = assetCode;
-  }
-
-
-  public SystemAccountBankModel name(String name) {
-    
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * The name of the account.
-   * @return name
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The name of the account.")
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getName() {
-    return name;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setName(String name) {
-    this.name = name;
+  @JsonProperty(JSON_PROPERTY_OBJECTS)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setObjects(List<ExchangeBankModel> objects) {
+    this.objects = objects;
   }
 
 
@@ -235,28 +179,26 @@ public class SystemAccountBankModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    SystemAccountBankModel systemAccount = (SystemAccountBankModel) o;
-    return Objects.equals(this.type, systemAccount.type) &&
-        Objects.equals(this.guid, systemAccount.guid) &&
-        Objects.equals(this.createdAt, systemAccount.createdAt) &&
-        Objects.equals(this.assetCode, systemAccount.assetCode) &&
-        Objects.equals(this.name, systemAccount.name);
+    ExchangeListBankModel exchangeList = (ExchangeListBankModel) o;
+    return Objects.equals(this.total, exchangeList.total) &&
+        Objects.equals(this.page, exchangeList.page) &&
+        Objects.equals(this.perPage, exchangeList.perPage) &&
+        Objects.equals(this.objects, exchangeList.objects);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(type, guid, createdAt, assetCode, name);
+    return Objects.hash(total, page, perPage, objects);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class SystemAccountBankModel {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
-    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    assetCode: ").append(toIndentedString(assetCode)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("class ExchangeListBankModel {\n");
+    sb.append("    total: ").append(toIndentedString(total)).append("\n");
+    sb.append("    page: ").append(toIndentedString(page)).append("\n");
+    sb.append("    perPage: ").append(toIndentedString(perPage)).append("\n");
+    sb.append("    objects: ").append(toIndentedString(objects)).append("\n");
     sb.append("}");
     return sb.toString();
   }

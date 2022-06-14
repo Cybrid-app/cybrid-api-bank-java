@@ -2,6 +2,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostQuoteBankModel;
 import app.cybrid.cybrid_api_bank.client.model.QuoteBankModel;
 import app.cybrid.cybrid_api_bank.client.model.QuoteListBankModel;
@@ -27,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T14:52:25.719857Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T15:19:05.617268Z[Etc/UTC]")
 public class QuotesBankApi {
     private ApiClient apiClient;
 
@@ -52,6 +53,11 @@ public class QuotesBankApi {
      * Create Quote
      * Creates a quote.  Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>422</b> - Unable to process request
+     * <p><b>500</b> - Internal server error
      * @param postQuoteBankModel The postQuoteBankModel parameter
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -89,6 +95,11 @@ public class QuotesBankApi {
      * Create Quote
      * Creates a quote.  Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>422</b> - Unable to process request
+     * <p><b>500</b> - Internal server error
      * @param postQuoteBankModel The postQuoteBankModel parameter
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -106,6 +117,10 @@ public class QuotesBankApi {
      * Get Quote
      * Retrieves a quote.  Required scope: **quotes:read**
      * <p><b>200</b> - quote found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - quote not found
      * @param quoteGuid Identifier for the quote.
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -143,6 +158,10 @@ public class QuotesBankApi {
      * Get Quote
      * Retrieves a quote.  Required scope: **quotes:read**
      * <p><b>200</b> - quote found
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - quote not found
      * @param quoteGuid Identifier for the quote.
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -160,6 +179,9 @@ public class QuotesBankApi {
      * Get quotes list
      * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
      * <p><b>200</b> - get list of quotes
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param guid Comma separated quote_guids to list quotes for.
@@ -201,6 +223,9 @@ public class QuotesBankApi {
      * Get quotes list
      * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
      * <p><b>200</b> - get list of quotes
+     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param guid Comma separated quote_guids to list quotes for.

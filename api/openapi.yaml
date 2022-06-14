@@ -85,7 +85,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.25.3
+  version: v0.26.0
 servers:
 - url: https://bank.demo.cybrid.app
   variables:
@@ -1767,6 +1767,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuoteList'
           description: get list of quotes
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Invalid value. comma separated guids must be at the
+                  most 4096 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Invalid value. comma separated customer guids must
+                  be at the most 4096 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Invalid value. comma separated bank guids must be at
+                  the most 4096 characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: quotes:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
       security:
       - BearerAuth: []
         oauth2:
@@ -1795,6 +1849,113 @@ paths:
               schema:
                 $ref: '#/components/schemas/Quote'
           description: quote created
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: 'Missing parameter. Required: customer_guid, symbol,
+                  side'
+                message_code: missing_parameter
+              - status: 400
+                error_message: Invalid value. customer guids must be at the most 32
+                  characters long
+                message_code: invalid_value
+              - status: 400
+                error_message: Invalid parameter. receive_amount, deliver_amount are
+                  mutually exclusive. Atleast one of them should be present
+                message_code: invalid_parameter
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: quotes:execute'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "422":
+          content:
+            application/json:
+              example:
+              - status: 422
+                error_message: 'Unable to process request: NotBackstoppedBankException
+                  - bank is not a backstopped bank account'
+                message_code: not_backstopped_bank
+              - status: 422
+                error_message: 'Unable to process request: MissingBackstoppedAccountException
+                  - no backstopped bank account configured'
+                message_code: no_backstopped_bank_account
+              - status: 422
+                error_message: 'Unable to process request: UnsupportedCryptoAssetException
+                  - bank does not support the asset'
+                message_code: unsupported_asset
+              - status: 422
+                error_message: 'Unable to process request: MissingTradingAccountException
+                  - no trading account for the asset requested'
+                message_code: no_trading_account_for_asset
+              - status: 422
+                error_message: 'Unable to process request: MissingIdentityRecordException
+                  - customer has no identity records'
+                message_code: no_identity_records
+              - status: 422
+                error_message: 'Unable to process request: InvalidIdentityRecordException
+                  - customer has no verified identity records'
+                message_code: invalid_identity_record
+              - status: 422
+                error_message: 'Unable to process request: InvalidQuoteAmountException
+                  - quote amount is below the configured threshold'
+                message_code: invalid_quote_amount
+              - status: 422
+                error_message: 'Unable to process request: NoExchangeException - exchange
+                  does not exist'
+                message_code: no_exchange
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unable to process request
+        "500":
+          content:
+            application/json:
+              example:
+              - status: 500
+                error_message: 'Unable to process request: exchange has no crypto
+                  account'
+                message_code: internal_server_error
+              - status: 500
+                error_message: 'Unable to process request: exchange has no fiat account'
+                message_code: internal_server_error
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
       security:
       - BearerAuth: []
         oauth2:
@@ -1827,6 +1988,58 @@ paths:
               schema:
                 $ref: '#/components/schemas/Quote'
           description: quote found
+        "400":
+          content:
+            application/json:
+              example:
+              - status: 400
+                error_message: Authorization header is malformed.
+                message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests - malformed authentication header
+        "401":
+          content:
+            application/json:
+              example:
+              - status: 401
+                error_message: 'Invalid Subject type. Required: bank or organization'
+                message_code: invalid_subject
+              - status: 401
+                error_message: Signature verification raised
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid audience
+                message_code: authentication_failed
+              - status: 401
+                error_message: Invalid issuer
+                message_code: authentication_failed
+              - status: 401
+                error_message: Signature has expired
+                message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: 'Unauthorized - Authentication failed, '
+        "403":
+          content:
+            application/json:
+              example:
+              - status: 403
+                error_message: 'Invalid scopes. Required: quotes:read'
+                message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              example:
+                status: 404
+                error_message: quote not found
+                message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: quote not found
       security:
       - BearerAuth: []
         oauth2:

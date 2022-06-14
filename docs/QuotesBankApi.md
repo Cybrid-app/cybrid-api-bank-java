@@ -83,6 +83,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | quote created |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **422** | Unable to process request |  -  |
+| **500** | Internal server error |  -  |
 
 
 ## getQuote
@@ -158,6 +163,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | quote found |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | quote not found |  -  |
 
 
 ## listQuotes
@@ -241,4 +250,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of quotes |  -  |
+| **400** | Invalid requests - malformed authentication header |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
 

@@ -1,8 +1,8 @@
 /*
  * Cybrid Bank API
- * # Welcome  Welcome to the Cybrid platform; enabling turnkey crypto banking services!  In these documents, you will find information on the operations provided by our platform, as well as details on how our REST API operates more generally.  Our complete set of APIs allows you to manage all your resources: your Organization, your banks and your identities. The complete set of APIs can be found on the following pages:  | API                                                            | Description                  | |----------------------------------------------------------------|------------------------------| | [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui) | APIs to manage organizations | | [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                 | APIs to manage banks         | | [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                     | APIs to manage identities    |  When you're ready, [request access](https://www.cybrid.xyz/access) to your Dashboard to view and administer your Organization. Once you've logged in, you can begin creating Banks, either for sandbox or production usage, and start enabling your customers to leverage DeFi and web3 with confidence.  If you have any questions, please contact [Support](mailto:support@cybrid.app) at any time so that we can help.  ## Authentication  The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create Organization and Bank tokens can be generated via your Dashboard ([request access](https://www.cybrid.xyz/access)).  An Organization Token applies broadly to the whole Organization and all of its Banks, whereas, a Bank Token is specific to an individual Bank.  Both Organization and Bank tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique Client ID and Secret that allows for machine-to-machine authentication.  **Never share your Client ID or Secret publicly or in your source code repository**  Your Client ID and Secret can be exchanged for a time-limited Bearer Token by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document:  ``` curl -X POST https://id.demo.cybrid.app/oauth/token -d '{     \"grant_type\": \"client_credentials\",     \"client_id\": \"<Your Client ID>\",     \"client_secret\": \"<Your Secret>\",     \"scope\": \"<Your requested scopes -- space separated>\"   }' -H \"Content-Type: application/json\" ```  ## Scopes  The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.  The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.  | Resource      | Read scope         | Write scope          | Execute scope     | Token Type         | |---------------|--------------------|----------------------|-------------------|--------------------| | Organizations | organizations:read | organizations:write  |                   | Organization/ Bank | | Banks         | banks:read         | banks:write          | banks:execute     | Organization/ Bank | | Customers     | customers:read     | customers:write      | customers:execute | Bank               | | Assets        | prices:read        |                      |                   | Bank               | | Accounts      | accounts:read      |                      | accounts:execute  | Bank               | | Prices        | prices:read        |                      |                   | Bank               | | Symbols       | prices:read        |                      |                   | Bank               | | Quotes        | quotes:read        |                      | quotes:execute    | Bank               | | Trades        | trades:read        |                      | trades:execute    | Bank               |  ## Organizations  An Organization is meant to model the organization partnering with Cybrid to use our platform.  An Organization does not directly interact with customers. Instead, an Organization has one or more banks, which encompass the financial service offerings of the platform.  ## Banks  A Bank is owned by an Organization and can be thought of as an environment or container for Customers and product offerings. An example of a Bank would be your customer facing banking website, or an internal staging environment for testing and integration.  An Organization can have multiple banks, in sandbox or production environments. A sandbox Bank will be backed by stubbed data and process flows. For instance, identity record and funding source processes will be simulated rather than performed.  ## Customers  Customers represent your banking users on the platform. At present, we offer support for Individuals as Customers.  Customers must be verified in our system before they can play any part on the platform. See the Identity Records section for more details on how a customer can be verified.  Customers must also have an account to be able to transact. See the Accounts APIs for more details on setting up accounts for the customer. 
+ * # Cybrid API documentation  Welcome to Cybrid, an all-in-one crypto platform that enables you to easily **build** and **launch** white-label crypto products or services.  In these documents, you'll find details on how our REST API operates and generally how our platform functions.  If you're looking for our UI SDK Widgets for Web or Mobile (iOS/Android), generated API clients, or demo applications, head over to our [Github repo](https://github.com/Cybrid-app).  💡 We recommend bookmarking the [Cybrid LinkTree](https://linktr.ee/cybridtechnologies) which contains many helpful links to platform resources.  ## Getting Started  This is Cybrid's public interactive API documentation, which allows you to fully test our APIs. If you'd like to use a different tool to exercise our APIs, you can download the [Open API 3.0 yaml](https://bank.sandbox.cybrid.app/api/schema/v1/swagger.yaml) for import.  If you're new to our APIs and the Cybrid Platform, follow the below guides to get set up and familiar with the platform:  1. [Understanding the Platform](https://kb.cybrid.xyz/understanding-the-platform) 2. [Getting Started in the Cybrid Sandbox](https://kb.cybrid.xyz/getting-started-guide) 3. [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading) 4. [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app) (or, alternatively, [Testing with Hosted Web Demo App](https://kb.cybrid.xyz/testing-with-hosted-web-demo-app))  In [Getting Started in the Cybrid Sandbox](https://www.cybrid.xyz/guides/getting-started), we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/) to create a test bank and generate API keys. In [Getting Ready for Trading](https://www.cybrid.xyz/guides/getting-ready-for-trading), we walk through creating customers, customer identities, accounts, as well as executing quotes and trades.  If you've already run through the first two guides, you can follow the [Running the Web Demo App](https://www.cybrid.xyz/guides/running-the-cybrid-web-demo-crypto-app) guide to test our web SDK with your sandbox `bank` and `customer`.  ## Working with the Cybrid Platform  There are three primary ways you can interact with the Cybrid platform:  1. Directly via our RESTful API (this documentation) 2. Using our API clients available in a variety of languages ([Angular](https://github.com/Cybrid-app/cybrid-api-bank-angular), [Java](https://github.com/Cybrid-app/cybrid-api-bank-java), [Kotlin](https://github.com/Cybrid-app/cybrid-api-bank-kotlin), [Python](https://github.com/Cybrid-app/cybrid-api-bank-python), [Ruby](https://github.com/Cybrid-app/cybrid-api-bank-ruby), [Swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) or [Typescript](https://github.com/Cybrid-app/cybrid-api-bank-typescript)) 3. Integrating a platform specific SDK ([Web](https://github.com/Cybrid-app/cybrid-sdk-web), [Android](https://github.com/Cybrid-app/cybrid-sdk-android), [iOS](https://github.com/Cybrid-app/cybrid-sdk-ios))  Our complete set of APIs allows you to manage resources across three distinct areas: your `Organization`, your `Banks` and your `Identities`. For most of your testing and interaction you'll be using the `Bank` API, which is where the majority of APIs reside.  *The complete set of APIs can be found on the following pages:*  | API                                                              | Description                                                 | |------------------------------------------------------------------|-------------------------------------------------------------| | [Organization API](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)   | APIs to manage organizations                                | | [Bank API](https://bank.sandbox.cybrid.app/api/schema/swagger-ui)                   | APIs to manage banks (and all downstream customer activity) | | [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui)                       | APIs to manage organization and bank identities             |  For questions please contact [Support](mailto:support@cybrid.xyz) at any time for assistance, or contact the [Product Team](mailto:product@cybrid.xyz) for product suggestions.  ## Authenticating with the API  The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create `Organization` and `Bank` tokens can be generated via the [Cybrid Sandbox](https://id.sandbox.cybrid.app). Access tokens can be generated for a `Customer` as well via the [Cybrid IdP](https://id.sandbox.cybrid.app) as well.  An `Organization` access token applies broadly to the whole Organization and all of its `Banks`, whereas, a `Bank` access token is specific to an individual Bank. `Customer` tokens, similarly, are scoped to a specific customer in a bank.  Both `Organization` and `Bank` tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique `Client ID` and `Secret` that allows for machine-to-machine authentication.  A `Bank` can then generate `Customer` access tokens via API using our [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui).  <font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or in your source code repository.**</font>  Your `Client ID` and `Secret` can be exchanged for a time-limited `Bearer Token` by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document.  The following curl command can be used to quickly generate a `Bearer Token` for use in testing the API or demo applications.  ``` # Example request when using Bank credentials curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{     \"grant_type\": \"client_credentials\",     \"client_id\": \"<Your Client ID>\",     \"client_secret\": \"<Your Secret>\",     \"scope\": \"banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"   }' -H \"Content-Type: application/json\"  # When using Organization credentials set `scope` to 'organizations:read organizations:write banks:read banks:write banks:execute customers:read accounts:read quotes:read trades:read transfers:read external_bank_accounts:read workflows:read deposit_addresses:read' ``` <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>  ## Authentication Scopes  The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.  The following scopes are available on the platform and can be requested when generating either an Organization, Bank or Customer token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.  | Resource              | Read scope (Token Type)                                    | Write scope (Token Type)                      | Execute scope (Token Type)                      | |-----------------------|------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------| | Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)               | | Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                    | | Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                        | | Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)      | | External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer) | | Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                 | | Price                 | prices:read (Bank, Customer)                               |                                               |                                                 | | Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Bank, Customer)                 | | Reward                | rewards:read (Bank, Customer)                              |                                               | rewards:execute (Bank)                          | | Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Bank, Customer)                 | | Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Bank, Customer)              | | Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)              |  ## Available Endpoints  The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services are listed below:  | API Service  | Model                | API Endpoint Path              | Description                                                                                       | |--------------|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------| | Identity     | Bank                 | /api/bank_applications         | Create and list banks                                                                             | | Identity     | CustomerToken        | /api/customer_tokens           | Create customer JWT access tokens                                                                 | | Identity     | Organization         | /api/organization_applications | Create and list organizations                                                                     | | Organization | Organization         | /api/organizations             | APIs to retrieve and update organization name                                                     | | Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             | | Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     | | Bank         | Bank                 | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             | | Bank         | BankVerificationKey  | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities                           | | Bank         | Customer             | /api/customers                 | Create and list customers                                                                         | | Bank         | DepositAddress       | /api/deposit_addresses         | Create, get and list deposit addresses                                                            | | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform | | Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  | | Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 | | Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      | | Bank         | Reward               | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                                        | | Bank         | Symbol               | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           | | Bank         | Trade                | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                                          | | Bank         | Transfer             | /api/transfers                 | Create, get and list transfers (e.g., funding, book)                                              | | Bank         | Workflow             | /api/workflows                 | Create, get and list workflows                                                                    |  ## Understanding Object Models & Endpoints  **Organizations**  An `Organization` is meant to represent the organization partnering with Cybrid to use our platform.  An `Organization` does not directly interact with `customers`. Instead, an Organization has one or more `banks`, which encompass the financial service offerings of the platform.  **Banks**  A `Bank` is owned by an `Organization` and can be thought of as an environment or container for `customers` and product offerings. Banks are created in either `Sandbox` or `Production` mode, where `Sandbox` is the environment that you would test, prototype and build in prior to moving to `Production`.  An `Organization` can have multiple `banks`, in either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed by stubbed data and process flows. For instance, funding source transfer processes as well as trades will be simulated rather than performed, however asset prices are representative of real-world values. You have an unlimited amount of simulated fiat currency for testing purposes.  **Customers**  `Customers` represent your banking users on the platform. At present, we offer support for `Individuals` as Customers.  `Customers` must be verified (i.e., KYC'd) in our system before they can play any part on the platform, which means they must have an associated and a passing `Identity Verification`. See the Identity Verifications section for more details on how a customer can be verified.  `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer. 
  *
- * The version of the OpenAPI document: v0.26.2
+ * The version of the OpenAPI document: v0.68.30
  * Contact: support@cybrid.app
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  */
 @JsonPropertyOrder({
   QuoteBankModel.JSON_PROPERTY_GUID,
+  QuoteBankModel.JSON_PROPERTY_PRODUCT_TYPE,
   QuoteBankModel.JSON_PROPERTY_CUSTOMER_GUID,
   QuoteBankModel.JSON_PROPERTY_SYMBOL,
   QuoteBankModel.JSON_PROPERTY_SIDE,
@@ -38,13 +39,58 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   QuoteBankModel.JSON_PROPERTY_DELIVER_AMOUNT,
   QuoteBankModel.JSON_PROPERTY_FEE,
   QuoteBankModel.JSON_PROPERTY_ISSUED_AT,
-  QuoteBankModel.JSON_PROPERTY_EXPIRES_AT
+  QuoteBankModel.JSON_PROPERTY_EXPIRES_AT,
+  QuoteBankModel.JSON_PROPERTY_ASSET,
+  QuoteBankModel.JSON_PROPERTY_NETWORK_FEE,
+  QuoteBankModel.JSON_PROPERTY_NETWORK_FEE_ASSET
 })
 @JsonTypeName("Quote")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class QuoteBankModel {
   public static final String JSON_PROPERTY_GUID = "guid";
   private String guid;
+
+  /**
+   * The type of product the quote is for.
+   */
+  public enum ProductTypeEnum {
+    TRADING("trading"),
+    
+    FUNDING("funding"),
+    
+    BOOK_TRANSFER("book_transfer"),
+    
+    CRYPTO_TRANSFER("crypto_transfer");
+
+    private String value;
+
+    ProductTypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static ProductTypeEnum fromValue(String value) {
+      for (ProductTypeEnum b : ProductTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  public static final String JSON_PROPERTY_PRODUCT_TYPE = "product_type";
+  private ProductTypeEnum productType;
 
   public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
   private String customerGuid;
@@ -53,12 +99,16 @@ public class QuoteBankModel {
   private String symbol;
 
   /**
-   * The direction of the quote: either &#39;buy&#39; or &#39;sell&#39;.
+   * The direction of the quote: either &#39;buy&#39; or &#39;sell&#39; for trade quotes.
    */
   public enum SideEnum {
     BUY("buy"),
     
-    SELL("sell");
+    SELL("sell"),
+    
+    DEPOSIT("deposit"),
+    
+    WITHDRAWAL("withdrawal");
 
     private String value;
 
@@ -105,6 +155,15 @@ public class QuoteBankModel {
   public static final String JSON_PROPERTY_EXPIRES_AT = "expires_at";
   private OffsetDateTime expiresAt;
 
+  public static final String JSON_PROPERTY_ASSET = "asset";
+  private String asset;
+
+  public static final String JSON_PROPERTY_NETWORK_FEE = "network_fee";
+  private java.math.BigInteger networkFee;
+
+  public static final String JSON_PROPERTY_NETWORK_FEE_ASSET = "network_fee_asset";
+  private String networkFeeAsset;
+
   public QuoteBankModel() { 
   }
 
@@ -132,6 +191,33 @@ public class QuoteBankModel {
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setGuid(String guid) {
     this.guid = guid;
+  }
+
+
+  public QuoteBankModel productType(ProductTypeEnum productType) {
+    
+    this.productType = productType;
+    return this;
+  }
+
+   /**
+   * The type of product the quote is for.
+   * @return productType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The type of product the quote is for.")
+  @JsonProperty(JSON_PROPERTY_PRODUCT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public ProductTypeEnum getProductType() {
+    return productType;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_PRODUCT_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setProductType(ProductTypeEnum productType) {
+    this.productType = productType;
   }
 
 
@@ -169,11 +255,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * Symbol the quote is being requested for. Format is \&quot;asset-counter_asset\&quot; in uppercase.
+   * Symbol the quote was requested for. Format is \&quot;asset-counter_asset\&quot; in uppercase. Populated for trade quotes.
    * @return symbol
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Symbol the quote is being requested for. Format is \"asset-counter_asset\" in uppercase.")
+  @ApiModelProperty(value = "Symbol the quote was requested for. Format is \"asset-counter_asset\" in uppercase. Populated for trade quotes.")
   @JsonProperty(JSON_PROPERTY_SYMBOL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -196,11 +282,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * The direction of the quote: either &#39;buy&#39; or &#39;sell&#39;.
+   * The direction of the quote: either &#39;buy&#39; or &#39;sell&#39; for trade quotes.
    * @return side
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The direction of the quote: either 'buy' or 'sell'.")
+  @ApiModelProperty(value = "The direction of the quote: either 'buy' or 'sell' for trade quotes.")
   @JsonProperty(JSON_PROPERTY_SIDE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -223,11 +309,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * The amount to be received in base units of the currency: currency is \&quot;asset\&quot; for buy and \&quot;counter_asset\&quot; for sell.
+   * The amount to be received in base units of the currency: currency is \&quot;asset\&quot; for buy and \&quot;counter_asset\&quot; for sell for trade quotes.
    * @return receiveAmount
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell.")
+  @ApiModelProperty(value = "The amount to be received in base units of the currency: currency is \"asset\" for buy and \"counter_asset\" for sell for trade quotes.")
   @JsonProperty(JSON_PROPERTY_RECEIVE_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -250,11 +336,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * The amount to be delivered in base units of the currency: currency is \&quot;counter_asset\&quot; for buy and \&quot;asset\&quot; for sell.
+   * The amount to be delivered in base units of the currency: currency is \&quot;counter_asset\&quot; for buy and \&quot;asset\&quot; for sell for trade quotes.
    * @return deliverAmount
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell.")
+  @ApiModelProperty(value = "The amount to be delivered in base units of the currency: currency is \"counter_asset\" for buy and \"asset\" for sell for trade quotes.")
   @JsonProperty(JSON_PROPERTY_DELIVER_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -277,11 +363,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * The fee associated with the trade. Denominated in \&quot;counter_asset\&quot; base units
+   * The fee associated with the trade. Denominated in \&quot;counter_asset\&quot; base units for trade quotes.
    * @return fee
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The fee associated with the trade. Denominated in \"counter_asset\" base units")
+  @ApiModelProperty(value = "The fee associated with the trade. Denominated in \"counter_asset\" base units for trade quotes.")
   @JsonProperty(JSON_PROPERTY_FEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -331,11 +417,11 @@ public class QuoteBankModel {
   }
 
    /**
-   * ISO8601 datetime the quote is expiring at.
+   * ISO8601 datetime the quote is expiring at. Populated for trading quotes.
    * @return expiresAt
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "ISO8601 datetime the quote is expiring at.")
+  @ApiModelProperty(value = "ISO8601 datetime the quote is expiring at. Populated for trading quotes.")
   @JsonProperty(JSON_PROPERTY_EXPIRES_AT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -351,6 +437,87 @@ public class QuoteBankModel {
   }
 
 
+  public QuoteBankModel asset(String asset) {
+    
+    this.asset = asset;
+    return this;
+  }
+
+   /**
+   * The asset code the quote was requested for. Populated for book transfer and funding quotes.
+   * @return asset
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The asset code the quote was requested for. Populated for book transfer and funding quotes.")
+  @JsonProperty(JSON_PROPERTY_ASSET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getAsset() {
+    return asset;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ASSET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAsset(String asset) {
+    this.asset = asset;
+  }
+
+
+  public QuoteBankModel networkFee(java.math.BigInteger networkFee) {
+    
+    this.networkFee = networkFee;
+    return this;
+  }
+
+   /**
+   * The network fee in base units of network_fee_asset. Only present on &#x60;crypto_transfer&#x60; quotes.
+   * @return networkFee
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The network fee in base units of network_fee_asset. Only present on `crypto_transfer` quotes.")
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public java.math.BigInteger getNetworkFee() {
+    return networkFee;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setNetworkFee(java.math.BigInteger networkFee) {
+    this.networkFee = networkFee;
+  }
+
+
+  public QuoteBankModel networkFeeAsset(String networkFeeAsset) {
+    
+    this.networkFeeAsset = networkFeeAsset;
+    return this;
+  }
+
+   /**
+   * The asset code of the network fee.
+   * @return networkFeeAsset
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The asset code of the network fee.")
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_ASSET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getNetworkFeeAsset() {
+    return networkFeeAsset;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_ASSET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setNetworkFeeAsset(String networkFeeAsset) {
+    this.networkFeeAsset = networkFeeAsset;
+  }
+
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -361,6 +528,7 @@ public class QuoteBankModel {
     }
     QuoteBankModel quote = (QuoteBankModel) o;
     return Objects.equals(this.guid, quote.guid) &&
+        Objects.equals(this.productType, quote.productType) &&
         Objects.equals(this.customerGuid, quote.customerGuid) &&
         Objects.equals(this.symbol, quote.symbol) &&
         Objects.equals(this.side, quote.side) &&
@@ -368,12 +536,15 @@ public class QuoteBankModel {
         Objects.equals(this.deliverAmount, quote.deliverAmount) &&
         Objects.equals(this.fee, quote.fee) &&
         Objects.equals(this.issuedAt, quote.issuedAt) &&
-        Objects.equals(this.expiresAt, quote.expiresAt);
+        Objects.equals(this.expiresAt, quote.expiresAt) &&
+        Objects.equals(this.asset, quote.asset) &&
+        Objects.equals(this.networkFee, quote.networkFee) &&
+        Objects.equals(this.networkFeeAsset, quote.networkFeeAsset);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(guid, customerGuid, symbol, side, receiveAmount, deliverAmount, fee, issuedAt, expiresAt);
+    return Objects.hash(guid, productType, customerGuid, symbol, side, receiveAmount, deliverAmount, fee, issuedAt, expiresAt, asset, networkFee, networkFeeAsset);
   }
 
   @Override
@@ -381,6 +552,7 @@ public class QuoteBankModel {
     StringBuilder sb = new StringBuilder();
     sb.append("class QuoteBankModel {\n");
     sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+    sb.append("    productType: ").append(toIndentedString(productType)).append("\n");
     sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    side: ").append(toIndentedString(side)).append("\n");
@@ -389,6 +561,9 @@ public class QuoteBankModel {
     sb.append("    fee: ").append(toIndentedString(fee)).append("\n");
     sb.append("    issuedAt: ").append(toIndentedString(issuedAt)).append("\n");
     sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
+    sb.append("    asset: ").append(toIndentedString(asset)).append("\n");
+    sb.append("    networkFee: ").append(toIndentedString(networkFee)).append("\n");
+    sb.append("    networkFeeAsset: ").append(toIndentedString(networkFeeAsset)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -1,12 +1,12 @@
 # TradesBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createTrade**](TradesBankApi.md#createTrade) | **POST** /api/trades | Create Trade
-[**getTrade**](TradesBankApi.md#getTrade) | **GET** /api/trades/{trade_guid} | Get Trade
-[**listTrades**](TradesBankApi.md#listTrades) | **GET** /api/trades | Get trades list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createTrade**](TradesBankApi.md#createTrade) | **POST** /api/trades | Create Trade |
+| [**getTrade**](TradesBankApi.md#getTrade) | **GET** /api/trades/{trade_guid} | Get Trade |
+| [**listTrades**](TradesBankApi.md#listTrades) | **GET** /api/trades | Get trades list |
 
 
 
@@ -32,7 +32,7 @@ import app.cybrid.cybrid_api_bank.client.api.TradesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -61,9 +61,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postTradeBankModel** | [**PostTradeBankModel**](PostTradeBankModel.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postTradeBankModel** | [**PostTradeBankModel**](PostTradeBankModel.md)|  | |
 
 ### Return type
 
@@ -83,6 +83,11 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Trade created |  -  |
+| **400** | Invalid requests |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **409** | Data already exists |  -  |
+| **422** | Unable to process request |  -  |
 
 
 ## getTrade
@@ -107,7 +112,7 @@ import app.cybrid.cybrid_api_bank.client.api.TradesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -136,9 +141,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **tradeGuid** | **String**| Identifier for the trade. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tradeGuid** | **String**| Identifier for the trade. | |
 
 ### Return type
 
@@ -158,6 +163,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | trade found |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | trade not found |  -  |
 
 
 ## listTrades
@@ -182,7 +190,7 @@ import app.cybrid.cybrid_api_bank.client.api.TradesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -216,14 +224,14 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] [default to 10]
- **guid** | **String**| Comma separated trade_guids to list trades for. | [optional]
- **bankGuid** | **String**| Comma separated bank_guids to list trades for. | [optional]
- **customerGuid** | **String**| Comma separated customer_guids to list trades for. | [optional]
- **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
+| **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
+| **guid** | **String**| Comma separated trade_guids to list trades for. | [optional] |
+| **bankGuid** | **String**| Comma separated bank_guids to list trades for. | [optional] |
+| **customerGuid** | **String**| Comma separated customer_guids to list trades for. | [optional] |
+| **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional] |
 
 ### Return type
 
@@ -243,4 +251,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of trades |  -  |
+| **400** | Invalid requests |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
+| **403** | Invalid scope |  -  |
 

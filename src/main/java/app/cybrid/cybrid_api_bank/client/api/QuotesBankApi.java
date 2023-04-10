@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class QuotesBankApi {
     private ApiClient apiClient;
 
@@ -53,7 +53,7 @@ public class QuotesBankApi {
      * Create Quote
      * Creates a quote.  Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>422</b> - Unable to process request
@@ -95,7 +95,7 @@ public class QuotesBankApi {
      * Create Quote
      * Creates a quote.  Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>422</b> - Unable to process request
@@ -117,7 +117,6 @@ public class QuotesBankApi {
      * Get Quote
      * Retrieves a quote.  Required scope: **quotes:read**
      * <p><b>200</b> - quote found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - quote not found
@@ -158,7 +157,6 @@ public class QuotesBankApi {
      * Get Quote
      * Retrieves a quote.  Required scope: **quotes:read**
      * <p><b>200</b> - quote found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - quote not found
@@ -179,7 +177,7 @@ public class QuotesBankApi {
      * Get quotes list
      * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
      * <p><b>200</b> - get list of quotes
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param page The page parameter
@@ -223,7 +221,7 @@ public class QuotesBankApi {
      * Get quotes list
      * Retrieves a listing of quotes for all customers of a bank.  Required scope: **quotes:read**
      * <p><b>200</b> - get list of quotes
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param page The page parameter

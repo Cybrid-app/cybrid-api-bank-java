@@ -1,12 +1,12 @@
 # VerificationKeysBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createVerificationKey**](VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/bank_verification_keys | Create VerificationKey
-[**getVerificationKey**](VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/bank_verification_keys/{verification_key_guid} | Get VerificationKey
-[**listVerificationKeys**](VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/bank_verification_keys | Get Verification Keys list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createVerificationKey**](VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/bank_verification_keys | Create VerificationKey |
+| [**getVerificationKey**](VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/bank_verification_keys/{verification_key_guid} | Get VerificationKey |
+| [**listVerificationKeys**](VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/bank_verification_keys | Get Verification Keys list |
 
 
 
@@ -32,7 +32,7 @@ import app.cybrid.cybrid_api_bank.client.api.VerificationKeysBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -61,9 +61,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postVerificationKeyBankModel** | [**PostVerificationKeyBankModel**](PostVerificationKeyBankModel.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postVerificationKeyBankModel** | [**PostVerificationKeyBankModel**](PostVerificationKeyBankModel.md)|  | |
 
 ### Return type
 
@@ -83,7 +83,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | verification key created |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 
@@ -110,7 +109,7 @@ import app.cybrid.cybrid_api_bank.client.api.VerificationKeysBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -139,9 +138,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **verificationKeyGuid** | **String**| Identifier for the verification key. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **verificationKeyGuid** | **String**| Identifier for the verification key. | |
 
 ### Return type
 
@@ -161,7 +160,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Verification Key found |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | verification key not found |  -  |
@@ -189,7 +187,7 @@ import app.cybrid.cybrid_api_bank.client.api.VerificationKeysBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -219,10 +217,10 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**|  | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**|  | [optional] |
+| **perPage** | **java.math.BigInteger**|  | [optional] |
 
 ### Return type
 
@@ -242,7 +240,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of verification keys |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 

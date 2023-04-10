@@ -1,10 +1,10 @@
 # AssetsBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**listAssets**](AssetsBankApi.md#listAssets) | **GET** /api/assets | Get assets list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**listAssets**](AssetsBankApi.md#listAssets) | **GET** /api/assets | Get assets list |
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Get assets list
 
-Retrieves a listing of assets.  Required scope: **prices:read**
+Retrieves a listing of assets.
 
 ### Example
 
@@ -23,22 +23,13 @@ Retrieves a listing of assets.  Required scope: **prices:read**
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 import app.cybrid.cybrid_api_bank.client.ApiException;
 import app.cybrid.cybrid_api_bank.client.Configuration;
-import app.cybrid.cybrid_api_bank.client.auth.*;
 import app.cybrid.cybrid_api_bank.client.models.*;
 import app.cybrid.cybrid_api_bank.client.api.AssetsBankApi;
 
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
-        
-        // Configure HTTP bearer authorization: BearerAuth
-        HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
-        BearerAuth.setBearerToken("BEARER TOKEN");
-
-        // Configure OAuth2 access token for authorization: oauth2
-        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-        oauth2.setAccessToken("YOUR ACCESS TOKEN");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
 
         AssetsBankApi apiInstance = new AssetsBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
@@ -60,10 +51,10 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] [default to 10]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
+| **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
 
 ### Return type
 
@@ -71,7 +62,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+No authorization required
 
 ### HTTP request headers
 
@@ -83,7 +74,4 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of assets |  -  |
-| **400** | Invalid requests - Malformed Authentication Header |  -  |
-| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
-| **403** | Invalid scope |  -  |
 

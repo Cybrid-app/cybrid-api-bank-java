@@ -1,10 +1,10 @@
 # PricesBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**listPrices**](PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**listPrices**](PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price |
 
 
 
@@ -30,7 +30,7 @@ import app.cybrid.cybrid_api_bank.client.api.PricesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -59,9 +59,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **symbol** | **String**| Comma separated symbols to list prices for. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **symbol** | **String**| Comma separated symbols to list prices for. | [optional] |
 
 ### Return type
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of price |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 

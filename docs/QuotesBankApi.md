@@ -1,12 +1,12 @@
 # QuotesBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createQuote**](QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote
-[**getQuote**](QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote
-[**listQuotes**](QuotesBankApi.md#listQuotes) | **GET** /api/quotes | Get quotes list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createQuote**](QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote |
+| [**getQuote**](QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote |
+| [**listQuotes**](QuotesBankApi.md#listQuotes) | **GET** /api/quotes | Get quotes list |
 
 
 
@@ -32,7 +32,7 @@ import app.cybrid.cybrid_api_bank.client.api.QuotesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -61,9 +61,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postQuoteBankModel** | [**PostQuoteBankModel**](PostQuoteBankModel.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postQuoteBankModel** | [**PostQuoteBankModel**](PostQuoteBankModel.md)|  | |
 
 ### Return type
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | quote created |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 | **422** | Unable to process request |  -  |
@@ -112,7 +112,7 @@ import app.cybrid.cybrid_api_bank.client.api.QuotesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -141,9 +141,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **quoteGuid** | **String**| Identifier for the quote. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **quoteGuid** | **String**| Identifier for the quote. | |
 
 ### Return type
 
@@ -163,7 +163,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | quote found |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | quote not found |  -  |
@@ -191,7 +190,7 @@ import app.cybrid.cybrid_api_bank.client.api.QuotesBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -224,13 +223,13 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**|  | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
- **guid** | **String**| Comma separated quote_guids to list quotes for. | [optional]
- **bankGuid** | **String**| Comma separated bank_guids to list quotes for. | [optional]
- **customerGuid** | **String**| Comma separated customer_guids to list quotes for. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**|  | [optional] |
+| **perPage** | **java.math.BigInteger**|  | [optional] |
+| **guid** | **String**| Comma separated quote_guids to list quotes for. | [optional] |
+| **bankGuid** | **String**| Comma separated bank_guids to list quotes for. | [optional] |
+| **customerGuid** | **String**| Comma separated customer_guids to list quotes for. | [optional] |
 
 ### Return type
 
@@ -250,7 +249,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of quotes |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 

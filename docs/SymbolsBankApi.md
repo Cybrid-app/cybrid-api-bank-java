@@ -1,10 +1,10 @@
 # SymbolsBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**listSymbols**](SymbolsBankApi.md#listSymbols) | **GET** /api/symbols | Get Symbols list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**listSymbols**](SymbolsBankApi.md#listSymbols) | **GET** /api/symbols | Get Symbols list |
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 Get Symbols list
 
-Retrieves a listing of symbols.  Required scope: **prices:read**
+Retrieves a listing of symbols.
 
 ### Example
 
@@ -30,7 +30,7 @@ import app.cybrid.cybrid_api_bank.client.api.SymbolsBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -77,4 +77,5 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of symbols |  -  |
+| **401** | Unauthorized - Authentication failed,  |  -  |
 

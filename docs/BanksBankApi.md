@@ -1,12 +1,13 @@
 # BanksBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createBank**](BanksBankApi.md#createBank) | **POST** /api/banks | Create Bank
-[**getBank**](BanksBankApi.md#getBank) | **GET** /api/banks/{bank_guid} | Get Bank
-[**listBanks**](BanksBankApi.md#listBanks) | **GET** /api/banks | Get banks list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createBank**](BanksBankApi.md#createBank) | **POST** /api/banks | Create Bank |
+| [**getBank**](BanksBankApi.md#getBank) | **GET** /api/banks/{bank_guid} | Get Bank |
+| [**listBanks**](BanksBankApi.md#listBanks) | **GET** /api/banks | Get banks list |
+| [**updateBank**](BanksBankApi.md#updateBank) | **PATCH** /api/banks/{bank_guid} | Patch Bank |
 
 
 
@@ -16,7 +17,7 @@ Method | HTTP request | Description
 
 Create Bank
 
-Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Backstopped Funding Source  A Backstopped Funding Source is an agreement between the Organization and Cybrid on transaction settlement. A Backstopped Funding Source is an escrow bank account that the Organization tops up on a regular basis and is drawn down by the Cybrid Platform when trades are executed by the Bank for its customers.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;backstopped_funding_source&#x60; flag. At present, backstopped funding sources is the supported method for funding trades on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
+Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Backstopped Funding Source  A Backstopped Funding Source is an agreement between the Organization and Cybrid on transaction settlement. A Backstopped Funding Source is an escrow bank account that the Organization tops up on a regular basis and is drawn down by the Cybrid Platform when trades are executed by the Bank for its customers.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;backstopped_funding_source&#x60; flag.  To allow customers to trade in a bank that has a Backstopped Funding Source the customer&#39;s &#x60;fiat&#x60; account must be topped up using a &#x60;book transfer&#x60; prior to executing any trades.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.  ## Plaid Funding Source  A Plaid Funding Source allows customers to directly connect their TradFi bank accounts to the Cybrid platform.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;plaid_funding_source&#x60; flag.  To allow customers to trade in a bank that has a Plaid Funding Source the customer&#39;s &#x60;fiat&#x60; account must first be connected to the platform using Cybrid&#39;s &#x60;Workflows&#x60; and &#x60;ExternalBankAccounts&#x60; APIs. Once their &#x60;ExternalBankAccount&#x60; is created on the Cybrid Platform their &#x60;fiat&#x60; account must be topped up using a &#x60;funding&#x60; transfer prior to executing any trades.  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
 
 ### Example
 
@@ -32,7 +33,7 @@ import app.cybrid.cybrid_api_bank.client.api.BanksBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -61,9 +62,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postBankBankModel** | [**PostBankBankModel**](PostBankBankModel.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postBankBankModel** | [**PostBankBankModel**](PostBankBankModel.md)|  | |
 
 ### Return type
 
@@ -83,10 +84,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Bank created |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
-| **415** | Unsupported values |  -  |
+| **422** | Unable to process request |  -  |
 
 
 ## getBank
@@ -111,7 +112,7 @@ import app.cybrid.cybrid_api_bank.client.api.BanksBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -140,9 +141,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **bankGuid** | **String**| Identifier for the bank. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bankGuid** | **String**| Identifier for the bank. | |
 
 ### Return type
 
@@ -162,7 +163,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | bank not found |  -  |
@@ -190,7 +190,7 @@ import app.cybrid.cybrid_api_bank.client.api.BanksBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -221,11 +221,11 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] [default to 10]
- **guid** | **String**| Comma separated bank_guids to list banks for. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
+| **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
+| **guid** | **String**| Comma separated bank_guids to list banks for. | [optional] |
 
 ### Return type
 
@@ -245,7 +245,86 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of banks |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - invalid subject, Authentication failed |  -  |
 | **403** | Invalid scope |  -  |
+
+
+## updateBank
+
+> BankBankModel updateBank(bankGuid, patchBankBankModel)
+
+Patch Bank
+
+Update a bank.  Required scope: **banks:write**
+
+### Example
+
+```java
+// Import classes:
+import app.cybrid.cybrid_api_bank.client.ApiClient;
+import app.cybrid.cybrid_api_bank.client.ApiException;
+import app.cybrid.cybrid_api_bank.client.Configuration;
+import app.cybrid.cybrid_api_bank.client.auth.*;
+import app.cybrid.cybrid_api_bank.client.models.*;
+import app.cybrid.cybrid_api_bank.client.api.BanksBankApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
+        
+        // Configure HTTP bearer authorization: BearerAuth
+        HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+        BearerAuth.setBearerToken("BEARER TOKEN");
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+        BanksBankApi apiInstance = new BanksBankApi(defaultClient);
+        String bankGuid = "bankGuid_example"; // String | Identifier for the bank.
+        PatchBankBankModel patchBankBankModel = new PatchBankBankModel(); // PatchBankBankModel | 
+        try {
+            BankBankModel result = apiInstance.updateBank(bankGuid, patchBankBankModel);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling BanksBankApi#updateBank");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bankGuid** | **String**| Identifier for the bank. | |
+| **patchBankBankModel** | [**PatchBankBankModel**](PatchBankBankModel.md)|  | |
+
+### Return type
+
+[**BankBankModel**](BankBankModel.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | bank found |  -  |
+| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | bank not found |  -  |
 

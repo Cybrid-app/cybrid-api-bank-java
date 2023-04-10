@@ -2,6 +2,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostTradeBankModel;
 import app.cybrid.cybrid_api_bank.client.model.TradeBankModel;
 import app.cybrid.cybrid_api_bank.client.model.TradeListBankModel;
@@ -27,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class TradesBankApi {
     private ApiClient apiClient;
 
@@ -52,6 +53,11 @@ public class TradesBankApi {
      * Create Trade
      * Creates a trade.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | initiating | The Platform has begun to perform the trade | | pending | The Platform is executing the trade | | settling | The Platform is settling the trade | | completed | The Platform has successfully completed the trade | | failed | The Platform was not able to successfully complete the trade |    Required scope: **trades:execute**
      * <p><b>201</b> - Trade created
+     * <p><b>400</b> - Invalid requests
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>409</b> - Data already exists
+     * <p><b>422</b> - Unable to process request
      * @param postTradeBankModel The postTradeBankModel parameter
      * @return TradeBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -89,6 +95,11 @@ public class TradesBankApi {
      * Create Trade
      * Creates a trade.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | initiating | The Platform has begun to perform the trade | | pending | The Platform is executing the trade | | settling | The Platform is settling the trade | | completed | The Platform has successfully completed the trade | | failed | The Platform was not able to successfully complete the trade |    Required scope: **trades:execute**
      * <p><b>201</b> - Trade created
+     * <p><b>400</b> - Invalid requests
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>409</b> - Data already exists
+     * <p><b>422</b> - Unable to process request
      * @param postTradeBankModel The postTradeBankModel parameter
      * @return TradeBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -106,6 +117,9 @@ public class TradesBankApi {
      * Get Trade
      * Retrieves a trade.  Required scope: **trades:read**
      * <p><b>200</b> - trade found
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - trade not found
      * @param tradeGuid Identifier for the trade.
      * @return TradeBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -143,6 +157,9 @@ public class TradesBankApi {
      * Get Trade
      * Retrieves a trade.  Required scope: **trades:read**
      * <p><b>200</b> - trade found
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - trade not found
      * @param tradeGuid Identifier for the trade.
      * @return TradeBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -160,6 +177,9 @@ public class TradesBankApi {
      * Get trades list
      * Retrieves a listing of trades.  Required scope: **trades:read**
      * <p><b>200</b> - get list of trades
+     * <p><b>400</b> - Invalid requests
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @param guid Comma separated trade_guids to list trades for.
@@ -203,6 +223,9 @@ public class TradesBankApi {
      * Get trades list
      * Retrieves a listing of trades.  Required scope: **trades:read**
      * <p><b>200</b> - get list of trades
+     * <p><b>400</b> - Invalid requests
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @param guid Comma separated trade_guids to list trades for.

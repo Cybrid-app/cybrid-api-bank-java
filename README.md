@@ -2,86 +2,152 @@
 
 Cybrid Bank API
 
-- API version: v0.26.2
+- API version: v0.68.30
 
-- Build date: 2022-06-14T18:31:50.519571Z[Etc/UTC]
+- Build date: 2023-04-10T16:27:31.012539Z[Etc/UTC]
 
-# Welcome
+# Cybrid API documentation
 
-Welcome to the Cybrid platform; enabling turnkey crypto banking services!
+Welcome to Cybrid, an all-in-one crypto platform that enables you to easily **build** and **launch** white-label crypto products or services.
 
-In these documents, you will find information on the operations provided by our platform, as well as details on how our REST API operates more generally.
+In these documents, you'll find details on how our REST API operates and generally how our platform functions.
 
-Our complete set of APIs allows you to manage all your resources: your Organization, your banks and your identities. The complete set of APIs can be found on the following pages:
+If you're looking for our UI SDK Widgets for Web or Mobile (iOS/Android), generated API clients, or demo applications, head over to our [Github repo](https://github.com/Cybrid-app).
 
-| API                                                            | Description                  |
-|----------------------------------------------------------------|------------------------------|
-| [Organization API](https://organization.demo.cybrid.app/api/schema/swagger-ui) | APIs to manage organizations |
-| [Bank API](https://bank.demo.cybrid.app/api/schema/swagger-ui)                 | APIs to manage banks         |
-| [Identities API](https://id.demo.cybrid.app/api/schema/swagger-ui)                     | APIs to manage identities    |
+💡 We recommend bookmarking the [Cybrid LinkTree](https://linktr.ee/cybridtechnologies) which contains many helpful links to platform resources.
 
-When you're ready, [request access](https://www.cybrid.xyz/access) to your Dashboard to view and administer your Organization. Once you've logged in, you can begin creating Banks, either for sandbox or production usage, and start enabling your customers to leverage DeFi and web3 with confidence.
+## Getting Started
 
-If you have any questions, please contact [Support](mailto:support@cybrid.app) at any time so that we can help.
+This is Cybrid's public interactive API documentation, which allows you to fully test our APIs. If you'd like to use a different tool to exercise our APIs, you can download the [Open API 3.0 yaml](https://bank.sandbox.cybrid.app/api/schema/v1/swagger.yaml) for import.
 
-## Authentication
+If you're new to our APIs and the Cybrid Platform, follow the below guides to get set up and familiar with the platform:
 
-The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create Organization and Bank tokens can be generated via your Dashboard ([request access](https://www.cybrid.xyz/access)).
+1. [Understanding the Platform](https://kb.cybrid.xyz/understanding-the-platform)
+2. [Getting Started in the Cybrid Sandbox](https://kb.cybrid.xyz/getting-started-guide)
+3. [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading)
+4. [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app) (or, alternatively, [Testing with Hosted Web Demo App](https://kb.cybrid.xyz/testing-with-hosted-web-demo-app))
 
-An Organization Token applies broadly to the whole Organization and all of its Banks, whereas, a Bank Token is specific to an individual Bank.
+In [Getting Started in the Cybrid Sandbox](https://www.cybrid.xyz/guides/getting-started), we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/) to create a test bank and generate API keys. In [Getting Ready for Trading](https://www.cybrid.xyz/guides/getting-ready-for-trading), we walk through creating customers, customer identities, accounts, as well as executing quotes and trades.
 
-Both Organization and Bank tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique Client ID and Secret that allows for machine-to-machine authentication.
+If you've already run through the first two guides, you can follow the [Running the Web Demo App](https://www.cybrid.xyz/guides/running-the-cybrid-web-demo-crypto-app) guide to test our web SDK with your sandbox `bank` and `customer`.
 
-**Never share your Client ID or Secret publicly or in your source code repository**
+## Working with the Cybrid Platform
 
-Your Client ID and Secret can be exchanged for a time-limited Bearer Token by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document:
+There are three primary ways you can interact with the Cybrid platform:
+
+1. Directly via our RESTful API (this documentation)
+2. Using our API clients available in a variety of languages ([Angular](https://github.com/Cybrid-app/cybrid-api-bank-angular), [Java](https://github.com/Cybrid-app/cybrid-api-bank-java), [Kotlin](https://github.com/Cybrid-app/cybrid-api-bank-kotlin), [Python](https://github.com/Cybrid-app/cybrid-api-bank-python), [Ruby](https://github.com/Cybrid-app/cybrid-api-bank-ruby), [Swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) or [Typescript](https://github.com/Cybrid-app/cybrid-api-bank-typescript))
+3. Integrating a platform specific SDK ([Web](https://github.com/Cybrid-app/cybrid-sdk-web), [Android](https://github.com/Cybrid-app/cybrid-sdk-android), [iOS](https://github.com/Cybrid-app/cybrid-sdk-ios))
+
+Our complete set of APIs allows you to manage resources across three distinct areas: your `Organization`, your `Banks` and your `Identities`. For most of your testing and interaction you'll be using the `Bank` API, which is where the majority of APIs reside.
+
+*The complete set of APIs can be found on the following pages:*
+
+| API                                                              | Description                                                 |
+|------------------------------------------------------------------|-------------------------------------------------------------|
+| [Organization API](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)   | APIs to manage organizations                                |
+| [Bank API](https://bank.sandbox.cybrid.app/api/schema/swagger-ui)                   | APIs to manage banks (and all downstream customer activity) |
+| [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui)                       | APIs to manage organization and bank identities             |
+
+For questions please contact [Support](mailto:support@cybrid.xyz) at any time for assistance, or contact the [Product Team](mailto:product@cybrid.xyz) for product suggestions.
+
+## Authenticating with the API
+
+The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create `Organization` and `Bank` tokens can be generated via the [Cybrid Sandbox](https://id.sandbox.cybrid.app). Access tokens can be generated for a `Customer` as well via the [Cybrid IdP](https://id.sandbox.cybrid.app) as well.
+
+An `Organization` access token applies broadly to the whole Organization and all of its `Banks`, whereas, a `Bank` access token is specific to an individual Bank. `Customer` tokens, similarly, are scoped to a specific customer in a bank.
+
+Both `Organization` and `Bank` tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique `Client ID` and `Secret` that allows for machine-to-machine authentication.
+
+A `Bank` can then generate `Customer` access tokens via API using our [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui).
+
+<font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or in your source code repository.**</font>
+
+Your `Client ID` and `Secret` can be exchanged for a time-limited `Bearer Token` by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document.
+
+The following curl command can be used to quickly generate a `Bearer Token` for use in testing the API or demo applications.
 
 ```
-curl -X POST https://id.demo.cybrid.app/oauth/token -d '{
+# Example request when using Bank credentials
+curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"<Your requested scopes -- space separated>\"
+    \"scope\": \"banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
   }' -H \"Content-Type: application/json\"
-```
 
-## Scopes
+# When using Organization credentials set `scope` to 'organizations:read organizations:write banks:read banks:write banks:execute customers:read accounts:read quotes:read trades:read transfers:read external_bank_accounts:read workflows:read deposit_addresses:read'
+```
+<font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
+
+## Authentication Scopes
 
 The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.
 
-The following scopes are available on the platform and can be requested when generating either an Organization or a Bank token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
+The following scopes are available on the platform and can be requested when generating either an Organization, Bank or Customer token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.
 
-| Resource      | Read scope         | Write scope          | Execute scope     | Token Type         |
-|---------------|--------------------|----------------------|-------------------|--------------------|
-| Organizations | organizations:read | organizations:write  |                   | Organization/ Bank |
-| Banks         | banks:read         | banks:write          | banks:execute     | Organization/ Bank |
-| Customers     | customers:read     | customers:write      | customers:execute | Bank               |
-| Assets        | prices:read        |                      |                   | Bank               |
-| Accounts      | accounts:read      |                      | accounts:execute  | Bank               |
-| Prices        | prices:read        |                      |                   | Bank               |
-| Symbols       | prices:read        |                      |                   | Bank               |
-| Quotes        | quotes:read        |                      | quotes:execute    | Bank               |
-| Trades        | trades:read        |                      | trades:execute    | Bank               |
+| Resource              | Read scope (Token Type)                                    | Write scope (Token Type)                      | Execute scope (Token Type)                      |
+|-----------------------|------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------|
+| Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)               |
+| Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                    |
+| Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                        |
+| Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)      |
+| External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer) |
+| Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                 |
+| Price                 | prices:read (Bank, Customer)                               |                                               |                                                 |
+| Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Bank, Customer)                 |
+| Reward                | rewards:read (Bank, Customer)                              |                                               | rewards:execute (Bank)                          |
+| Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Bank, Customer)                 |
+| Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Bank, Customer)              |
+| Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)              |
 
-## Organizations
+## Available Endpoints
 
-An Organization is meant to model the organization partnering with Cybrid to use our platform.
+The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services are listed below:
 
-An Organization does not directly interact with customers. Instead, an Organization has one or more banks, which encompass the financial service offerings of the platform.
+| API Service  | Model                | API Endpoint Path              | Description                                                                                       |
+|--------------|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------|
+| Identity     | Bank                 | /api/bank_applications         | Create and list banks                                                                             |
+| Identity     | CustomerToken        | /api/customer_tokens           | Create customer JWT access tokens                                                                 |
+| Identity     | Organization         | /api/organization_applications | Create and list organizations                                                                     |
+| Organization | Organization         | /api/organizations             | APIs to retrieve and update organization name                                                     |
+| Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             |
+| Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     |
+| Bank         | Bank                 | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             |
+| Bank         | BankVerificationKey  | /api/bank_verification_keys    | Create, list and retrive verification keys, used for signing identities                           |
+| Bank         | Customer             | /api/customers                 | Create and list customers                                                                         |
+| Bank         | DepositAddress       | /api/deposit_addresses         | Create, get and list deposit addresses                                                            |
+| Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
+| Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  |
+| Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 |
+| Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      |
+| Bank         | Reward               | /api/rewards                   | Create a new reward (automates quote/trade for simplicity)                                        |
+| Bank         | Symbol               | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           |
+| Bank         | Trade                | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                                          |
+| Bank         | Transfer             | /api/transfers                 | Create, get and list transfers (e.g., funding, book)                                              |
+| Bank         | Workflow             | /api/workflows                 | Create, get and list workflows                                                                    |
 
-## Banks
+## Understanding Object Models & Endpoints
 
-A Bank is owned by an Organization and can be thought of as an environment or container for Customers and product offerings. An example of a Bank would be your customer facing banking website, or an internal staging environment for testing and integration.
+**Organizations**
 
-An Organization can have multiple banks, in sandbox or production environments. A sandbox Bank will be backed by stubbed data and process flows. For instance, identity record and funding source processes will be simulated rather than performed.
+An `Organization` is meant to represent the organization partnering with Cybrid to use our platform.
 
-## Customers
+An `Organization` does not directly interact with `customers`. Instead, an Organization has one or more `banks`, which encompass the financial service offerings of the platform.
 
-Customers represent your banking users on the platform. At present, we offer support for Individuals as Customers.
+**Banks**
 
-Customers must be verified in our system before they can play any part on the platform. See the Identity Records section for more details on how a customer can be verified.
+A `Bank` is owned by an `Organization` and can be thought of as an environment or container for `customers` and product offerings. Banks are created in either `Sandbox` or `Production` mode, where `Sandbox` is the environment that you would test, prototype and build in prior to moving to `Production`.
 
-Customers must also have an account to be able to transact. See the Accounts APIs for more details on setting up accounts for the customer.
+An `Organization` can have multiple `banks`, in either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed by stubbed data and process flows. For instance, funding source transfer processes as well as trades will be simulated rather than performed, however asset prices are representative of real-world values. You have an unlimited amount of simulated fiat currency for testing purposes.
+
+**Customers**
+
+`Customers` represent your banking users on the platform. At present, we offer support for `Individuals` as Customers.
+
+`Customers` must be verified (i.e., KYC'd) in our system before they can play any part on the platform, which means they must have an associated and a passing `Identity Verification`. See the Identity Verifications section for more details on how a customer can be verified.
+
+`Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer.
 
 
 
@@ -118,7 +184,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.26.2</version>
+  <version>v0.68.30</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -134,7 +200,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.26.2"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.68.30"
   }
 ```
 
@@ -148,7 +214,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.26.2.jar`
+- `target/cybrid-api-bank-java-v0.68.30.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -166,7 +232,7 @@ public class AccountsBankApiExample {
 
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -195,7 +261,7 @@ public class AccountsBankApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -206,26 +272,44 @@ Class | Method | HTTP request | Description
 *BanksBankApi* | [**createBank**](docs/BanksBankApi.md#createBank) | **POST** /api/banks | Create Bank
 *BanksBankApi* | [**getBank**](docs/BanksBankApi.md#getBank) | **GET** /api/banks/{bank_guid} | Get Bank
 *BanksBankApi* | [**listBanks**](docs/BanksBankApi.md#listBanks) | **GET** /api/banks | Get banks list
+*BanksBankApi* | [**updateBank**](docs/BanksBankApi.md#updateBank) | **PATCH** /api/banks/{bank_guid} | Patch Bank
 *CustomersBankApi* | [**createCustomer**](docs/CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer
 *CustomersBankApi* | [**getCustomer**](docs/CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer
 *CustomersBankApi* | [**listCustomers**](docs/CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list
+*DepositAddressesBankApi* | [**createDepositAddress**](docs/DepositAddressesBankApi.md#createDepositAddress) | **POST** /api/deposit_addresses | Create Deposit Address
+*DepositAddressesBankApi* | [**getDepositAddress**](docs/DepositAddressesBankApi.md#getDepositAddress) | **GET** /api/deposit_addresses/{deposit_address_guid} | Get Deposit Address
+*DepositAddressesBankApi* | [**listDepositAddresses**](docs/DepositAddressesBankApi.md#listDepositAddresses) | **GET** /api/deposit_addresses | List Deposit Addresses
+*ExternalBankAccountsBankApi* | [**createExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#createExternalBankAccount) | **POST** /api/external_bank_accounts | Create ExternalBankAccount
+*ExternalBankAccountsBankApi* | [**deleteExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#deleteExternalBankAccount) | **DELETE** /api/external_bank_accounts/{external_bank_account_guid} | Delete External Bank Account
+*ExternalBankAccountsBankApi* | [**getExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#getExternalBankAccount) | **GET** /api/external_bank_accounts/{external_bank_account_guid} | Get External Bank Account
+*ExternalBankAccountsBankApi* | [**listExternalBankAccounts**](docs/ExternalBankAccountsBankApi.md#listExternalBankAccounts) | **GET** /api/external_bank_accounts | Get external bank accounts list
+*ExternalBankAccountsBankApi* | [**patchExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#patchExternalBankAccount) | **PATCH** /api/external_bank_accounts/{external_bank_account_guid} | Patch ExternalBankAccount
 *IdentityRecordsBankApi* | [**createIdentityRecord**](docs/IdentityRecordsBankApi.md#createIdentityRecord) | **POST** /api/identity_records | Create Identity Record
 *IdentityRecordsBankApi* | [**getIdentityRecord**](docs/IdentityRecordsBankApi.md#getIdentityRecord) | **GET** /api/identity_records/{identity_record_guid} | Get Identity Record
 *IdentityRecordsBankApi* | [**listIdentityRecords**](docs/IdentityRecordsBankApi.md#listIdentityRecords) | **GET** /api/identity_records | List Identity Records
+*IdentityVerificationsBankApi* | [**createIdentityVerification**](docs/IdentityVerificationsBankApi.md#createIdentityVerification) | **POST** /api/identity_verifications | Create Identity Verification
+*IdentityVerificationsBankApi* | [**getIdentityVerification**](docs/IdentityVerificationsBankApi.md#getIdentityVerification) | **GET** /api/identity_verifications/{identity_verification_guid} | Get Identity Verification
+*IdentityVerificationsBankApi* | [**listIdentityVerifications**](docs/IdentityVerificationsBankApi.md#listIdentityVerifications) | **GET** /api/identity_verifications | List Identity Verifications
 *PricesBankApi* | [**listPrices**](docs/PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price
 *QuotesBankApi* | [**createQuote**](docs/QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote
 *QuotesBankApi* | [**getQuote**](docs/QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote
 *QuotesBankApi* | [**listQuotes**](docs/QuotesBankApi.md#listQuotes) | **GET** /api/quotes | Get quotes list
+*RewardsBankApi* | [**createRewards**](docs/RewardsBankApi.md#createRewards) | **POST** /api/rewards | Create Reward
+*RewardsBankApi* | [**getReward**](docs/RewardsBankApi.md#getReward) | **GET** /api/rewards/{reward_guid} | Get Reward
+*RewardsBankApi* | [**listRewards**](docs/RewardsBankApi.md#listRewards) | **GET** /api/rewards | Get rewards list
 *SymbolsBankApi* | [**listSymbols**](docs/SymbolsBankApi.md#listSymbols) | **GET** /api/symbols | Get Symbols list
 *TradesBankApi* | [**createTrade**](docs/TradesBankApi.md#createTrade) | **POST** /api/trades | Create Trade
 *TradesBankApi* | [**getTrade**](docs/TradesBankApi.md#getTrade) | **GET** /api/trades/{trade_guid} | Get Trade
 *TradesBankApi* | [**listTrades**](docs/TradesBankApi.md#listTrades) | **GET** /api/trades | Get trades list
-*TradingConfigurationsBankApi* | [**createTradingConfiguration**](docs/TradingConfigurationsBankApi.md#createTradingConfiguration) | **POST** /api/trading_configurations | Create TradingConfiguration
-*TradingConfigurationsBankApi* | [**getTradingConfiguration**](docs/TradingConfigurationsBankApi.md#getTradingConfiguration) | **GET** /api/trading_configurations/{trading_configuration_guid} | Get TradingConfiguration
-*TradingConfigurationsBankApi* | [**listTradingConfigurations**](docs/TradingConfigurationsBankApi.md#listTradingConfigurations) | **GET** /api/trading_configurations | List trading configurations
+*TransfersBankApi* | [**createTransfer**](docs/TransfersBankApi.md#createTransfer) | **POST** /api/transfers | Create Transfer
+*TransfersBankApi* | [**getTransfer**](docs/TransfersBankApi.md#getTransfer) | **GET** /api/transfers/{transfer_guid} | Get Transfer
+*TransfersBankApi* | [**listTransfers**](docs/TransfersBankApi.md#listTransfers) | **GET** /api/transfers | Get transfers list
 *VerificationKeysBankApi* | [**createVerificationKey**](docs/VerificationKeysBankApi.md#createVerificationKey) | **POST** /api/bank_verification_keys | Create VerificationKey
 *VerificationKeysBankApi* | [**getVerificationKey**](docs/VerificationKeysBankApi.md#getVerificationKey) | **GET** /api/bank_verification_keys/{verification_key_guid} | Get VerificationKey
 *VerificationKeysBankApi* | [**listVerificationKeys**](docs/VerificationKeysBankApi.md#listVerificationKeys) | **GET** /api/bank_verification_keys | Get Verification Keys list
+*WorkflowsBankApi* | [**createWorkflow**](docs/WorkflowsBankApi.md#createWorkflow) | **POST** /api/workflows | Create Workflow
+*WorkflowsBankApi* | [**getWorkflow**](docs/WorkflowsBankApi.md#getWorkflow) | **GET** /api/workflows/{workflow_guid} | Get Workflow
+*WorkflowsBankApi* | [**listWorkflows**](docs/WorkflowsBankApi.md#listWorkflows) | **GET** /api/workflows | Get workflows list
 
 
 ## Documentation for Models
@@ -239,34 +323,54 @@ Class | Method | HTTP request | Description
  - [BankListBankModel](docs/BankListBankModel.md)
  - [CustomerBankModel](docs/CustomerBankModel.md)
  - [CustomerListBankModel](docs/CustomerListBankModel.md)
- - [CybridAccountBankModel](docs/CybridAccountBankModel.md)
+ - [DepositAddressBankModel](docs/DepositAddressBankModel.md)
+ - [DepositAddressListBankModel](docs/DepositAddressListBankModel.md)
  - [ErrorResponseBankModel](docs/ErrorResponseBankModel.md)
- - [ExchangeAccountBankModel](docs/ExchangeAccountBankModel.md)
- - [ExchangeBankModel](docs/ExchangeBankModel.md)
- - [ExchangeListBankModel](docs/ExchangeListBankModel.md)
- - [FeeBankModel](docs/FeeBankModel.md)
+ - [ExternalBankAccountBankModel](docs/ExternalBankAccountBankModel.md)
+ - [ExternalBankAccountListBankModel](docs/ExternalBankAccountListBankModel.md)
  - [IdentityRecordBankModel](docs/IdentityRecordBankModel.md)
  - [IdentityRecordListBankModel](docs/IdentityRecordListBankModel.md)
+ - [IdentityVerificationBankModel](docs/IdentityVerificationBankModel.md)
+ - [IdentityVerificationListBankModel](docs/IdentityVerificationListBankModel.md)
+ - [IdentityVerificationWithDetailsAllOfBankModel](docs/IdentityVerificationWithDetailsAllOfBankModel.md)
+ - [IdentityVerificationWithDetailsBankModel](docs/IdentityVerificationWithDetailsBankModel.md)
+ - [PatchBankBankModel](docs/PatchBankBankModel.md)
+ - [PatchExternalBankAccountBankModel](docs/PatchExternalBankAccountBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
+ - [PostCustomerAddressBankModel](docs/PostCustomerAddressBankModel.md)
  - [PostCustomerBankModel](docs/PostCustomerBankModel.md)
- - [PostFeeBankModel](docs/PostFeeBankModel.md)
+ - [PostCustomerNameBankModel](docs/PostCustomerNameBankModel.md)
+ - [PostDepositAddressBankModel](docs/PostDepositAddressBankModel.md)
+ - [PostExternalBankAccountBankModel](docs/PostExternalBankAccountBankModel.md)
+ - [PostIdentificationNumberBankModel](docs/PostIdentificationNumberBankModel.md)
  - [PostIdentityRecordAttestationDetailsBankModel](docs/PostIdentityRecordAttestationDetailsBankModel.md)
  - [PostIdentityRecordBankModel](docs/PostIdentityRecordBankModel.md)
+ - [PostIdentityVerificationAddressBankModel](docs/PostIdentityVerificationAddressBankModel.md)
+ - [PostIdentityVerificationBankModel](docs/PostIdentityVerificationBankModel.md)
+ - [PostIdentityVerificationNameBankModel](docs/PostIdentityVerificationNameBankModel.md)
+ - [PostOneTimeAddressBankModel](docs/PostOneTimeAddressBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
+ - [PostRewardBankModel](docs/PostRewardBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
- - [PostTradingConfigurationBankModel](docs/PostTradingConfigurationBankModel.md)
+ - [PostTransferBankModel](docs/PostTransferBankModel.md)
  - [PostVerificationKeyBankModel](docs/PostVerificationKeyBankModel.md)
+ - [PostWorkflowBankModel](docs/PostWorkflowBankModel.md)
  - [QuoteBankModel](docs/QuoteBankModel.md)
  - [QuoteListBankModel](docs/QuoteListBankModel.md)
+ - [RewardBankModel](docs/RewardBankModel.md)
+ - [RewardListBankModel](docs/RewardListBankModel.md)
  - [SymbolPriceBankModel](docs/SymbolPriceBankModel.md)
- - [SystemAccountBankModel](docs/SystemAccountBankModel.md)
  - [TradeBankModel](docs/TradeBankModel.md)
  - [TradeListBankModel](docs/TradeListBankModel.md)
- - [TradingConfigurationBankModel](docs/TradingConfigurationBankModel.md)
- - [TradingConfigurationListBankModel](docs/TradingConfigurationListBankModel.md)
+ - [TransferBankModel](docs/TransferBankModel.md)
+ - [TransferListBankModel](docs/TransferListBankModel.md)
  - [VerificationKeyBankModel](docs/VerificationKeyBankModel.md)
  - [VerificationKeyListBankModel](docs/VerificationKeyListBankModel.md)
+ - [WorkflowBankModel](docs/WorkflowBankModel.md)
+ - [WorkflowWithDetailsAllOfBankModel](docs/WorkflowWithDetailsAllOfBankModel.md)
+ - [WorkflowWithDetailsBankModel](docs/WorkflowWithDetailsBankModel.md)
+ - [WorkflowsListBankModel](docs/WorkflowsListBankModel.md)
 
 
 ## Documentation for Authorization
@@ -296,6 +400,17 @@ Authentication schemes defined for the API:
   - quotes:read: quotes read
   - trades:execute: trades execute
   - trades:read: trades read
+  - transfers:execute: transfers execute
+  - transfers:read: transfers read
+  - rewards:execute: rewards execute
+  - rewards:read: rewards read
+  - external_bank_accounts:read: external_bank_accounts read
+  - external_bank_accounts:write: external_bank_accounts write
+  - external_bank_accounts:execute: external_bank_accounts execute
+  - workflows:read: workflows read
+  - workflows:execute: workflows execute
+  - deposit_addresses:read: deposit_addresses read
+  - deposit_addresses:execute: deposit_addresses execute
 
 
 ## Recommendation

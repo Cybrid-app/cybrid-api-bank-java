@@ -66,6 +66,7 @@ target/
 .ipynb_checkpoints
 
 # Added by Cybrid
+.github
 .gradle
 .bundle
 .openapi-generator

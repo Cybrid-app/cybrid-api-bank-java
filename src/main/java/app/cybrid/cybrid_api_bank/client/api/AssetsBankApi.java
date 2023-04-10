@@ -3,7 +3,6 @@ package app.cybrid.cybrid_api_bank.client.api;
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.AssetListBankModel;
-import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class AssetsBankApi {
     private ApiClient apiClient;
 
@@ -49,11 +48,8 @@ public class AssetsBankApi {
 
     /**
      * Get assets list
-     * Retrieves a listing of assets.  Required scope: **prices:read**
+     * Retrieves a listing of assets.
      * <p><b>200</b> - get list of assets
-     * <p><b>400</b> - Invalid requests - Malformed Authentication Header
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return AssetListBankModel
@@ -79,7 +75,7 @@ public class AssetsBankApi {
         final String[] localVarContentTypes = { };
         final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-        String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
+        String[] localVarAuthNames = new String[] {  };
 
         ParameterizedTypeReference<AssetListBankModel> localVarReturnType = new ParameterizedTypeReference<AssetListBankModel>() {};
         return apiClient.invokeAPI("/api/assets", HttpMethod.GET, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
@@ -87,11 +83,8 @@ public class AssetsBankApi {
 
     /**
      * Get assets list
-     * Retrieves a listing of assets.  Required scope: **prices:read**
+     * Retrieves a listing of assets.
      * <p><b>200</b> - get list of assets
-     * <p><b>400</b> - Invalid requests - Malformed Authentication Header
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
      * @return AssetListBankModel

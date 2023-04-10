@@ -1,12 +1,12 @@
 # CustomersBankApi
 
-All URIs are relative to *https://bank.demo.cybrid.app*
+All URIs are relative to *https://bank.sandbox.cybrid.app*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**createCustomer**](CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer
-[**getCustomer**](CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer
-[**listCustomers**](CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**createCustomer**](CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer |
+| [**getCustomer**](CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer |
+| [**listCustomers**](CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list |
 
 
 
@@ -32,7 +32,7 @@ import app.cybrid.cybrid_api_bank.client.api.CustomersBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -61,9 +61,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **postCustomerBankModel** | [**PostCustomerBankModel**](PostCustomerBankModel.md)|  |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **postCustomerBankModel** | [**PostCustomerBankModel**](PostCustomerBankModel.md)|  | |
 
 ### Return type
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | customer created |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 
@@ -110,7 +110,7 @@ import app.cybrid.cybrid_api_bank.client.api.CustomersBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -139,9 +139,9 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **customerGuid** | **String**| Identifier for the customer. |
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **customerGuid** | **String**| Identifier for the customer. | |
 
 ### Return type
 
@@ -161,7 +161,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | customer found |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | customer not found |  -  |
@@ -189,7 +188,7 @@ import app.cybrid.cybrid_api_bank.client.api.CustomersBankApi;
 public class Example {
     public static void main(String[] args) {
         ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("https://bank.demo.cybrid.app");
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
         
         // Configure HTTP bearer authorization: BearerAuth
         HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
@@ -221,12 +220,12 @@ public class Example {
 ### Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **java.math.BigInteger**|  | [optional] [default to 0]
- **perPage** | **java.math.BigInteger**|  | [optional] [default to 10]
- **bankGuid** | **String**| Comma separated bank_guids to list customers for. | [optional]
- **guid** | **String**| Comma separated customer_guids to list customers for. | [optional]
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **page** | **java.math.BigInteger**|  | [optional] |
+| **perPage** | **java.math.BigInteger**|  | [optional] |
+| **bankGuid** | **String**| Comma separated bank_guids to list customers for. | [optional] |
+| **guid** | **String**| Comma separated customer_guids to list customers for. | [optional] |
 
 ### Return type
 
@@ -246,7 +245,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of customers |  -  |
-| **400** | Invalid requests - malformed authentication header |  -  |
+| **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject, |  -  |
 | **403** | Invalid scope |  -  |
 

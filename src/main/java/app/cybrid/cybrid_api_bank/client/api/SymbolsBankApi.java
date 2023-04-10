@@ -2,6 +2,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
+import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class SymbolsBankApi {
     private ApiClient apiClient;
 
@@ -47,8 +48,9 @@ public class SymbolsBankApi {
 
     /**
      * Get Symbols list
-     * Retrieves a listing of symbols.  Required scope: **prices:read**
+     * Retrieves a listing of symbols.
      * <p><b>200</b> - get list of symbols
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
      * @return List&lt;String&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
@@ -77,8 +79,9 @@ public class SymbolsBankApi {
 
     /**
      * Get Symbols list
-     * Retrieves a listing of symbols.  Required scope: **prices:read**
+     * Retrieves a listing of symbols.
      * <p><b>200</b> - get list of symbols
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
      * @return List&lt;String&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */

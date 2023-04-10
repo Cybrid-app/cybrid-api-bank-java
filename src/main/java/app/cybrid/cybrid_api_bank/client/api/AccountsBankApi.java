@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2022-06-14T18:31:50.519571Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-10T16:27:31.012539Z[Etc/UTC]")
 public class AccountsBankApi {
     private ApiClient apiClient;
 
@@ -51,9 +51,9 @@ public class AccountsBankApi {
 
     /**
      * Create Account
-     * Creates an account.  ## Account Type  An Account is tied to a specific cryptocurrency and is comprised of transactions and a current balance.  An account is required to allow a Customer to hold cryptocurrency on the Cybrid Platform.  At present, account&#39;s can be created as &#x60;trading&#x60; accounts and are required before a Customer can generate a quote and execute a trade.  ## Asset  The asset is the specific cryptocurrency that the account holds, e.g., &#39;BTC&#39; for Bitcoin. See the Symbols API for a complete list of cryptocurrencies supported.     Required scope: **accounts:execute**
+     * Creates an account.  ## Account Type  An Account is tied to a specific cryptocurrency or fiat and is comprised of transactions and a current balance.  An account is required to allow a Customer to hold cryptocurrency or fiat on the Cybrid Platform.  At present, account&#39;s can be created as &#x60;trading&#x60; or &#x60;fiat &#x60; accounts and are required before a Customer can generate quotes or execute a &#x60;trade&#x60; or &#x60;transfer&#x60;.  ## Asset  The asset is the specific cryptocurrency or fiat that the account holds, e.g., &#39;BTC&#39; for Bitcoin or &#x60;USD&#x60; for US dollars. See the Symbols API for a complete list of cryptocurrencies and fiat supported.     Required scope: **accounts:execute**
      * <p><b>201</b> - account created
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param postAccountBankModel The postAccountBankModel parameter
@@ -91,9 +91,9 @@ public class AccountsBankApi {
 
     /**
      * Create Account
-     * Creates an account.  ## Account Type  An Account is tied to a specific cryptocurrency and is comprised of transactions and a current balance.  An account is required to allow a Customer to hold cryptocurrency on the Cybrid Platform.  At present, account&#39;s can be created as &#x60;trading&#x60; accounts and are required before a Customer can generate a quote and execute a trade.  ## Asset  The asset is the specific cryptocurrency that the account holds, e.g., &#39;BTC&#39; for Bitcoin. See the Symbols API for a complete list of cryptocurrencies supported.     Required scope: **accounts:execute**
+     * Creates an account.  ## Account Type  An Account is tied to a specific cryptocurrency or fiat and is comprised of transactions and a current balance.  An account is required to allow a Customer to hold cryptocurrency or fiat on the Cybrid Platform.  At present, account&#39;s can be created as &#x60;trading&#x60; or &#x60;fiat &#x60; accounts and are required before a Customer can generate quotes or execute a &#x60;trade&#x60; or &#x60;transfer&#x60;.  ## Asset  The asset is the specific cryptocurrency or fiat that the account holds, e.g., &#39;BTC&#39; for Bitcoin or &#x60;USD&#x60; for US dollars. See the Symbols API for a complete list of cryptocurrencies and fiat supported.     Required scope: **accounts:execute**
      * <p><b>201</b> - account created
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param postAccountBankModel The postAccountBankModel parameter
@@ -113,7 +113,6 @@ public class AccountsBankApi {
      * Get Account
      * Retrieves an account.  Required scope: **accounts:read**
      * <p><b>200</b> - account found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - account not found
@@ -154,7 +153,6 @@ public class AccountsBankApi {
      * Get Account
      * Retrieves an account.  Required scope: **accounts:read**
      * <p><b>200</b> - account found
-     * <p><b>400</b> - Invalid requests - malformed authentication header
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - account not found
@@ -175,7 +173,7 @@ public class AccountsBankApi {
      * List Accounts
      * Retrieves a list of accounts.  Required scope: **accounts:read**
      * <p><b>200</b> - get list of accounts
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
@@ -219,7 +217,7 @@ public class AccountsBankApi {
      * List Accounts
      * Retrieves a list of accounts.  Required scope: **accounts:read**
      * <p><b>200</b> - get list of accounts
-     * <p><b>400</b> - Invalid requests - malformed authentication header
+     * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.

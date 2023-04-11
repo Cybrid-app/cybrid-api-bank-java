@@ -16,7 +16,8 @@
 |**state** | [**StateEnum**](#StateEnum) | The trade&#39;s state |  [optional] |
 |**amount** | **java.math.BigInteger** | The amount being transferred. |  [optional] |
 |**fee** | **java.math.BigInteger** | The fee associated with the trade. |  [optional] |
-|**networkFee** | **java.math.BigInteger** | The network fee in base units of network_fee_asset. Only present on &#x60;crypto&#x60; transfers. |  [optional] |
+|**estimatedNetworkFee** | **java.math.BigInteger** | The estimated network fee in base units of network_fee_asset. Only present on &#x60;crypto&#x60; transfers. |  [optional] |
+|**networkFee** | **java.math.BigInteger** | The actual network fee in base units of network_fee_asset. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
 |**networkFeeAsset** | **String** | The asset code of the network fee. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. |  [optional] |
 

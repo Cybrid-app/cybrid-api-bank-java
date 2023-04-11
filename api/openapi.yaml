@@ -194,7 +194,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.68.32
+  version: v0.68.33
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5764,13 +5764,14 @@ components:
         amount: 5
         quote_guid: quote_guid
         fee: 5
-        guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
+        network_fee: 7
+        network_fee_asset: network_fee_asset
+        guid: guid
         transfer_type: savings
         state: storing
         asset: asset
-        network_fee: 2
-        network_fee_asset: network_fee_asset
+        estimated_network_fee: 2
         customer_guid: customer_guid
       properties:
         guid:
@@ -5820,9 +5821,14 @@ components:
         fee:
           description: The fee associated with the trade.
           type: integer
+        estimated_network_fee:
+          description: The estimated network fee in base units of network_fee_asset.
+            Only present on `crypto` transfers.
+          nullable: true
+          type: integer
         network_fee:
-          description: The network fee in base units of network_fee_asset. Only present
-            on `crypto` transfers.
+          description: The actual network fee in base units of network_fee_asset.
+            Only present on `crypto` transfers that have successfully completed.
           nullable: true
           type: integer
         network_fee_asset:
@@ -5965,25 +5971,27 @@ components:
           amount: 5
           quote_guid: quote_guid
           fee: 5
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          network_fee: 7
+          network_fee_asset: network_fee_asset
+          guid: guid
           transfer_type: savings
           state: storing
           asset: asset
-          network_fee: 2
-          network_fee_asset: network_fee_asset
+          estimated_network_fee: 2
           customer_guid: customer_guid
         - side: deposit
           amount: 5
           quote_guid: quote_guid
           fee: 5
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          network_fee: 7
+          network_fee_asset: network_fee_asset
+          guid: guid
           transfer_type: savings
           state: storing
           asset: asset
-          network_fee: 2
-          network_fee_asset: network_fee_asset
+          estimated_network_fee: 2
           customer_guid: customer_guid
         page: 0
       properties:

@@ -78,20 +78,20 @@ info:
     \ deposit_addresses:read deposit_addresses:execute\"\n  }' -H \"Content-Type:\
     \ application/json\"\n\n# When using Organization credentials set `scope` to 'organizations:read\
     \ organizations:write banks:read banks:write banks:execute customers:read accounts:read\
-    \ quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute\
-    \ external_bank_accounts:read workflows:read deposit_addresses:read'\n```\n<font\
-    \ color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full\
-    \ scope access. Delete scopes if you'd like to restrict access.**</font>\n\n##\
-    \ Authentication Scopes\n\nThe Cybrid platform supports the use of scopes to control\
-    \ the level of access a token is limited to. Scopes do not grant access to resources;\
-    \ instead, they provide limits, in support of the least privilege principal.\n\
-    \nThe following scopes are available on the platform and can be requested when\
-    \ generating either an Organization, Bank or Customer token. Generally speaking,\
-    \ the _Read_ scope is required to read and list resources, the _Write_ scope is\
-    \ required to update a resource and the _Execute_ scope is required to create\
-    \ a resource.\n\n| Resource              | Read scope (Token Type)           \
-    \                         | Write scope (Token Type)                      | Execute\
-    \ scope (Token Type)                       |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
+    \ prices:read quotes:execute quotes:read trades:execute trades:read transfers:read\
+    \ transfers:execute external_bank_accounts:read workflows:read deposit_addresses:read'\n\
+    ```\n<font color=\"orange\">**⚠️ Note: The above curl will create a bearer token\
+    \ with full scope access. Delete scopes if you'd like to restrict access.**</font>\n\
+    \n## Authentication Scopes\n\nThe Cybrid platform supports the use of scopes to\
+    \ control the level of access a token is limited to. Scopes do not grant access\
+    \ to resources; instead, they provide limits, in support of the least privilege\
+    \ principal.\n\nThe following scopes are available on the platform and can be\
+    \ requested when generating either an Organization, Bank or Customer token. Generally\
+    \ speaking, the _Read_ scope is required to read and list resources, the _Write_\
+    \ scope is required to update a resource and the _Execute_ scope is required to\
+    \ create a resource.\n\n| Resource              | Read scope (Token Type)    \
+    \                                | Write scope (Token Type)                  \
+    \    | Execute scope (Token Type)                       |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
     | Account               | accounts:read (Organization, Bank, Customer)       \
     \        |                                               | accounts:execute (Bank,\
     \ Customer)                |\n| Bank                  | banks:read (Organization,\
@@ -196,7 +196,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.68.68
+  version: v0.68.69
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3027,6 +3027,14 @@ paths:
         explode: true
         in: query
         name: symbol
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The bank identifier to retrieve prices for.
+        explode: true
+        in: query
+        name: bank_guid
         required: false
         schema:
           type: string

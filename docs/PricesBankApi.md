@@ -10,7 +10,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 ## listPrices
 
-> List&lt;SymbolPriceBankModel&gt; listPrices(symbol)
+> List&lt;SymbolPriceBankModel&gt; listPrices(symbol, bankGuid)
 
 Get Price
 
@@ -42,8 +42,9 @@ public class Example {
 
         PricesBankApi apiInstance = new PricesBankApi(defaultClient);
         String symbol = "symbol_example"; // String | Comma separated symbols to list prices for.
+        String bankGuid = "bankGuid_example"; // String | The bank identifier to retrieve prices for.
         try {
-            List<SymbolPriceBankModel> result = apiInstance.listPrices(symbol);
+            List<SymbolPriceBankModel> result = apiInstance.listPrices(symbol, bankGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PricesBankApi#listPrices");
@@ -62,6 +63,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **symbol** | **String**| Comma separated symbols to list prices for. | [optional] |
+| **bankGuid** | **String**| The bank identifier to retrieve prices for. | [optional] |
 
 ### Return type
 

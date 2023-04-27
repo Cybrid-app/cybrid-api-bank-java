@@ -26,7 +26,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-27T12:41:02.165559Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-04-27T14:24:45.587248Z[Etc/UTC]")
 public class PricesBankApi {
     private ApiClient apiClient;
 
@@ -55,10 +55,11 @@ public class PricesBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param symbol Comma separated symbols to list prices for.
+     * @param bankGuid The bank identifier to retrieve prices for.
      * @return List&lt;SymbolPriceBankModel&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listPricesRequestCreation(String symbol) throws WebClientResponseException {
+    private ResponseSpec listPricesRequestCreation(String symbol, String bankGuid) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -69,6 +70,7 @@ public class PricesBankApi {
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "symbol", symbol));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -91,16 +93,17 @@ public class PricesBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * @param symbol Comma separated symbols to list prices for.
+     * @param bankGuid The bank identifier to retrieve prices for.
      * @return List&lt;SymbolPriceBankModel&gt;
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Flux<SymbolPriceBankModel> listPrices(String symbol) throws WebClientResponseException {
+    public Flux<SymbolPriceBankModel> listPrices(String symbol, String bankGuid) throws WebClientResponseException {
         ParameterizedTypeReference<SymbolPriceBankModel> localVarReturnType = new ParameterizedTypeReference<SymbolPriceBankModel>() {};
-        return listPricesRequestCreation(symbol).bodyToFlux(localVarReturnType);
+        return listPricesRequestCreation(symbol, bankGuid).bodyToFlux(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<List<SymbolPriceBankModel>>> listPricesWithHttpInfo(String symbol) throws WebClientResponseException {
+    public Mono<ResponseEntity<List<SymbolPriceBankModel>>> listPricesWithHttpInfo(String symbol, String bankGuid) throws WebClientResponseException {
         ParameterizedTypeReference<SymbolPriceBankModel> localVarReturnType = new ParameterizedTypeReference<SymbolPriceBankModel>() {};
-        return listPricesRequestCreation(symbol).toEntityList(localVarReturnType);
+        return listPricesRequestCreation(symbol, bankGuid).toEntityList(localVarReturnType);
     }
 }

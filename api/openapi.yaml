@@ -196,7 +196,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.68.83
+  version: v0.68.84
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6460,6 +6460,57 @@ components:
           type: string
         failure_code:
           description: The failure code for failed transfers.
+          nullable: true
+          type: string
+      type: object
+    ExternalWallet:
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+        asset_code:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        account_kind:
+          description: The type of account.
+          enum:
+          - fireblocks_external_wallet
+          - circle_wire_external_wallet
+          type: string
+        environment:
+          description: The environment that the exchange is operating in.
+          enum:
+          - sandbox
+          - production
+          type: string
+        exchange_guid:
+          description: The exchange identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the exchange was created at.
+          format: date-time
+          type: string
+        state:
+          description: The state of an external wallet
+          enum:
+          - storing
+          - pending
+          - failed
+          - completed
+          type: string
+        failure_code:
+          description: The failure code of an external wallet (if any)
           nullable: true
           type: string
       type: object

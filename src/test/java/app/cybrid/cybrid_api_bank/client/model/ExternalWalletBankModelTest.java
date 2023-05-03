@@ -20,71 +20,96 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.OffsetDateTime;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 
 /**
- * Model tests for PostIdentityVerificationAddressBankModel
+ * Model tests for ExternalWalletBankModel
  */
-public class PostIdentityVerificationAddressBankModelTest {
-    private final PostIdentityVerificationAddressBankModel model = new PostIdentityVerificationAddressBankModel();
+public class ExternalWalletBankModelTest {
+    private final ExternalWalletBankModel model = new ExternalWalletBankModel();
 
     /**
-     * Model tests for PostIdentityVerificationAddressBankModel
+     * Model tests for ExternalWalletBankModel
      */
     @Test
-    public void testPostIdentityVerificationAddressBankModel() {
-        // TODO: test PostIdentityVerificationAddressBankModel
+    public void testExternalWalletBankModel() {
+        // TODO: test ExternalWalletBankModel
     }
 
     /**
-     * Test the property 'street'
+     * Test the property 'guid'
      */
     @Test
-    public void streetTest() {
-        // TODO: test street
+    public void guidTest() {
+        // TODO: test guid
     }
 
     /**
-     * Test the property 'street2'
+     * Test the property 'name'
      */
     @Test
-    public void street2Test() {
-        // TODO: test street2
+    public void nameTest() {
+        // TODO: test name
     }
 
     /**
-     * Test the property 'city'
+     * Test the property 'assetCode'
      */
     @Test
-    public void cityTest() {
-        // TODO: test city
+    public void assetCodeTest() {
+        // TODO: test assetCode
     }
 
     /**
-     * Test the property 'subdivision'
+     * Test the property 'accountKind'
      */
     @Test
-    public void subdivisionTest() {
-        // TODO: test subdivision
+    public void accountKindTest() {
+        // TODO: test accountKind
     }
 
     /**
-     * Test the property 'postalCode'
+     * Test the property 'environment'
      */
     @Test
-    public void postalCodeTest() {
-        // TODO: test postalCode
+    public void environmentTest() {
+        // TODO: test environment
     }
 
     /**
-     * Test the property 'countryCode'
+     * Test the property 'exchangeGuid'
      */
     @Test
-    public void countryCodeTest() {
-        // TODO: test countryCode
+    public void exchangeGuidTest() {
+        // TODO: test exchangeGuid
+    }
+
+    /**
+     * Test the property 'createdAt'
+     */
+    @Test
+    public void createdAtTest() {
+        // TODO: test createdAt
+    }
+
+    /**
+     * Test the property 'state'
+     */
+    @Test
+    public void stateTest() {
+        // TODO: test state
+    }
+
+    /**
+     * Test the property 'failureCode'
+     */
+    @Test
+    public void failureCodeTest() {
+        // TODO: test failureCode
     }
 
 }

@@ -13,6 +13,8 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import java.util.Objects;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,71 +22,461 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import java.time.OffsetDateTime;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for PostIdentityVerificationAddressBankModel
+ * ExternalWalletBankModel
  */
-public class PostIdentityVerificationAddressBankModelTest {
-    private final PostIdentityVerificationAddressBankModel model = new PostIdentityVerificationAddressBankModel();
+@JsonPropertyOrder({
+  ExternalWalletBankModel.JSON_PROPERTY_GUID,
+  ExternalWalletBankModel.JSON_PROPERTY_NAME,
+  ExternalWalletBankModel.JSON_PROPERTY_ASSET_CODE,
+  ExternalWalletBankModel.JSON_PROPERTY_ACCOUNT_KIND,
+  ExternalWalletBankModel.JSON_PROPERTY_ENVIRONMENT,
+  ExternalWalletBankModel.JSON_PROPERTY_EXCHANGE_GUID,
+  ExternalWalletBankModel.JSON_PROPERTY_CREATED_AT,
+  ExternalWalletBankModel.JSON_PROPERTY_STATE,
+  ExternalWalletBankModel.JSON_PROPERTY_FAILURE_CODE
+})
+@JsonTypeName("ExternalWallet")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-05-03T18:54:58.085937Z[Etc/UTC]")
+public class ExternalWalletBankModel {
+  public static final String JSON_PROPERTY_GUID = "guid";
+  private String guid;
 
-    /**
-     * Model tests for PostIdentityVerificationAddressBankModel
-     */
-    @Test
-    public void testPostIdentityVerificationAddressBankModel() {
-        // TODO: test PostIdentityVerificationAddressBankModel
+  public static final String JSON_PROPERTY_NAME = "name";
+  private String name;
+
+  public static final String JSON_PROPERTY_ASSET_CODE = "asset_code";
+  private String assetCode;
+
+  /**
+   * The type of account.
+   */
+  public enum AccountKindEnum {
+    FIREBLOCKS_EXTERNAL_WALLET("fireblocks_external_wallet"),
+    
+    CIRCLE_WIRE_EXTERNAL_WALLET("circle_wire_external_wallet");
+
+    private String value;
+
+    AccountKindEnum(String value) {
+      this.value = value;
     }
 
-    /**
-     * Test the property 'street'
-     */
-    @Test
-    public void streetTest() {
-        // TODO: test street
+    @JsonValue
+    public String getValue() {
+      return value;
     }
 
-    /**
-     * Test the property 'street2'
-     */
-    @Test
-    public void street2Test() {
-        // TODO: test street2
+    @Override
+    public String toString() {
+      return String.valueOf(value);
     }
 
-    /**
-     * Test the property 'city'
-     */
-    @Test
-    public void cityTest() {
-        // TODO: test city
+    @JsonCreator
+    public static AccountKindEnum fromValue(String value) {
+      for (AccountKindEnum b : AccountKindEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  public static final String JSON_PROPERTY_ACCOUNT_KIND = "account_kind";
+  private AccountKindEnum accountKind;
+
+  /**
+   * The environment that the exchange is operating in.
+   */
+  public enum EnvironmentEnum {
+    SANDBOX("sandbox"),
+    
+    PRODUCTION("production");
+
+    private String value;
+
+    EnvironmentEnum(String value) {
+      this.value = value;
     }
 
-    /**
-     * Test the property 'subdivision'
-     */
-    @Test
-    public void subdivisionTest() {
-        // TODO: test subdivision
+    @JsonValue
+    public String getValue() {
+      return value;
     }
 
-    /**
-     * Test the property 'postalCode'
-     */
-    @Test
-    public void postalCodeTest() {
-        // TODO: test postalCode
+    @Override
+    public String toString() {
+      return String.valueOf(value);
     }
 
-    /**
-     * Test the property 'countryCode'
-     */
-    @Test
-    public void countryCodeTest() {
-        // TODO: test countryCode
+    @JsonCreator
+    public static EnvironmentEnum fromValue(String value) {
+      for (EnvironmentEnum b : EnvironmentEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
+  }
+
+  public static final String JSON_PROPERTY_ENVIRONMENT = "environment";
+  private EnvironmentEnum environment;
+
+  public static final String JSON_PROPERTY_EXCHANGE_GUID = "exchange_guid";
+  private String exchangeGuid;
+
+  public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+  private OffsetDateTime createdAt;
+
+  /**
+   * The state of an external wallet
+   */
+  public enum StateEnum {
+    STORING("storing"),
+    
+    PENDING("pending"),
+    
+    FAILED("failed"),
+    
+    COMPLETED("completed");
+
+    private String value;
+
+    StateEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static StateEnum fromValue(String value) {
+      for (StateEnum b : StateEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  public static final String JSON_PROPERTY_STATE = "state";
+  private StateEnum state;
+
+  public static final String JSON_PROPERTY_FAILURE_CODE = "failure_code";
+  private String failureCode;
+
+  public ExternalWalletBankModel() { 
+  }
+
+  public ExternalWalletBankModel guid(String guid) {
+    
+    this.guid = guid;
+    return this;
+  }
+
+   /**
+   * Auto-generated unique identifier for the account.
+   * @return guid
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Auto-generated unique identifier for the account.")
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getGuid() {
+    return guid;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setGuid(String guid) {
+    this.guid = guid;
+  }
+
+
+  public ExternalWalletBankModel name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * The name of the account.
+   * @return name
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The name of the account.")
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getName() {
+    return name;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  public ExternalWalletBankModel assetCode(String assetCode) {
+    
+    this.assetCode = assetCode;
+    return this;
+  }
+
+   /**
+   * The asset code.
+   * @return assetCode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The asset code.")
+  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getAssetCode() {
+    return assetCode;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ASSET_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAssetCode(String assetCode) {
+    this.assetCode = assetCode;
+  }
+
+
+  public ExternalWalletBankModel accountKind(AccountKindEnum accountKind) {
+    
+    this.accountKind = accountKind;
+    return this;
+  }
+
+   /**
+   * The type of account.
+   * @return accountKind
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The type of account.")
+  @JsonProperty(JSON_PROPERTY_ACCOUNT_KIND)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public AccountKindEnum getAccountKind() {
+    return accountKind;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ACCOUNT_KIND)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setAccountKind(AccountKindEnum accountKind) {
+    this.accountKind = accountKind;
+  }
+
+
+  public ExternalWalletBankModel environment(EnvironmentEnum environment) {
+    
+    this.environment = environment;
+    return this;
+  }
+
+   /**
+   * The environment that the exchange is operating in.
+   * @return environment
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The environment that the exchange is operating in.")
+  @JsonProperty(JSON_PROPERTY_ENVIRONMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public EnvironmentEnum getEnvironment() {
+    return environment;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ENVIRONMENT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setEnvironment(EnvironmentEnum environment) {
+    this.environment = environment;
+  }
+
+
+  public ExternalWalletBankModel exchangeGuid(String exchangeGuid) {
+    
+    this.exchangeGuid = exchangeGuid;
+    return this;
+  }
+
+   /**
+   * The exchange identifier.
+   * @return exchangeGuid
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The exchange identifier.")
+  @JsonProperty(JSON_PROPERTY_EXCHANGE_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getExchangeGuid() {
+    return exchangeGuid;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_EXCHANGE_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setExchangeGuid(String exchangeGuid) {
+    this.exchangeGuid = exchangeGuid;
+  }
+
+
+  public ExternalWalletBankModel createdAt(OffsetDateTime createdAt) {
+    
+    this.createdAt = createdAt;
+    return this;
+  }
+
+   /**
+   * ISO8601 datetime the exchange was created at.
+   * @return createdAt
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "ISO8601 datetime the exchange was created at.")
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CREATED_AT)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+
+  public ExternalWalletBankModel state(StateEnum state) {
+    
+    this.state = state;
+    return this;
+  }
+
+   /**
+   * The state of an external wallet
+   * @return state
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The state of an external wallet")
+  @JsonProperty(JSON_PROPERTY_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public StateEnum getState() {
+    return state;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_STATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setState(StateEnum state) {
+    this.state = state;
+  }
+
+
+  public ExternalWalletBankModel failureCode(String failureCode) {
+    
+    this.failureCode = failureCode;
+    return this;
+  }
+
+   /**
+   * The failure code of an external wallet (if any)
+   * @return failureCode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The failure code of an external wallet (if any)")
+  @JsonProperty(JSON_PROPERTY_FAILURE_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getFailureCode() {
+    return failureCode;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_FAILURE_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFailureCode(String failureCode) {
+    this.failureCode = failureCode;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ExternalWalletBankModel externalWallet = (ExternalWalletBankModel) o;
+    return Objects.equals(this.guid, externalWallet.guid) &&
+        Objects.equals(this.name, externalWallet.name) &&
+        Objects.equals(this.assetCode, externalWallet.assetCode) &&
+        Objects.equals(this.accountKind, externalWallet.accountKind) &&
+        Objects.equals(this.environment, externalWallet.environment) &&
+        Objects.equals(this.exchangeGuid, externalWallet.exchangeGuid) &&
+        Objects.equals(this.createdAt, externalWallet.createdAt) &&
+        Objects.equals(this.state, externalWallet.state) &&
+        Objects.equals(this.failureCode, externalWallet.failureCode);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(guid, name, assetCode, accountKind, environment, exchangeGuid, createdAt, state, failureCode);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class ExternalWalletBankModel {\n");
+    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    assetCode: ").append(toIndentedString(assetCode)).append("\n");
+    sb.append("    accountKind: ").append(toIndentedString(accountKind)).append("\n");
+    sb.append("    environment: ").append(toIndentedString(environment)).append("\n");
+    sb.append("    exchangeGuid: ").append(toIndentedString(exchangeGuid)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    state: ").append(toIndentedString(state)).append("\n");
+    sb.append("    failureCode: ").append(toIndentedString(failureCode)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 
 }
+

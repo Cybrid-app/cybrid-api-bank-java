@@ -201,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.70.0
+  version: v0.71.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -4414,8 +4414,8 @@ paths:
                   value:
                     status: 400
                     error_message: "Invalid value exception. Parameter: expected_error\
-                      \ supported values: [\"unexpected_error\", \"invalid_quote_guid\"\
-                      , \"expired_quote\", \"non_sufficient_funds\"] "
+                      \ supported values: [\"invalid_quote_guid\", \"expired_quote\"\
+                      , \"non_sufficient_funds\"] "
                     message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -7348,7 +7348,6 @@ components:
         expected_error:
           description: The optional expected error to simulate trade failure.
           enum:
-          - unexpected_error
           - invalid_quote_guid
           - expired_quote
           - non_sufficient_funds

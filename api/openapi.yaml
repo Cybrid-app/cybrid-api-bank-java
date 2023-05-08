@@ -74,12 +74,13 @@ info:
     banks:read banks:write accounts:read accounts:execute customers:read customers:write\
     \ customers:execute prices:read quotes:execute quotes:read trades:execute trades:read\
     \ transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read\
-    \ external_bank_accounts:write external_bank_accounts:execute workflows:read workflows:execute\
-    \ deposit_addresses:read deposit_addresses:execute\"\n  }' -H \"Content-Type:\
-    \ application/json\"\n\n# When using Organization credentials set `scope` to 'organizations:read\
-    \ organizations:write banks:read banks:write banks:execute customers:read accounts:read\
-    \ prices:read quotes:execute quotes:read trades:execute trades:read transfers:read\
-    \ transfers:execute external_bank_accounts:read workflows:read deposit_addresses:read'\n\
+    \ external_bank_accounts:write external_bank_accounts:execute external_wallets:read\
+    \ external_wallets:execute workflows:read workflows:execute deposit_addresses:read\
+    \ deposit_addresses:execute\"\n  }' -H \"Content-Type: application/json\"\n\n\
+    # When using Organization credentials set `scope` to 'organizations:read organizations:write\
+    \ banks:read banks:write banks:execute customers:read accounts:read prices:read\
+    \ quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute\
+    \ external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'\n\
     ```\n<font color=\"orange\">**⚠️ Note: The above curl will create a bearer token\
     \ with full scope access. Delete scopes if you'd like to restrict access.**</font>\n\
     \n## Authentication Scopes\n\nThe Cybrid platform supports the use of scopes to\
@@ -103,25 +104,27 @@ info:
     \ Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute\
     \ (Bank, Customer)       |\n| External Bank Account | external_bank_accounts:read\
     \ (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer)\
-    \ | external_bank_accounts:execute (Bank, Customer)  |\n| Organization       \
-    \   | organizations:read (Organization)                          | organizations:write\
-    \ (Organization)            |                                                \
-    \  |\n| Price                 | prices:read (Bank, Customer)                 \
-    \              |                                               |             \
-    \                                     |\n| Quote                 | quotes:read\
-    \ (Organization, Bank, Customer)                 |                           \
-    \                    | quotes:execute (Organization, Bank, Customer)    |\n| Reward\
-    \                | rewards:read (Bank, Customer)                             \
-    \ |                                               | rewards:execute (Bank)   \
-    \                        |\n| Trade                 | trades:read (Organization,\
-    \ Bank, Customer)                 |                                          \
-    \     | trades:execute (Organization, Bank, Customer)    |\n| Transfer       \
-    \       | transfers:read (Organization, Bank, Customer)              |       \
-    \                                        | transfers:execute (Organization, Bank,\
-    \ Customer) |\n| Workflow              | workflows:read (Organization, Bank, Customer)\
-    \              |                                               | workflows:execute\
-    \ (Bank, Customer)               |\n\n## Available Endpoints\n\nThe available\
-    \ APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
+    \ | external_bank_accounts:execute (Bank, Customer)  |\n| External Wallet    \
+    \   | external_wallet:read (Organization, Bank, Customer)        |           \
+    \                                    | external_wallet:execute (Bank, Customer)\
+    \         |\n| Organization          | organizations:read (Organization)     \
+    \                     | organizations:write (Organization)            |      \
+    \                                            |\n| Price                 | prices:read\
+    \ (Bank, Customer)                               |                           \
+    \                    |                                                  |\n| Quote\
+    \                 | quotes:read (Organization, Bank, Customer)               \
+    \  |                                               | quotes:execute (Organization,\
+    \ Bank, Customer)    |\n| Reward                | rewards:read (Bank, Customer)\
+    \                              |                                             \
+    \  | rewards:execute (Bank)                           |\n| Trade             \
+    \    | trades:read (Organization, Bank, Customer)                 |          \
+    \                                     | trades:execute (Organization, Bank, Customer)\
+    \    |\n| Transfer              | transfers:read (Organization, Bank, Customer)\
+    \              |                                               | transfers:execute\
+    \ (Organization, Bank, Customer) |\n| Workflow              | workflows:read (Organization,\
+    \ Bank, Customer)              |                                             \
+    \  | workflows:execute (Bank, Customer)               |\n\n## Available Endpoints\n\
+    \nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
     \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
     \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
@@ -151,9 +154,11 @@ info:
     \                                                            |\n| Bank       \
     \  | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list\
     \ external bank accounts, which connect customer bank accounts to the platform\
-    \ |\n| Bank         | IdentityVerification | /api/identity_verifications    |\
-    \ Create and list identity verifications, which are performed on customers for\
-    \ KYC                  |\n| Bank         | Price                | /api/prices\
+    \ |\n| Bank         | ExternalWallet       | /api/external_wallets          |\
+    \ Create, get, list and delete external wallets, which connect customer wallets\
+    \ to the platform     |\n| Bank         | IdentityVerification | /api/identity_verifications\
+    \    | Create and list identity verifications, which are performed on customers\
+    \ for KYC                  |\n| Bank         | Price                | /api/prices\
     \                    | Get the current prices for assets on the platform     \
     \                                            |\n| Bank         | Quote       \
     \         | /api/quotes                    | Create and list quotes, which are\
@@ -196,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.68.91
+  version: v0.69.1
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1786,8 +1791,7 @@ paths:
                 invalid_subject:
                   value:
                     status: 401
-                    error_message: "Invalid Subject type. Required: customer or bank\
-                      \ or organization"
+                    error_message: "Invalid Subject type. Required: customer or bank"
                     message_code: invalid_subject
                 invalid_signature:
                   value:
@@ -2032,6 +2036,421 @@ paths:
       tags:
       - External Bank Accounts
       x-content-type: application/json
+      x-accepts: application/json
+  /api/external_wallets:
+    get:
+      description: "Retrieves a listing of external wallets.\n\nRequired scope: **external_wallets:read**"
+      operationId: listExternalWallets
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated external_wallet_guids to list external_wallets
+          for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list external_wallets for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list external_wallets for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalWalletList'
+          description: Get list of external_wallets
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: Invalid value. comma separated bank guids must
+                      be at the most 4096 characters long
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: external_wallets:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - external_wallets:read
+      summary: Get external wallets list
+      tags:
+      - External Wallets
+      x-accepts: application/json
+    post:
+      description: "Create an ExternalWallet.\n\nRequired scope: **external_wallets:execute**"
+      operationId: createExternalWallet
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostExternalWallet'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalWallet'
+          description: ExternalWallet created
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_parameter:
+                  value:
+                    status: 400
+                    error_message: "Missing parameter. Required: name, asset, account_kind"
+                    message_code: missing_parameter
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: Invalid value. customer_guid must  32 characters
+                      long
+                    message_code: invalid_value
+                invalid_parameter_value:
+                  value:
+                    status: 400
+                    error_message: "Invalid value exception. Parameter: account_kind\
+                      \ supported values: [\"fireblocks_external_wallet\", \"circle_wire_external_wallet\"\
+                      ] "
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank or customer"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: external_wallets:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "422":
+          content:
+            application/json:
+              examples:
+                unprocessable_request:
+                  value:
+                    status: 422
+                    error_message: "Unable to process request: InvalidCustomer - Customer\
+                      \ not found"
+                    message_code: no_customer
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unable to process request
+      security:
+      - BearerAuth: []
+        oauth2:
+        - external_wallets:execute
+      summary: Create ExternalWallet
+      tags:
+      - External Wallets
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/external_wallets/{external_wallet_guid}:
+    delete:
+      description: "Deletes an external wallet.\n\nRequired scope: **external_wallets:execute**"
+      operationId: deleteExternalWallet
+      parameters:
+      - description: Identifier for the external wallet.
+        explode: false
+        in: path
+        name: external_wallet_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalWallet'
+          description: External wallet deleted
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: external_wallets:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: ExternalWallet not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ExternalWallet not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - external_wallets:execute
+      summary: Delete External Wallet
+      tags:
+      - External Wallets
+      x-accepts: application/json
+    get:
+      description: "Retrieves an external_wallet.\n\nRequired scope: **external_wallets:read**"
+      operationId: getExternalWallet
+      parameters:
+      - description: Identifier for the external_wallet.
+        explode: false
+        in: path
+        name: external_wallet_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExternalWallet'
+          description: External bank account found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: external_wallets:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: ExternalWallet not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: ExternalWallet not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - external_wallets:read
+      summary: Get External Wallet
+      tags:
+      - External Wallets
       x-accepts: application/json
   /api/identity_records:
     get:
@@ -5929,6 +6348,56 @@ components:
           format: date-time
           type: string
       type: object
+    ExternalWalletList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - environment: sandbox
+          failure_code: failure_code
+          address: address
+          asset_code: asset_code
+          name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          tag: tag
+          state: storing
+          customer_guid: customer_guid
+        - environment: sandbox
+          failure_code: failure_code
+          address: address
+          asset_code: asset_code
+          name: name
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          tag: tag
+          state: storing
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of external wallet entities
+          items:
+            $ref: '#/components/schemas/ExternalWallet'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
     ExternalBankAccountList:
       example:
         per_page: 0
@@ -6464,14 +6933,25 @@ components:
           type: string
       type: object
     ExternalWallet:
+      example:
+        environment: sandbox
+        failure_code: failure_code
+        address: address
+        asset_code: asset_code
+        name: name
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        tag: tag
+        state: storing
+        customer_guid: customer_guid
       properties:
         guid:
-          description: Auto-generated unique identifier for the account.
+          description: Auto-generated unique identifier for the wallet.
           maxLength: 32
           minLength: 32
           type: string
         name:
-          description: The name of the account.
+          description: The name of the wallet.
           maxLength: 128
           minLength: 1
           type: string
@@ -6480,25 +6960,28 @@ components:
           maxLength: 8
           minLength: 1
           type: string
-        account_kind:
-          description: The type of account.
-          enum:
-          - fireblocks_external_wallet
-          - circle_wire_external_wallet
-          type: string
         environment:
-          description: The environment that the exchange is operating in.
+          description: The environment that the wallet is configured for.
           enum:
           - sandbox
           - production
           type: string
-        exchange_guid:
-          description: The exchange identifier.
+        customer_guid:
+          description: The customer identifier.
           maxLength: 32
           minLength: 32
           type: string
+        address:
+          description: The blockchain wallet address for the wallet.
+          maxLength: 256
+          type: string
+        tag:
+          description: The blockchain tag to use when transferring crypto to the wallet.
+          maxLength: 256
+          nullable: true
+          type: string
         created_at:
-          description: ISO8601 datetime the exchange was created at.
+          description: ISO8601 datetime the wallet was created at.
           format: date-time
           type: string
         state:
@@ -6508,6 +6991,8 @@ components:
           - pending
           - failed
           - completed
+          - deleting
+          - deleted
           type: string
         failure_code:
           description: The failure code of an external wallet (if any)
@@ -6983,6 +7468,39 @@ components:
       - asset
       - name
       type: object
+    PostExternalWallet:
+      properties:
+        name:
+          description: The name of the account.
+          maxLength: 128
+          minLength: 1
+          type: string
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        asset:
+          description: The asset code.
+          maxLength: 8
+          minLength: 1
+          type: string
+        address:
+          description: The blockchain wallet address for the wallet.
+          maxLength: 256
+          type: string
+        tag:
+          description: The blockchain tag to use when transferring crypto to the wallet.
+          maxLength: 256
+          nullable: true
+          type: string
+      required:
+      - address
+      - asset
+      - customer_guid
+      - name
+      type: object
     ErrorResponse:
       properties:
         status:
@@ -7291,6 +7809,8 @@ components:
             external_bank_accounts:read: external_bank_accounts read
             external_bank_accounts:write: external_bank_accounts write
             external_bank_accounts:execute: external_bank_accounts execute
+            external_wallets:read: external_wallets read
+            external_wallets:execute: external_wallets execute
             workflows:read: workflows read
             workflows:execute: workflows execute
             deposit_addresses:read: deposit_addresses read

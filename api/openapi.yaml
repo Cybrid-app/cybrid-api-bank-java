@@ -201,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.69.1
+  version: v0.70.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -7295,6 +7295,11 @@ components:
           - funding
           - book
           - crypto
+          type: string
+        external_wallet_guid:
+          description: The customer's external wallet's identifier.
+          maxLength: 32
+          minLength: 32
           type: string
         external_bank_account_guid:
           description: The customer's 'plaid' or 'plaid_processor_token' external

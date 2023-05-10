@@ -201,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.71.11
+  version: v0.71.12
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2185,7 +2185,7 @@ paths:
                 missing_parameter:
                   value:
                     status: 400
-                    error_message: "Missing parameter. Required: name, asset, account_kind"
+                    error_message: "Missing parameter. Required: name, asset"
                     message_code: missing_parameter
                 invalid_value:
                   value:
@@ -2381,7 +2381,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExternalWallet'
-          description: External bank account found
+          description: External wallet found
         "401":
           content:
             application/json:
@@ -6356,22 +6356,22 @@ components:
         - environment: sandbox
           failure_code: failure_code
           address: address
-          asset_code: asset_code
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
           state: storing
+          asset: asset
           customer_guid: customer_guid
         - environment: sandbox
           failure_code: failure_code
           address: address
-          asset_code: asset_code
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
           state: storing
+          asset: asset
           customer_guid: customer_guid
         page: 0
       properties:
@@ -6937,12 +6937,12 @@ components:
         environment: sandbox
         failure_code: failure_code
         address: address
-        asset_code: asset_code
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         tag: tag
         state: storing
+        asset: asset
         customer_guid: customer_guid
       properties:
         guid:
@@ -6955,7 +6955,7 @@ components:
           maxLength: 128
           minLength: 1
           type: string
-        asset_code:
+        asset:
           description: The asset code.
           maxLength: 8
           minLength: 1

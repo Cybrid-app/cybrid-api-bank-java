@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the wallet. |  [optional] |
 |**name** | **String** | The name of the wallet. |  [optional] |
-|**assetCode** | **String** | The asset code. |  [optional] |
+|**asset** | **String** | The asset code. |  [optional] |
 |**environment** | [**EnvironmentEnum**](#EnvironmentEnum) | The environment that the wallet is configured for. |  [optional] |
 |**customerGuid** | **String** | The customer identifier. |  [optional] |
 |**address** | **String** | The blockchain wallet address for the wallet. |  [optional] |

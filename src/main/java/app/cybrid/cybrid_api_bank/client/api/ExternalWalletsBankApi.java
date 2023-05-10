@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-05-10T13:02:50.528194Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-05-10T19:02:24.841724Z[Etc/UTC]")
 public class ExternalWalletsBankApi {
     private ApiClient apiClient;
 
@@ -174,7 +174,7 @@ public class ExternalWalletsBankApi {
     /**
      * Get External Wallet
      * Retrieves an external_wallet.  Required scope: **external_wallets:read**
-     * <p><b>200</b> - External bank account found
+     * <p><b>200</b> - External wallet found
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - ExternalWallet not found
@@ -214,7 +214,7 @@ public class ExternalWalletsBankApi {
     /**
      * Get External Wallet
      * Retrieves an external_wallet.  Required scope: **external_wallets:read**
-     * <p><b>200</b> - External bank account found
+     * <p><b>200</b> - External wallet found
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - ExternalWallet not found

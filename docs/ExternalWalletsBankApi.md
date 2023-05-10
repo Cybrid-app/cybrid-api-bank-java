@@ -240,7 +240,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | External bank account found |  -  |
+| **200** | External wallet found |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | ExternalWallet not found |  -  |

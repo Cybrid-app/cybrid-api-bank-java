@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-05-11T15:03:41.970747Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-05-11T18:54:03.873003Z[Etc/UTC]")
 public class ExternalWalletsBankApi {
     private ApiClient apiClient;
 
@@ -56,6 +56,7 @@ public class ExternalWalletsBankApi {
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
+     * <p><b>409</b> - Data already exists
      * <p><b>422</b> - Unable to process request
      * @param postExternalWalletBankModel The postExternalWalletBankModel parameter
      * @return ExternalWalletBankModel
@@ -97,6 +98,7 @@ public class ExternalWalletsBankApi {
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
+     * <p><b>409</b> - Data already exists
      * <p><b>422</b> - Unable to process request
      * @param postExternalWalletBankModel The postExternalWalletBankModel parameter
      * @return ExternalWalletBankModel

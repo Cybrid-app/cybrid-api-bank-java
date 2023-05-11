@@ -201,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.71.15
+  version: v0.71.17
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2252,6 +2252,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Invalid scope
+        "409":
+          content:
+            application/json:
+              examples:
+                already_exists:
+                  value:
+                    status: 409
+                    error_message: "Data exists: External wallet already exists"
+                    message_code: data_exists
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Data already exists
         "422":
           content:
             application/json:

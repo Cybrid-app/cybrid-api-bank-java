@@ -33,6 +33,7 @@
 | FUNDING | &quot;funding&quot; |
 | BOOK | &quot;book&quot; |
 | CRYPTO | &quot;crypto&quot; |
+| INTERNAL_BANK_REBALANCE | &quot;internal_bank_rebalance&quot; |
 
 
 

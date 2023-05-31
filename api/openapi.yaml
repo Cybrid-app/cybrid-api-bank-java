@@ -201,7 +201,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.71.60
+  version: v0.71.61
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:

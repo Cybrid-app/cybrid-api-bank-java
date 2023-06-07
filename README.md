@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.71.72
+- API version: v0.72.0
 
-- Build date: 2023-06-07T13:57:58.553793Z[Etc/UTC]
+- Build date: 2023-06-07T14:54:19.867708Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -186,7 +186,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.71.72</version>
+  <version>v0.72.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -202,7 +202,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.71.72"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.72.0"
   }
 ```
 
@@ -216,7 +216,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.71.72.jar`
+- `target/cybrid-api-bank-java-v0.72.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -290,9 +290,6 @@ Class | Method | HTTP request | Description
 *ExternalWalletsBankApi* | [**deleteExternalWallet**](docs/ExternalWalletsBankApi.md#deleteExternalWallet) | **DELETE** /api/external_wallets/{external_wallet_guid} | Delete External Wallet
 *ExternalWalletsBankApi* | [**getExternalWallet**](docs/ExternalWalletsBankApi.md#getExternalWallet) | **GET** /api/external_wallets/{external_wallet_guid} | Get External Wallet
 *ExternalWalletsBankApi* | [**listExternalWallets**](docs/ExternalWalletsBankApi.md#listExternalWallets) | **GET** /api/external_wallets | Get external wallets list
-*IdentityRecordsBankApi* | [**createIdentityRecord**](docs/IdentityRecordsBankApi.md#createIdentityRecord) | **POST** /api/identity_records | Create Identity Record
-*IdentityRecordsBankApi* | [**getIdentityRecord**](docs/IdentityRecordsBankApi.md#getIdentityRecord) | **GET** /api/identity_records/{identity_record_guid} | Get Identity Record
-*IdentityRecordsBankApi* | [**listIdentityRecords**](docs/IdentityRecordsBankApi.md#listIdentityRecords) | **GET** /api/identity_records | List Identity Records
 *IdentityVerificationsBankApi* | [**createIdentityVerification**](docs/IdentityVerificationsBankApi.md#createIdentityVerification) | **POST** /api/identity_verifications | Create Identity Verification
 *IdentityVerificationsBankApi* | [**getIdentityVerification**](docs/IdentityVerificationsBankApi.md#getIdentityVerification) | **GET** /api/identity_verifications/{identity_verification_guid} | Get Identity Verification
 *IdentityVerificationsBankApi* | [**listIdentityVerifications**](docs/IdentityVerificationsBankApi.md#listIdentityVerifications) | **GET** /api/identity_verifications | List Identity Verifications
@@ -324,7 +321,6 @@ Class | Method | HTTP request | Description
  - [AccountListBankModel](docs/AccountListBankModel.md)
  - [AssetBankModel](docs/AssetBankModel.md)
  - [AssetListBankModel](docs/AssetListBankModel.md)
- - [AttestationDetailsBankModel](docs/AttestationDetailsBankModel.md)
  - [BankBankModel](docs/BankBankModel.md)
  - [BankListBankModel](docs/BankListBankModel.md)
  - [CustomerBankModel](docs/CustomerBankModel.md)
@@ -336,8 +332,6 @@ Class | Method | HTTP request | Description
  - [ExternalBankAccountListBankModel](docs/ExternalBankAccountListBankModel.md)
  - [ExternalWalletBankModel](docs/ExternalWalletBankModel.md)
  - [ExternalWalletListBankModel](docs/ExternalWalletListBankModel.md)
- - [IdentityRecordBankModel](docs/IdentityRecordBankModel.md)
- - [IdentityRecordListBankModel](docs/IdentityRecordListBankModel.md)
  - [IdentityVerificationBankModel](docs/IdentityVerificationBankModel.md)
  - [IdentityVerificationListBankModel](docs/IdentityVerificationListBankModel.md)
  - [IdentityVerificationWithDetailsAllOfBankModel](docs/IdentityVerificationWithDetailsAllOfBankModel.md)
@@ -353,8 +347,6 @@ Class | Method | HTTP request | Description
  - [PostExternalBankAccountBankModel](docs/PostExternalBankAccountBankModel.md)
  - [PostExternalWalletBankModel](docs/PostExternalWalletBankModel.md)
  - [PostIdentificationNumberBankModel](docs/PostIdentificationNumberBankModel.md)
- - [PostIdentityRecordAttestationDetailsBankModel](docs/PostIdentityRecordAttestationDetailsBankModel.md)
- - [PostIdentityRecordBankModel](docs/PostIdentityRecordBankModel.md)
  - [PostIdentityVerificationAddressBankModel](docs/PostIdentityVerificationAddressBankModel.md)
  - [PostIdentityVerificationBankModel](docs/PostIdentityVerificationBankModel.md)
  - [PostIdentityVerificationNameBankModel](docs/PostIdentityVerificationNameBankModel.md)

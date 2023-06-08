@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-08T11:56:11.446374Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-08T20:24:33.920445Z[Etc/UTC]")
 public class ExternalBankAccountsBankApi {
     private ApiClient apiClient;
 
@@ -244,10 +244,11 @@ public class ExternalBankAccountsBankApi {
      * @param guid Comma separated external_bank_account_guids to list external_bank_accounts for.
      * @param bankGuid Comma separated bank_guids to list external_bank_accounts for.
      * @param customerGuid Comma separated customer_guids to list external_bank_accounts for.
+     * @param state Comma separated states to list external_bank_accounts for.
      * @return ExternalBankAccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listExternalBankAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    private ResponseSpec listExternalBankAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -262,6 +263,7 @@ public class ExternalBankAccountsBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -288,17 +290,18 @@ public class ExternalBankAccountsBankApi {
      * @param guid Comma separated external_bank_account_guids to list external_bank_accounts for.
      * @param bankGuid Comma separated bank_guids to list external_bank_accounts for.
      * @param customerGuid Comma separated customer_guids to list external_bank_accounts for.
+     * @param state Comma separated states to list external_bank_accounts for.
      * @return ExternalBankAccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ExternalBankAccountListBankModel> listExternalBankAccounts(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<ExternalBankAccountListBankModel> listExternalBankAccounts(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalBankAccountListBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalBankAccountListBankModel>() {};
-        return listExternalBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid).bodyToMono(localVarReturnType);
+        return listExternalBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<ExternalBankAccountListBankModel>> listExternalBankAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<ExternalBankAccountListBankModel>> listExternalBankAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalBankAccountListBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalBankAccountListBankModel>() {};
-        return listExternalBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid).toEntity(localVarReturnType);
+        return listExternalBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state).toEntity(localVarReturnType);
     }
     /**
      * Patch ExternalBankAccount

@@ -249,7 +249,7 @@ public class Example {
 
 ## listExternalBankAccounts
 
-> ExternalBankAccountListBankModel listExternalBankAccounts(page, perPage, guid, bankGuid, customerGuid)
+> ExternalBankAccountListBankModel listExternalBankAccounts(page, perPage, guid, bankGuid, customerGuid, state)
 
 Get external bank accounts list
 
@@ -285,8 +285,9 @@ public class Example {
         String guid = "guid_example"; // String | Comma separated external_bank_account_guids to list external_bank_accounts for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list external_bank_accounts for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list external_bank_accounts for.
+        String state = "state_example"; // String | Comma separated states to list external_bank_accounts for.
         try {
-            ExternalBankAccountListBankModel result = apiInstance.listExternalBankAccounts(page, perPage, guid, bankGuid, customerGuid);
+            ExternalBankAccountListBankModel result = apiInstance.listExternalBankAccounts(page, perPage, guid, bankGuid, customerGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ExternalBankAccountsBankApi#listExternalBankAccounts");
@@ -309,6 +310,7 @@ public class Example {
 | **guid** | **String**| Comma separated external_bank_account_guids to list external_bank_accounts for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list external_bank_accounts for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list external_bank_accounts for. | [optional] |
+| **state** | **String**| Comma separated states to list external_bank_accounts for. | [optional] |
 
 ### Return type
 

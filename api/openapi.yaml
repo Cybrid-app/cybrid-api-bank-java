@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.73.1
+  version: v0.73.4
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1302,6 +1302,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated states to list external_bank_accounts for.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1890,7 +1898,12 @@ paths:
       - External Wallets
       x-accepts: application/json
     post:
-      description: "Create an ExternalWallet.\n\nRequired scope: **external_wallets:execute**"
+      description: "Create an ExternalWallet.\n\nExternal wallets can be added to\
+        \ the bank by leaving the customer_guid blank. External wallets added to the\
+        \ bank can be used by any customer of the bank.\n\nExternal wallets can also\
+        \ be added to a specific customer by providing the customer_guid. External\
+        \ wallets added to a customer can only be used by that customer.\n\nRequired\
+        \ scope: **external_wallets:execute**"
       operationId: createExternalWallet
       parameters: []
       requestBody:
@@ -5623,6 +5636,7 @@ components:
           tag: tag
           state: storing
           asset: asset
+          bank_guid: bank_guid
           customer_guid: customer_guid
         - environment: sandbox
           failure_code: failure_code
@@ -5633,6 +5647,7 @@ components:
           tag: tag
           state: storing
           asset: asset
+          bank_guid: bank_guid
           customer_guid: customer_guid
         page: 0
       properties:
@@ -6174,6 +6189,7 @@ components:
         tag: tag
         state: storing
         asset: asset
+        bank_guid: bank_guid
         customer_guid: customer_guid
       properties:
         guid:
@@ -6196,6 +6212,11 @@ components:
           enum:
           - sandbox
           - production
+          type: string
+        bank_guid:
+          description: The bank identifier.
+          maxLength: 32
+          minLength: 32
           type: string
         customer_guid:
           description: The customer identifier.
@@ -6714,7 +6735,6 @@ components:
       required:
       - address
       - asset
-      - customer_guid
       - name
       type: object
     ErrorResponse:

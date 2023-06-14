@@ -170,7 +170,7 @@ public class Example {
 
 ## listTransfers
 
-> TransferListBankModel listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid)
+> TransferListBankModel listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid, state)
 
 Get transfers list
 
@@ -207,8 +207,9 @@ public class Example {
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list transfers for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list transfers for.
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list transfers for.
+        String state = "state_example"; // String | Comma separated states to list transfers for.
         try {
-            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid);
+            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TransfersBankApi#listTransfers");
@@ -232,6 +233,7 @@ public class Example {
 | **bankGuid** | **String**| Comma separated bank_guids to list transfers for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list transfers for. | [optional] |
 | **accountGuid** | **String**| Comma separated account_guids to list transfers for. | [optional] |
+| **state** | **String**| Comma separated states to list transfers for. | [optional] |
 
 ### Return type
 

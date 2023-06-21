@@ -36,7 +36,6 @@
 | STORING | &quot;storing&quot; |
 | PENDING | &quot;pending&quot; |
 | CANCELLED | &quot;cancelled&quot; |
-| EXECUTED | &quot;executed&quot; |
 | COMPLETED | &quot;completed&quot; |
 | SETTLING | &quot;settling&quot; |
 | FAILED | &quot;failed&quot; |

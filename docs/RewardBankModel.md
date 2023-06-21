@@ -25,10 +25,10 @@
 | Name | Value |
 |---- | -----|
 | STORING | &quot;storing&quot; |
-| INITIATING | &quot;initiating&quot; |
 | PENDING | &quot;pending&quot; |
-| SETTLING | &quot;settling&quot; |
+| CANCELLED | &quot;cancelled&quot; |
 | COMPLETED | &quot;completed&quot; |
+| SETTLING | &quot;settling&quot; |
 | FAILED | &quot;failed&quot; |
 
 

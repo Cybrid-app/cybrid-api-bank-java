@@ -249,7 +249,7 @@ public class Example {
 
 ## listExternalWallets
 
-> ExternalWalletListBankModel listExternalWallets(page, perPage, guid, bankGuid, customerGuid)
+> ExternalWalletListBankModel listExternalWallets(page, perPage, guid, bankGuid, customerGuid, state)
 
 Get external wallets list
 
@@ -285,8 +285,9 @@ public class Example {
         String guid = "guid_example"; // String | Comma separated external_wallet_guids to list external_wallets for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list external_wallets for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list external_wallets for.
+        String state = "state_example"; // String | Comma separated states to list external_wallets for.
         try {
-            ExternalWalletListBankModel result = apiInstance.listExternalWallets(page, perPage, guid, bankGuid, customerGuid);
+            ExternalWalletListBankModel result = apiInstance.listExternalWallets(page, perPage, guid, bankGuid, customerGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ExternalWalletsBankApi#listExternalWallets");
@@ -309,6 +310,7 @@ public class Example {
 | **guid** | **String**| Comma separated external_wallet_guids to list external_wallets for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list external_wallets for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list external_wallets for. | [optional] |
+| **state** | **String**| Comma separated states to list external_wallets for. | [optional] |
 
 ### Return type
 

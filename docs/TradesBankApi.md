@@ -170,7 +170,7 @@ public class Example {
 
 ## listTrades
 
-> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid)
+> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state)
 
 Get trades list
 
@@ -207,8 +207,9 @@ public class Example {
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list trades for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list trades for.
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list trades for.
+        String state = "state_example"; // String | Comma separated states to list trades for.
         try {
-            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid);
+            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TradesBankApi#listTrades");
@@ -232,6 +233,7 @@ public class Example {
 | **bankGuid** | **String**| Comma separated bank_guids to list trades for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list trades for. | [optional] |
 | **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional] |
+| **state** | **String**| Comma separated states to list trades for. | [optional] |
 
 ### Return type
 

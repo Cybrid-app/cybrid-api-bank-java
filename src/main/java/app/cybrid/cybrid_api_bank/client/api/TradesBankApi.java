@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-21T16:41:30.922995Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-22T00:01:49.901018Z[Etc/UTC]")
 public class TradesBankApi {
     private ApiClient apiClient;
 
@@ -186,10 +186,11 @@ public class TradesBankApi {
      * @param bankGuid Comma separated bank_guids to list trades for.
      * @param customerGuid Comma separated customer_guids to list trades for.
      * @param accountGuid Comma separated account_guids to list trades for.
+     * @param state Comma separated states to list trades for.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTradesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
+    private ResponseSpec listTradesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -205,6 +206,7 @@ public class TradesBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "account_guid", accountGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -232,16 +234,17 @@ public class TradesBankApi {
      * @param bankGuid Comma separated bank_guids to list trades for.
      * @param customerGuid Comma separated customer_guids to list trades for.
      * @param accountGuid Comma separated account_guids to list trades for.
+     * @param state Comma separated states to list trades for.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TradeListBankModel> listTrades(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
+    public Mono<TradeListBankModel> listTrades(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid).bodyToMono(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid).toEntity(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state).toEntity(localVarReturnType);
     }
 }

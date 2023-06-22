@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.73.41
+  version: v0.74.1
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6564,8 +6564,6 @@ components:
           maxLength: 32
           minLength: 32
           type: string
-        one_time_address:
-          $ref: '#/components/schemas/PostOneTimeAddress'
         expected_error:
           description: The optional expected error to simulate transfer failure.
           enum:
@@ -6580,20 +6578,6 @@ components:
       required:
       - quote_guid
       - transfer_type
-      type: object
-    PostOneTimeAddress:
-      properties:
-        address:
-          description: The blockchain wallet address to transfer crypto to.
-          maxLength: 256
-          type: string
-        tag:
-          description: The blockchain tag to use when transferring crypto.
-          maxLength: 256
-          nullable: true
-          type: string
-      required:
-      - address
       type: object
     PostTrade:
       properties:

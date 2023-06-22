@@ -21,12 +21,12 @@ info:
     3. [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading)\n\
     4. [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app)\
     \ (or, alternatively, [Testing with Hosted Web Demo App](https://kb.cybrid.xyz/testing-with-hosted-web-demo-app))\n\
-    \nIn [Getting Started in the Cybrid Sandbox](https://www.cybrid.xyz/guides/getting-started),\
+    \nIn [Getting Started in the Cybrid Sandbox](https://kb.cybrid.xyz/getting-started-guide),\
     \ we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/)\
-    \ to create a test bank and generate API keys. In [Getting Ready for Trading](https://www.cybrid.xyz/guides/getting-ready-for-trading),\
+    \ to create a test bank and generate API keys. In [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading),\
     \ we walk through creating customers, customer identities, accounts, as well as\
     \ executing quotes and trades.\n\nIf you've already run through the first two\
-    \ guides, you can follow the [Running the Web Demo App](https://www.cybrid.xyz/guides/running-the-cybrid-web-demo-crypto-app)\
+    \ guides, you can follow the [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app)\
     \ guide to test our web SDK with your sandbox `bank` and `customer`.\n\n## Working\
     \ with the Cybrid Platform\n\nThere are three primary ways you can interact with\
     \ the Cybrid platform:\n\n1. Directly via our RESTful API (this documentation)\n\
@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.73.39
+  version: v0.73.41
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:

@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.73.39
+- API version: v0.73.41
 
-- Build date: 2023-06-22T00:01:49.901018Z[Etc/UTC]
+- Build date: 2023-06-22T12:11:34.864758Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -27,9 +27,9 @@ If you're new to our APIs and the Cybrid Platform, follow the below guides to ge
 3. [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading)
 4. [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app) (or, alternatively, [Testing with Hosted Web Demo App](https://kb.cybrid.xyz/testing-with-hosted-web-demo-app))
 
-In [Getting Started in the Cybrid Sandbox](https://www.cybrid.xyz/guides/getting-started), we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/) to create a test bank and generate API keys. In [Getting Ready for Trading](https://www.cybrid.xyz/guides/getting-ready-for-trading), we walk through creating customers, customer identities, accounts, as well as executing quotes and trades.
+In [Getting Started in the Cybrid Sandbox](https://kb.cybrid.xyz/getting-started-guide), we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/) to create a test bank and generate API keys. In [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading), we walk through creating customers, customer identities, accounts, as well as executing quotes and trades.
 
-If you've already run through the first two guides, you can follow the [Running the Web Demo App](https://www.cybrid.xyz/guides/running-the-cybrid-web-demo-crypto-app) guide to test our web SDK with your sandbox `bank` and `customer`.
+If you've already run through the first two guides, you can follow the [Running the Web Demo App](https://kb.cybrid.xyz/locally-running-the-web-demo-app) guide to test our web SDK with your sandbox `bank` and `customer`.
 
 ## Working with the Cybrid Platform
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.73.39</version>
+  <version>v0.73.41</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.73.39"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.73.41"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.73.39.jar`
+- `target/cybrid-api-bank-java-v0.73.41.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

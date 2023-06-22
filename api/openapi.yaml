@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.74.1
+  version: v0.74.2
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5495,6 +5495,7 @@ components:
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         guid: guid
+        external_bank_account_guid: external_bank_account_guid
         transfer_type: savings
         state: storing
         asset: asset
@@ -5525,6 +5526,12 @@ components:
           description: The associated quote's identifier.
           maxLength: 32
           minLength: 32
+          type: string
+        external_bank_account_guid:
+          description: The associated external bank account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
         asset:
           description: "The asset the transfer is related to, e.g., USD."
@@ -5769,6 +5776,7 @@ components:
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           guid: guid
+          external_bank_account_guid: external_bank_account_guid
           transfer_type: savings
           state: storing
           asset: asset
@@ -5784,6 +5792,7 @@ components:
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           guid: guid
+          external_bank_account_guid: external_bank_account_guid
           transfer_type: savings
           state: storing
           asset: asset

@@ -11,6 +11,7 @@
 |**transferType** | [**TransferTypeEnum**](#TransferTypeEnum) | The type of transfer. |  [optional] |
 |**customerGuid** | **String** | The associated customer&#39;s identifier. |  [optional] |
 |**quoteGuid** | **String** | The associated quote&#39;s identifier. |  [optional] |
+|**externalBankAccountGuid** | **String** | The associated external bank account&#39;s identifier. |  [optional] |
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
 |**side** | [**SideEnum**](#SideEnum) | The direction of the quote: &#39;deposit&#39; or &#39;withdrawal&#39;. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The trade&#39;s state |  [optional] |

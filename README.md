@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.74.10
+- API version: v0.74.11
 
-- Build date: 2023-06-26T18:07:52.976414Z[Etc/UTC]
+- Build date: 2023-06-26T20:44:13.555834Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.74.10</version>
+  <version>v0.74.11</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.74.10"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.74.11"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.74.10.jar`
+- `target/cybrid-api-bank-java-v0.74.11.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -350,7 +350,6 @@ Class | Method | HTTP request | Description
  - [PostRewardBankModel](docs/PostRewardBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
  - [PostTransferBankModel](docs/PostTransferBankModel.md)
- - [PostVerificationKeyBankModel](docs/PostVerificationKeyBankModel.md)
  - [PostWorkflowBankModel](docs/PostWorkflowBankModel.md)
  - [QuoteBankModel](docs/QuoteBankModel.md)
  - [QuoteListBankModel](docs/QuoteListBankModel.md)
@@ -361,8 +360,6 @@ Class | Method | HTTP request | Description
  - [TradeListBankModel](docs/TradeListBankModel.md)
  - [TransferBankModel](docs/TransferBankModel.md)
  - [TransferListBankModel](docs/TransferListBankModel.md)
- - [VerificationKeyBankModel](docs/VerificationKeyBankModel.md)
- - [VerificationKeyListBankModel](docs/VerificationKeyListBankModel.md)
  - [WorkflowBankModel](docs/WorkflowBankModel.md)
  - [WorkflowWithDetailsAllOfBankModel](docs/WorkflowWithDetailsAllOfBankModel.md)
  - [WorkflowWithDetailsBankModel](docs/WorkflowWithDetailsBankModel.md)

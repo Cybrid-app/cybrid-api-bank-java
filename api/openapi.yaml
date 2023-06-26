@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.74.10
+  version: v0.74.11
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6072,80 +6072,6 @@ components:
       - per_page
       - total
       type: object
-    VerificationKey:
-      properties:
-        guid:
-          description: Auto-generated unique identifier for the verification key.
-          maxLength: 32
-          minLength: 32
-          type: string
-        bank_guid:
-          description: The banks's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
-        type:
-          description: The verification key's type.
-          enum:
-          - attestation
-          type: string
-        state:
-          description: The verification key's state.
-          enum:
-          - storing
-          - pending
-          - verified
-          - failed
-          type: string
-        failure_code:
-          description: The verification key's failure code (if any).
-          enum:
-          - invalid_algorithm
-          - invalid_nonce
-          - invalid_public_key
-          - invalid_signature
-          nullable: true
-          type: string
-        algorithm:
-          description: The verification key's algorithm.
-          enum:
-          - RS512
-          type: string
-        fingerprint:
-          description: The verification key's cryptographic fingerprint.
-          maxLength: 128
-          minLength: 1
-          type: string
-        created_at:
-          description: ISO8601 datetime the verification key was created at.
-          format: date-time
-          type: string
-      type: object
-    VerificationKeyList:
-      properties:
-        total:
-          description: The total number of records available.
-          minimum: 0
-          type: integer
-        page:
-          description: The page index to retrieve.
-          minimum: 0
-          type: integer
-        per_page:
-          description: The number of entities per page to return.
-          minimum: 0
-          type: integer
-        objects:
-          description: Array of VerificationKey entities
-          items:
-            $ref: '#/components/schemas/VerificationKey'
-          type: array
-      required:
-      - objects
-      - page
-      - per_page
-      - total
-      type: object
     ListRequestCursor:
       description: The cursor used to retrieve the page.
       nullable: true
@@ -6645,41 +6571,6 @@ components:
           type: string
       required:
       - quote_guid
-      type: object
-    PostVerificationKey:
-      properties:
-        type:
-          description: The verification key's type.
-          enum:
-          - attestation
-          type: string
-        algorithm:
-          description: The verification key's algorithm.
-          enum:
-          - RS512
-          type: string
-        public_key:
-          description: DER encoded public key in Base64 format.
-          maxLength: 6000
-          minLength: 1
-          type: string
-        nonce:
-          description: Value signed in the **signature** field.
-          maxLength: 256
-          minLength: 1
-          type: string
-        signature:
-          description: Signature on **nonce** using PKCS1v15 padding and the SHA512
-            hashing algorithm in Base64 format.
-          maxLength: 6000
-          minLength: 1
-          type: string
-      required:
-      - algorithm
-      - nonce
-      - public_key
-      - signature
-      - type
       type: object
     PatchExternalBankAccount:
       properties:

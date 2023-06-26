@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T13:23:41.165553Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T14:47:24.099212Z[Etc/UTC]")
 public class DepositAddressesBankApi {
     private ApiClient apiClient;
 
@@ -51,7 +51,7 @@ public class DepositAddressesBankApi {
 
     /**
      * Create Deposit Address
-     * Create an Deposit Address.  Required scope: **deposit_addresses:execute**
+     * Creates a deposit address.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the deposit address details in our private store | | created | The Platform has created the deposit address |    Required scope: **deposit_addresses:execute**
      * <p><b>201</b> - Deposit Address created
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
@@ -90,7 +90,7 @@ public class DepositAddressesBankApi {
 
     /**
      * Create Deposit Address
-     * Create an Deposit Address.  Required scope: **deposit_addresses:execute**
+     * Creates a deposit address.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the deposit address details in our private store | | created | The Platform has created the deposit address |    Required scope: **deposit_addresses:execute**
      * <p><b>201</b> - Deposit Address created
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope

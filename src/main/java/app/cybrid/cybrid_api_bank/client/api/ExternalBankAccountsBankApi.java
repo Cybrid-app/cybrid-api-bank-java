@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T13:23:41.165553Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T14:47:24.099212Z[Etc/UTC]")
 public class ExternalBankAccountsBankApi {
     private ApiClient apiClient;
 
@@ -52,7 +52,7 @@ public class ExternalBankAccountsBankApi {
 
     /**
      * Create ExternalBankAccount
-     * Create an ExternalBankAccount.  Required scope: **external_bank_accounts:execute**
+     * Create an ExternalBankAccount.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the external bank account details in our private store | | completed | The Platform has created the external bank account | | failed | The Platform was not able to successfully create the external bank account | | refresh_required | The Platform has created the external bank account, but needs to be refreshed | | deleting | The Platform is deleting the external bank account | | deleted | The Platform has deleted the external bank account |    Required scope: **external_bank_accounts:execute**
      * <p><b>201</b> - ExternalBankAccount created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
@@ -93,7 +93,7 @@ public class ExternalBankAccountsBankApi {
 
     /**
      * Create ExternalBankAccount
-     * Create an ExternalBankAccount.  Required scope: **external_bank_accounts:execute**
+     * Create an ExternalBankAccount.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the external bank account details in our private store | | completed | The Platform has created the external bank account | | failed | The Platform was not able to successfully create the external bank account | | refresh_required | The Platform has created the external bank account, but needs to be refreshed | | deleting | The Platform is deleting the external bank account | | deleted | The Platform has deleted the external bank account |    Required scope: **external_bank_accounts:execute**
      * <p><b>201</b> - ExternalBankAccount created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 

@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T13:23:41.165553Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-26T14:47:24.099212Z[Etc/UTC]")
 public class WorkflowsBankApi {
     private ApiClient apiClient;
 
@@ -52,7 +52,7 @@ public class WorkflowsBankApi {
 
     /**
      * Create Workflow
-     * Creates a workflow.  Required scope: **workflows:execute**
+     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |    Required scope: **workflows:execute**
      * <p><b>201</b> - Workflow created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
@@ -93,7 +93,7 @@ public class WorkflowsBankApi {
 
     /**
      * Create Workflow
-     * Creates a workflow.  Required scope: **workflows:execute**
+     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |    Required scope: **workflows:execute**
      * <p><b>201</b> - Workflow created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 

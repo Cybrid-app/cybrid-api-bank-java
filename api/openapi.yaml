@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.74.7
+  version: v0.74.8
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -786,7 +786,12 @@ paths:
         \ Platform and are used throughout the platform to perform high level operations,\
         \ e.g., create a quote, execute a trade, etc..\n\nCustomers can have additional\
         \ resources attached to them, e.g., identity records, accounts, etc.\n\nAt\
-        \ present, Customer's can be created with type `individual`.\n\n\n\nRequired\
+        \ present, Customer's can be created with type `individual`.\n\n## State\n\
+        \n| State | Description |\n|-------|-------------|\n| storing | The Platform\
+        \ is storing the customer details in our private store |\n| unverified | The\
+        \ Platform has not yet verified the customer's identity |\n| verified | The\
+        \ Platform has verified the customer's identity |\n| rejected | The Platform\
+        \ was not able to successfully verify the customer's identity |\n\n\n\nRequired\
         \ scope: **customers:execute**"
       operationId: createCustomer
       parameters: []
@@ -1091,7 +1096,10 @@ paths:
       - DepositAddresses
       x-accepts: application/json
     post:
-      description: "Create an Deposit Address.\n\nRequired scope: **deposit_addresses:execute**"
+      description: "Creates a deposit address.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the deposit\
+        \ address details in our private store |\n| created | The Platform has created\
+        \ the deposit address |\n\n\n\nRequired scope: **deposit_addresses:execute**"
       operationId: createDepositAddress
       parameters: []
       requestBody:
@@ -1389,7 +1397,15 @@ paths:
       - External Bank Accounts
       x-accepts: application/json
     post:
-      description: "Create an ExternalBankAccount.\n\nRequired scope: **external_bank_accounts:execute**"
+      description: "Create an ExternalBankAccount.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the external\
+        \ bank account details in our private store |\n| completed | The Platform\
+        \ has created the external bank account |\n| failed | The Platform was not\
+        \ able to successfully create the external bank account |\n| refresh_required\
+        \ | The Platform has created the external bank account, but needs to be refreshed\
+        \ |\n| deleting | The Platform is deleting the external bank account |\n|\
+        \ deleted | The Platform has deleted the external bank account |\n\n\n\nRequired\
+        \ scope: **external_bank_accounts:execute**"
       operationId: createExternalBankAccount
       parameters: []
       requestBody:
@@ -1906,12 +1922,18 @@ paths:
       - External Wallets
       x-accepts: application/json
     post:
-      description: "Create an ExternalWallet.\n\nExternal wallets can be added to\
-        \ the bank by leaving the customer_guid blank. External wallets added to the\
-        \ bank can be used by any customer of the bank.\n\nExternal wallets can also\
-        \ be added to a specific customer by providing the customer_guid. External\
-        \ wallets added to a customer can only be used by that customer.\n\nRequired\
-        \ scope: **external_wallets:execute**"
+      description: "Create an ExternalWallet.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the external\
+        \ wallet details in our private store |\n| pending | The Platform is waiting\
+        \ for the external wallet to be created |\n| completed | The Platform has\
+        \ created the external wallet |\n| failed | The Platform was not able to successfully\
+        \ create the external wallet |\n| deleting | The Platform is deleting the\
+        \ external wallet |\n| deleted | The Platform has deleted the external wallet\
+        \ |\n\n\n\nExternal wallets can be added to the bank by leaving the customer_guid\
+        \ blank. External wallets added to the bank can be used by any customer of\
+        \ the bank.\n\nExternal wallets can also be added to a specific customer by\
+        \ providing the customer_guid. External wallets added to a customer can only\
+        \ be used by that customer.\n\nRequired scope: **external_wallets:execute**"
       operationId: createExternalWallet
       parameters: []
       requestBody:
@@ -2344,7 +2366,15 @@ paths:
         \ requirement for individuals to be able to transact. At present, we offer\
         \ support for Cybrid performing the verification or working with partners\
         \ to accept their KYC/AML process and have it attested to in our platform.\n\
-        \n\n\nRequired scope: **customers:write**"
+        \n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
+        \ | The Platform is storing the identity verification details in our private\
+        \ store |\n| waiting | The Platform is waiting for the customer to complete\
+        \ the identity verification process |\n| expired | The identity verification\
+        \ process has expired |\n| completed | The identity verification process has\
+        \ been completed |\n\n## Outcome\n\n| State | Description |\n|-------|-------------|\n\
+        | passed | The customer has passed the identity verification process |\n|\
+        \ failed | The customer has failed the identity verification process |\n\n\
+        \n\nRequired scope: **customers:write**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:
@@ -2638,7 +2668,10 @@ paths:
         \ generate quotes or execute a `trade` or `transfer`.\n\n## Asset\n\nThe asset\
         \ is the specific cryptocurrency or fiat that the account holds, e.g., 'BTC'\
         \ for Bitcoin or `USD` for US dollars. See the Symbols API for a complete\
-        \ list of cryptocurrencies and fiat supported. \n\n\n\nRequired scope: **accounts:execute**"
+        \ list of cryptocurrencies and fiat supported. \n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the account\
+        \ details in our private store |\n| created | The Platform has created the\
+        \ account |\n\n\n\nRequired scope: **accounts:execute**"
       operationId: createAccount
       parameters: []
       requestBody:
@@ -4131,7 +4164,12 @@ paths:
       - Transfers
       x-accepts: application/json
     post:
-      description: "Creates a transfer.\n\nRequired scope: **transfers:execute**"
+      description: "Creates a transfer.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the trade details in our private store\
+        \ |\n| initiating | The Platform has begun to perform the transfer |\n| pending\
+        \ | The Platform is executing the transfer |\n| completed | The Platform has\
+        \ successfully completed the transfer |\n| failed | The Platform was not able\
+        \ to successfully complete the transfer |\n\n\n\nRequired scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:
@@ -4468,7 +4506,10 @@ paths:
       - Workflows
       x-accepts: application/json
     post:
-      description: "Creates a workflow.\n\nRequired scope: **workflows:execute**"
+      description: "Creates a workflow.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the workflow details in our private store\
+        \ |\n| completed | The Platform has created the workflow |\n| failed | The\
+        \ workflow was not completed successfully |\n\n\n\nRequired scope: **workflows:execute**"
       operationId: createWorkflow
       parameters: []
       requestBody:

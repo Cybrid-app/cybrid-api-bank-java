@@ -18,7 +18,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 Create ExternalBankAccount
 
-Create an ExternalBankAccount.  Required scope: **external_bank_accounts:execute**
+Create an ExternalBankAccount.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the external bank account details in our private store | | completed | The Platform has created the external bank account | | failed | The Platform was not able to successfully create the external bank account | | refresh_required | The Platform has created the external bank account, but needs to be refreshed | | deleting | The Platform is deleting the external bank account | | deleted | The Platform has deleted the external bank account |    Required scope: **external_bank_accounts:execute**
 
 ### Example
 

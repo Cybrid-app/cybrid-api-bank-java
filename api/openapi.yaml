@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.74.19
+  version: v0.74.20
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -4509,7 +4509,10 @@ paths:
       description: "Creates a workflow.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
         | storing | The Platform is storing the workflow details in our private store\
         \ |\n| completed | The Platform has created the workflow |\n| failed | The\
-        \ workflow was not completed successfully |\n\n\n\nRequired scope: **workflows:execute**"
+        \ workflow was not completed successfully |\n\n## Plaid\n\n| Param | Description\
+        \ |\n|-------|-------------|\n| redirect_uri | All URIs must be registered\
+        \ with Cybrid. For local testing use `http://localhost:4200/bank-account-connect`\
+        \ |\n\n\n\nRequired scope: **workflows:execute**"
       operationId: createWorkflow
       parameters: []
       requestBody:

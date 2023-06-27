@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-27T20:45:06.554834Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-06-27T23:01:26.531929Z[Etc/UTC]")
 public class WorkflowsBankApi {
     private ApiClient apiClient;
 
@@ -52,7 +52,7 @@ public class WorkflowsBankApi {
 
     /**
      * Create Workflow
-     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |    Required scope: **workflows:execute**
+     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |  ## Plaid  | Param | Description | |-------|-------------| | redirect_uri | All URIs must be registered with Cybrid. For local testing use &#x60;http://localhost:4200/bank-account-connect&#x60; |    Required scope: **workflows:execute**
      * <p><b>201</b> - Workflow created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
@@ -93,7 +93,7 @@ public class WorkflowsBankApi {
 
     /**
      * Create Workflow
-     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |    Required scope: **workflows:execute**
+     * Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |  ## Plaid  | Param | Description | |-------|-------------| | redirect_uri | All URIs must be registered with Cybrid. For local testing use &#x60;http://localhost:4200/bank-account-connect&#x60; |    Required scope: **workflows:execute**
      * <p><b>201</b> - Workflow created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 

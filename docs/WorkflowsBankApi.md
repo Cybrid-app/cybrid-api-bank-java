@@ -16,7 +16,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 Create Workflow
 
-Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |    Required scope: **workflows:execute**
+Creates a workflow.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the workflow details in our private store | | completed | The Platform has created the workflow | | failed | The workflow was not completed successfully |  ## Plaid  | Param | Description | |-------|-------------| | redirect_uri | All URIs must be registered with Cybrid. For local testing use &#x60;http://localhost:4200/bank-account-connect&#x60; |    Required scope: **workflows:execute**
 
 ### Example
 

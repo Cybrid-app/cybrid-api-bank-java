@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.74.27
+  version: v0.75.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2566,6 +2566,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated account_types to list accounts for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
       - description: Comma separated bank_guids to list accounts for.
         explode: true
         in: query
@@ -2983,6 +2991,14 @@ paths:
         explode: true
         in: query
         name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated product_types to list accounts for.
+        explode: true
+        in: query
+        name: product_type
         required: false
         schema:
           type: string
@@ -4045,10 +4061,18 @@ paths:
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
         style: form
-      - description: Comma separated trade_guids to list transfers for.
+      - description: Comma separated transfer_guids to list transfers for.
         explode: true
         in: query
         name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated transfer_types to list accounts for.
+        explode: true
+        in: query
+        name: transfer_type
         required: false
         schema:
           type: string

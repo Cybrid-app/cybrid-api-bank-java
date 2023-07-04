@@ -170,7 +170,7 @@ public class Example {
 
 ## listQuotes
 
-> QuoteListBankModel listQuotes(page, perPage, guid, bankGuid, customerGuid)
+> QuoteListBankModel listQuotes(page, perPage, guid, productType, bankGuid, customerGuid)
 
 Get quotes list
 
@@ -204,10 +204,11 @@ public class Example {
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
         String guid = "guid_example"; // String | Comma separated quote_guids to list quotes for.
+        String productType = "productType_example"; // String | Comma separated product_types to list accounts for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list quotes for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list quotes for.
         try {
-            QuoteListBankModel result = apiInstance.listQuotes(page, perPage, guid, bankGuid, customerGuid);
+            QuoteListBankModel result = apiInstance.listQuotes(page, perPage, guid, productType, bankGuid, customerGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling QuotesBankApi#listQuotes");
@@ -228,6 +229,7 @@ public class Example {
 | **page** | **java.math.BigInteger**|  | [optional] |
 | **perPage** | **java.math.BigInteger**|  | [optional] |
 | **guid** | **String**| Comma separated quote_guids to list quotes for. | [optional] |
+| **productType** | **String**| Comma separated product_types to list accounts for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list quotes for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list quotes for. | [optional] |
 

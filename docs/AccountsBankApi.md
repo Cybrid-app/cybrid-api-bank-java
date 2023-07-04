@@ -168,7 +168,7 @@ public class Example {
 
 ## listAccounts
 
-> AccountListBankModel listAccounts(page, perPage, guid, bankGuid, customerGuid)
+> AccountListBankModel listAccounts(page, perPage, guid, type, bankGuid, customerGuid)
 
 List Accounts
 
@@ -202,10 +202,11 @@ public class Example {
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
         String guid = "guid_example"; // String | Comma separated account_guids to list accounts for.
+        String type = "type_example"; // String | Comma separated account_types to list accounts for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list accounts for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list accounts for.
         try {
-            AccountListBankModel result = apiInstance.listAccounts(page, perPage, guid, bankGuid, customerGuid);
+            AccountListBankModel result = apiInstance.listAccounts(page, perPage, guid, type, bankGuid, customerGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AccountsBankApi#listAccounts");
@@ -226,6 +227,7 @@ public class Example {
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
 | **guid** | **String**| Comma separated account_guids to list accounts for. | [optional] |
+| **type** | **String**| Comma separated account_types to list accounts for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list accounts for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list accounts for. | [optional] |
 

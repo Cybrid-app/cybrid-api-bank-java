@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-07-04T15:10:35.843027Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-07-04T15:42:06.871980Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -182,7 +182,8 @@ public class TransfersBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
-     * @param guid Comma separated trade_guids to list transfers for.
+     * @param guid Comma separated transfer_guids to list transfers for.
+     * @param transferType Comma separated transfer_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list transfers for.
      * @param customerGuid Comma separated customer_guids to list transfers for.
      * @param accountGuid Comma separated account_guids to list transfers for.
@@ -190,7 +191,7 @@ public class TransfersBankApi {
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
+    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -203,6 +204,7 @@ public class TransfersBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "transfer_type", transferType));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "account_guid", accountGuid));
@@ -230,7 +232,8 @@ public class TransfersBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
-     * @param guid Comma separated trade_guids to list transfers for.
+     * @param guid Comma separated transfer_guids to list transfers for.
+     * @param transferType Comma separated transfer_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list transfers for.
      * @param customerGuid Comma separated customer_guids to list transfers for.
      * @param accountGuid Comma separated account_guids to list transfers for.
@@ -238,13 +241,13 @@ public class TransfersBankApi {
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
+    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state).bodyToMono(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
+    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state).toEntity(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state).toEntity(localVarReturnType);
     }
 }

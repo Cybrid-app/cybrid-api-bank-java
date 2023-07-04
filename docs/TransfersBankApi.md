@@ -170,7 +170,7 @@ public class Example {
 
 ## listTransfers
 
-> TransferListBankModel listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid, state)
+> TransferListBankModel listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state)
 
 Get transfers list
 
@@ -203,13 +203,14 @@ public class Example {
         TransfersBankApi apiInstance = new TransfersBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
-        String guid = "guid_example"; // String | Comma separated trade_guids to list transfers for.
+        String guid = "guid_example"; // String | Comma separated transfer_guids to list transfers for.
+        String transferType = "transferType_example"; // String | Comma separated transfer_types to list accounts for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list transfers for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list transfers for.
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list transfers for.
         String state = "state_example"; // String | Comma separated states to list transfers for.
         try {
-            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, bankGuid, customerGuid, accountGuid, state);
+            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TransfersBankApi#listTransfers");
@@ -229,7 +230,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
-| **guid** | **String**| Comma separated trade_guids to list transfers for. | [optional] |
+| **guid** | **String**| Comma separated transfer_guids to list transfers for. | [optional] |
+| **transferType** | **String**| Comma separated transfer_types to list accounts for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list transfers for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list transfers for. | [optional] |
 | **accountGuid** | **String**| Comma separated account_guids to list transfers for. | [optional] |

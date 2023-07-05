@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.75.5
+  version: v0.76.1
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5556,18 +5556,19 @@ components:
         side: deposit
         amount: 5
         quote_guid: quote_guid
-        fee: 5
-        network_fee_liability_amount: 9
+        fee: 2
+        network_fee_liability_amount: 3
         created_at: 2000-01-23T04:56:07.000+00:00
-        network_fee: 7
+        network_fee: 9
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
+        estimated_amount: 5
         guid: guid
         external_bank_account_guid: external_bank_account_guid
         transfer_type: savings
         state: storing
         asset: asset
-        estimated_network_fee: 2
+        estimated_network_fee: 7
         customer_guid: customer_guid
       properties:
         guid:
@@ -5620,7 +5621,11 @@ components:
           - failed
           type: string
         amount:
-          description: The amount being transferred.
+          description: The actual amount in base units of the asset.
+          nullable: true
+          type: integer
+        estimated_amount:
+          description: The estimated amount in base units of the asset.
           type: integer
         fee:
           description: The fee associated with the trade.
@@ -5837,34 +5842,36 @@ components:
         - side: deposit
           amount: 5
           quote_guid: quote_guid
-          fee: 5
-          network_fee_liability_amount: 9
+          fee: 2
+          network_fee_liability_amount: 3
           created_at: 2000-01-23T04:56:07.000+00:00
-          network_fee: 7
+          network_fee: 9
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
+          estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
           transfer_type: savings
           state: storing
           asset: asset
-          estimated_network_fee: 2
+          estimated_network_fee: 7
           customer_guid: customer_guid
         - side: deposit
           amount: 5
           quote_guid: quote_guid
-          fee: 5
-          network_fee_liability_amount: 9
+          fee: 2
+          network_fee_liability_amount: 3
           created_at: 2000-01-23T04:56:07.000+00:00
-          network_fee: 7
+          network_fee: 9
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
+          estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
           transfer_type: savings
           state: storing
           asset: asset
-          estimated_network_fee: 2
+          estimated_network_fee: 7
           customer_guid: customer_guid
         page: 0
       properties:

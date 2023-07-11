@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.76.9
+  version: v0.77.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2670,16 +2670,17 @@ paths:
     post:
       description: "Creates an account.\n\n## Account Type\n\nAn Account is tied to\
         \ a specific cryptocurrency or fiat and is comprised of transactions and a\
-        \ current balance.\n\nAn account is required to allow a Customer to hold cryptocurrency\
-        \ or fiat on the Cybrid Platform.\n\nAt present, account's can be created\
-        \ as `trading` or `fiat ` accounts and are required before a Customer can\
-        \ generate quotes or execute a `trade` or `transfer`.\n\n## Asset\n\nThe asset\
-        \ is the specific cryptocurrency or fiat that the account holds, e.g., 'BTC'\
-        \ for Bitcoin or `USD` for US dollars. See the Symbols API for a complete\
-        \ list of cryptocurrencies and fiat supported. \n\n## State\n\n| State | Description\
-        \ |\n|-------|-------------|\n| storing | The Platform is storing the account\
-        \ details in our private store |\n| created | The Platform has created the\
-        \ account |\n\n\n\nRequired scope: **accounts:execute**"
+        \ current balance.\n\nAn account is required to allow a Bank or Customer to\
+        \ hold cryptocurrency or a Customer to hold fiat on the Cybrid Platform.\n\
+        \nAt present, account's can be created as `trading` or `fiat ` accounts and\
+        \ are required before a Customer can generate quotes or execute a `trade`\
+        \ or `transfer`.\n\n## Asset\n\nThe asset is the specific cryptocurrency or\
+        \ fiat that the account holds, e.g., 'BTC' for Bitcoin or `USD` for US dollars.\
+        \ See the Symbols API for a complete list of cryptocurrencies and fiat supported.\
+        \ \n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
+        \ | The Platform is storing the account details in our private store |\n|\
+        \ created | The Platform has created the account |\n\n\n\nRequired scope:\
+        \ **accounts:execute**"
       operationId: createAccount
       parameters: []
       requestBody:
@@ -5174,6 +5175,7 @@ components:
           description: The address' customer identifier.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         account_guid:
           description: The address' account identifier.
@@ -5205,14 +5207,6 @@ components:
         tag:
           description: The blockchain address tag.
           type: string
-      required:
-      - account_guid
-      - asset
-      - bank_guid
-      - created_at
-      - customer_guid
-      - guid
-      - state
       type: object
     DepositAddressList:
       example:
@@ -6481,6 +6475,7 @@ components:
           description: The customer identifier associated with the account.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         asset:
           description: The asset code.

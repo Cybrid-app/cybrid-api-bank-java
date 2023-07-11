@@ -17,6 +17,7 @@
 |**failureCodes** | [**List&lt;FailureCodesEnum&gt;**](#List&lt;FailureCodesEnum&gt;) | The reason codes explaining the outcome. |  [optional] |
 |**personaInquiryId** | **String** | The Persona identifier of the backing inquiry. |  [optional] |
 |**personaState** | [**PersonaStateEnum**](#PersonaStateEnum) | The Persona state of the backing inquiry. |  [optional] |
+|**externalBankAccountGuid** | **String** | The external bank account&#39;s identifier. |  [optional] |
 
 
 
@@ -25,6 +26,7 @@
 | Name | Value |
 |---- | -----|
 | KYC | &quot;kyc&quot; |
+| BANK_ACCOUNT | &quot;bank_account&quot; |
 
 
 
@@ -34,6 +36,7 @@
 |---- | -----|
 | ID_AND_SELFIE | &quot;id_and_selfie&quot; |
 | ATTESTED | &quot;attested&quot; |
+| PLAID_IDENTITY_MATCH | &quot;plaid_identity_match&quot; |
 
 
 
@@ -71,6 +74,8 @@
 | ADDRESS_CHECK_FAILURE | &quot;address_check_failure&quot; |
 | DOB_CHECK_FAILURE | &quot;dob_check_failure&quot; |
 | ID_NUMBER_CHECK_FAILURE | &quot;id_number_check_failure&quot; |
+| PHONE_NUMBER_CHECK_FAILURE | &quot;phone_number_check_failure&quot; |
+| EMAIL_ADDRESS_CHECK_FAILURE | &quot;email_address_check_failure&quot; |
 
 
 

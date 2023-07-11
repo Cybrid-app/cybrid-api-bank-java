@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.77.0
+  version: v0.78.1
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5052,12 +5052,14 @@ components:
           description: The type of identity verification.
           enum:
           - kyc
+          - bank_account
           type: string
         method:
           description: The identity verification method.
           enum:
           - id_and_selfie
           - attested
+          - plaid_identity_match
           type: string
         created_at:
           description: ISO8601 datetime the customer was created at.
@@ -5092,6 +5094,8 @@ components:
             - address_check_failure
             - dob_check_failure
             - id_number_check_failure
+            - phone_number_check_failure
+            - email_address_check_failure
             type: string
           type: array
       type: object
@@ -6379,12 +6383,14 @@ components:
           description: The type of identity verification.
           enum:
           - kyc
+          - bank_account
           type: string
         method:
           description: The identity verification method.
           enum:
           - id_and_selfie
           - attested
+          - plaid_identity_match
           type: string
         customer_guid:
           description: The customer's identifier.
@@ -6410,6 +6416,14 @@ components:
           format: date
           nullable: true
           type: string
+        phone_number:
+          description: The customer's phone number.
+          nullable: true
+          type: string
+        email_address:
+          description: The customer's email address.
+          nullable: true
+          type: string
         identification_numbers:
           description: The customer's identification numbers; required when method
             is set to 'attested'.
@@ -6417,6 +6431,13 @@ components:
             $ref: '#/components/schemas/PostIdentificationNumber'
           nullable: true
           type: array
+        external_bank_account_guid:
+          description: The external bank account's identifier. Required for 'bank_account'
+            type.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         expected_behaviours:
           description: The optional expected behaviour to simulate.
           items:
@@ -6889,6 +6910,12 @@ components:
           - unknown
           nullable: true
           type: string
+        external_bank_account_guid:
+          description: The external bank account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
       type: object
     WorkflowWithDetails_allOf:
       properties:
@@ -6943,10 +6970,12 @@ components:
       type: object
     PostIdentityVerification_name:
       description: The customer's name; required when method is set to 'attested'.
+        Either full or first and last are required.
       nullable: true
       properties:
         first:
           description: The customer's first name.
+          nullable: true
           type: string
         middle:
           description: The customer's middle name.
@@ -6954,10 +6983,12 @@ components:
           type: string
         last:
           description: The customer's last name.
+          nullable: true
           type: string
-      required:
-      - first
-      - last
+        full:
+          description: The customer's full name.
+          nullable: true
+          type: string
       type: object
     PostIdentityVerification_address:
       description: The customer's address; required when method is set to 'attested'.

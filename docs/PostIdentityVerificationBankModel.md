@@ -14,7 +14,10 @@
 |**name** | [**PostIdentityVerificationNameBankModel**](PostIdentityVerificationNameBankModel.md) |  |  [optional] |
 |**address** | [**PostIdentityVerificationAddressBankModel**](PostIdentityVerificationAddressBankModel.md) |  |  [optional] |
 |**dateOfBirth** | **LocalDate** | The customer&#39;s date of birth; required when method is set to &#39;attested&#39;. |  [optional] |
+|**phoneNumber** | **String** | The customer&#39;s phone number. |  [optional] |
+|**emailAddress** | **String** | The customer&#39;s email address. |  [optional] |
 |**identificationNumbers** | [**List&lt;PostIdentificationNumberBankModel&gt;**](PostIdentificationNumberBankModel.md) | The customer&#39;s identification numbers; required when method is set to &#39;attested&#39;. |  [optional] |
+|**externalBankAccountGuid** | **String** | The external bank account&#39;s identifier. Required for &#39;bank_account&#39; type. |  [optional] |
 |**expectedBehaviours** | [**List&lt;ExpectedBehavioursEnum&gt;**](#List&lt;ExpectedBehavioursEnum&gt;) | The optional expected behaviour to simulate. |  [optional] |
 
 
@@ -24,6 +27,7 @@
 | Name | Value |
 |---- | -----|
 | KYC | &quot;kyc&quot; |
+| BANK_ACCOUNT | &quot;bank_account&quot; |
 
 
 
@@ -33,6 +37,7 @@
 |---- | -----|
 | ID_AND_SELFIE | &quot;id_and_selfie&quot; |
 | ATTESTED | &quot;attested&quot; |
+| PLAID_IDENTITY_MATCH | &quot;plaid_identity_match&quot; |
 
 
 

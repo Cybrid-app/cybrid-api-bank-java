@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**personaInquiryId** | **String** | The Persona identifier of the backing inquiry. |  [optional] |
 |**personaState** | [**PersonaStateEnum**](#PersonaStateEnum) | The Persona state of the backing inquiry. |  [optional] |
+|**externalBankAccountGuid** | **String** | The external bank account&#39;s identifier. |  [optional] |
 
 
 

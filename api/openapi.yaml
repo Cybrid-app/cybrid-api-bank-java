@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.78.3
+  version: v0.78.4
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6461,6 +6461,7 @@ components:
           - residence_card
           - social_security_number
           - tax_identification_number
+          - identification_card
           type: string
         issuing_country_code:
           description: The ISO 3166 country 2-Alpha country code of the identification

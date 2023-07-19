@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the quote. |  [optional] |
 |**productType** | [**ProductTypeEnum**](#ProductTypeEnum) | The type of product the quote is for. |  [optional] |
+|**bankGuid** | **String** | The unique identifier for the bank. |  [optional] |
 |**customerGuid** | **String** | The unique identifier for the customer. |  [optional] |
 |**symbol** | **String** | Symbol the quote was requested for. Format is \&quot;asset-counter_asset\&quot; in uppercase. Populated for trade quotes. |  [optional] |
 |**side** | [**SideEnum**](#SideEnum) | The direction of the quote: either &#39;buy&#39; or &#39;sell&#39; for trade quotes. |  [optional] |

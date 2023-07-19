@@ -9,6 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the trade. |  [optional] |
 |**transferType** | [**TransferTypeEnum**](#TransferTypeEnum) | The type of transfer. |  [optional] |
+|**bankGuid** | **String** | The associated bank&#39;s identifier. |  [optional] |
 |**customerGuid** | **String** | The associated customer&#39;s identifier. |  [optional] |
 |**quoteGuid** | **String** | The associated quote&#39;s identifier. |  [optional] |
 |**externalBankAccountGuid** | **String** | The associated external bank account&#39;s identifier. |  [optional] |

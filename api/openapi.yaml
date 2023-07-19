@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.78.21
+  version: v0.79.2
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5312,10 +5312,17 @@ components:
           - book_transfer
           - crypto_transfer
           type: string
+        bank_guid:
+          description: The unique identifier for the bank.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         customer_guid:
           description: The unique identifier for the customer.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         asset:
           description: "The asset code the quote was requested for. Populated for\
@@ -5367,6 +5374,7 @@ components:
         guid: guid
         receive_amount: 5
         asset: asset
+        bank_guid: bank_guid
         customer_guid: customer_guid
       properties:
         guid:
@@ -5381,6 +5389,11 @@ components:
           - funding
           - book_transfer
           - crypto_transfer
+          type: string
+        bank_guid:
+          description: The unique identifier for the bank.
+          maxLength: 32
+          minLength: 32
           type: string
         customer_guid:
           description: The unique identifier for the customer.
@@ -5462,6 +5475,7 @@ components:
           guid: guid
           receive_amount: 5
           asset: asset
+          bank_guid: bank_guid
           customer_guid: customer_guid
         - symbol: symbol
           side: buy
@@ -5475,6 +5489,7 @@ components:
           guid: guid
           receive_amount: 5
           asset: asset
+          bank_guid: bank_guid
           customer_guid: customer_guid
         page: 0
       properties:
@@ -5567,6 +5582,7 @@ components:
         state: storing
         asset: asset
         estimated_network_fee: 7
+        bank_guid: bank_guid
         customer_guid: customer_guid
       properties:
         guid:
@@ -5584,10 +5600,17 @@ components:
           - internal_bank_rebalance
           - internal_wallet_rebalance
           type: string
+        bank_guid:
+          description: The associated bank's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         customer_guid:
           description: The associated customer's identifier.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         quote_guid:
           description: The associated quote's identifier.
@@ -5853,6 +5876,7 @@ components:
           state: storing
           asset: asset
           estimated_network_fee: 7
+          bank_guid: bank_guid
           customer_guid: customer_guid
         - side: deposit
           amount: 5
@@ -5870,6 +5894,7 @@ components:
           state: storing
           asset: asset
           estimated_network_fee: 7
+          bank_guid: bank_guid
           customer_guid: customer_guid
         page: 0
       properties:
@@ -6579,6 +6604,16 @@ components:
           - funding
           - book
           - crypto
+          type: string
+        source_account_guid:
+          description: The source account's identifier. Required for book transfers.
+          maxLength: 32
+          minLength: 32
+          type: string
+        destination_account_guid:
+          description: The destination account's identifier. Required for book transfers.
+          maxLength: 32
+          minLength: 32
           type: string
         external_wallet_guid:
           description: The customer's external wallet's identifier.

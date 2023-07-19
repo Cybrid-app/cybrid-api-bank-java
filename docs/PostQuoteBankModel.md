@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**productType** | [**ProductTypeEnum**](#ProductTypeEnum) | The type of product the quote is for. |  [optional] |
+|**bankGuid** | **String** | The unique identifier for the bank. |  [optional] |
 |**customerGuid** | **String** | The unique identifier for the customer. |  [optional] |
 |**asset** | **String** | The asset code the quote was requested for. Populated for funding, book transfer and crypto transfer quotes. |  [optional] |
 |**symbol** | **String** | Symbol the quote is being requested for. Format is \&quot;asset-counter_asset\&quot; in uppercase. See the Symbols API for a complete list of cryptocurrencies supported. Populated for trade quotes. |  [optional] |

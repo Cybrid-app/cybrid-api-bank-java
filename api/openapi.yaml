@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.79.6
+  version: v0.79.7
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5340,13 +5340,14 @@ components:
         side:
           description: "The direction for trade quotes: either 'buy' or 'sell'. The\
             \ direction for funding quotes: either 'deposit' or 'withdrawal'. The\
-            \ direction for book transfer quotes: either 'deposit' or 'withdrawal'.\
-            \ The direction for crypto transfer quotes: 'withdrawal'. "
+            \ direction for crypto transfer quotes: 'withdrawal'. Book transfers do\
+            \ not require a side. They are all 'deposit's. "
           enum:
           - buy
           - sell
           - deposit
           - withdrawal
+          nullable: true
           type: string
         receive_amount:
           description: "The amount to be received in base units of the currency: currency\
@@ -5357,8 +5358,6 @@ components:
             \ currency is \"counter_asset\" for buy and \"asset\" for sell for trade\
             \ quotes."
           type: integer
-      required:
-      - side
       type: object
     Quote:
       example:

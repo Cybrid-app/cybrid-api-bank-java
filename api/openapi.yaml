@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.79.16
+  version: v0.80.5
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2557,6 +2557,14 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: The owner of the entity.
+        explode: true
+        in: query
+        name: owner
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestOwner'
         style: form
       - description: Comma separated account_guids to list accounts for.
         explode: true
@@ -6141,6 +6149,12 @@ components:
       maximum: 100
       minimum: 1
       type: integer
+    ListRequestOwner:
+      description: The owner of the entity.
+      enum:
+      - bank
+      - customer
+      type: string
     ExternalBankAccount:
       example:
         failure_code: failure_code

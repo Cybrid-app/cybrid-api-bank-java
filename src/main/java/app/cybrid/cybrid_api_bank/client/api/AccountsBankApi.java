@@ -5,6 +5,7 @@ import app.cybrid.cybrid_api_bank.client.ApiClient;
 import app.cybrid.cybrid_api_bank.client.model.AccountBankModel;
 import app.cybrid.cybrid_api_bank.client.model.AccountListBankModel;
 import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
+import app.cybrid.cybrid_api_bank.client.model.ListRequestOwnerBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostAccountBankModel;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-07-24T23:34:03.008055Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-07-26T16:55:29.579135Z[Etc/UTC]")
 public class AccountsBankApi {
     private ApiClient apiClient;
 
@@ -178,6 +179,7 @@ public class AccountsBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param owner The owner of the entity.
      * @param guid Comma separated account_guids to list accounts for.
      * @param type Comma separated account_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list accounts for.
@@ -185,7 +187,7 @@ public class AccountsBankApi {
      * @return AccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    private ResponseSpec listAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -197,6 +199,7 @@ public class AccountsBankApi {
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "owner", owner));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
@@ -224,6 +227,7 @@ public class AccountsBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param owner The owner of the entity.
      * @param guid Comma separated account_guids to list accounts for.
      * @param type Comma separated account_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list accounts for.
@@ -231,13 +235,13 @@ public class AccountsBankApi {
      * @return AccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<AccountListBankModel> listAccounts(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<AccountListBankModel> listAccounts(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
         ParameterizedTypeReference<AccountListBankModel> localVarReturnType = new ParameterizedTypeReference<AccountListBankModel>() {};
-        return listAccountsRequestCreation(page, perPage, guid, type, bankGuid, customerGuid).bodyToMono(localVarReturnType);
+        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<AccountListBankModel>> listAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<AccountListBankModel>> listAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
         ParameterizedTypeReference<AccountListBankModel> localVarReturnType = new ParameterizedTypeReference<AccountListBankModel>() {};
-        return listAccountsRequestCreation(page, perPage, guid, type, bankGuid, customerGuid).toEntity(localVarReturnType);
+        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid).toEntity(localVarReturnType);
     }
 }

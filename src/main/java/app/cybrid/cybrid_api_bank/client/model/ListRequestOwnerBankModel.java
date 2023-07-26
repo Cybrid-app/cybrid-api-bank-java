@@ -15,434 +15,46 @@ package app.cybrid.cybrid_api_bank.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
- * PostWorkflowBankModel
+ * The owner of the entity.
  */
-@JsonPropertyOrder({
-  PostWorkflowBankModel.JSON_PROPERTY_TYPE,
-  PostWorkflowBankModel.JSON_PROPERTY_KIND,
-  PostWorkflowBankModel.JSON_PROPERTY_CUSTOMER_GUID,
-  PostWorkflowBankModel.JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID,
-  PostWorkflowBankModel.JSON_PROPERTY_LANGUAGE,
-  PostWorkflowBankModel.JSON_PROPERTY_LINK_CUSTOMIZATION_NAME,
-  PostWorkflowBankModel.JSON_PROPERTY_REDIRECT_URI,
-  PostWorkflowBankModel.JSON_PROPERTY_ANDROID_PACKAGE_NAME
-})
-@JsonTypeName("PostWorkflow")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-07-26T16:55:29.579135Z[Etc/UTC]")
-public class PostWorkflowBankModel {
-  /**
-   * The workflow type.
-   */
-  public enum TypeEnum {
-    PLAID("plaid");
+public enum ListRequestOwnerBankModel {
+  
+  BANK("bank"),
+  
+  CUSTOMER("customer");
 
-    private String value;
+  private String value;
 
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
+  ListRequestOwnerBankModel(String value) {
+    this.value = value;
   }
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private TypeEnum type;
-
-  /**
-   * The Plaid workflow kind.
-   */
-  public enum KindEnum {
-    CREATE("link_token_create"),
-    
-    UPDATE("link_token_update");
-
-    private String value;
-
-    KindEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static KindEnum fromValue(String value) {
-      for (KindEnum b : KindEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  public static final String JSON_PROPERTY_KIND = "kind";
-  private KindEnum kind;
-
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
-
-  public static final String JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID = "external_bank_account_guid";
-  private String externalBankAccountGuid;
-
-  /**
-   * The language to initialize Plaid link.
-   */
-  public enum LanguageEnum {
-    EN("en"),
-    
-    FR("fr"),
-    
-    ES("es"),
-    
-    NL("nl"),
-    
-    DE("de");
-
-    private String value;
-
-    LanguageEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static LanguageEnum fromValue(String value) {
-      for (LanguageEnum b : LanguageEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-  }
-
-  public static final String JSON_PROPERTY_LANGUAGE = "language";
-  private LanguageEnum language;
-
-  public static final String JSON_PROPERTY_LINK_CUSTOMIZATION_NAME = "link_customization_name";
-  private String linkCustomizationName;
-
-  public static final String JSON_PROPERTY_REDIRECT_URI = "redirect_uri";
-  private String redirectUri;
-
-  public static final String JSON_PROPERTY_ANDROID_PACKAGE_NAME = "android_package_name";
-  private String androidPackageName;
-
-  public PostWorkflowBankModel() { 
-  }
-
-  public PostWorkflowBankModel type(TypeEnum type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The workflow type.
-   * @return type
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The workflow type.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public TypeEnum getType() {
-    return type;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setType(TypeEnum type) {
-    this.type = type;
-  }
-
-
-  public PostWorkflowBankModel kind(KindEnum kind) {
-    
-    this.kind = kind;
-    return this;
-  }
-
-   /**
-   * The Plaid workflow kind.
-   * @return kind
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Plaid workflow kind.")
-  @JsonProperty(JSON_PROPERTY_KIND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public KindEnum getKind() {
-    return kind;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_KIND)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setKind(KindEnum kind) {
-    this.kind = kind;
-  }
-
-
-  public PostWorkflowBankModel customerGuid(String customerGuid) {
-    
-    this.customerGuid = customerGuid;
-    return this;
-  }
-
-   /**
-   * The customer identifier associated with the workflow.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The customer identifier associated with the workflow.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getCustomerGuid() {
-    return customerGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-
-  public PostWorkflowBankModel externalBankAccountGuid(String externalBankAccountGuid) {
-    
-    this.externalBankAccountGuid = externalBankAccountGuid;
-    return this;
-  }
-
-   /**
-   * The external bank account identifier associated with the workflow.
-   * @return externalBankAccountGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The external bank account identifier associated with the workflow.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getExternalBankAccountGuid() {
-    return externalBankAccountGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExternalBankAccountGuid(String externalBankAccountGuid) {
-    this.externalBankAccountGuid = externalBankAccountGuid;
-  }
-
-
-  public PostWorkflowBankModel language(LanguageEnum language) {
-    
-    this.language = language;
-    return this;
-  }
-
-   /**
-   * The language to initialize Plaid link.
-   * @return language
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The language to initialize Plaid link.")
-  @JsonProperty(JSON_PROPERTY_LANGUAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public LanguageEnum getLanguage() {
-    return language;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_LANGUAGE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLanguage(LanguageEnum language) {
-    this.language = language;
-  }
-
-
-  public PostWorkflowBankModel linkCustomizationName(String linkCustomizationName) {
-    
-    this.linkCustomizationName = linkCustomizationName;
-    return this;
-  }
-
-   /**
-   * The customization name for Plaid link.
-   * @return linkCustomizationName
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The customization name for Plaid link.")
-  @JsonProperty(JSON_PROPERTY_LINK_CUSTOMIZATION_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getLinkCustomizationName() {
-    return linkCustomizationName;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_LINK_CUSTOMIZATION_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLinkCustomizationName(String linkCustomizationName) {
-    this.linkCustomizationName = linkCustomizationName;
-  }
-
-
-  public PostWorkflowBankModel redirectUri(String redirectUri) {
-    
-    this.redirectUri = redirectUri;
-    return this;
-  }
-
-   /**
-   * The redirect URI for Plaid link.
-   * @return redirectUri
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The redirect URI for Plaid link.")
-  @JsonProperty(JSON_PROPERTY_REDIRECT_URI)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getRedirectUri() {
-    return redirectUri;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_REDIRECT_URI)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setRedirectUri(String redirectUri) {
-    this.redirectUri = redirectUri;
-  }
-
-
-  public PostWorkflowBankModel androidPackageName(String androidPackageName) {
-    
-    this.androidPackageName = androidPackageName;
-    return this;
-  }
-
-   /**
-   * The Android package name for Plaid link.
-   * @return androidPackageName
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Android package name for Plaid link.")
-  @JsonProperty(JSON_PROPERTY_ANDROID_PACKAGE_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getAndroidPackageName() {
-    return androidPackageName;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_ANDROID_PACKAGE_NAME)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAndroidPackageName(String androidPackageName) {
-    this.androidPackageName = androidPackageName;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    PostWorkflowBankModel postWorkflow = (PostWorkflowBankModel) o;
-    return Objects.equals(this.type, postWorkflow.type) &&
-        Objects.equals(this.kind, postWorkflow.kind) &&
-        Objects.equals(this.customerGuid, postWorkflow.customerGuid) &&
-        Objects.equals(this.externalBankAccountGuid, postWorkflow.externalBankAccountGuid) &&
-        Objects.equals(this.language, postWorkflow.language) &&
-        Objects.equals(this.linkCustomizationName, postWorkflow.linkCustomizationName) &&
-        Objects.equals(this.redirectUri, postWorkflow.redirectUri) &&
-        Objects.equals(this.androidPackageName, postWorkflow.androidPackageName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(type, kind, customerGuid, externalBankAccountGuid, language, linkCustomizationName, redirectUri, androidPackageName);
+  @JsonValue
+  public String getValue() {
+    return value;
   }
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PostWorkflowBankModel {\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    kind: ").append(toIndentedString(kind)).append("\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
-    sb.append("    externalBankAccountGuid: ").append(toIndentedString(externalBankAccountGuid)).append("\n");
-    sb.append("    language: ").append(toIndentedString(language)).append("\n");
-    sb.append("    linkCustomizationName: ").append(toIndentedString(linkCustomizationName)).append("\n");
-    sb.append("    redirectUri: ").append(toIndentedString(redirectUri)).append("\n");
-    sb.append("    androidPackageName: ").append(toIndentedString(androidPackageName)).append("\n");
-    sb.append("}");
-    return sb.toString();
+    return String.valueOf(value);
   }
 
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+  @JsonCreator
+  public static ListRequestOwnerBankModel fromValue(String value) {
+    for (ListRequestOwnerBankModel b : ListRequestOwnerBankModel.values()) {
+      if (b.value.equals(value)) {
+        return b;
+      }
     }
-    return o.toString().replace("\n", "\n    ");
+    throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
-
 }
 

@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.80.5
+  version: v0.81.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -336,31 +336,13 @@ paths:
         \ `sandbox` or `production` mode. Sandbox Banks will not transact in real\
         \ fiat dollars or cryptocurrencies.\n\nVia the API, only `sandbox` banks can\
         \ be created. In order to enable a `production` bank please contact [Support](mailto:support@cybrid.app).\n\
-        \n## Backstopped Funding Source\n\nA Backstopped Funding Source is an agreement\
-        \ between the Organization and Cybrid on transaction settlement. A Backstopped\
-        \ Funding Source is an escrow bank account that the Organization tops up on\
-        \ a regular basis and is drawn down by the Cybrid Platform when trades are\
-        \ executed by the Bank for its customers.\n\nThis feature must specifically\
-        \ be enabled in the Bank's `features` array by including the `backstopped_funding_source`\
-        \ flag.\n\nTo allow customers to trade in a bank that has a Backstopped Funding\
-        \ Source the customer's `fiat` account must be topped up using a `book transfer`\
-        \ prior to executing any trades.\n\nPlease contact [Support](mailto:support@cybrid.app)\
-        \ to inquire about enabling this option for your Organization.\n\n## Plaid\
-        \ Funding Source\n\nA Plaid Funding Source allows customers to directly connect\
-        \ their TradFi bank accounts to the Cybrid platform.\n\nThis feature must\
-        \ specifically be enabled in the Bank's `features` array by including the\
-        \ `plaid_funding_source` flag.\n\nTo allow customers to trade in a bank that\
-        \ has a Plaid Funding Source the customer's `fiat` account must first be connected\
-        \ to the platform using Cybrid's `Workflows` and `ExternalBankAccounts` APIs.\
-        \ Once their `ExternalBankAccount` is created on the Cybrid Platform their\
-        \ `fiat` account must be topped up using a `funding` transfer prior to executing\
-        \ any trades.\n\n## Attestation Identity Records\n\nAttestation Identity Records\
-        \ is a method the Cybrid Platform uses to verify the identity of a Bank's\
-        \ customers. Please see the documentation under the create Identity Record\
-        \ API for more technical detail.\n\nThis feature must specifically be enabled\
-        \ in the Bank's `features` array by including the `attestation_identity_records`\
-        \ flag. At present, attestation identity records is the supported method for\
-        \ verifying a customer's identity on the platform.\n\nPlease contact [Support](mailto:support@cybrid.app)\
+        \n## Attestation Identity Records\n\nAttestation Identity Records is a method\
+        \ the Cybrid Platform uses to verify the identity of a Bank's customers. Please\
+        \ see the documentation under the create Identity Record API for more technical\
+        \ detail.\n\nThis feature must specifically be enabled in the Bank's `features`\
+        \ array by including the `attestation_identity_records` flag. At present,\
+        \ attestation identity records is the supported method for verifying a customer's\
+        \ identity on the platform.\n\nPlease contact [Support](mailto:support@cybrid.app)\
         \ to inquire about enabling this option for your Organization.\n\n\n\nRequired\
         \ scope: **banks:execute**"
       operationId: createBank
@@ -469,8 +451,7 @@ paths:
                   value:
                     status: 415
                     error_message: "Unsupported value exception. Parameter: features\
-                      \ supported values: [ attestation_identity_records, backstopped_funding_source\
-                      \ ]"
+                      \ supported values: [ attestation_identity_records ]"
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -4878,8 +4859,6 @@ components:
             enum:
             - attestation_identity_records
             - kyc_identity_verifications
-            - backstopped_funding_source
-            - plaid_funding_source
             type: string
           type: array
         created_at:
@@ -6028,7 +6007,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         platform_balance: 5
         state: storing
-        type: backstopped
+        type: trading
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
@@ -6036,7 +6015,6 @@ components:
         type:
           description: The account type.
           enum:
-          - backstopped
           - trading
           - fee
           - fiat
@@ -6097,7 +6075,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           platform_balance: 5
           state: storing
-          type: backstopped
+          type: trading
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -6107,7 +6085,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           platform_balance: 5
           state: storing
-          type: backstopped
+          type: trading
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -6339,14 +6317,11 @@ components:
             type: string
           type: array
         features:
-          description: "The bank's enabled features. At present, both **attestation_identity_records**\
-            \ and **backstopped_funding_source** must be set."
+          description: The bank's enabled features.
           items:
             enum:
             - attestation_identity_records
             - kyc_identity_verifications
-            - backstopped_funding_source
-            - plaid_funding_source
             type: string
           type: array
         supported_fiat_account_assets:

@@ -34,8 +34,6 @@
 |---- | -----|
 | ATTESTATION_IDENTITY_RECORDS | &quot;attestation_identity_records&quot; |
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
-| BACKSTOPPED_FUNDING_SOURCE | &quot;backstopped_funding_source&quot; |
-| PLAID_FUNDING_SOURCE | &quot;plaid_funding_source&quot; |
 
 
 

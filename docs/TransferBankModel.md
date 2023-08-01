@@ -15,7 +15,7 @@
 |**externalBankAccountGuid** | **String** | The associated external bank account&#39;s identifier. |  [optional] |
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
 |**side** | [**SideEnum**](#SideEnum) | The direction of the quote: &#39;deposit&#39; or &#39;withdrawal&#39;. |  [optional] |
-|**state** | [**StateEnum**](#StateEnum) | The trade&#39;s state |  [optional] |
+|**state** | [**StateEnum**](#StateEnum) | The transfer&#39;s state |  [optional] |
 |**amount** | **java.math.BigInteger** | The actual amount in base units of the asset. |  [optional] |
 |**estimatedAmount** | **java.math.BigInteger** | The estimated amount in base units of the asset. |  [optional] |
 |**fee** | **java.math.BigInteger** | The fee associated with the trade. |  [optional] |
@@ -55,7 +55,6 @@
 | Name | Value |
 |---- | -----|
 | STORING | &quot;storing&quot; |
-| INITIATING | &quot;initiating&quot; |
 | PENDING | &quot;pending&quot; |
 | COMPLETED | &quot;completed&quot; |
 | FAILED | &quot;failed&quot; |

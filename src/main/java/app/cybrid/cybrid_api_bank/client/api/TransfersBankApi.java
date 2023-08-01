@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-01T12:10:11.581060Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-01T14:46:57.669313Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -51,7 +51,7 @@ public class TransfersBankApi {
 
     /**
      * Create Transfer
-     * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | initiating | The Platform has begun to perform the transfer | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |    Required scope: **transfers:execute**
+     * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |  ## Failure codes  | Code | Description | |------|-------------| | non_sufficient_funds | The customer does not have enough funds to complete the trade | | refresh_required | The transfer&#39;s associated external_bank_account needs to be reconnected via Plaid |    Required scope: **transfers:execute**
      * <p><b>201</b> - Transfer created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
@@ -93,7 +93,7 @@ public class TransfersBankApi {
 
     /**
      * Create Transfer
-     * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | initiating | The Platform has begun to perform the transfer | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |    Required scope: **transfers:execute**
+     * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |  ## Failure codes  | Code | Description | |------|-------------| | non_sufficient_funds | The customer does not have enough funds to complete the trade | | refresh_required | The transfer&#39;s associated external_bank_account needs to be reconnected via Plaid |    Required scope: **transfers:execute**
      * <p><b>201</b> - Transfer created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 

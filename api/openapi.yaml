@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.81.15
+  version: v0.81.16
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3807,11 +3807,14 @@ paths:
     post:
       description: "Creates a trade.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
         | storing | The Platform is storing the trade details in our private store\
-        \ |\n| initiating | The Platform has begun to perform the trade |\n| pending\
-        \ | The Platform is executing the trade |\n| settling | The Platform is settling\
+        \ |\n| pending | The Platform is executing the trade |\n| cancelled | The\
+        \ Platform has cancelled the trade |\n| settling | The Platform is settling\
         \ the trade |\n| completed | The Platform has successfully completed the trade\
         \ |\n| failed | The Platform was not able to successfully complete the trade\
-        \ |\n\n\n\nRequired scope: **trades:execute**"
+        \ |\n\n## Failure codes\n\n| Code | Description |\n|------|-------------|\n\
+        | non_sufficient_funds | The customer does not have enough funds to complete\
+        \ the trade |\n| unsupported | The trading pair is not supported for this\
+        \ customer |\n\n\n\nRequired scope: **trades:execute**"
       operationId: createTrade
       parameters: []
       requestBody:
@@ -4180,10 +4183,13 @@ paths:
     post:
       description: "Creates a transfer.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
         | storing | The Platform is storing the trade details in our private store\
-        \ |\n| initiating | The Platform has begun to perform the transfer |\n| pending\
-        \ | The Platform is executing the transfer |\n| completed | The Platform has\
-        \ successfully completed the transfer |\n| failed | The Platform was not able\
-        \ to successfully complete the transfer |\n\n\n\nRequired scope: **transfers:execute**"
+        \ |\n| pending | The Platform is executing the transfer |\n| completed | The\
+        \ Platform has successfully completed the transfer |\n| failed | The Platform\
+        \ was not able to successfully complete the transfer |\n\n## Failure codes\n\
+        \n| Code | Description |\n|------|-------------|\n| non_sufficient_funds |\
+        \ The customer does not have enough funds to complete the trade |\n| refresh_required\
+        \ | The transfer's associated external_bank_account needs to be reconnected\
+        \ via Plaid |\n\n\n\nRequired scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:
@@ -5619,10 +5625,9 @@ components:
           - withdrawal
           type: string
         state:
-          description: The trade's state
+          description: The transfer's state
           enum:
           - storing
-          - initiating
           - pending
           - completed
           - failed

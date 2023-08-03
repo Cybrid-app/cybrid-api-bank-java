@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.81.28
+  version: v0.82.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3814,7 +3814,8 @@ paths:
         \ |\n\n## Failure codes\n\n| Code | Description |\n|------|-------------|\n\
         | non_sufficient_funds | The customer does not have enough funds to complete\
         \ the trade |\n| unsupported | The trading pair is not supported for this\
-        \ customer |\n\n\n\nRequired scope: **trades:execute**"
+        \ customer |\n| limit_exceeded | The customer is over the limits that have\
+        \ been set for them for this activity |\n\n\n\nRequired scope: **trades:execute**"
       operationId: createTrade
       parameters: []
       requestBody:
@@ -4187,9 +4188,10 @@ paths:
         \ Platform has successfully completed the transfer |\n| failed | The Platform\
         \ was not able to successfully complete the transfer |\n\n## Failure codes\n\
         \n| Code | Description |\n|------|-------------|\n| non_sufficient_funds |\
-        \ The customer does not have enough funds to complete the trade |\n| refresh_required\
+        \ The customer does not have enough funds to complete the transfer |\n| refresh_required\
         \ | The transfer's associated external_bank_account needs to be reconnected\
-        \ via Plaid |\n\n\n\nRequired scope: **transfers:execute**"
+        \ via Plaid |\n| limit_exceeded | The customer is over the limits that have\
+        \ been set for them for this activity |\n\n\n\nRequired scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:
@@ -5559,6 +5561,7 @@ components:
     Transfer:
       example:
         side: deposit
+        failure_code: failure_code
         amount: 5
         quote_guid: quote_guid
         fee: 2
@@ -5578,7 +5581,7 @@ components:
         customer_guid: customer_guid
       properties:
         guid:
-          description: Auto-generated unique identifier for the trade.
+          description: Auto-generated unique identifier for the transfer.
           maxLength: 32
           minLength: 32
           type: string
@@ -5632,6 +5635,10 @@ components:
           - completed
           - failed
           type: string
+        failure_code:
+          description: The failure code for failed transfers.
+          nullable: true
+          type: string
         amount:
           description: The actual amount in base units of the asset.
           nullable: true
@@ -5640,7 +5647,7 @@ components:
           description: The estimated amount in base units of the asset.
           type: integer
         fee:
-          description: The fee associated with the trade.
+          description: The fee associated with the transfer.
           type: integer
         estimated_network_fee:
           description: The estimated network fee in base units of network_fee_asset.
@@ -5678,6 +5685,7 @@ components:
       example:
         symbol: symbol
         side: buy
+        failure_code: failure_code
         quote_guid: quote_guid
         fee: 2
         guid: guid
@@ -5720,6 +5728,10 @@ components:
           - completed
           - settling
           - failed
+          type: string
+        failure_code:
+          description: The failure code for failed trades.
+          nullable: true
           type: string
         receive_amount:
           description: "The amount to be received in base units of the currency: currency\
@@ -5852,6 +5864,7 @@ components:
         total: 0
         objects:
         - side: deposit
+          failure_code: failure_code
           amount: 5
           quote_guid: quote_guid
           fee: 2
@@ -5870,6 +5883,7 @@ components:
           bank_guid: bank_guid
           customer_guid: customer_guid
         - side: deposit
+          failure_code: failure_code
           amount: 5
           quote_guid: quote_guid
           fee: 2
@@ -5919,6 +5933,7 @@ components:
         objects:
         - symbol: symbol
           side: buy
+          failure_code: failure_code
           quote_guid: quote_guid
           fee: 2
           guid: guid
@@ -5929,6 +5944,7 @@ components:
           deliver_amount: 5
         - symbol: symbol
           side: buy
+          failure_code: failure_code
           quote_guid: quote_guid
           fee: 2
           guid: guid

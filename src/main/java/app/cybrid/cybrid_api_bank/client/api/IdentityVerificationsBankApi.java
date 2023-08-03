@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-02T17:40:37.293179Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-03T12:32:28.862322Z[Etc/UTC]")
 public class IdentityVerificationsBankApi {
     private ApiClient apiClient;
 

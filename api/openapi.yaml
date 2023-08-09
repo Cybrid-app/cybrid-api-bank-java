@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.82.8
+  version: v0.83.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -4190,8 +4190,10 @@ paths:
         \n| Code | Description |\n|------|-------------|\n| non_sufficient_funds |\
         \ The customer does not have enough funds to complete the transfer |\n| refresh_required\
         \ | The transfer's associated external_bank_account needs to be reconnected\
-        \ via Plaid |\n| limit_exceeded | The customer is over the limits that have\
-        \ been set for them for this activity |\n\n\n\nRequired scope: **transfers:execute**"
+        \ via Plaid |\n| party_name_invalid | The transfer's associated external bank\
+        \ account has an invalid party name |\n| limit_exceeded | The customer is\
+        \ over the limits that have been set for them for this activity |\n\n\n\n\
+        Required scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:

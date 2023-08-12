@@ -26,49 +26,41 @@ import org.junit.Test;
 
 
 /**
- * Model tests for PostAccountBankModel
+ * Model tests for CustomerNameBankModel
  */
-public class PostAccountBankModelTest {
-    private final PostAccountBankModel model = new PostAccountBankModel();
+public class CustomerNameBankModelTest {
+    private final CustomerNameBankModel model = new CustomerNameBankModel();
 
     /**
-     * Model tests for PostAccountBankModel
+     * Model tests for CustomerNameBankModel
      */
     @Test
-    public void testPostAccountBankModel() {
-        // TODO: test PostAccountBankModel
+    public void testCustomerNameBankModel() {
+        // TODO: test CustomerNameBankModel
     }
 
     /**
-     * Test the property 'type'
+     * Test the property 'first'
      */
     @Test
-    public void typeTest() {
-        // TODO: test type
+    public void firstTest() {
+        // TODO: test first
     }
 
     /**
-     * Test the property 'customerGuid'
+     * Test the property 'middle'
      */
     @Test
-    public void customerGuidTest() {
-        // TODO: test customerGuid
+    public void middleTest() {
+        // TODO: test middle
     }
 
     /**
-     * Test the property 'asset'
+     * Test the property 'last'
      */
     @Test
-    public void assetTest() {
-        // TODO: test asset
-    }
-
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
+    public void lastTest() {
+        // TODO: test last
     }
 
 }

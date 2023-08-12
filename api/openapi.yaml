@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.83.14
+  version: v0.84.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -878,6 +878,14 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Include PII in the response.
+        explode: true
+        in: query
+        name: include_pii
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -4949,8 +4957,22 @@ components:
       type: object
     Customer:
       example:
+        address:
+          subdivision: subdivision
+          country_code: country_code
+          city: city
+          street: street
+          street2: street2
+          postal_code: postal_code
+        email_address: email_address
+        date_of_birth: 2000-01-23
+        name:
+          middle: middle
+          last: last
+          first: first
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
+        phone_number: phone_number
         state: storing
         type: individual
         bank_guid: bank_guid
@@ -4982,19 +5004,64 @@ components:
           - verified
           - rejected
           type: string
+        name:
+          $ref: '#/components/schemas/Customer_name'
+        address:
+          $ref: '#/components/schemas/Customer_address'
+        date_of_birth:
+          description: The customer's date of birth.
+          format: date
+          nullable: true
+          type: string
+        phone_number:
+          description: The customer's phone number.
+          nullable: true
+          type: string
+        email_address:
+          description: The customer's phone number.
+          nullable: true
+          type: string
       type: object
     CustomerList:
       example:
         per_page: 0
         total: 0
         objects:
-        - guid: guid
+        - address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          email_address: email_address
+          date_of_birth: 2000-01-23
+          name:
+            middle: middle
+            last: last
+            first: first
+          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          phone_number: phone_number
           state: storing
           type: individual
           bank_guid: bank_guid
-        - guid: guid
+        - address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          email_address: email_address
+          date_of_birth: 2000-01-23
+          name:
+            middle: middle
+            last: last
+            first: first
+          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          phone_number: phone_number
           state: storing
           type: individual
           bank_guid: bank_guid
@@ -6395,6 +6462,7 @@ components:
         date_of_birth:
           description: The customer's date of birth.
           format: date
+          nullable: true
           type: string
         phone_number:
           description: The customer's phone number.
@@ -6939,6 +7007,61 @@ components:
       - per_page
       - total
       type: object
+    Customer_name:
+      example:
+        middle: middle
+        last: last
+        first: first
+      nullable: true
+      properties:
+        first:
+          description: The customer's first name.
+          nullable: true
+          type: string
+        middle:
+          description: The customer's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The customer's last name.
+          nullable: true
+          type: string
+      type: object
+    Customer_address:
+      example:
+        subdivision: subdivision
+        country_code: country_code
+        city: city
+        street: street
+        street2: street2
+        postal_code: postal_code
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          nullable: true
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          nullable: true
+          type: string
+        subdivision:
+          description: The provide/state/region of the address; not used by all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          nullable: true
+          type: string
+      type: object
     IdentityVerificationWithDetails_allOf:
       properties:
         persona_inquiry_id:
@@ -6972,6 +7095,7 @@ components:
           type: string
       type: object
     PostCustomer_name:
+      nullable: true
       properties:
         first:
           description: The customer's first name.
@@ -6988,6 +7112,7 @@ components:
       - last
       type: object
     PostCustomer_address:
+      nullable: true
       properties:
         street:
           description: The first line of the address.

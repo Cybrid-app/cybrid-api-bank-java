@@ -26,49 +26,65 @@ import org.junit.Test;
 
 
 /**
- * Model tests for PostAccountBankModel
+ * Model tests for CustomerAddressBankModel
  */
-public class PostAccountBankModelTest {
-    private final PostAccountBankModel model = new PostAccountBankModel();
+public class CustomerAddressBankModelTest {
+    private final CustomerAddressBankModel model = new CustomerAddressBankModel();
 
     /**
-     * Model tests for PostAccountBankModel
+     * Model tests for CustomerAddressBankModel
      */
     @Test
-    public void testPostAccountBankModel() {
-        // TODO: test PostAccountBankModel
+    public void testCustomerAddressBankModel() {
+        // TODO: test CustomerAddressBankModel
     }
 
     /**
-     * Test the property 'type'
+     * Test the property 'street'
      */
     @Test
-    public void typeTest() {
-        // TODO: test type
+    public void streetTest() {
+        // TODO: test street
     }
 
     /**
-     * Test the property 'customerGuid'
+     * Test the property 'street2'
      */
     @Test
-    public void customerGuidTest() {
-        // TODO: test customerGuid
+    public void street2Test() {
+        // TODO: test street2
     }
 
     /**
-     * Test the property 'asset'
+     * Test the property 'city'
      */
     @Test
-    public void assetTest() {
-        // TODO: test asset
+    public void cityTest() {
+        // TODO: test city
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'subdivision'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
+    public void subdivisionTest() {
+        // TODO: test subdivision
+    }
+
+    /**
+     * Test the property 'postalCode'
+     */
+    @Test
+    public void postalCodeTest() {
+        // TODO: test postalCode
+    }
+
+    /**
+     * Test the property 'countryCode'
+     */
+    @Test
+    public void countryCodeTest() {
+        // TODO: test countryCode
     }
 
 }

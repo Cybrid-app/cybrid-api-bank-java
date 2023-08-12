@@ -13,6 +13,8 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import java.util.Objects;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,55 +22,252 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for PostAccountBankModel
+ * CustomerAddressBankModel
  */
-public class PostAccountBankModelTest {
-    private final PostAccountBankModel model = new PostAccountBankModel();
+@JsonPropertyOrder({
+  CustomerAddressBankModel.JSON_PROPERTY_STREET,
+  CustomerAddressBankModel.JSON_PROPERTY_STREET2,
+  CustomerAddressBankModel.JSON_PROPERTY_CITY,
+  CustomerAddressBankModel.JSON_PROPERTY_SUBDIVISION,
+  CustomerAddressBankModel.JSON_PROPERTY_POSTAL_CODE,
+  CustomerAddressBankModel.JSON_PROPERTY_COUNTRY_CODE
+})
+@JsonTypeName("Customer_address")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-12T22:12:58.457228Z[Etc/UTC]")
+public class CustomerAddressBankModel {
+  public static final String JSON_PROPERTY_STREET = "street";
+  private String street;
 
-    /**
-     * Model tests for PostAccountBankModel
-     */
-    @Test
-    public void testPostAccountBankModel() {
-        // TODO: test PostAccountBankModel
-    }
+  public static final String JSON_PROPERTY_STREET2 = "street2";
+  private String street2;
 
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // TODO: test type
-    }
+  public static final String JSON_PROPERTY_CITY = "city";
+  private String city;
 
-    /**
-     * Test the property 'customerGuid'
-     */
-    @Test
-    public void customerGuidTest() {
-        // TODO: test customerGuid
-    }
+  public static final String JSON_PROPERTY_SUBDIVISION = "subdivision";
+  private String subdivision;
 
-    /**
-     * Test the property 'asset'
-     */
-    @Test
-    public void assetTest() {
-        // TODO: test asset
-    }
+  public static final String JSON_PROPERTY_POSTAL_CODE = "postal_code";
+  private String postalCode;
 
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
+  public static final String JSON_PROPERTY_COUNTRY_CODE = "country_code";
+  private String countryCode;
+
+  public CustomerAddressBankModel() { 
+  }
+
+  public CustomerAddressBankModel street(String street) {
+    
+    this.street = street;
+    return this;
+  }
+
+   /**
+   * The first line of the address.
+   * @return street
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The first line of the address.")
+  @JsonProperty(JSON_PROPERTY_STREET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getStreet() {
+    return street;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_STREET)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setStreet(String street) {
+    this.street = street;
+  }
+
+
+  public CustomerAddressBankModel street2(String street2) {
+    
+    this.street2 = street2;
+    return this;
+  }
+
+   /**
+   * The optional second line of the address.
+   * @return street2
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The optional second line of the address.")
+  @JsonProperty(JSON_PROPERTY_STREET2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getStreet2() {
+    return street2;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_STREET2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setStreet2(String street2) {
+    this.street2 = street2;
+  }
+
+
+  public CustomerAddressBankModel city(String city) {
+    
+    this.city = city;
+    return this;
+  }
+
+   /**
+   * The city of the address.
+   * @return city
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The city of the address.")
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getCity() {
+    return city;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+
+  public CustomerAddressBankModel subdivision(String subdivision) {
+    
+    this.subdivision = subdivision;
+    return this;
+  }
+
+   /**
+   * The provide/state/region of the address; not used by all countries.
+   * @return subdivision
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The provide/state/region of the address; not used by all countries.")
+  @JsonProperty(JSON_PROPERTY_SUBDIVISION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getSubdivision() {
+    return subdivision;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_SUBDIVISION)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSubdivision(String subdivision) {
+    this.subdivision = subdivision;
+  }
+
+
+  public CustomerAddressBankModel postalCode(String postalCode) {
+    
+    this.postalCode = postalCode;
+    return this;
+  }
+
+   /**
+   * The postal/post/zip code of the address; not used by all countries.
+   * @return postalCode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The postal/post/zip code of the address; not used by all countries.")
+  @JsonProperty(JSON_PROPERTY_POSTAL_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getPostalCode() {
+    return postalCode;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_POSTAL_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
+  }
+
+
+  public CustomerAddressBankModel countryCode(String countryCode) {
+    
+    this.countryCode = countryCode;
+    return this;
+  }
+
+   /**
+   * The ISO 3166 country 2-Alpha country code of the address.
+   * @return countryCode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The ISO 3166 country 2-Alpha country code of the address.")
+  @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getCountryCode() {
+    return countryCode;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CustomerAddressBankModel customerAddress = (CustomerAddressBankModel) o;
+    return Objects.equals(this.street, customerAddress.street) &&
+        Objects.equals(this.street2, customerAddress.street2) &&
+        Objects.equals(this.city, customerAddress.city) &&
+        Objects.equals(this.subdivision, customerAddress.subdivision) &&
+        Objects.equals(this.postalCode, customerAddress.postalCode) &&
+        Objects.equals(this.countryCode, customerAddress.countryCode);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(street, street2, city, subdivision, postalCode, countryCode);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class CustomerAddressBankModel {\n");
+    sb.append("    street: ").append(toIndentedString(street)).append("\n");
+    sb.append("    street2: ").append(toIndentedString(street2)).append("\n");
+    sb.append("    city: ").append(toIndentedString(city)).append("\n");
+    sb.append("    subdivision: ").append(toIndentedString(subdivision)).append("\n");
+    sb.append("    postalCode: ").append(toIndentedString(postalCode)).append("\n");
+    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 
 }
+

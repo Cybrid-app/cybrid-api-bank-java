@@ -90,7 +90,7 @@ public class Example {
 
 ## getCustomer
 
-> CustomerBankModel getCustomer(customerGuid)
+> CustomerBankModel getCustomer(customerGuid, includePii)
 
 Get Customer
 
@@ -122,8 +122,9 @@ public class Example {
 
         CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
         String customerGuid = "customerGuid_example"; // String | Identifier for the customer.
+        Boolean includePii = true; // Boolean | Include PII in the response.
         try {
-            CustomerBankModel result = apiInstance.getCustomer(customerGuid);
+            CustomerBankModel result = apiInstance.getCustomer(customerGuid, includePii);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CustomersBankApi#getCustomer");
@@ -142,6 +143,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **customerGuid** | **String**| Identifier for the customer. | |
+| **includePii** | **Boolean**| Include PII in the response. | [optional] |
 
 ### Return type
 

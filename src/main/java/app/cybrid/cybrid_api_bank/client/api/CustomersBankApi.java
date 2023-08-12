@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-12T16:10:58.152393Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-12T22:12:58.457228Z[Etc/UTC]")
 public class CustomersBankApi {
     private ApiClient apiClient;
 
@@ -117,10 +117,11 @@ public class CustomersBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - customer not found
      * @param customerGuid Identifier for the customer.
+     * @param includePii Include PII in the response.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getCustomerRequestCreation(String customerGuid) throws WebClientResponseException {
+    private ResponseSpec getCustomerRequestCreation(String customerGuid, Boolean includePii) throws WebClientResponseException {
         Object postBody = null;
         // verify the required parameter 'customerGuid' is set
         if (customerGuid == null) {
@@ -135,6 +136,8 @@ public class CustomersBankApi {
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_pii", includePii));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -157,17 +160,18 @@ public class CustomersBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - customer not found
      * @param customerGuid Identifier for the customer.
+     * @param includePii Include PII in the response.
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<CustomerBankModel> getCustomer(String customerGuid) throws WebClientResponseException {
+    public Mono<CustomerBankModel> getCustomer(String customerGuid, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
-        return getCustomerRequestCreation(customerGuid).bodyToMono(localVarReturnType);
+        return getCustomerRequestCreation(customerGuid, includePii).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<CustomerBankModel>> getCustomerWithHttpInfo(String customerGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<CustomerBankModel>> getCustomerWithHttpInfo(String customerGuid, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
-        return getCustomerRequestCreation(customerGuid).toEntity(localVarReturnType);
+        return getCustomerRequestCreation(customerGuid, includePii).toEntity(localVarReturnType);
     }
     /**
      * Get customers list

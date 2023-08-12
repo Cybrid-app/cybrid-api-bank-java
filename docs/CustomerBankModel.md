@@ -12,6 +12,11 @@
 |**type** | [**TypeEnum**](#TypeEnum) | The customer&#39;s type. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the customer was created at. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The customer&#39;s state. |  [optional] |
+|**name** | [**CustomerNameBankModel**](CustomerNameBankModel.md) |  |  [optional] |
+|**address** | [**CustomerAddressBankModel**](CustomerAddressBankModel.md) |  |  [optional] |
+|**dateOfBirth** | **LocalDate** | The customer&#39;s date of birth. |  [optional] |
+|**phoneNumber** | **String** | The customer&#39;s phone number. |  [optional] |
+|**emailAddress** | **String** | The customer&#39;s phone number. |  [optional] |
 
 
 

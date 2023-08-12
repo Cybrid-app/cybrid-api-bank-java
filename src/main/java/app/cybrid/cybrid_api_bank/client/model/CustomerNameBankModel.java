@@ -13,6 +13,8 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import java.util.Objects;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,55 +22,153 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for PostAccountBankModel
+ * CustomerNameBankModel
  */
-public class PostAccountBankModelTest {
-    private final PostAccountBankModel model = new PostAccountBankModel();
+@JsonPropertyOrder({
+  CustomerNameBankModel.JSON_PROPERTY_FIRST,
+  CustomerNameBankModel.JSON_PROPERTY_MIDDLE,
+  CustomerNameBankModel.JSON_PROPERTY_LAST
+})
+@JsonTypeName("Customer_name")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-08-12T22:12:58.457228Z[Etc/UTC]")
+public class CustomerNameBankModel {
+  public static final String JSON_PROPERTY_FIRST = "first";
+  private String first;
 
-    /**
-     * Model tests for PostAccountBankModel
-     */
-    @Test
-    public void testPostAccountBankModel() {
-        // TODO: test PostAccountBankModel
-    }
+  public static final String JSON_PROPERTY_MIDDLE = "middle";
+  private String middle;
 
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // TODO: test type
-    }
+  public static final String JSON_PROPERTY_LAST = "last";
+  private String last;
 
-    /**
-     * Test the property 'customerGuid'
-     */
-    @Test
-    public void customerGuidTest() {
-        // TODO: test customerGuid
-    }
+  public CustomerNameBankModel() { 
+  }
 
-    /**
-     * Test the property 'asset'
-     */
-    @Test
-    public void assetTest() {
-        // TODO: test asset
-    }
+  public CustomerNameBankModel first(String first) {
+    
+    this.first = first;
+    return this;
+  }
 
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
+   /**
+   * The customer&#39;s first name.
+   * @return first
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The customer's first name.")
+  @JsonProperty(JSON_PROPERTY_FIRST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getFirst() {
+    return first;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_FIRST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFirst(String first) {
+    this.first = first;
+  }
+
+
+  public CustomerNameBankModel middle(String middle) {
+    
+    this.middle = middle;
+    return this;
+  }
+
+   /**
+   * The customer&#39;s middle name.
+   * @return middle
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The customer's middle name.")
+  @JsonProperty(JSON_PROPERTY_MIDDLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getMiddle() {
+    return middle;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_MIDDLE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setMiddle(String middle) {
+    this.middle = middle;
+  }
+
+
+  public CustomerNameBankModel last(String last) {
+    
+    this.last = last;
+    return this;
+  }
+
+   /**
+   * The customer&#39;s last name.
+   * @return last
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The customer's last name.")
+  @JsonProperty(JSON_PROPERTY_LAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getLast() {
+    return last;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_LAST)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setLast(String last) {
+    this.last = last;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    CustomerNameBankModel customerName = (CustomerNameBankModel) o;
+    return Objects.equals(this.first, customerName.first) &&
+        Objects.equals(this.middle, customerName.middle) &&
+        Objects.equals(this.last, customerName.last);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(first, middle, last);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class CustomerNameBankModel {\n");
+    sb.append("    first: ").append(toIndentedString(first)).append("\n");
+    sb.append("    middle: ").append(toIndentedString(middle)).append("\n");
+    sb.append("    last: ").append(toIndentedString(last)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 
 }
+

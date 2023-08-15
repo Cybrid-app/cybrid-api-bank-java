@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.84.4
+  version: v0.84.5
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5639,6 +5639,7 @@ components:
         network_fee: 9
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
+        updated_at: 2000-01-23T04:56:07.000+00:00
         estimated_amount: 5
         guid: guid
         external_bank_account_guid: external_bank_account_guid
@@ -5749,12 +5750,17 @@ components:
           description: ISO8601 datetime the bank was created at.
           format: date-time
           type: string
+        updated_at:
+          description: ISO8601 datetime the trade was last updated at.
+          format: date-time
+          type: string
       type: object
     Trade:
       example:
         symbol: symbol
         side: buy
         failure_code: failure_code
+        updated_at: 2000-01-23T04:56:07.000+00:00
         quote_guid: quote_guid
         fee: 2
         guid: guid
@@ -5815,7 +5821,11 @@ components:
             base units
           type: integer
         created_at:
-          description: ISO8601 datetime the bank was created at.
+          description: ISO8601 datetime the trade was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the trade was last updated at.
           format: date-time
           type: string
       type: object
@@ -5942,6 +5952,7 @@ components:
           network_fee: 9
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
+          updated_at: 2000-01-23T04:56:07.000+00:00
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -5961,6 +5972,7 @@ components:
           network_fee: 9
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
+          updated_at: 2000-01-23T04:56:07.000+00:00
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -6003,6 +6015,7 @@ components:
         - symbol: symbol
           side: buy
           failure_code: failure_code
+          updated_at: 2000-01-23T04:56:07.000+00:00
           quote_guid: quote_guid
           fee: 2
           guid: guid
@@ -6014,6 +6027,7 @@ components:
         - symbol: symbol
           side: buy
           failure_code: failure_code
+          updated_at: 2000-01-23T04:56:07.000+00:00
           quote_guid: quote_guid
           fee: 2
           guid: guid

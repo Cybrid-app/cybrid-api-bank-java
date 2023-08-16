@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.84.12
+  version: v0.84.13
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1798,6 +1798,14 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: The owner of the entity.
+        explode: true
+        in: query
+        name: owner
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestOwner'
         style: form
       - description: Comma separated external_wallet_guids to list external_wallets
           for.

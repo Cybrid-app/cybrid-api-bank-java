@@ -249,7 +249,7 @@ public class Example {
 
 ## listExternalWallets
 
-> ExternalWalletListBankModel listExternalWallets(page, perPage, guid, bankGuid, customerGuid, state)
+> ExternalWalletListBankModel listExternalWallets(page, perPage, owner, guid, bankGuid, customerGuid, state)
 
 Get external wallets list
 
@@ -282,12 +282,13 @@ public class Example {
         ExternalWalletsBankApi apiInstance = new ExternalWalletsBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
+        ListRequestOwnerBankModel owner = ListRequestOwnerBankModel.fromValue("bank"); // ListRequestOwnerBankModel | The owner of the entity.
         String guid = "guid_example"; // String | Comma separated external_wallet_guids to list external_wallets for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list external_wallets for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list external_wallets for.
         String state = "state_example"; // String | Comma separated states to list external_wallets for.
         try {
-            ExternalWalletListBankModel result = apiInstance.listExternalWallets(page, perPage, guid, bankGuid, customerGuid, state);
+            ExternalWalletListBankModel result = apiInstance.listExternalWallets(page, perPage, owner, guid, bankGuid, customerGuid, state);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ExternalWalletsBankApi#listExternalWallets");
@@ -307,6 +308,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
+| **owner** | [**ListRequestOwnerBankModel**](.md)| The owner of the entity. | [optional] [enum: bank, customer] |
 | **guid** | **String**| Comma separated external_wallet_guids to list external_wallets for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list external_wallets for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list external_wallets for. | [optional] |

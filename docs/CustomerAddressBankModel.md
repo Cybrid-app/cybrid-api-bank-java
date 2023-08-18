@@ -2,6 +2,7 @@
 
 # CustomerAddressBankModel
 
+The customer's address. Only available for GET operations when 'include_pii' is set.
 
 ## Properties
 

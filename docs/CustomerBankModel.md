@@ -14,9 +14,9 @@
 |**state** | [**StateEnum**](#StateEnum) | The customer&#39;s state. |  [optional] |
 |**name** | [**CustomerNameBankModel**](CustomerNameBankModel.md) |  |  [optional] |
 |**address** | [**CustomerAddressBankModel**](CustomerAddressBankModel.md) |  |  [optional] |
-|**dateOfBirth** | **LocalDate** | The customer&#39;s date of birth. |  [optional] |
-|**phoneNumber** | **String** | The customer&#39;s phone number. |  [optional] |
-|**emailAddress** | **String** | The customer&#39;s phone number. |  [optional] |
+|**dateOfBirth** | **LocalDate** | The customer&#39;s DOB. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
+|**phoneNumber** | **String** | The customer&#39;s phone number. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
+|**emailAddress** | **String** | The customer&#39;s phone number. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 
 
 

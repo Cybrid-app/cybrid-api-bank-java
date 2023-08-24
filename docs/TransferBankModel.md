@@ -25,6 +25,7 @@
 |**networkFeeAsset** | **String** | The asset code of the network fee. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
 |**networkFeeLiabilityAmount** | **java.math.BigInteger** | The equivalent fiat network fee in base units of network_fee_liability_amount_asset. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
 |**networkFeeLiabilityAmountAsset** | **String** | The fiat asset the network_fee_liability_amount is denominated in. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
+|**txnHash** | **String** | The hash of the blockchain transaction |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the trade was last updated at. |  [optional] |
 

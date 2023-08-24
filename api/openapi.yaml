@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.86.6
+  version: v0.87.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6573,6 +6573,7 @@ components:
             enum:
             - passed_immediately
             - failed_immediately
+            - tax_id_not_checked
             type: string
           type: array
       required:

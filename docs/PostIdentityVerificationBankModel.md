@@ -47,6 +47,7 @@
 |---- | -----|
 | PASSED_IMMEDIATELY | &quot;passed_immediately&quot; |
 | FAILED_IMMEDIATELY | &quot;failed_immediately&quot; |
+| TAX_ID_NOT_CHECKED | &quot;tax_id_not_checked&quot; |
 
 
 

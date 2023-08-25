@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.88.2
+- API version: v0.88.6
 
-- Build date: 2023-08-24T18:48:42.041556Z[Etc/UTC]
+- Build date: 2023-08-25T13:10:36.690576Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -73,10 +73,10 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write banks:read banks:write banks:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.88.2</version>
+  <version>v0.88.6</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.88.2"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.88.6"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.88.2.jar`
+- `target/cybrid-api-bank-java-v0.88.6.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -386,6 +386,7 @@ Authentication schemes defined for the API:
 - **Scopes**: 
   - banks:read: banks read
   - banks:write: banks write
+  - bank_applications:execute: bank_applications execute
   - accounts:read: accounts read
   - accounts:execute: accounts execute
   - customers:read: customers read

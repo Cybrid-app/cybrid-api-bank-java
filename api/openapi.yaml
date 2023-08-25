@@ -71,14 +71,15 @@ info:
     \ when using Bank credentials\ncurl -X POST https://id.sandbox.cybrid.app/oauth/token\
     \ -d '{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"<Your\
     \ Client ID>\",\n    \"client_secret\": \"<Your Secret>\",\n    \"scope\": \"\
-    banks:read banks:write accounts:read accounts:execute customers:read customers:write\
-    \ customers:execute prices:read quotes:execute quotes:read trades:execute trades:read\
-    \ transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read\
-    \ external_bank_accounts:write external_bank_accounts:execute external_wallets:read\
-    \ external_wallets:execute workflows:read workflows:execute deposit_addresses:read\
-    \ deposit_addresses:execute\"\n  }' -H \"Content-Type: application/json\"\n\n\
-    # When using Organization credentials set `scope` to 'organizations:read organizations:write\
-    \ banks:read banks:write banks:execute customers:read accounts:read prices:read\
+    banks:read banks:write bank_applications:execute accounts:read accounts:execute\
+    \ customers:read customers:write customers:execute prices:read quotes:execute\
+    \ quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute\
+    \ rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute\
+    \ external_wallets:read external_wallets:execute workflows:read workflows:execute\
+    \ deposit_addresses:read deposit_addresses:execute\"\n  }' -H \"Content-Type:\
+    \ application/json\"\n\n# When using Organization credentials set `scope` to 'organizations:read\
+    \ organizations:write organization_applications:execute banks:read banks:write\
+    \ banks:execute bank_applications:execute customers:read accounts:read prices:read\
     \ quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute\
     \ external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'\n\
     ```\n<font color=\"orange\">**⚠️ Note: The above curl will create a bearer token\
@@ -199,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.88.2
+  version: v0.88.6
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -7238,6 +7239,7 @@ components:
           scopes:
             banks:read: banks read
             banks:write: banks write
+            bank_applications:execute: bank_applications execute
             accounts:read: accounts read
             accounts:execute: accounts execute
             customers:read: customers read

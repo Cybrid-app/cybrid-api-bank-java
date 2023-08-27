@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.88.8
+  version: v0.88.9
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5172,6 +5172,8 @@ components:
             - id_number_check_failure
             - phone_number_check_failure
             - email_address_check_failure
+            - decision_timeout
+            - plaid_failure
             type: string
           type: array
       type: object

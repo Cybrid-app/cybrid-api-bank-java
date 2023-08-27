@@ -76,6 +76,8 @@
 | ID_NUMBER_CHECK_FAILURE | &quot;id_number_check_failure&quot; |
 | PHONE_NUMBER_CHECK_FAILURE | &quot;phone_number_check_failure&quot; |
 | EMAIL_ADDRESS_CHECK_FAILURE | &quot;email_address_check_failure&quot; |
+| DECISION_TIMEOUT | &quot;decision_timeout&quot; |
+| PLAID_FAILURE | &quot;plaid_failure&quot; |
 
 
 

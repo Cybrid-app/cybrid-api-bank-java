@@ -49,6 +49,7 @@
 | COMPLETED | &quot;completed&quot; |
 | FAILED | &quot;failed&quot; |
 | REFRESH_REQUIRED | &quot;refresh_required&quot; |
+| UNVERIFIED | &quot;unverified&quot; |
 | DELETING | &quot;deleting&quot; |
 | DELETED | &quot;deleted&quot; |
 

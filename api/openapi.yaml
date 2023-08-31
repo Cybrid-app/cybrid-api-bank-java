@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.89.7
+  version: v0.90.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1390,8 +1390,9 @@ paths:
       description: "Create an ExternalBankAccount.\n\n## State\n\n| State | Description\
         \ |\n|-------|-------------|\n| storing | The Platform is storing the external\
         \ bank account details in our private store |\n| completed | The Platform\
-        \ has created the external bank account |\n| failed | The Platform was not\
-        \ able to successfully create the external bank account |\n| refresh_required\
+        \ has created the external bank account |\n| unverified | The external bank\
+        \ account is created, but it has not yet been verified |\n| failed | The Platform\
+        \ was not able to successfully create the external bank account |\n| refresh_required\
         \ | The Platform has created the external bank account, but needs to be refreshed\
         \ |\n| deleting | The Platform is deleting the external bank account |\n|\
         \ deleted | The Platform has deleted the external bank account |\n\n\n\nRequired\
@@ -6343,6 +6344,7 @@ components:
           - completed
           - failed
           - refresh_required
+          - unverified
           - deleting
           - deleted
           type: string

@@ -11,73 +11,173 @@
  */
 
 
-package app.cybrid.cybrid_api_bank.client;
+package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Objects;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
+/**
+ * The destination account in the transfer.
+ */
+@ApiModel(description = "The destination account in the transfer.")
+@JsonPropertyOrder({
+  TransferDestinationAccountBankModel.JSON_PROPERTY_GUID,
+  TransferDestinationAccountBankModel.JSON_PROPERTY_TYPE
+})
+@JsonTypeName("Transfer_destination_account")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-09-01T09:47:43.139172Z[Etc/UTC]")
-public class StringUtil {
+public class TransferDestinationAccountBankModel {
+  public static final String JSON_PROPERTY_GUID = "guid";
+  private String guid;
+
   /**
-   * Check if the given array contains the given value (with case-insensitive comparison).
-   *
-   * @param array The array
-   * @param value The value to search
-   * @return true if the array contains the value
+   * The type of transfer account.
    */
-  public static boolean containsIgnoreCase(String[] array, String value) {
-    for (String str : array) {
-      if (value == null && str == null) {
-        return true;
+  public enum TypeEnum {
+    TRADING("trading"),
+    
+    FIAT("fiat"),
+    
+    EXTERNAL_BANK_ACCOUNT("external_bank_account"),
+    
+    EXTERNAL_WALLET("external_wallet"),
+    
+    ONE_TIME_ADDRESS("one_time_address");
+
+    private String value;
+
+    TypeEnum(String value) {
+      this.value = value;
+    }
+
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static TypeEnum fromValue(String value) {
+      for (TypeEnum b : TypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
       }
-      if (value != null && value.equalsIgnoreCase(str)) {
-        return true;
-      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-    return false;
+  }
+
+  public static final String JSON_PROPERTY_TYPE = "type";
+  private TypeEnum type;
+
+  public TransferDestinationAccountBankModel() { 
+  }
+
+  public TransferDestinationAccountBankModel guid(String guid) {
+    
+    this.guid = guid;
+    return this;
+  }
+
+   /**
+   * Auto-generated unique identifier for the transfer account.
+   * @return guid
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "Auto-generated unique identifier for the transfer account.")
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getGuid() {
+    return guid;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setGuid(String guid) {
+    this.guid = guid;
+  }
+
+
+  public TransferDestinationAccountBankModel type(TypeEnum type) {
+    
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * The type of transfer account.
+   * @return type
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The type of transfer account.")
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public TypeEnum getType() {
+    return type;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setType(TypeEnum type) {
+    this.type = type;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TransferDestinationAccountBankModel transferDestinationAccount = (TransferDestinationAccountBankModel) o;
+    return Objects.equals(this.guid, transferDestinationAccount.guid) &&
+        Objects.equals(this.type, transferDestinationAccount.type);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(guid, type);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class TransferDestinationAccountBankModel {\n");
+    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("}");
+    return sb.toString();
   }
 
   /**
-   * Join an array of strings with the given separator.
-   * <p>
-   * Note: This might be replaced by utility method from commons-lang or guava someday
-   * if one of those libraries is added as dependency.
-   * </p>
-   *
-   * @param array     The array of strings
-   * @param separator The separator
-   * @return the resulting string
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
    */
-  public static String join(String[] array, String separator) {
-    int len = array.length;
-    if (len == 0) {
-      return "";
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
     }
-
-    StringBuilder out = new StringBuilder();
-    out.append(array[0]);
-    for (int i = 1; i < len; i++) {
-      out.append(separator).append(array[i]);
-    }
-    return out.toString();
+    return o.toString().replace("\n", "\n    ");
   }
 
-  /**
-   * Join a list of strings with the given separator.
-   *
-   * @param list      The list of strings
-   * @param separator The separator
-   * @return the resulting string
-   */
-  public static String join(Collection<String> list, String separator) {
-    Iterator<String> iterator = list.iterator();
-    StringBuilder out = new StringBuilder();
-    if (iterator.hasNext()) {
-      out.append(iterator.next());
-    }
-    while (iterator.hasNext()) {
-      out.append(separator).append(iterator.next());
-    }
-    return out.toString();
-  }
 }
+

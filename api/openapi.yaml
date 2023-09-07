@@ -206,7 +206,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.91.13
+  version: v0.92.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5692,6 +5692,7 @@ components:
           - crypto
           - internal_bank_rebalance
           - internal_wallet_rebalance
+          - instant_funding
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -6750,6 +6751,7 @@ components:
           - funding
           - book
           - crypto
+          - instant_funding
           type: string
         source_account_guid:
           description: The source account's identifier. Required for book transfers.
@@ -6781,7 +6783,6 @@ components:
           - failed
           - cancelled
           - manual_intervention
-          - reversed
           type: string
       required:
       - quote_guid

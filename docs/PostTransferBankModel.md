@@ -24,6 +24,7 @@
 | FUNDING | &quot;funding&quot; |
 | BOOK | &quot;book&quot; |
 | CRYPTO | &quot;crypto&quot; |
+| INSTANT_FUNDING | &quot;instant_funding&quot; |
 
 
 
@@ -37,7 +38,6 @@
 | FAILED | &quot;failed&quot; |
 | CANCELLED | &quot;cancelled&quot; |
 | MANUAL_INTERVENTION | &quot;manual_intervention&quot; |
-| REVERSED | &quot;reversed&quot; |
 
 
 

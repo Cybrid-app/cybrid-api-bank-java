@@ -43,6 +43,7 @@
 | CRYPTO | &quot;crypto&quot; |
 | INTERNAL_BANK_REBALANCE | &quot;internal_bank_rebalance&quot; |
 | INTERNAL_WALLET_REBALANCE | &quot;internal_wallet_rebalance&quot; |
+| INSTANT_FUNDING | &quot;instant_funding&quot; |
 
 
 

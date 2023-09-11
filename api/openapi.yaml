@@ -118,18 +118,15 @@ info:
     \               |                                               |            \
     \                                      |\n| Quote                 | quotes:read\
     \ (Organization, Bank, Customer)                 |                           \
-    \                    | quotes:execute (Organization, Bank, Customer)    |\n| Reward\
-    \                | rewards:read (Bank, Customer)                             \
-    \ |                                               | rewards:execute (Bank)   \
-    \                        |\n| Trade                 | trades:read (Organization,\
-    \ Bank, Customer)                 |                                          \
-    \     | trades:execute (Organization, Bank, Customer)    |\n| Transfer       \
-    \       | transfers:read (Organization, Bank, Customer)              |       \
-    \                                        | transfers:execute (Organization, Bank,\
-    \ Customer) |\n| Workflow              | workflows:read (Organization, Bank, Customer)\
-    \              |                                               | workflows:execute\
-    \ (Bank, Customer)               |\n\n## Available Endpoints\n\nThe available\
-    \ APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
+    \                    | quotes:execute (Organization, Bank, Customer)    |\n| Trade\
+    \                 | trades:read (Organization, Bank, Customer)               \
+    \  |                                               | trades:execute (Organization,\
+    \ Bank, Customer)    |\n| Transfer              | transfers:read (Organization,\
+    \ Bank, Customer)              |                                             \
+    \  | transfers:execute (Organization, Bank, Customer) |\n| Workflow          \
+    \    | workflows:read (Organization, Bank, Customer)              |          \
+    \                                     | workflows:execute (Bank, Customer)   \
+    \            |\n\n## Available Endpoints\n\nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
     \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
     \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
@@ -168,45 +165,42 @@ info:
     \                                            |\n| Bank         | Quote       \
     \         | /api/quotes                    | Create and list quotes, which are\
     \ required to execute trades                                      |\n| Bank  \
-    \       | Reward               | /api/rewards                   | Create a new\
-    \ reward (automates quote/trade for simplicity)                              \
-    \          |\n| Bank         | Symbol               | /api/symbols           \
-    \        | Get a list of symbols supported for trade (ex: BTC-USD)           \
-    \                                |\n| Bank         | Trade                | /api/trades\
-    \                    | Create and list trades, which buy or sell cryptocurrency\
-    \                                          |\n| Bank         | Transfer      \
-    \       | /api/transfers                 | Create, get and list transfers (e.g.,\
-    \ funding, book)                                              |\n| Bank      \
-    \   | Workflow             | /api/workflows                 | Create, get and\
-    \ list workflows                                                             \
-    \       |\n\n## Understanding Object Models & Endpoints\n\n**Organizations**\n\
-    \nAn `Organization` is meant to represent the organization partnering with Cybrid\
-    \ to use our platform.\n\nAn `Organization` typically does not directly interact\
-    \ with `customers`. Instead, an Organization has one or more `banks`, which encompass\
-    \ the financial service offerings of the platform.\n\n**Banks**\n\nA `Bank` is\
-    \ owned by an `Organization` and can be thought of as an environment or container\
-    \ for `customers` and product offerings. Banks are created in either `Sandbox`\
-    \ or `Production` mode, where `Sandbox` is the environment that you would test,\
-    \ prototype and build in prior to moving to `Production`.\n\nAn `Organization`\
-    \ can have multiple `banks`, in either `Sandbox` or `Production` environments.\
-    \ A `Sandbox Bank` will be backed by stubbed data and process flows. For instance,\
-    \ funding source transfer processes as well as trades will be simulated rather\
-    \ than performed, however asset prices are representative of real-world values.\
-    \ You have an unlimited amount of simulated fiat currency for testing purposes.\n\
-    \n**Customers**\n\n`Customers` represent your banking users on the platform. At\
-    \ present, we offer support for `Individuals` as Customers.\n\n`Customers` must\
-    \ be verified (i.e., KYC'd) in our system before they can play any part on the\
-    \ platform, which means they must have an associated and a passing `Identity Verification`.\
-    \ See the Identity Verifications section for more details on how a customer can\
-    \ be verified.\n\n`Customers` must also have an `Account` to be able to transact,\
-    \ in the desired asset class. See the Accounts APIs for more details on setting\
-    \ up accounts for the customer.\n"
+    \       | Symbol               | /api/symbols                   | Get a list of\
+    \ symbols supported for trade (ex: BTC-USD)                                  \
+    \         |\n| Bank         | Trade                | /api/trades             \
+    \       | Create and list trades, which buy or sell cryptocurrency           \
+    \                               |\n| Bank         | Transfer             | /api/transfers\
+    \                 | Create, get and list transfers (e.g., funding, book)     \
+    \                                         |\n| Bank         | Workflow       \
+    \      | /api/workflows                 | Create, get and list workflows     \
+    \                                                               |\n\n## Understanding\
+    \ Object Models & Endpoints\n\n**Organizations**\n\nAn `Organization` is meant\
+    \ to represent the organization partnering with Cybrid to use our platform.\n\n\
+    An `Organization` typically does not directly interact with `customers`. Instead,\
+    \ an Organization has one or more `banks`, which encompass the financial service\
+    \ offerings of the platform.\n\n**Banks**\n\nA `Bank` is owned by an `Organization`\
+    \ and can be thought of as an environment or container for `customers` and product\
+    \ offerings. Banks are created in either `Sandbox` or `Production` mode, where\
+    \ `Sandbox` is the environment that you would test, prototype and build in prior\
+    \ to moving to `Production`.\n\nAn `Organization` can have multiple `banks`, in\
+    \ either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed\
+    \ by stubbed data and process flows. For instance, funding source transfer processes\
+    \ as well as trades will be simulated rather than performed, however asset prices\
+    \ are representative of real-world values. You have an unlimited amount of simulated\
+    \ fiat currency for testing purposes.\n\n**Customers**\n\n`Customers` represent\
+    \ your banking users on the platform. At present, we offer support for `Individuals`\
+    \ as Customers.\n\n`Customers` must be verified (i.e., KYC'd) in our system before\
+    \ they can play any part on the platform, which means they must have an associated\
+    \ and a passing `Identity Verification`. See the Identity Verifications section\
+    \ for more details on how a customer can be verified.\n\n`Customers` must also\
+    \ have an `Account` to be able to transact, in the desired asset class. See the\
+    \ Accounts APIs for more details on setting up accounts for the customer.\n"
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.92.5
+  version: v0.93.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3324,316 +3318,6 @@ paths:
       summary: Get Quote
       tags:
       - Quotes
-      x-accepts: application/json
-  /api/rewards:
-    get:
-      description: "Retrieves a listing of rewards.\n\nRequired scope: **rewards:read**"
-      operationId: listRewards
-      parameters:
-      - description: The page index to retrieve.
-        explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          $ref: '#/components/schemas/ListRequestPage'
-        style: form
-      - description: The number of entities per page to return.
-        explode: true
-        in: query
-        name: per_page
-        required: false
-        schema:
-          $ref: '#/components/schemas/ListRequestPerPage'
-        style: form
-      - description: Comma separated reward_guids to list rewards for.
-        explode: true
-        in: query
-        name: guid
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Comma separated bank_guids to list rewards for.
-        explode: true
-        in: query
-        name: bank_guid
-        required: false
-        schema:
-          type: string
-        style: form
-      - description: Comma separated customer_guids to list rewards for.
-        explode: true
-        in: query
-        name: customer_guid
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RewardList'
-          description: get list of rewards
-        "400":
-          content:
-            application/json:
-              examples:
-                invalid_value:
-                  value:
-                    status: 400
-                    error_message: Invalid value. comma separated bank guids must
-                      be at the most 4096 characters long
-                    message_code: invalid_value
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests
-        "401":
-          content:
-            application/json:
-              examples:
-                invalid_subject:
-                  value:
-                    status: 401
-                    error_message: "Invalid Subject type. Required: bank or organization"
-                    message_code: invalid_subject
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, "
-        "403":
-          content:
-            application/json:
-              examples:
-                invalid_scope:
-                  value:
-                    status: 403
-                    error_message: "Invalid scopes. Required: rewards:read"
-                    message_code: invalid_scopes
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
-      security:
-      - BearerAuth: []
-        oauth2:
-        - rewards:read
-      summary: Get rewards list
-      tags:
-      - Rewards
-      x-accepts: application/json
-    post:
-      description: "Creates a reward.\n\nRequired scope: **rewards:execute**"
-      operationId: createRewards
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PostReward'
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Reward'
-          description: reward created
-        "400":
-          content:
-            application/json:
-              examples:
-                missing_parameter:
-                  value:
-                    status: 400
-                    error_message: "Missing parameter. Required: customer_guid, symbol"
-                    message_code: missing_parameter
-                invalid_value:
-                  value:
-                    status: 400
-                    error_message: Invalid value. customer guids must be at the most
-                      32 characters long
-                    message_code: invalid_value
-                invalid_parameter:
-                  value:
-                    status: 400
-                    error_message: "Invalid parameter. receive_amount, deliver_amount\
-                      \ are mutually exclusive. At least one of them should be present"
-                    message_code: invalid_parameter
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests
-        "401":
-          content:
-            application/json:
-              examples:
-                invalid_subject:
-                  value:
-                    status: 401
-                    error_message: "Invalid Subject type. Required: bank"
-                    message_code: invalid_subject
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, "
-        "403":
-          content:
-            application/json:
-              examples:
-                invalid_scope:
-                  value:
-                    status: 403
-                    error_message: "Invalid scopes. Required: rewards:execute"
-                    message_code: invalid_scopes
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
-      security:
-      - BearerAuth: []
-        oauth2:
-        - rewards:execute
-      summary: Create Reward
-      tags:
-      - Rewards
-      x-content-type: application/json
-      x-accepts: application/json
-  /api/rewards/{reward_guid}:
-    get:
-      description: "Retrieves a reward.\n\nRequired scope: **rewards:read**"
-      operationId: getReward
-      parameters:
-      - description: Identifier for the reward.
-        explode: false
-        in: path
-        name: reward_guid
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Reward'
-          description: reward found
-        "401":
-          content:
-            application/json:
-              examples:
-                invalid_subject:
-                  value:
-                    status: 401
-                    error_message: "Invalid Subject type. Required: bank or organization"
-                    message_code: invalid_subject
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, "
-        "403":
-          content:
-            application/json:
-              examples:
-                invalid_scope:
-                  value:
-                    status: 403
-                    error_message: "Invalid scopes. Required: rewards:read"
-                    message_code: invalid_scopes
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
-        "404":
-          content:
-            application/json:
-              examples:
-                not_found:
-                  value:
-                    status: 404
-                    error_message: reward not found
-                    message_code: not_found
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: reward not found
-      security:
-      - BearerAuth: []
-        oauth2:
-        - rewards:read
-      summary: Get Reward
-      tags:
-      - Rewards
       x-accepts: application/json
   /api/symbols:
     get:
@@ -6960,120 +6644,6 @@ components:
       required:
       - customer_guid
       - symbol
-      type: object
-    Reward:
-      example:
-        symbol: symbol
-        trade_guid: trade_guid
-        quote_guid: quote_guid
-        fee: 2
-        guid: guid
-        created_at: 2000-01-23T04:56:07.000+00:00
-        receive_amount: 5
-        state: storing
-        customer_guid: customer_guid
-        deliver_amount: 5
-      properties:
-        guid:
-          description: Auto-generated unique identifier for the reward.
-          maxLength: 32
-          minLength: 32
-          type: string
-        customer_guid:
-          description: The associated customer's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
-        quote_guid:
-          description: The associated quote's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
-        trade_guid:
-          description: The associated trade's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
-        symbol:
-          description: "The trade symbol the pricing is related to. Format is asset-counter_asset,\
-            \ e.g., BTC-USD."
-          type: string
-        state:
-          description: The trade's state
-          enum:
-          - storing
-          - pending
-          - cancelled
-          - completed
-          - settling
-          - failed
-          type: string
-        receive_amount:
-          description: "The amount to be received in base units of the currency: currency\
-            \ is \"asset\" for buy and \"counter_asset\" for sell."
-          type: integer
-        deliver_amount:
-          description: "The amount to be delivered in base units of the currency:\
-            \ currency is \"counter_asset\" for buy and \"asset\" for sell."
-          type: integer
-        fee:
-          description: The fee associated with the trade. Denominated in "counter_asset"
-            base units
-          type: integer
-        created_at:
-          description: ISO8601 datetime the bank was created at.
-          format: date-time
-          type: string
-      type: object
-    RewardList:
-      example:
-        per_page: 0
-        total: 0
-        objects:
-        - symbol: symbol
-          trade_guid: trade_guid
-          quote_guid: quote_guid
-          fee: 2
-          guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
-          receive_amount: 5
-          state: storing
-          customer_guid: customer_guid
-          deliver_amount: 5
-        - symbol: symbol
-          trade_guid: trade_guid
-          quote_guid: quote_guid
-          fee: 2
-          guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
-          receive_amount: 5
-          state: storing
-          customer_guid: customer_guid
-          deliver_amount: 5
-        page: 0
-      properties:
-        total:
-          description: The total number of records available.
-          minimum: 0
-          type: integer
-        page:
-          description: The page index to retrieve.
-          minimum: 0
-          type: integer
-        per_page:
-          description: The number of entities per page to return.
-          minimum: 0
-          type: integer
-        objects:
-          description: Array of reward entities
-          items:
-            $ref: '#/components/schemas/Reward'
-          type: array
-      required:
-      - objects
-      - page
-      - per_page
-      - total
       type: object
     Customer_name:
       description: The customer's name. Only available for GET operations when 'include_pii'

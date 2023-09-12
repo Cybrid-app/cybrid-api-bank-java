@@ -66,6 +66,7 @@
 | DATABASE_CHECK_FAILURE | &quot;database_check_failure&quot; |
 | SELFIE_FAILURE | &quot;selfie_failure&quot; |
 | PEP_CHECK_FAILURE | &quot;pep_check_failure&quot; |
+| MEDIA_CHECK_FAILURE | &quot;media_check_failure&quot; |
 | WATCHLIST_CHECK_FAILURE | &quot;watchlist_check_failure&quot; |
 | NAME_CHECK_FAILURE | &quot;name_check_failure&quot; |
 | ADDRESS_CHECK_FAILURE | &quot;address_check_failure&quot; |

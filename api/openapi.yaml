@@ -79,22 +79,22 @@ info:
     \ deposit_addresses:read deposit_addresses:execute\"\n  }' -H \"Content-Type:\
     \ application/json\"\n\n# When using Organization credentials set `scope` to 'organizations:read\
     \ organizations:write organization_applications:execute banks:read banks:write\
-    \ banks:execute bank_applications:execute users:execute customers:read accounts:read\
-    \ prices:read quotes:execute quotes:read trades:execute trades:read transfers:read\
-    \ transfers:execute external_bank_accounts:read external_wallets:read workflows:read\
-    \ deposit_addresses:read'\n```\n<font color=\"orange\">**⚠️ Note: The above curl\
-    \ will create a bearer token with full scope access. Delete scopes if you'd like\
-    \ to restrict access.**</font>\n\n## Authentication Scopes\n\nThe Cybrid platform\
-    \ supports the use of scopes to control the level of access a token is limited\
-    \ to. Scopes do not grant access to resources; instead, they provide limits, in\
-    \ support of the least privilege principal.\n\nThe following scopes are available\
-    \ on the platform and can be requested when generating either an Organization,\
-    \ Bank or Customer token. Generally speaking, the _Read_ scope is required to\
-    \ read and list resources, the _Write_ scope is required to update a resource\
-    \ and the _Execute_ scope is required to create a resource.\n\n| Resource    \
-    \          | Read scope (Token Type)                                    | Write\
-    \ scope (Token Type)                      | Execute scope (Token Type)       \
-    \                |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
+    \ banks:execute bank_applications:execute users:read users:execute customers:read\
+    \ accounts:read prices:read quotes:execute quotes:read trades:execute trades:read\
+    \ transfers:read transfers:execute external_bank_accounts:read external_wallets:read\
+    \ workflows:read deposit_addresses:read'\n```\n<font color=\"orange\">**⚠️ Note:\
+    \ The above curl will create a bearer token with full scope access. Delete scopes\
+    \ if you'd like to restrict access.**</font>\n\n## Authentication Scopes\n\nThe\
+    \ Cybrid platform supports the use of scopes to control the level of access a\
+    \ token is limited to. Scopes do not grant access to resources; instead, they\
+    \ provide limits, in support of the least privilege principal.\n\nThe following\
+    \ scopes are available on the platform and can be requested when generating either\
+    \ an Organization, Bank or Customer token. Generally speaking, the _Read_ scope\
+    \ is required to read and list resources, the _Write_ scope is required to update\
+    \ a resource and the _Execute_ scope is required to create a resource.\n\n| Resource\
+    \              | Read scope (Token Type)                                    |\
+    \ Write scope (Token Type)                      | Execute scope (Token Type) \
+    \                      |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
     | Account               | accounts:read (Organization, Bank, Customer)       \
     \        |                                               | accounts:execute (Bank,\
     \ Customer)                |\n| Bank                  | banks:read (Organization,\
@@ -111,22 +111,22 @@ info:
     \                                    | external_wallet:execute (Bank, Customer)\
     \         |\n| Organization          | organizations:read (Organization)     \
     \                     | organizations:write (Organization)            |      \
-    \                                            |\n| User                  |    \
-    \                                                        |                   \
-    \                            | users:execute (Organization)                  \
-    \   |\n| Price                 | prices:read (Bank, Customer)                \
-    \               |                                               |            \
-    \                                      |\n| Quote                 | quotes:read\
-    \ (Organization, Bank, Customer)                 |                           \
-    \                    | quotes:execute (Organization, Bank, Customer)    |\n| Trade\
-    \                 | trades:read (Organization, Bank, Customer)               \
-    \  |                                               | trades:execute (Organization,\
-    \ Bank, Customer)    |\n| Transfer              | transfers:read (Organization,\
+    \                                            |\n| User                  | users:read\
+    \ (Organization)                                  |                          \
+    \                     | users:execute (Organization)                     |\n|\
+    \ Price                 | prices:read (Bank, Customer)                       \
+    \        |                                               |                   \
+    \                               |\n| Quote                 | quotes:read (Organization,\
+    \ Bank, Customer)                 |                                          \
+    \     | quotes:execute (Organization, Bank, Customer)    |\n| Trade          \
+    \       | trades:read (Organization, Bank, Customer)                 |       \
+    \                                        | trades:execute (Organization, Bank,\
+    \ Customer)    |\n| Transfer              | transfers:read (Organization, Bank,\
+    \ Customer)              |                                               | transfers:execute\
+    \ (Organization, Bank, Customer) |\n| Workflow              | workflows:read (Organization,\
     \ Bank, Customer)              |                                             \
-    \  | transfers:execute (Organization, Bank, Customer) |\n| Workflow          \
-    \    | workflows:read (Organization, Bank, Customer)              |          \
-    \                                     | workflows:execute (Bank, Customer)   \
-    \            |\n\n## Available Endpoints\n\nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
+    \  | workflows:execute (Bank, Customer)               |\n\n## Available Endpoints\n\
+    \nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
     \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
     \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
@@ -139,8 +139,8 @@ info:
     \                                   |\n| Identity     | Organization         |\
     \ /api/organization_applications | Create and list organizations             \
     \                                                        |\n| Identity     | Organization\
-    \         | /api/users                     | Create an organization user     \
-    \                                                                  |\n| Organization\
+    \         | /api/users                     | Create and list organization users\
+    \                                                                |\n| Organization\
     \ | Organization         | /api/organizations             | APIs to retrieve and\
     \ update organization name                                                   \
     \  |\n| Bank         | Account              | /api/accounts                  |\
@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.94.2
+  version: v0.94.3
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:

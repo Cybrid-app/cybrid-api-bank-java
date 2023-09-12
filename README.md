@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.94.2
+- API version: v0.94.3
 
-- Build date: 2023-09-12T19:05:06.385524Z[Etc/UTC]
+- Build date: 2023-09-12T22:29:26.989456Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -76,7 +76,7 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read rewards:execute rewards:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -95,7 +95,7 @@ The following scopes are available on the platform and can be requested when gen
 | External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  |
 | External Wallet       | external_wallet:read (Organization, Bank, Customer)        |                                               | external_wallet:execute (Bank, Customer)         |
 | Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                  |
-| User                  |                                                            |                                               | users:execute (Organization)                     |
+| User                  | users:read (Organization)                                  |                                               | users:execute (Organization)                     |
 | Price                 | prices:read (Bank, Customer)                               |                                               |                                                  |
 | Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Organization, Bank, Customer)    |
 | Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Organization, Bank, Customer)    |
@@ -111,7 +111,7 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Identity     | Bank                 | /api/bank_applications         | Create and list banks                                                                             |
 | Identity     | CustomerToken        | /api/customer_tokens           | Create customer JWT access tokens                                                                 |
 | Identity     | Organization         | /api/organization_applications | Create and list organizations                                                                     |
-| Identity     | Organization         | /api/users                     | Create an organization user                                                                       |
+| Identity     | Organization         | /api/users                     | Create and list organization users                                                                |
 | Organization | Organization         | /api/organizations             | APIs to retrieve and update organization name                                                     |
 | Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             |
 | Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     |
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.94.2</version>
+  <version>v0.94.3</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.94.2"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.94.3"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.94.2.jar`
+- `target/cybrid-api-bank-java-v0.94.3.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

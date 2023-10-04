@@ -34,6 +34,7 @@
 |---- | -----|
 | ATTESTATION_IDENTITY_RECORDS | &quot;attestation_identity_records&quot; |
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
+| RAW_ROUTING_DETAILS | &quot;raw_routing_details&quot; |
 
 
 

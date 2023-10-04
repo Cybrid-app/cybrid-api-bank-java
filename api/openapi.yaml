@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.94.57
+  version: v0.95.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1394,8 +1394,9 @@ paths:
         \ was not able to successfully create the external bank account |\n| refresh_required\
         \ | The Platform has created the external bank account, but needs to be refreshed\
         \ |\n| deleting | The Platform is deleting the external bank account |\n|\
-        \ deleted | The Platform has deleted the external bank account |\n\n\n\nRequired\
-        \ scope: **external_bank_accounts:execute**"
+        \ deleted | The Platform has deleted the external bank account |\n\n## Failure\
+        \ codes\n\n| Code | Description |\n|------|-------------|\n| invalid_routing_number\
+        \ | The provided routing number is invalid |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
       operationId: createExternalBankAccount
       parameters: []
       requestBody:
@@ -1430,7 +1431,8 @@ paths:
                   value:
                     status: 400
                     error_message: "Invalid value exception. Parameter: account_kind\
-                      \ supported values: [\"plaid\", \"plaid_processor_token\"] "
+                      \ supported values: [\"plaid\", \"plaid_processor_token\", \"\
+                      raw_routing_details\"] "
                     message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -4576,6 +4578,7 @@ components:
             enum:
             - attestation_identity_records
             - kyc_identity_verifications
+            - raw_routing_details
             type: string
           type: array
         created_at:
@@ -6008,6 +6011,7 @@ components:
           enum:
           - plaid
           - plaid_processor_token
+          - raw_routing_details
           type: string
         environment:
           description: The environment that the external bank account is operating
@@ -6512,6 +6516,7 @@ components:
           enum:
           - plaid
           - plaid_processor_token
+          - raw_routing_details
           type: string
         customer_guid:
           description: The customer identifier.
@@ -6564,6 +6569,16 @@ components:
             accounts.
           maxLength: 128
           minLength: 1
+          nullable: true
+          type: string
+        counterparty_bank_account:
+          $ref: '#/components/schemas/PostExternalBankAccount_counterparty_bank_account'
+        counterparty_name:
+          $ref: '#/components/schemas/PostExternalBankAccount_counterparty_name'
+        counterparty_address:
+          $ref: '#/components/schemas/PostExternalBankAccount_counterparty_address'
+        counterparty_email_address:
+          description: The counterparty's email address on the account.
           nullable: true
           type: string
       required:
@@ -6850,6 +6865,77 @@ components:
       type: object
     PostIdentityVerification_address:
       description: The customer's address; required when method is set to 'attested'.
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          type: string
+        subdivision:
+          description: The provide/state/region of the address; not used by all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          maxLength: 2
+          minLength: 2
+          type: string
+      required:
+      - city
+      - country_code
+      - street
+      type: object
+    PostExternalBankAccount_counterparty_bank_account:
+      description: The counterparty's name on the account.
+      nullable: true
+      properties:
+        routing_number_type:
+          description: The type of routing number.
+          enum:
+          - CPA
+          - ABA
+          type: string
+        routing_number:
+          description: The routing number.
+          type: string
+        account_number:
+          description: The account number.
+          type: string
+      required:
+      - account_number
+      - routing_number
+      - routing_number_type
+      type: object
+    PostExternalBankAccount_counterparty_name:
+      description: The counterparty's name on the account.
+      nullable: true
+      properties:
+        first:
+          description: The customer's first name.
+          type: string
+        middle:
+          description: The customer's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The customer's last name.
+          type: string
+      required:
+      - first
+      - last
+      type: object
+    PostExternalBankAccount_counterparty_address:
+      description: The counterparty's address on the account.
       nullable: true
       properties:
         street:

@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.94.57
+- API version: v0.95.0
 
-- Build date: 2023-10-04T14:02:41.869214Z[Etc/UTC]
+- Build date: 2023-10-04T15:33:09.241152Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.94.57</version>
+  <version>v0.95.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.94.57"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.95.0"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.94.57.jar`
+- `target/cybrid-api-bank-java-v0.95.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -341,6 +341,9 @@ Class | Method | HTTP request | Description
  - [PostCustomerNameBankModel](docs/PostCustomerNameBankModel.md)
  - [PostDepositAddressBankModel](docs/PostDepositAddressBankModel.md)
  - [PostExternalBankAccountBankModel](docs/PostExternalBankAccountBankModel.md)
+ - [PostExternalBankAccountCounterpartyAddressBankModel](docs/PostExternalBankAccountCounterpartyAddressBankModel.md)
+ - [PostExternalBankAccountCounterpartyBankAccountBankModel](docs/PostExternalBankAccountCounterpartyBankAccountBankModel.md)
+ - [PostExternalBankAccountCounterpartyNameBankModel](docs/PostExternalBankAccountCounterpartyNameBankModel.md)
  - [PostExternalWalletBankModel](docs/PostExternalWalletBankModel.md)
  - [PostIdentificationNumberBankModel](docs/PostIdentificationNumberBankModel.md)
  - [PostIdentityVerificationAddressBankModel](docs/PostIdentityVerificationAddressBankModel.md)

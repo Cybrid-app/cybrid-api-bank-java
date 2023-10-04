@@ -29,6 +29,7 @@
 |---- | -----|
 | PLAID | &quot;plaid&quot; |
 | PLAID_PROCESSOR_TOKEN | &quot;plaid_processor_token&quot; |
+| RAW_ROUTING_DETAILS | &quot;raw_routing_details&quot; |
 
 
 

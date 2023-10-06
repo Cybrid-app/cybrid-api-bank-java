@@ -26,6 +26,7 @@
 |**networkFeeLiabilityAmount** | **java.math.BigInteger** | The equivalent fiat network fee in base units of network_fee_liability_amount_asset. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
 |**networkFeeLiabilityAmountAsset** | **String** | The fiat asset the network_fee_liability_amount is denominated in. Only present on &#x60;crypto&#x60; transfers that have successfully completed. |  [optional] |
 |**txnHash** | **String** | The hash of the blockchain transaction |  [optional] |
+|**referenceTransferGuid** | **String** | The guid of the related transfer. Only present on &#x60;funding_return&#x60; transfers. |  [optional] |
 |**sourceAccount** | [**TransferSourceAccountBankModel**](TransferSourceAccountBankModel.md) |  |  [optional] |
 |**destinationAccount** | [**TransferDestinationAccountBankModel**](TransferDestinationAccountBankModel.md) |  |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. |  [optional] |
@@ -37,13 +38,11 @@
 
 | Name | Value |
 |---- | -----|
-| SAVINGS | &quot;savings&quot; |
 | FUNDING | &quot;funding&quot; |
 | BOOK | &quot;book&quot; |
 | CRYPTO | &quot;crypto&quot; |
-| INTERNAL_BANK_REBALANCE | &quot;internal_bank_rebalance&quot; |
-| INTERNAL_WALLET_REBALANCE | &quot;internal_wallet_rebalance&quot; |
 | INSTANT_FUNDING | &quot;instant_funding&quot; |
+| FUNDING_RETURN | &quot;funding_return&quot; |
 
 
 

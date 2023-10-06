@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.96.1
+  version: v0.97.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5357,13 +5357,14 @@ components:
           type: trading
         network_fee: 9
         network_fee_asset: network_fee_asset
+        reference_transfer_guid: reference_transfer_guid
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
         estimated_amount: 5
         txn_hash: txn_hash
         guid: guid
         external_bank_account_guid: external_bank_account_guid
-        transfer_type: savings
+        transfer_type: funding
         state: storing
         asset: asset
         estimated_network_fee: 7
@@ -5381,13 +5382,11 @@ components:
         transfer_type:
           description: The type of transfer.
           enum:
-          - savings
           - funding
           - book
           - crypto
-          - internal_bank_rebalance
-          - internal_wallet_rebalance
           - instant_funding
+          - funding_return
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -5472,6 +5471,13 @@ components:
           type: string
         txn_hash:
           description: The hash of the blockchain transaction
+          nullable: true
+          type: string
+        reference_transfer_guid:
+          description: The guid of the related transfer. Only present on `funding_return`
+            transfers.
+          maxLength: 32
+          minLength: 32
           nullable: true
           type: string
         source_account:
@@ -5686,13 +5692,14 @@ components:
             type: trading
           network_fee: 9
           network_fee_asset: network_fee_asset
+          reference_transfer_guid: reference_transfer_guid
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           estimated_amount: 5
           txn_hash: txn_hash
           guid: guid
           external_bank_account_guid: external_bank_account_guid
-          transfer_type: savings
+          transfer_type: funding
           state: storing
           asset: asset
           estimated_network_fee: 7
@@ -5713,13 +5720,14 @@ components:
             type: trading
           network_fee: 9
           network_fee_asset: network_fee_asset
+          reference_transfer_guid: reference_transfer_guid
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           estimated_amount: 5
           txn_hash: txn_hash
           guid: guid
           external_bank_account_guid: external_bank_account_guid
-          transfer_type: savings
+          transfer_type: funding
           state: storing
           asset: asset
           estimated_network_fee: 7

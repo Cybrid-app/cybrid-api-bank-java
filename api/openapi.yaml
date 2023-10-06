@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.97.0
+  version: v0.98.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5498,20 +5498,27 @@ components:
         symbol: symbol
         side: buy
         failure_code: failure_code
-        updated_at: 2000-01-23T04:56:07.000+00:00
         quote_guid: quote_guid
         fee: 2
-        guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
+        deliver_amount: 5
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        guid: guid
+        trade_type: platform
         receive_amount: 5
         state: storing
         customer_guid: customer_guid
-        deliver_amount: 5
       properties:
         guid:
           description: Auto-generated unique identifier for the trade.
           maxLength: 32
           minLength: 32
+          type: string
+        trade_type:
+          description: The type of trade.
+          enum:
+          - platform
+          - liquidation
           type: string
         customer_guid:
           description: The associated customer's identifier.
@@ -5769,27 +5776,29 @@ components:
         - symbol: symbol
           side: buy
           failure_code: failure_code
-          updated_at: 2000-01-23T04:56:07.000+00:00
           quote_guid: quote_guid
           fee: 2
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          deliver_amount: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          trade_type: platform
           receive_amount: 5
           state: storing
           customer_guid: customer_guid
-          deliver_amount: 5
         - symbol: symbol
           side: buy
           failure_code: failure_code
-          updated_at: 2000-01-23T04:56:07.000+00:00
           quote_guid: quote_guid
           fee: 2
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
+          deliver_amount: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          trade_type: platform
           receive_amount: 5
           state: storing
           customer_guid: customer_guid
-          deliver_amount: 5
         page: 0
       properties:
         total:
@@ -6649,32 +6658,6 @@ components:
       - error_message
       - message_code
       - status
-      type: object
-    PostReward:
-      properties:
-        customer_guid:
-          description: The unique identifier for the customer.
-          maxLength: 32
-          minLength: 32
-          type: string
-        symbol:
-          description: Symbol the quote is being requested for. Format is "asset-counter_asset"
-            in uppercase. See the Symbols API for a complete list of cryptocurrencies
-            supported.
-          maxLength: 16
-          minLength: 1
-          type: string
-        receive_amount:
-          description: "The amount to be received in base units of the currency: currency\
-            \ is \"asset\" for buy and \"counter_asset\" for sell."
-          type: integer
-        deliver_amount:
-          description: "The amount to be delivered in base units of the currency:\
-            \ currency is \"counter_asset\" for buy and \"asset\" for sell."
-          type: integer
-      required:
-      - customer_guid
-      - symbol
       type: object
     Customer_name:
       description: The customer's name. Only available for GET operations when 'include_pii'

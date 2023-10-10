@@ -5,6 +5,7 @@ import app.cybrid.cybrid_api_bank.client.ApiClient;
 import app.cybrid.cybrid_api_bank.client.model.CustomerBankModel;
 import app.cybrid.cybrid_api_bank.client.model.CustomerListBankModel;
 import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
+import app.cybrid.cybrid_api_bank.client.model.PatchCustomerBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostCustomerBankModel;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-10T16:09:44.130953Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-10T17:10:22.581809Z[Etc/UTC]")
 public class CustomersBankApi {
     private ApiClient apiClient;
 
@@ -237,5 +238,73 @@ public class CustomersBankApi {
     public Mono<ResponseEntity<CustomerListBankModel>> listCustomersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String bankGuid, String guid) throws WebClientResponseException {
         ParameterizedTypeReference<CustomerListBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerListBankModel>() {};
         return listCustomersRequestCreation(page, perPage, bankGuid, guid).toEntity(localVarReturnType);
+    }
+    /**
+     * Patch Customer
+     * Update a customer.  Required scope: **customers:write**
+     * <p><b>200</b> - customer found
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - customer not found
+     * @param customerGuid Identifier for the customer.
+     * @param patchCustomerBankModel The patchCustomerBankModel parameter
+     * @return CustomerBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec updateCustomerRequestCreation(String customerGuid, PatchCustomerBankModel patchCustomerBankModel) throws WebClientResponseException {
+        Object postBody = patchCustomerBankModel;
+        // verify the required parameter 'customerGuid' is set
+        if (customerGuid == null) {
+            throw new WebClientResponseException("Missing the required parameter 'customerGuid' when calling updateCustomer", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // verify the required parameter 'patchCustomerBankModel' is set
+        if (patchCustomerBankModel == null) {
+            throw new WebClientResponseException("Missing the required parameter 'patchCustomerBankModel' when calling updateCustomer", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("customer_guid", customerGuid);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { 
+            "application/json"
+        };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
+
+        ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
+        return apiClient.invokeAPI("/api/customers/{customer_guid}", HttpMethod.PATCH, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Patch Customer
+     * Update a customer.  Required scope: **customers:write**
+     * <p><b>200</b> - customer found
+     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - customer not found
+     * @param customerGuid Identifier for the customer.
+     * @param patchCustomerBankModel The patchCustomerBankModel parameter
+     * @return CustomerBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<CustomerBankModel> updateCustomer(String customerGuid, PatchCustomerBankModel patchCustomerBankModel) throws WebClientResponseException {
+        ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
+        return updateCustomerRequestCreation(customerGuid, patchCustomerBankModel).bodyToMono(localVarReturnType);
+    }
+
+    public Mono<ResponseEntity<CustomerBankModel>> updateCustomerWithHttpInfo(String customerGuid, PatchCustomerBankModel patchCustomerBankModel) throws WebClientResponseException {
+        ParameterizedTypeReference<CustomerBankModel> localVarReturnType = new ParameterizedTypeReference<CustomerBankModel>() {};
+        return updateCustomerRequestCreation(customerGuid, patchCustomerBankModel).toEntity(localVarReturnType);
     }
 }

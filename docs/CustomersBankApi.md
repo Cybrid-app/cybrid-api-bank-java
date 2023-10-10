@@ -7,6 +7,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 | [**createCustomer**](CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer |
 | [**getCustomer**](CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer |
 | [**listCustomers**](CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list |
+| [**updateCustomer**](CustomersBankApi.md#updateCustomer) | **PATCH** /api/customers/{customer_guid} | Patch Customer |
 
 
 
@@ -250,4 +251,84 @@ public class Example {
 | **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed, invalid subject, |  -  |
 | **403** | Invalid scope |  -  |
+
+
+## updateCustomer
+
+> CustomerBankModel updateCustomer(customerGuid, patchCustomerBankModel)
+
+Patch Customer
+
+Update a customer.  Required scope: **customers:write**
+
+### Example
+
+```java
+// Import classes:
+import app.cybrid.cybrid_api_bank.client.ApiClient;
+import app.cybrid.cybrid_api_bank.client.ApiException;
+import app.cybrid.cybrid_api_bank.client.Configuration;
+import app.cybrid.cybrid_api_bank.client.auth.*;
+import app.cybrid.cybrid_api_bank.client.models.*;
+import app.cybrid.cybrid_api_bank.client.api.CustomersBankApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
+        
+        // Configure HTTP bearer authorization: BearerAuth
+        HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+        BearerAuth.setBearerToken("BEARER TOKEN");
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+        CustomersBankApi apiInstance = new CustomersBankApi(defaultClient);
+        String customerGuid = "customerGuid_example"; // String | Identifier for the customer.
+        PatchCustomerBankModel patchCustomerBankModel = new PatchCustomerBankModel(); // PatchCustomerBankModel | 
+        try {
+            CustomerBankModel result = apiInstance.updateCustomer(customerGuid, patchCustomerBankModel);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CustomersBankApi#updateCustomer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **customerGuid** | **String**| Identifier for the customer. | |
+| **patchCustomerBankModel** | [**PatchCustomerBankModel**](PatchCustomerBankModel.md)|  | |
+
+### Return type
+
+[**CustomerBankModel**](CustomerBankModel.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | customer found |  -  |
+| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
+| **403** | Invalid scope |  -  |
+| **404** | customer not found |  -  |
 

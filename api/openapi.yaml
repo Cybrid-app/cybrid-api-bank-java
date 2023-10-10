@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.98.2
+  version: v0.99.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -961,6 +961,101 @@ paths:
       summary: Get Customer
       tags:
       - Customers
+      x-accepts: application/json
+    patch:
+      description: "Update a customer.\n\nRequired scope: **customers:write**"
+      operationId: updateCustomer
+      parameters:
+      - description: Identifier for the customer.
+        explode: false
+        in: path
+        name: customer_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchCustomer'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: customer found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, invalid subject"
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: customers:write"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: invalid customer_guid value
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: customer not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - customers:write
+      summary: Patch Customer
+      tags:
+      - Customers
+      x-content-type: application/json
       x-accepts: application/json
   /api/deposit_addresses:
     get:
@@ -6259,6 +6354,14 @@ components:
           type: array
       required:
       - type
+      type: object
+    PatchCustomer:
+      properties:
+        state:
+          description: The customer's state.
+          enum:
+          - unverified
+          type: string
       type: object
     PostIdentityVerification:
       properties:

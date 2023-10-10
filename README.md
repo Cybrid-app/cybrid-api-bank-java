@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.98.2
+- API version: v0.99.0
 
-- Build date: 2023-10-10T16:09:44.130953Z[Etc/UTC]
+- Build date: 2023-10-10T17:10:22.581809Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.98.2</version>
+  <version>v0.99.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.98.2"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.99.0"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.98.2.jar`
+- `target/cybrid-api-bank-java-v0.99.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -277,6 +277,7 @@ Class | Method | HTTP request | Description
 *CustomersBankApi* | [**createCustomer**](docs/CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer
 *CustomersBankApi* | [**getCustomer**](docs/CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer
 *CustomersBankApi* | [**listCustomers**](docs/CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list
+*CustomersBankApi* | [**updateCustomer**](docs/CustomersBankApi.md#updateCustomer) | **PATCH** /api/customers/{customer_guid} | Patch Customer
 *DepositAddressesBankApi* | [**createDepositAddress**](docs/DepositAddressesBankApi.md#createDepositAddress) | **POST** /api/deposit_addresses | Create Deposit Address
 *DepositAddressesBankApi* | [**getDepositAddress**](docs/DepositAddressesBankApi.md#getDepositAddress) | **GET** /api/deposit_addresses/{deposit_address_guid} | Get Deposit Address
 *DepositAddressesBankApi* | [**listDepositAddresses**](docs/DepositAddressesBankApi.md#listDepositAddresses) | **GET** /api/deposit_addresses | List Deposit Addresses
@@ -333,6 +334,7 @@ Class | Method | HTTP request | Description
  - [IdentityVerificationWithDetailsBankModel](docs/IdentityVerificationWithDetailsBankModel.md)
  - [ListRequestOwnerBankModel](docs/ListRequestOwnerBankModel.md)
  - [PatchBankBankModel](docs/PatchBankBankModel.md)
+ - [PatchCustomerBankModel](docs/PatchCustomerBankModel.md)
  - [PatchExternalBankAccountBankModel](docs/PatchExternalBankAccountBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)

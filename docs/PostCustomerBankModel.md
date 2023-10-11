@@ -14,6 +14,7 @@
 |**phoneNumber** | **String** | The customer&#39;s phone number. |  [optional] |
 |**emailAddress** | **String** | The customer&#39;s email address. |  [optional] |
 |**identificationNumbers** | [**List&lt;PostIdentificationNumberBankModel&gt;**](PostIdentificationNumberBankModel.md) | The customer&#39;s identification numbers. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the customer. |  [optional] |
 
 
 

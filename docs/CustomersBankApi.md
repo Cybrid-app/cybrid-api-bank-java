@@ -171,7 +171,7 @@ public class Example {
 
 ## listCustomers
 
-> CustomerListBankModel listCustomers(page, perPage, bankGuid, guid)
+> CustomerListBankModel listCustomers(page, perPage, bankGuid, guid, label)
 
 Get customers list
 
@@ -206,8 +206,9 @@ public class Example {
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list customers for.
         String guid = "guid_example"; // String | Comma separated customer_guids to list customers for.
+        String label = "label_example"; // String | Comma separated labels to list customers for.
         try {
-            CustomerListBankModel result = apiInstance.listCustomers(page, perPage, bankGuid, guid);
+            CustomerListBankModel result = apiInstance.listCustomers(page, perPage, bankGuid, guid, label);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CustomersBankApi#listCustomers");
@@ -229,6 +230,7 @@ public class Example {
 | **perPage** | **java.math.BigInteger**|  | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list customers for. | [optional] |
 | **guid** | **String**| Comma separated customer_guids to list customers for. | [optional] |
+| **label** | **String**| Comma separated labels to list customers for. | [optional] |
 
 ### Return type
 

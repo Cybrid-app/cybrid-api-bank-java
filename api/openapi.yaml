@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.103.1
+  version: v0.104.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -680,6 +680,14 @@ paths:
         explode: true
         in: query
         name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list customers for.
+        explode: true
+        in: query
+        name: label
         required: false
         schema:
           type: string
@@ -4813,6 +4821,9 @@ components:
         state: storing
         type: individual
         bank_guid: bank_guid
+        labels:
+        - labels
+        - labels
       properties:
         guid:
           description: Auto-generated unique identifier for the customer.
@@ -4861,6 +4872,12 @@ components:
             when 'include_pii' is set.
           nullable: true
           type: string
+        labels:
+          description: The labels associated with the customer.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     CustomerList:
       example:
@@ -4886,6 +4903,9 @@ components:
           state: storing
           type: individual
           bank_guid: bank_guid
+          labels:
+          - labels
+          - labels
         - address:
             subdivision: subdivision
             country_code: country_code
@@ -4905,6 +4925,9 @@ components:
           state: storing
           type: individual
           bank_guid: bank_guid
+          labels:
+          - labels
+          - labels
         page: 0
       properties:
         total:
@@ -6442,6 +6465,12 @@ components:
           description: The customer's identification numbers.
           items:
             $ref: '#/components/schemas/PostIdentificationNumber'
+          nullable: true
+          type: array
+        labels:
+          description: The labels associated with the customer.
+          items:
+            type: string
           nullable: true
           type: array
       required:

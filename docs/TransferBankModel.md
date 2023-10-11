@@ -30,7 +30,8 @@
 |**sourceAccount** | [**TransferSourceAccountBankModel**](TransferSourceAccountBankModel.md) |  |  [optional] |
 |**destinationAccount** | [**TransferDestinationAccountBankModel**](TransferDestinationAccountBankModel.md) |  |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. |  [optional] |
-|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the trade was last updated at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the transfer was last updated at. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
 
 
 

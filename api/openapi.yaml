@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.100.0
+  version: v0.101.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3923,6 +3923,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated labels to list transfers for.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -5463,34 +5471,37 @@ components:
       - $ref: '#/components/schemas/WorkflowWithDetails_allOf'
     Transfer:
       example:
-        side: deposit
-        failure_code: failure_code
-        amount: 5
         quote_guid: quote_guid
         fee: 2
-        network_fee_liability_amount: 3
         created_at: 2000-01-23T04:56:07.000+00:00
         source_account:
           guid: guid
           type: trading
-        network_fee: 9
         network_fee_asset: network_fee_asset
-        reference_transfer_guid: reference_transfer_guid
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
-        estimated_amount: 5
         txn_hash: txn_hash
-        guid: guid
-        external_bank_account_guid: external_bank_account_guid
-        transfer_type: funding
         state: storing
-        asset: asset
-        estimated_network_fee: 7
         bank_guid: bank_guid
-        customer_guid: customer_guid
         destination_account:
           guid: guid
           type: trading
+        side: deposit
+        failure_code: failure_code
+        amount: 5
+        network_fee_liability_amount: 3
+        network_fee: 9
+        reference_transfer_guid: reference_transfer_guid
+        labels:
+        - labels
+        - labels
+        estimated_amount: 5
+        guid: guid
+        external_bank_account_guid: external_bank_account_guid
+        transfer_type: funding
+        asset: asset
+        estimated_network_fee: 7
+        customer_guid: customer_guid
       properties:
         guid:
           description: Auto-generated unique identifier for the transfer.
@@ -5607,9 +5618,15 @@ components:
           format: date-time
           type: string
         updated_at:
-          description: ISO8601 datetime the trade was last updated at.
+          description: ISO8601 datetime the transfer was last updated at.
           format: date-time
           type: string
+        labels:
+          description: The labels associated with the transfer.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     Trade:
       example:
@@ -5805,62 +5822,68 @@ components:
         per_page: 0
         total: 0
         objects:
-        - side: deposit
-          failure_code: failure_code
-          amount: 5
-          quote_guid: quote_guid
+        - quote_guid: quote_guid
           fee: 2
-          network_fee_liability_amount: 3
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:
             guid: guid
             type: trading
-          network_fee: 9
           network_fee_asset: network_fee_asset
-          reference_transfer_guid: reference_transfer_guid
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
-          estimated_amount: 5
           txn_hash: txn_hash
-          guid: guid
-          external_bank_account_guid: external_bank_account_guid
-          transfer_type: funding
           state: storing
-          asset: asset
-          estimated_network_fee: 7
           bank_guid: bank_guid
-          customer_guid: customer_guid
           destination_account:
             guid: guid
             type: trading
-        - side: deposit
+          side: deposit
           failure_code: failure_code
           amount: 5
-          quote_guid: quote_guid
-          fee: 2
           network_fee_liability_amount: 3
+          network_fee: 9
+          reference_transfer_guid: reference_transfer_guid
+          labels:
+          - labels
+          - labels
+          estimated_amount: 5
+          guid: guid
+          external_bank_account_guid: external_bank_account_guid
+          transfer_type: funding
+          asset: asset
+          estimated_network_fee: 7
+          customer_guid: customer_guid
+        - quote_guid: quote_guid
+          fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:
             guid: guid
             type: trading
-          network_fee: 9
           network_fee_asset: network_fee_asset
-          reference_transfer_guid: reference_transfer_guid
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
-          estimated_amount: 5
           txn_hash: txn_hash
-          guid: guid
-          external_bank_account_guid: external_bank_account_guid
-          transfer_type: funding
           state: storing
-          asset: asset
-          estimated_network_fee: 7
           bank_guid: bank_guid
-          customer_guid: customer_guid
           destination_account:
             guid: guid
             type: trading
+          side: deposit
+          failure_code: failure_code
+          amount: 5
+          network_fee_liability_amount: 3
+          network_fee: 9
+          reference_transfer_guid: reference_transfer_guid
+          labels:
+          - labels
+          - labels
+          estimated_amount: 5
+          guid: guid
+          external_bank_account_guid: external_bank_account_guid
+          transfer_type: funding
+          asset: asset
+          estimated_network_fee: 7
+          customer_guid: customer_guid
         page: 0
       properties:
         total:
@@ -6629,6 +6652,12 @@ components:
           - cancelled
           - manual_intervention
           type: string
+        labels:
+          description: The labels associated with the transfer.
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - quote_guid
       - transfer_type

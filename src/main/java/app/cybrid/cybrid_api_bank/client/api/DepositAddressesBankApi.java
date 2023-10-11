@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-10T17:10:22.581809Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-11T14:45:26.164636Z[Etc/UTC]")
 public class DepositAddressesBankApi {
     private ApiClient apiClient;
 
@@ -179,10 +179,11 @@ public class DepositAddressesBankApi {
      * @param guid Comma separated guids to list deposit addresses for.
      * @param bankGuid Comma separated bank_guids to list deposit addresses for.
      * @param customerGuid Comma separated customer_guids to list deposit addresses for.
+     * @param label Comma separated labels to list deposit addresses for.
      * @return DepositAddressListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listDepositAddressesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    private ResponseSpec listDepositAddressesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -197,6 +198,7 @@ public class DepositAddressesBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -223,16 +225,17 @@ public class DepositAddressesBankApi {
      * @param guid Comma separated guids to list deposit addresses for.
      * @param bankGuid Comma separated bank_guids to list deposit addresses for.
      * @param customerGuid Comma separated customer_guids to list deposit addresses for.
+     * @param label Comma separated labels to list deposit addresses for.
      * @return DepositAddressListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<DepositAddressListBankModel> listDepositAddresses(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<DepositAddressListBankModel> listDepositAddresses(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<DepositAddressListBankModel> localVarReturnType = new ParameterizedTypeReference<DepositAddressListBankModel>() {};
-        return listDepositAddressesRequestCreation(page, perPage, guid, bankGuid, customerGuid).bodyToMono(localVarReturnType);
+        return listDepositAddressesRequestCreation(page, perPage, guid, bankGuid, customerGuid, label).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<DepositAddressListBankModel>> listDepositAddressesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<DepositAddressListBankModel>> listDepositAddressesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<DepositAddressListBankModel> localVarReturnType = new ParameterizedTypeReference<DepositAddressListBankModel>() {};
-        return listDepositAddressesRequestCreation(page, perPage, guid, bankGuid, customerGuid).toEntity(localVarReturnType);
+        return listDepositAddressesRequestCreation(page, perPage, guid, bankGuid, customerGuid, label).toEntity(localVarReturnType);
     }
 }

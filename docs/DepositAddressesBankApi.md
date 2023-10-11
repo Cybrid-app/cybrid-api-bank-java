@@ -167,7 +167,7 @@ public class Example {
 
 ## listDepositAddresses
 
-> DepositAddressListBankModel listDepositAddresses(page, perPage, guid, bankGuid, customerGuid)
+> DepositAddressListBankModel listDepositAddresses(page, perPage, guid, bankGuid, customerGuid, label)
 
 List Deposit Addresses
 
@@ -203,8 +203,9 @@ public class Example {
         String guid = "guid_example"; // String | Comma separated guids to list deposit addresses for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list deposit addresses for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list deposit addresses for.
+        String label = "label_example"; // String | Comma separated labels to list deposit addresses for.
         try {
-            DepositAddressListBankModel result = apiInstance.listDepositAddresses(page, perPage, guid, bankGuid, customerGuid);
+            DepositAddressListBankModel result = apiInstance.listDepositAddresses(page, perPage, guid, bankGuid, customerGuid, label);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DepositAddressesBankApi#listDepositAddresses");
@@ -227,6 +228,7 @@ public class Example {
 | **guid** | **String**| Comma separated guids to list deposit addresses for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list deposit addresses for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list deposit addresses for. | [optional] |
+| **label** | **String**| Comma separated labels to list deposit addresses for. | [optional] |
 
 ### Return type
 

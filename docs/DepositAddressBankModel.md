@@ -17,6 +17,7 @@
 |**address** | **String** | The blockchain address. |  [optional] |
 |**format** | [**FormatEnum**](#FormatEnum) | The blockchain address format. |  [optional] |
 |**tag** | **String** | The blockchain address tag. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the address. |  [optional] |
 
 
 

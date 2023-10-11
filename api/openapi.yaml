@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.99.0
+  version: v0.100.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1098,6 +1098,14 @@ paths:
         explode: true
         in: query
         name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list deposit addresses for.
+        explode: true
+        in: query
+        name: label
         required: false
         schema:
           type: string
@@ -5039,6 +5047,9 @@ components:
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
+        labels:
+        - labels
+        - labels
       properties:
         guid:
           description: Auto-generated unique identifier for the identity verification.
@@ -5086,6 +5097,12 @@ components:
         tag:
           description: The blockchain address tag.
           type: string
+        labels:
+          description: The labels associated with the address.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     DepositAddressList:
       example:
@@ -5102,6 +5119,9 @@ components:
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
+          labels:
+          - labels
+          - labels
         - account_guid: account_guid
           address: address
           format: standard
@@ -5112,6 +5132,9 @@ components:
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
+          labels:
+          - labels
+          - labels
         page: 0
       properties:
         total:
@@ -6469,6 +6492,12 @@ components:
           maxLength: 32
           minLength: 32
           type: string
+        labels:
+          description: The labels associated with the address.
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - account_guid
       type: object

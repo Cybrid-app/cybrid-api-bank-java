@@ -20,6 +20,7 @@
 |**fee** | **java.math.BigInteger** | The fee associated with the trade. Denominated in \&quot;counter_asset\&quot; base units |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the trade was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the trade was last updated at. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the trade. |  [optional] |
 
 
 

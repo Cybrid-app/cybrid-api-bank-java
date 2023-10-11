@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.102.0
+  version: v0.103.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -3555,6 +3555,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated labels to list trades for.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -5645,6 +5653,9 @@ components:
         fee: 2
         created_at: 2000-01-23T04:56:07.000+00:00
         deliver_amount: 5
+        labels:
+        - labels
+        - labels
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         trade_type: platform
@@ -5716,6 +5727,12 @@ components:
           description: ISO8601 datetime the trade was last updated at.
           format: date-time
           type: string
+        labels:
+          description: The labels associated with the trade.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     ExternalWalletList:
       example:
@@ -5929,6 +5946,9 @@ components:
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           deliver_amount: 5
+          labels:
+          - labels
+          - labels
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           trade_type: platform
@@ -5942,6 +5962,9 @@ components:
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           deliver_amount: 5
+          labels:
+          - labels
+          - labels
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           trade_type: platform
@@ -6705,6 +6728,12 @@ components:
           - expired_quote
           - non_sufficient_funds
           type: string
+        labels:
+          description: The labels associated with the trade.
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - quote_guid
       type: object

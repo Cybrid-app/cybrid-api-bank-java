@@ -11,6 +11,7 @@
 |**customerGuid** | **String** | The customer identifier associated with the account. |  [optional] |
 |**asset** | **String** | The asset code. |  |
 |**name** | **String** | The name of the account. |  |
+|**labels** | **List&lt;String&gt;** | The labels associated with the account. |  [optional] |
 
 
 

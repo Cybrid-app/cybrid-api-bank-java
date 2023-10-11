@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-11T15:55:19.394336Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-11T16:30:51.770031Z[Etc/UTC]")
 public class AccountsBankApi {
     private ApiClient apiClient;
 
@@ -184,10 +184,11 @@ public class AccountsBankApi {
      * @param type Comma separated account_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list accounts for.
      * @param customerGuid Comma separated customer_guids to list accounts for.
+     * @param label Comma separated labels to list accounts for.
      * @return AccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    private ResponseSpec listAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -204,6 +205,7 @@ public class AccountsBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -232,16 +234,17 @@ public class AccountsBankApi {
      * @param type Comma separated account_types to list accounts for.
      * @param bankGuid Comma separated bank_guids to list accounts for.
      * @param customerGuid Comma separated customer_guids to list accounts for.
+     * @param label Comma separated labels to list accounts for.
      * @return AccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<AccountListBankModel> listAccounts(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<AccountListBankModel> listAccounts(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<AccountListBankModel> localVarReturnType = new ParameterizedTypeReference<AccountListBankModel>() {};
-        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid).bodyToMono(localVarReturnType);
+        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid, label).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<AccountListBankModel>> listAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<AccountListBankModel>> listAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, ListRequestOwnerBankModel owner, String guid, String type, String bankGuid, String customerGuid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<AccountListBankModel> localVarReturnType = new ParameterizedTypeReference<AccountListBankModel>() {};
-        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid).toEntity(localVarReturnType);
+        return listAccountsRequestCreation(page, perPage, owner, guid, type, bankGuid, customerGuid, label).toEntity(localVarReturnType);
     }
 }

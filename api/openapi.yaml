@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.101.0
+  version: v0.102.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2705,6 +2705,14 @@ paths:
         explode: true
         in: query
         name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list accounts for.
+        explode: true
+        in: query
+        name: label
         required: false
         schema:
           type: string
@@ -6019,6 +6027,9 @@ components:
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
+        labels:
+        - labels
+        - labels
       properties:
         type:
           description: The account type.
@@ -6071,6 +6082,12 @@ components:
           - storing
           - created
           type: string
+        labels:
+          description: The labels associated with the account.
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     AccountList:
       example:
@@ -6087,6 +6104,9 @@ components:
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
+          labels:
+          - labels
+          - labels
         - platform_available: 5
           name: name
           guid: guid
@@ -6097,6 +6117,9 @@ components:
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
+          labels:
+          - labels
+          - labels
         page: 0
       properties:
         total:
@@ -6548,6 +6571,12 @@ components:
           maxLength: 128
           minLength: 1
           type: string
+        labels:
+          description: The labels associated with the account.
+          items:
+            type: string
+          nullable: true
+          type: array
       required:
       - asset
       - name

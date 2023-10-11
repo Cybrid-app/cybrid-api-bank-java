@@ -168,7 +168,7 @@ public class Example {
 
 ## listAccounts
 
-> AccountListBankModel listAccounts(page, perPage, owner, guid, type, bankGuid, customerGuid)
+> AccountListBankModel listAccounts(page, perPage, owner, guid, type, bankGuid, customerGuid, label)
 
 List Accounts
 
@@ -206,8 +206,9 @@ public class Example {
         String type = "type_example"; // String | Comma separated account_types to list accounts for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list accounts for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list accounts for.
+        String label = "label_example"; // String | Comma separated labels to list accounts for.
         try {
-            AccountListBankModel result = apiInstance.listAccounts(page, perPage, owner, guid, type, bankGuid, customerGuid);
+            AccountListBankModel result = apiInstance.listAccounts(page, perPage, owner, guid, type, bankGuid, customerGuid, label);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AccountsBankApi#listAccounts");
@@ -232,6 +233,7 @@ public class Example {
 | **type** | **String**| Comma separated account_types to list accounts for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list accounts for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list accounts for. | [optional] |
+| **label** | **String**| Comma separated labels to list accounts for. | [optional] |
 
 ### Return type
 

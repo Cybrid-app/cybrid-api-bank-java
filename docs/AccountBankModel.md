@@ -17,6 +17,7 @@
 |**platformBalance** | **java.math.BigInteger** | The amount of funds that are in the account, in base units of the asset. |  [optional] |
 |**platformAvailable** | **java.math.BigInteger** | The amount of funds that are in the account, in base units of the asset, that are available for use on the platform. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The account&#39;s state. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the account. |  [optional] |
 
 
 

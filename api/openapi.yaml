@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.104.2
+  version: v0.105.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2493,7 +2493,23 @@ paths:
         \ been completed |\n\n## Outcome\n\n| State | Description |\n|-------|-------------|\n\
         | passed | The customer has passed the identity verification process |\n|\
         \ failed | The customer has failed the identity verification process |\n\n\
-        \n\nRequired scope: **customers:write**"
+        ## Failure Codes\n\n| Code | Description |\n|-------|-------------|\n| id_check_failure\
+        \ | Failure due to an issue when verifying the provided ID |\n| database_check_failure\
+        \ | Failure due to an issue when verifying the provided information against\
+        \ authoritative data sources |\n| selfie_failure | Failure due to an issue\
+        \ verifying the provided selfie photo |\n| duplicate_person_check_failure\
+        \ | Failure due to a customer already existing for this person |\n| name_check_failure\
+        \ | Failure due to an issue verifying the name of the person |\n| address_check_failure\
+        \ | Failure due to an issue verifying the address of the person |\n| dob_check_failure\
+        \ | Failure due to an issue verifying the date of birth of the person |\n\
+        | id_number_check_failure | Failure due to an issue verifying an identification\
+        \ number of the person |\n| phone_number_check_failure | Failure due to an\
+        \ issue verifying the phone number of the person |\n| email_address_check_failure\
+        \ | Failure due to an issue verifying the email address of the person |\n\
+        | plaid_failure | Failure due to an issue interacting with Plaid |\n| decision_timeout\
+        \ | Failure due to an issue verifying the email address of the person |\n\
+        | requested_failure | In sandbox, the caller requested that the process failed\
+        \ |\n\n\n\nRequired scope: **customers:write**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:
@@ -4955,8 +4971,8 @@ components:
     IdentityVerification:
       example:
         failure_codes:
-        - requested_failure
-        - requested_failure
+        - failure_codes
+        - failure_codes
         method: id_and_selfie
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -5010,23 +5026,8 @@ components:
         failure_codes:
           description: The reason codes explaining the outcome.
           items:
-            enum:
-            - requested_failure
-            - id_check_failure
-            - database_check_failure
-            - selfie_failure
-            - pep_check_failure
-            - media_check_failure
-            - watchlist_check_failure
-            - name_check_failure
-            - address_check_failure
-            - dob_check_failure
-            - id_number_check_failure
-            - phone_number_check_failure
-            - email_address_check_failure
-            - decision_timeout
-            - plaid_failure
             type: string
+          nullable: true
           type: array
       type: object
     IdentityVerificationWithDetails:
@@ -5039,8 +5040,8 @@ components:
         total: 0
         objects:
         - failure_codes:
-          - requested_failure
-          - requested_failure
+          - failure_codes
+          - failure_codes
           method: id_and_selfie
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5049,8 +5050,8 @@ components:
           outcome: passed
           customer_guid: customer_guid
         - failure_codes:
-          - requested_failure
-          - requested_failure
+          - failure_codes
+          - failure_codes
           method: id_and_selfie
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00

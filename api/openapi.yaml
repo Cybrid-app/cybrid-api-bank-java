@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.105.0
+  version: v0.106.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -2494,10 +2494,18 @@ paths:
         | passed | The customer has passed the identity verification process |\n|\
         \ failed | The customer has failed the identity verification process |\n\n\
         ## Failure Codes\n\n| Code | Description |\n|-------|-------------|\n| id_check_failure\
-        \ | Failure due to an issue when verifying the provided ID |\n| database_check_failure\
-        \ | Failure due to an issue when verifying the provided information against\
-        \ authoritative data sources |\n| selfie_failure | Failure due to an issue\
-        \ verifying the provided selfie photo |\n| duplicate_person_check_failure\
+        \ | Failure due to an issue verifying the provided ID |\n| id_quality_check_failure\
+        \ | Failure due to an issue verifying the provided ID based on the image quality\
+        \ |\n| id_barcode_check_failure | Failure due to an issue verifying the provided\
+        \ ID based on the barcode |\n| id_expiration_check_failure | Failure due to\
+        \ an issue verifying the provided ID based on the expiration date |\n| id_double_side_check_failure\
+        \ | Failure due to an issue verifying the provided ID based on both sides\
+        \ not being provided |\n| id_type_allowed_check_failure | Failure due to an\
+        \ issue verifying the provided ID based on the type provided |\n| id_country_allowed_check_failure\
+        \ | Failure due to an issue verifying the provided ID based on the issuing\
+        \ country |\n| database_check_failure | Failure due to an issue verifying\
+        \ the provided information against authoritative data sources |\n| selfie_failure\
+        \ | Failure due to an issue verifying the provided selfie photo |\n| duplicate_person_check_failure\
         \ | Failure due to a customer already existing for this person |\n| name_check_failure\
         \ | Failure due to an issue verifying the name of the person |\n| address_check_failure\
         \ | Failure due to an issue verifying the address of the person |\n| dob_check_failure\

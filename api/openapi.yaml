@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.106.8
+  version: v0.107.1
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6734,13 +6734,6 @@ components:
           type: string
         expected_error:
           description: The optional expected error to simulate transfer failure.
-          enum:
-          - pending
-          - in_progress
-          - completed
-          - failed
-          - cancelled
-          - manual_intervention
           type: string
         labels:
           description: The labels associated with the transfer.

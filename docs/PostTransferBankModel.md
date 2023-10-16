@@ -13,7 +13,7 @@
 |**destinationAccountGuid** | **String** | The destination account&#39;s identifier. Required for book transfers. |  [optional] |
 |**externalWalletGuid** | **String** | The customer&#39;s external wallet&#39;s identifier. |  [optional] |
 |**externalBankAccountGuid** | **String** | The customer&#39;s &#39;plaid&#39; or &#39;plaid_processor_token&#39; external bank account&#39;s identifier. |  [optional] |
-|**expectedError** | [**ExpectedErrorEnum**](#ExpectedErrorEnum) | The optional expected error to simulate transfer failure. |  [optional] |
+|**expectedError** | **String** | The optional expected error to simulate transfer failure. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
 
 
@@ -26,19 +26,6 @@
 | BOOK | &quot;book&quot; |
 | CRYPTO | &quot;crypto&quot; |
 | INSTANT_FUNDING | &quot;instant_funding&quot; |
-
-
-
-## Enum: ExpectedErrorEnum
-
-| Name | Value |
-|---- | -----|
-| PENDING | &quot;pending&quot; |
-| IN_PROGRESS | &quot;in_progress&quot; |
-| COMPLETED | &quot;completed&quot; |
-| FAILED | &quot;failed&quot; |
-| CANCELLED | &quot;cancelled&quot; |
-| MANUAL_INTERVENTION | &quot;manual_intervention&quot; |
 
 
 

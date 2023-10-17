@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.107.2
+  version: v0.108.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -6731,9 +6731,6 @@ components:
             bank account's identifier.
           maxLength: 32
           minLength: 32
-          type: string
-        expected_error:
-          description: The optional expected error to simulate transfer failure.
           type: string
         labels:
           description: The labels associated with the transfer.

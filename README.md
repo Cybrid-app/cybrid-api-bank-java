@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.108.2
+- API version: v0.109.0
 
-- Build date: 2023-10-18T16:18:43.635229Z[Etc/UTC]
+- Build date: 2023-10-18T16:27:55.982959Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.108.2</version>
+  <version>v0.109.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.108.2"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.109.0"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.108.2.jar`
+- `target/cybrid-api-bank-java-v0.109.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -324,8 +324,11 @@ Class | Method | HTTP request | Description
  - [DepositAddressBankModel](docs/DepositAddressBankModel.md)
  - [DepositAddressListBankModel](docs/DepositAddressListBankModel.md)
  - [ErrorResponseBankModel](docs/ErrorResponseBankModel.md)
+ - [ExternalBankAccountBalancesBankModel](docs/ExternalBankAccountBalancesBankModel.md)
  - [ExternalBankAccountBankModel](docs/ExternalBankAccountBankModel.md)
  - [ExternalBankAccountListBankModel](docs/ExternalBankAccountListBankModel.md)
+ - [ExternalBankAccountPiiInnerAddressesInnerBankModel](docs/ExternalBankAccountPiiInnerAddressesInnerBankModel.md)
+ - [ExternalBankAccountPiiInnerBankModel](docs/ExternalBankAccountPiiInnerBankModel.md)
  - [ExternalWalletBankModel](docs/ExternalWalletBankModel.md)
  - [ExternalWalletListBankModel](docs/ExternalWalletListBankModel.md)
  - [IdentityVerificationBankModel](docs/IdentityVerificationBankModel.md)

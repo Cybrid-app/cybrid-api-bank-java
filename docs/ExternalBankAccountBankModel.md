@@ -20,6 +20,9 @@
 |**plaidAccountName** | **String** | The name for the account. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The state of the external bank account. |  [optional] |
 |**failureCode** | **String** | The failure code for failed transfers. |  [optional] |
+|**balanceUpdatedAt** | **OffsetDateTime** | The timestamp that the balance information was last updated at. |  [optional] |
+|**balances** | [**ExternalBankAccountBalancesBankModel**](ExternalBankAccountBalancesBankModel.md) |  |  [optional] |
+|**pii** | [**List&lt;ExternalBankAccountPiiInnerBankModel&gt;**](ExternalBankAccountPiiInnerBankModel.md) | The account holder information. |  [optional] |
 
 
 

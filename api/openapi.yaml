@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.108.2
+  version: v0.109.0
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1720,6 +1720,30 @@ paths:
         schema:
           type: string
         style: simple
+      - description: Force the balance on the account to be updated.
+        explode: true
+        in: query
+        name: force_balance_refresh
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Include account balances in the response.
+        explode: true
+        in: query
+        name: include_balances
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Include account holder's PII in the response.
+        explode: true
+        in: query
+        name: include_pii
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -1789,6 +1813,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: ExternalBankAccount not found
+        "422":
+          content:
+            application/json:
+              examples:
+                unprocessable_request:
+                  value:
+                    status: 422
+                    error_message: "Unable to process request: PlaidLoginRequiredError\
+                      \ - Bank account refresh required"
+                    message_code: refresh_required
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unable to process request
       security:
       - BearerAuth: []
         oauth2:
@@ -5824,11 +5861,60 @@ components:
         total: 0
         objects:
         - failure_code: failure_code
+          balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           account_kind: plaid
           plaid_account_mask: plaid_account_mask
           plaid_account_name: plaid_account_name
+          pii:
+          - email_addresses:
+            - email_addresses
+            - email_addresses
+            phone_numbers:
+            - phone_numbers
+            - phone_numbers
+            addresses:
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            names:
+            - names
+            - names
+          - email_addresses:
+            - email_addresses
+            - email_addresses
+            phone_numbers:
+            - phone_numbers
+            - phone_numbers
+            addresses:
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            names:
+            - names
+            - names
           environment: sandbox
+          balances:
+            current_balance: 0
+            available_balance: 0
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -5837,11 +5923,60 @@ components:
           bank_guid: bank_guid
           customer_guid: customer_guid
         - failure_code: failure_code
+          balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           account_kind: plaid
           plaid_account_mask: plaid_account_mask
           plaid_account_name: plaid_account_name
+          pii:
+          - email_addresses:
+            - email_addresses
+            - email_addresses
+            phone_numbers:
+            - phone_numbers
+            - phone_numbers
+            addresses:
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            names:
+            - names
+            - names
+          - email_addresses:
+            - email_addresses
+            - email_addresses
+            phone_numbers:
+            - phone_numbers
+            - phone_numbers
+            addresses:
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            - subdivision: subdivision
+              country_code: country_code
+              city: city
+              street: street
+              street2: street2
+              postal_code: postal_code
+            names:
+            - names
+            - names
           environment: sandbox
+          balances:
+            current_balance: 0
+            available_balance: 0
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -6222,11 +6357,60 @@ components:
     ExternalBankAccount:
       example:
         failure_code: failure_code
+        balance_updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
         account_kind: plaid
         plaid_account_mask: plaid_account_mask
         plaid_account_name: plaid_account_name
+        pii:
+        - email_addresses:
+          - email_addresses
+          - email_addresses
+          phone_numbers:
+          - phone_numbers
+          - phone_numbers
+          addresses:
+          - subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          - subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          names:
+          - names
+          - names
+        - email_addresses:
+          - email_addresses
+          - email_addresses
+          phone_numbers:
+          - phone_numbers
+          - phone_numbers
+          addresses:
+          - subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          - subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          names:
+          - names
+          - names
         environment: sandbox
+        balances:
+          current_balance: 0
+          available_balance: 0
         plaid_institution_id: plaid_institution_id
         name: name
         guid: guid
@@ -6313,6 +6497,20 @@ components:
           description: The failure code for failed transfers.
           nullable: true
           type: string
+        balance_updated_at:
+          description: The timestamp that the balance information was last updated
+            at.
+          format: date-time
+          nullable: true
+          type: string
+        balances:
+          $ref: '#/components/schemas/ExternalBankAccount_balances'
+        pii:
+          description: The account holder information.
+          items:
+            $ref: '#/components/schemas/ExternalBankAccount_pii_inner'
+          nullable: true
+          type: array
       type: object
     ExternalWallet:
       example:
@@ -7040,6 +7238,105 @@ components:
           - external_wallet
           - one_time_address
           type: string
+      type: object
+    ExternalBankAccount_balances:
+      description: Balance information for the account.
+      example:
+        current_balance: 0
+        available_balance: 0
+      nullable: true
+      properties:
+        available_balance:
+          description: The available balance in the account.
+          minimum: 0
+          nullable: true
+          type: integer
+        current_balance:
+          description: The current balance in the account including pending transactions.
+          minimum: 0
+          nullable: true
+          type: integer
+      type: object
+    ExternalBankAccount_pii_inner_addresses_inner:
+      example:
+        subdivision: subdivision
+        country_code: country_code
+        city: city
+        street: street
+        street2: street2
+        postal_code: postal_code
+      properties:
+        street:
+          description: The first line of the address.
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          type: string
+        subdivision:
+          description: The provide/state/region of the address; not used by all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          type: string
+      type: object
+    ExternalBankAccount_pii_inner:
+      example:
+        email_addresses:
+        - email_addresses
+        - email_addresses
+        phone_numbers:
+        - phone_numbers
+        - phone_numbers
+        addresses:
+        - subdivision: subdivision
+          country_code: country_code
+          city: city
+          street: street
+          street2: street2
+          postal_code: postal_code
+        - subdivision: subdivision
+          country_code: country_code
+          city: city
+          street: street
+          street2: street2
+          postal_code: postal_code
+        names:
+        - names
+        - names
+      properties:
+        names:
+          description: Array of names on the account
+          items:
+            type: string
+          nullable: true
+          type: array
+        addresses:
+          description: Array of addresses associated to the account
+          items:
+            $ref: '#/components/schemas/ExternalBankAccount_pii_inner_addresses_inner'
+          nullable: true
+          type: array
+        email_addresses:
+          description: Array of email addresses associated to the account
+          items:
+            type: string
+          nullable: true
+          type: array
+        phone_numbers:
+          description: Array of phone numbers associated to the account
+          items:
+            type: string
+          nullable: true
+          type: array
       type: object
     PostCustomer_name:
       nullable: true

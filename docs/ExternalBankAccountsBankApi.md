@@ -171,7 +171,7 @@ public class Example {
 
 ## getExternalBankAccount
 
-> ExternalBankAccountBankModel getExternalBankAccount(externalBankAccountGuid)
+> ExternalBankAccountBankModel getExternalBankAccount(externalBankAccountGuid, forceBalanceRefresh, includeBalances, includePii)
 
 Get External Bank Account
 
@@ -203,8 +203,11 @@ public class Example {
 
         ExternalBankAccountsBankApi apiInstance = new ExternalBankAccountsBankApi(defaultClient);
         String externalBankAccountGuid = "externalBankAccountGuid_example"; // String | Identifier for the external bank account.
+        Boolean forceBalanceRefresh = true; // Boolean | Force the balance on the account to be updated.
+        Boolean includeBalances = true; // Boolean | Include account balances in the response.
+        Boolean includePii = true; // Boolean | Include account holder's PII in the response.
         try {
-            ExternalBankAccountBankModel result = apiInstance.getExternalBankAccount(externalBankAccountGuid);
+            ExternalBankAccountBankModel result = apiInstance.getExternalBankAccount(externalBankAccountGuid, forceBalanceRefresh, includeBalances, includePii);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ExternalBankAccountsBankApi#getExternalBankAccount");
@@ -223,6 +226,9 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **externalBankAccountGuid** | **String**| Identifier for the external bank account. | |
+| **forceBalanceRefresh** | **Boolean**| Force the balance on the account to be updated. | [optional] |
+| **includeBalances** | **Boolean**| Include account balances in the response. | [optional] |
+| **includePii** | **Boolean**| Include account holder&#39;s PII in the response. | [optional] |
 
 ### Return type
 
@@ -245,6 +251,7 @@ public class Example {
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 | **404** | ExternalBankAccount not found |  -  |
+| **422** | Unable to process request |  -  |
 
 
 ## listExternalBankAccounts

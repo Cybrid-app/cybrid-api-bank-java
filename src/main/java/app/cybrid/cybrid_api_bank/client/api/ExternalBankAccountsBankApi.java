@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-18T16:18:43.635229Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-18T16:27:55.982959Z[Etc/UTC]")
 public class ExternalBankAccountsBankApi {
     private ApiClient apiClient;
 
@@ -179,11 +179,15 @@ public class ExternalBankAccountsBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - ExternalBankAccount not found
+     * <p><b>422</b> - Unable to process request
      * @param externalBankAccountGuid Identifier for the external bank account.
+     * @param forceBalanceRefresh Force the balance on the account to be updated.
+     * @param includeBalances Include account balances in the response.
+     * @param includePii Include account holder&#39;s PII in the response.
      * @return ExternalBankAccountBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getExternalBankAccountRequestCreation(String externalBankAccountGuid) throws WebClientResponseException {
+    private ResponseSpec getExternalBankAccountRequestCreation(String externalBankAccountGuid, Boolean forceBalanceRefresh, Boolean includeBalances, Boolean includePii) throws WebClientResponseException {
         Object postBody = null;
         // verify the required parameter 'externalBankAccountGuid' is set
         if (externalBankAccountGuid == null) {
@@ -198,6 +202,10 @@ public class ExternalBankAccountsBankApi {
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "force_balance_refresh", forceBalanceRefresh));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_balances", includeBalances));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_pii", includePii));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -219,18 +227,22 @@ public class ExternalBankAccountsBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - ExternalBankAccount not found
+     * <p><b>422</b> - Unable to process request
      * @param externalBankAccountGuid Identifier for the external bank account.
+     * @param forceBalanceRefresh Force the balance on the account to be updated.
+     * @param includeBalances Include account balances in the response.
+     * @param includePii Include account holder&#39;s PII in the response.
      * @return ExternalBankAccountBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ExternalBankAccountBankModel> getExternalBankAccount(String externalBankAccountGuid) throws WebClientResponseException {
+    public Mono<ExternalBankAccountBankModel> getExternalBankAccount(String externalBankAccountGuid, Boolean forceBalanceRefresh, Boolean includeBalances, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalBankAccountBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalBankAccountBankModel>() {};
-        return getExternalBankAccountRequestCreation(externalBankAccountGuid).bodyToMono(localVarReturnType);
+        return getExternalBankAccountRequestCreation(externalBankAccountGuid, forceBalanceRefresh, includeBalances, includePii).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<ExternalBankAccountBankModel>> getExternalBankAccountWithHttpInfo(String externalBankAccountGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<ExternalBankAccountBankModel>> getExternalBankAccountWithHttpInfo(String externalBankAccountGuid, Boolean forceBalanceRefresh, Boolean includeBalances, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalBankAccountBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalBankAccountBankModel>() {};
-        return getExternalBankAccountRequestCreation(externalBankAccountGuid).toEntity(localVarReturnType);
+        return getExternalBankAccountRequestCreation(externalBankAccountGuid, forceBalanceRefresh, includeBalances, includePii).toEntity(localVarReturnType);
     }
     /**
      * Get external bank accounts list

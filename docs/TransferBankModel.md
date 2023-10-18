@@ -62,6 +62,7 @@
 |---- | -----|
 | STORING | &quot;storing&quot; |
 | PENDING | &quot;pending&quot; |
+| REVIEWING | &quot;reviewing&quot; |
 | COMPLETED | &quot;completed&quot; |
 | FAILED | &quot;failed&quot; |
 

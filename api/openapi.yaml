@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.109.11
+  version: v0.109.15
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -1720,7 +1720,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Force the balance on the account to be updated.
+      - description: Force the balance on the account to be retrieved.
         explode: true
         in: query
         name: force_balance_refresh
@@ -1728,7 +1728,10 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: Include account balances in the response.
+      - description: "Include balance information in the response. If `force_balance_refresh`\
+          \ is `true`, the most up to date balance will be returned. If `force_balance_refresh`\
+          \ is `false`, the cached balance will be returned. `balance_updated_at`\
+          \ in the response will provide the timestamp the balance was last updated."
         explode: true
         in: query
         name: include_balances
@@ -1736,7 +1739,7 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: Include account holder's PII in the response.
+      - description: Include the account holder's PII in the response.
         explode: true
         in: query
         name: include_pii

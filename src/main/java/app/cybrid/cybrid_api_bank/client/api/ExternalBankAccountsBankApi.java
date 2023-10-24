@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-23T15:56:03.247494Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-10-24T12:55:55.715935Z[Etc/UTC]")
 public class ExternalBankAccountsBankApi {
     private ApiClient apiClient;
 
@@ -181,9 +181,9 @@ public class ExternalBankAccountsBankApi {
      * <p><b>404</b> - ExternalBankAccount not found
      * <p><b>422</b> - Unable to process request
      * @param externalBankAccountGuid Identifier for the external bank account.
-     * @param forceBalanceRefresh Force the balance on the account to be updated.
-     * @param includeBalances Include account balances in the response.
-     * @param includePii Include account holder&#39;s PII in the response.
+     * @param forceBalanceRefresh Force the balance on the account to be retrieved.
+     * @param includeBalances Include balance information in the response. If &#x60;force_balance_refresh&#x60; is &#x60;true&#x60;, the most up to date balance will be returned. If &#x60;force_balance_refresh&#x60; is &#x60;false&#x60;, the cached balance will be returned. &#x60;balance_updated_at&#x60; in the response will provide the timestamp the balance was last updated.
+     * @param includePii Include the account holder&#39;s PII in the response.
      * @return ExternalBankAccountBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
@@ -229,9 +229,9 @@ public class ExternalBankAccountsBankApi {
      * <p><b>404</b> - ExternalBankAccount not found
      * <p><b>422</b> - Unable to process request
      * @param externalBankAccountGuid Identifier for the external bank account.
-     * @param forceBalanceRefresh Force the balance on the account to be updated.
-     * @param includeBalances Include account balances in the response.
-     * @param includePii Include account holder&#39;s PII in the response.
+     * @param forceBalanceRefresh Force the balance on the account to be retrieved.
+     * @param includeBalances Include balance information in the response. If &#x60;force_balance_refresh&#x60; is &#x60;true&#x60;, the most up to date balance will be returned. If &#x60;force_balance_refresh&#x60; is &#x60;false&#x60;, the cached balance will be returned. &#x60;balance_updated_at&#x60; in the response will provide the timestamp the balance was last updated.
+     * @param includePii Include the account holder&#39;s PII in the response.
      * @return ExternalBankAccountBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */

@@ -203,9 +203,9 @@ public class Example {
 
         ExternalBankAccountsBankApi apiInstance = new ExternalBankAccountsBankApi(defaultClient);
         String externalBankAccountGuid = "externalBankAccountGuid_example"; // String | Identifier for the external bank account.
-        Boolean forceBalanceRefresh = true; // Boolean | Force the balance on the account to be updated.
-        Boolean includeBalances = true; // Boolean | Include account balances in the response.
-        Boolean includePii = true; // Boolean | Include account holder's PII in the response.
+        Boolean forceBalanceRefresh = true; // Boolean | Force the balance on the account to be retrieved.
+        Boolean includeBalances = true; // Boolean | Include balance information in the response. If `force_balance_refresh` is `true`, the most up to date balance will be returned. If `force_balance_refresh` is `false`, the cached balance will be returned. `balance_updated_at` in the response will provide the timestamp the balance was last updated.
+        Boolean includePii = true; // Boolean | Include the account holder's PII in the response.
         try {
             ExternalBankAccountBankModel result = apiInstance.getExternalBankAccount(externalBankAccountGuid, forceBalanceRefresh, includeBalances, includePii);
             System.out.println(result);
@@ -226,9 +226,9 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **externalBankAccountGuid** | **String**| Identifier for the external bank account. | |
-| **forceBalanceRefresh** | **Boolean**| Force the balance on the account to be updated. | [optional] |
-| **includeBalances** | **Boolean**| Include account balances in the response. | [optional] |
-| **includePii** | **Boolean**| Include account holder&#39;s PII in the response. | [optional] |
+| **forceBalanceRefresh** | **Boolean**| Force the balance on the account to be retrieved. | [optional] |
+| **includeBalances** | **Boolean**| Include balance information in the response. If &#x60;force_balance_refresh&#x60; is &#x60;true&#x60;, the most up to date balance will be returned. If &#x60;force_balance_refresh&#x60; is &#x60;false&#x60;, the cached balance will be returned. &#x60;balance_updated_at&#x60; in the response will provide the timestamp the balance was last updated. | [optional] |
+| **includePii** | **Boolean**| Include the account holder&#39;s PII in the response. | [optional] |
 
 ### Return type
 

@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.109.37
+  version: v0.109.38
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5918,8 +5918,8 @@ components:
             - names
           environment: sandbox
           balances:
-            current_balance: 0
-            available_balance: 0
+            current: 0
+            available: 0
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -5980,8 +5980,8 @@ components:
             - names
           environment: sandbox
           balances:
-            current_balance: 0
-            available_balance: 0
+            current: 0
+            available: 0
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -6414,8 +6414,8 @@ components:
           - names
         environment: sandbox
         balances:
-          current_balance: 0
-          available_balance: 0
+          current: 0
+          available: 0
         plaid_institution_id: plaid_institution_id
         name: name
         guid: guid
@@ -7247,16 +7247,16 @@ components:
     ExternalBankAccount_balances:
       description: Balance information for the account.
       example:
-        current_balance: 0
-        available_balance: 0
+        current: 0
+        available: 0
       nullable: true
       properties:
-        available_balance:
+        available:
           description: The available balance in the account.
           minimum: 0
           nullable: true
           type: integer
-        current_balance:
+        current:
           description: The current balance in the account including pending transactions.
           minimum: 0
           nullable: true

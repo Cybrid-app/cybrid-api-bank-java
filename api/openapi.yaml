@@ -199,7 +199,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.109.44
+  version: v0.109.45
 servers:
 - url: https://bank.sandbox.cybrid.app
   variables:
@@ -5605,6 +5605,7 @@ components:
           - crypto
           - instant_funding
           - funding_return
+          - crypto_return
           type: string
         bank_guid:
           description: The associated bank's identifier.

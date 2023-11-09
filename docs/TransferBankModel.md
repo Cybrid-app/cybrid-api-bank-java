@@ -44,6 +44,7 @@
 | CRYPTO | &quot;crypto&quot; |
 | INSTANT_FUNDING | &quot;instant_funding&quot; |
 | FUNDING_RETURN | &quot;funding_return&quot; |
+| CRYPTO_RETURN | &quot;crypto_return&quot; |
 
 
 

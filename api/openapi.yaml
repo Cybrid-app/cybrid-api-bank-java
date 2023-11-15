@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.109.61
+  version: v0.110.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1362,6 +1362,331 @@ paths:
       summary: Get Deposit Address
       tags:
       - DepositAddresses
+      x-accepts: application/json
+  /api/deposit_bank_accounts:
+    get:
+      description: "Retrieves a list of deposit bank accounts.\n\nRequired scope:\
+        \ **deposit_bank_accounts:read**"
+      operationId: listDepositBankAccounts
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated guids to list deposit bank accounts for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list deposit bank accounts for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list deposit bank accounts
+          for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list deposit bank accounts for.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositBankAccountList'
+          description: get list of deposit bank accounts
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: comma separated bank guids must be at the most
+                      4096 characters long
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: deposit_bank_accounts:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - deposit_bank_accounts:read
+      summary: List Deposit Bank Accounts
+      tags:
+      - DepositBankAccounts
+      x-accepts: application/json
+    post:
+      description: "Creates a deposit bank account.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the deposit\
+        \ bank account details in our private store |\n| created | The Platform has\
+        \ created the deposit bank account |\n\n\n\nRequired scope: **deposit_bank_accounts:execute**"
+      operationId: createDepositBankAccount
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostDepositBankAccount'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositBankAccount'
+          description: Deposit Bank Account created
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: deposit_bank_accounts:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "422":
+          content:
+            application/json:
+              examples:
+                unprocessable_request:
+                  value:
+                    status: 422
+                    error_message: "Unable to process request: UnsupportedRoutableAccounts\
+                      \ - Bank does not support routable accounts"
+                    message_code: unsupported_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unable to process request
+        "500":
+          content:
+            application/json:
+              examples:
+                internal_server_error:
+                  value:
+                    status: 500
+                    error_message: "Unable to process request: Internal account not\
+                      \ found"
+                    message_code: internal_server_error
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - BearerAuth: []
+        oauth2:
+        - deposit_bank_accounts:execute
+      summary: Create Deposit Bank Account
+      tags:
+      - DepositBankAccounts
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/deposit_bank_accounts/{deposit_bank_account_guid}:
+    get:
+      description: "Retrieves a deposit bank account.\n\nRequired scope: **deposit_bank_accounts:read**"
+      operationId: getDepositBankAccount
+      parameters:
+      - description: Identifier for the deposit bank account.
+        explode: false
+        in: path
+        name: deposit_bank_account_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepositBankAccount'
+          description: deposit bank account found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: deposit_bank_accounts:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: deposit_bank_account not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: deposit_bank_account not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - deposit_bank_accounts:read
+      summary: Get Deposit Bank Account
+      tags:
+      - DepositBankAccounts
       x-accepts: application/json
   /api/external_bank_accounts:
     get:
@@ -4730,6 +5055,7 @@ components:
         features:
         - attestation_identity_records
         - attestation_identity_records
+        routable_accounts: unsupported
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -4790,6 +5116,13 @@ components:
             - raw_routing_details
             type: string
           type: array
+        routable_accounts:
+          description: Configuration for supporting creating routable bank accounts.
+          enum:
+          - unsupported
+          - bank
+          - customer
+          type: string
         created_at:
           description: ISO8601 datetime the bank was created at.
           format: date-time
@@ -4810,6 +5143,7 @@ components:
         - features:
           - attestation_identity_records
           - attestation_identity_records
+          routable_accounts: unsupported
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -4827,6 +5161,7 @@ components:
         - features:
           - attestation_identity_records
           - attestation_identity_records
+          routable_accounts: unsupported
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5126,6 +5461,205 @@ components:
         objects:
           items:
             $ref: '#/components/schemas/IdentityVerification'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    PostDepositBankAccount:
+      properties:
+        account_guid:
+          description: The trading account guid.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        labels:
+          description: The labels associated with the address.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - account_guid
+      type: object
+    DepositBankAccount:
+      example:
+        counterparty_name: counterparty_name
+        routing_details:
+        - routing_number_type: CPA
+          routing_number: routing_number
+        - routing_number_type: CPA
+          routing_number: routing_number
+        created_at: 2000-01-23T04:56:07.000+00:00
+        account_details:
+        - account_number: account_number
+        - account_number: account_number
+        labels:
+        - labels
+        - labels
+        counterparty_address:
+          subdivision: subdivision
+          country_code: country_code
+          city: city
+          street: street
+          street2: street2
+          postal_code: postal_code
+        account_guid: account_guid
+        guid: guid
+        state: storing
+        asset: asset
+        unique_memo_id: unique_memo_id
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the identity verification.
+          maxLength: 32
+          minLength: 32
+          type: string
+        bank_guid:
+          description: The address' bank identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The address' customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        account_guid:
+          description: The address' account identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the address was created at.
+          format: date-time
+          type: string
+        asset:
+          description: "The asset the transfer is related to, e.g., USD."
+          type: string
+        state:
+          description: The state of the address.
+          enum:
+          - storing
+          - created
+          type: string
+        unique_memo_id:
+          description: The unique memo identifier for the address. This is used to
+            identify the recipient when sending funds to the account. This value MUST
+            be included in all wire transfers to this account.
+          type: string
+        counterparty_name:
+          description: The name of the account holder.
+          nullable: true
+          type: string
+        counterparty_address:
+          $ref: '#/components/schemas/DepositBankAccount_counterparty_address'
+        account_details:
+          description: The account details for the bank account.
+          items:
+            $ref: '#/components/schemas/DepositBankAccount_account_details_inner'
+          nullable: true
+          type: array
+        routing_details:
+          description: The account details for the bank account.
+          items:
+            $ref: '#/components/schemas/DepositBankAccount_routing_details_inner'
+          nullable: true
+          type: array
+        labels:
+          description: The labels associated with the address.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    DepositBankAccountList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - counterparty_name: counterparty_name
+          routing_details:
+          - routing_number_type: CPA
+            routing_number: routing_number
+          - routing_number_type: CPA
+            routing_number: routing_number
+          created_at: 2000-01-23T04:56:07.000+00:00
+          account_details:
+          - account_number: account_number
+          - account_number: account_number
+          labels:
+          - labels
+          - labels
+          counterparty_address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          account_guid: account_guid
+          guid: guid
+          state: storing
+          asset: asset
+          unique_memo_id: unique_memo_id
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        - counterparty_name: counterparty_name
+          routing_details:
+          - routing_number_type: CPA
+            routing_number: routing_number
+          - routing_number_type: CPA
+            routing_number: routing_number
+          created_at: 2000-01-23T04:56:07.000+00:00
+          account_details:
+          - account_number: account_number
+          - account_number: account_number
+          labels:
+          - labels
+          - labels
+          counterparty_address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          account_guid: account_guid
+          guid: guid
+          state: storing
+          asset: asset
+          unique_memo_id: unique_memo_id
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/DepositBankAccount'
           type: array
       required:
       - objects
@@ -6631,6 +7165,13 @@ components:
           maxItems: 1
           minItems: 1
           type: array
+        routable_accounts:
+          description: Configuration for supporting creating routable bank accounts.
+          enum:
+          - unsupported
+          - bank
+          - customer
+          type: string
       required:
       - features
       - name
@@ -7195,6 +7736,74 @@ components:
           nullable: true
           type: string
       type: object
+    DepositBankAccount_counterparty_address:
+      description: The counterparty's address on the account.
+      example:
+        subdivision: subdivision
+        country_code: country_code
+        city: city
+        street: street
+        street2: street2
+        postal_code: postal_code
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          type: string
+        subdivision:
+          description: The provide/state/region of the address; not used by all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          maxLength: 2
+          minLength: 2
+          type: string
+      required:
+      - city
+      - country_code
+      - street
+      type: object
+    DepositBankAccount_account_details_inner:
+      example:
+        account_number: account_number
+      properties:
+        account_number:
+          description: The account number.
+          type: string
+      required:
+      - account_number
+      type: object
+    DepositBankAccount_routing_details_inner:
+      example:
+        routing_number_type: CPA
+        routing_number: routing_number
+      properties:
+        routing_number_type:
+          description: The type of routing number.
+          enum:
+          - CPA
+          - ABA
+          - SWIFT
+          type: string
+        routing_number:
+          description: The routing number.
+          type: string
+      required:
+      - routing_number
+      - routing_number_type
+      type: object
     WorkflowWithDetails_allOf:
       properties:
         plaid_link_token:
@@ -7485,7 +8094,7 @@ components:
       - last
       type: object
     PostExternalBankAccount_counterparty_address:
-      description: The counterparty's address on the account.
+      description: The counterparty's address on the external account.
       nullable: true
       properties:
         street:

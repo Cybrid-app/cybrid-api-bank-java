@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.109.61
+- API version: v0.110.0
 
-- Build date: 2023-11-15T13:14:02.443476Z[Etc/UTC]
+- Build date: 2023-11-15T15:43:27.168293Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.109.61</version>
+  <version>v0.110.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.109.61"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.110.0"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.109.61.jar`
+- `target/cybrid-api-bank-java-v0.110.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -281,6 +281,9 @@ Class | Method | HTTP request | Description
 *DepositAddressesBankApi* | [**createDepositAddress**](docs/DepositAddressesBankApi.md#createDepositAddress) | **POST** /api/deposit_addresses | Create Deposit Address
 *DepositAddressesBankApi* | [**getDepositAddress**](docs/DepositAddressesBankApi.md#getDepositAddress) | **GET** /api/deposit_addresses/{deposit_address_guid} | Get Deposit Address
 *DepositAddressesBankApi* | [**listDepositAddresses**](docs/DepositAddressesBankApi.md#listDepositAddresses) | **GET** /api/deposit_addresses | List Deposit Addresses
+*DepositBankAccountsBankApi* | [**createDepositBankAccount**](docs/DepositBankAccountsBankApi.md#createDepositBankAccount) | **POST** /api/deposit_bank_accounts | Create Deposit Bank Account
+*DepositBankAccountsBankApi* | [**getDepositBankAccount**](docs/DepositBankAccountsBankApi.md#getDepositBankAccount) | **GET** /api/deposit_bank_accounts/{deposit_bank_account_guid} | Get Deposit Bank Account
+*DepositBankAccountsBankApi* | [**listDepositBankAccounts**](docs/DepositBankAccountsBankApi.md#listDepositBankAccounts) | **GET** /api/deposit_bank_accounts | List Deposit Bank Accounts
 *ExternalBankAccountsBankApi* | [**createExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#createExternalBankAccount) | **POST** /api/external_bank_accounts | Create ExternalBankAccount
 *ExternalBankAccountsBankApi* | [**deleteExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#deleteExternalBankAccount) | **DELETE** /api/external_bank_accounts/{external_bank_account_guid} | Delete External Bank Account
 *ExternalBankAccountsBankApi* | [**getExternalBankAccount**](docs/ExternalBankAccountsBankApi.md#getExternalBankAccount) | **GET** /api/external_bank_accounts/{external_bank_account_guid} | Get External Bank Account
@@ -323,6 +326,11 @@ Class | Method | HTTP request | Description
  - [CustomerNameBankModel](docs/CustomerNameBankModel.md)
  - [DepositAddressBankModel](docs/DepositAddressBankModel.md)
  - [DepositAddressListBankModel](docs/DepositAddressListBankModel.md)
+ - [DepositBankAccountAccountDetailsInnerBankModel](docs/DepositBankAccountAccountDetailsInnerBankModel.md)
+ - [DepositBankAccountBankModel](docs/DepositBankAccountBankModel.md)
+ - [DepositBankAccountCounterpartyAddressBankModel](docs/DepositBankAccountCounterpartyAddressBankModel.md)
+ - [DepositBankAccountListBankModel](docs/DepositBankAccountListBankModel.md)
+ - [DepositBankAccountRoutingDetailsInnerBankModel](docs/DepositBankAccountRoutingDetailsInnerBankModel.md)
  - [ErrorResponseBankModel](docs/ErrorResponseBankModel.md)
  - [ExternalBankAccountBalancesBankModel](docs/ExternalBankAccountBalancesBankModel.md)
  - [ExternalBankAccountBankModel](docs/ExternalBankAccountBankModel.md)
@@ -345,6 +353,7 @@ Class | Method | HTTP request | Description
  - [PostCustomerBankModel](docs/PostCustomerBankModel.md)
  - [PostCustomerNameBankModel](docs/PostCustomerNameBankModel.md)
  - [PostDepositAddressBankModel](docs/PostDepositAddressBankModel.md)
+ - [PostDepositBankAccountBankModel](docs/PostDepositBankAccountBankModel.md)
  - [PostExternalBankAccountBankModel](docs/PostExternalBankAccountBankModel.md)
  - [PostExternalBankAccountCounterpartyAddressBankModel](docs/PostExternalBankAccountCounterpartyAddressBankModel.md)
  - [PostExternalBankAccountCounterpartyBankAccountBankModel](docs/PostExternalBankAccountCounterpartyBankAccountBankModel.md)

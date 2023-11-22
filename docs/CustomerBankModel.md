@@ -37,6 +37,7 @@
 | UNVERIFIED | &quot;unverified&quot; |
 | VERIFIED | &quot;verified&quot; |
 | REJECTED | &quot;rejected&quot; |
+| FROZEN | &quot;frozen&quot; |
 
 
 

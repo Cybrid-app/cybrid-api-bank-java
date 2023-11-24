@@ -169,7 +169,7 @@ public class Example {
 
 ## listDepositBankAccounts
 
-> DepositBankAccountListBankModel listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label)
+> DepositBankAccountListBankModel listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId)
 
 List Deposit Bank Accounts
 
@@ -206,8 +206,9 @@ public class Example {
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list deposit bank accounts for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list deposit bank accounts for.
         String label = "label_example"; // String | Comma separated labels to list deposit bank accounts for.
+        String uniqueMemoId = "uniqueMemoId_example"; // String | Comma separated unique memo ids to list deposit bank accounts for.
         try {
-            DepositBankAccountListBankModel result = apiInstance.listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label);
+            DepositBankAccountListBankModel result = apiInstance.listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DepositBankAccountsBankApi#listDepositBankAccounts");
@@ -231,6 +232,7 @@ public class Example {
 | **bankGuid** | **String**| Comma separated bank_guids to list deposit bank accounts for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list deposit bank accounts for. | [optional] |
 | **label** | **String**| Comma separated labels to list deposit bank accounts for. | [optional] |
+| **uniqueMemoId** | **String**| Comma separated unique memo ids to list deposit bank accounts for. | [optional] |
 
 ### Return type
 

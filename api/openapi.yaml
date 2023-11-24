@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.110.26
+  version: v0.110.27
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5056,6 +5056,7 @@ components:
         features:
         - attestation_identity_records
         - attestation_identity_records
+        updated_at: 2000-01-23T04:56:07.000+00:00
         routable_accounts: unsupported
         name: name
         guid: guid
@@ -5125,7 +5126,11 @@ components:
           - customer
           type: string
         created_at:
-          description: ISO8601 datetime the bank was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
       required:
@@ -5144,6 +5149,7 @@ components:
         - features:
           - attestation_identity_records
           - attestation_identity_records
+          updated_at: 2000-01-23T04:56:07.000+00:00
           routable_accounts: unsupported
           name: name
           guid: guid
@@ -5162,6 +5168,7 @@ components:
         - features:
           - attestation_identity_records
           - attestation_identity_records
+          updated_at: 2000-01-23T04:56:07.000+00:00
           routable_accounts: unsupported
           name: name
           guid: guid
@@ -5212,6 +5219,7 @@ components:
           street2: street2
           postal_code: postal_code
         email_address: email_address
+        updated_at: 2000-01-23T04:56:07.000+00:00
         date_of_birth: 2000-01-23
         name:
           middle: middle
@@ -5243,7 +5251,11 @@ components:
           - individual
           type: string
         created_at:
-          description: ISO8601 datetime the customer was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         state:
@@ -5295,6 +5307,7 @@ components:
             street2: street2
             postal_code: postal_code
           email_address: email_address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           date_of_birth: 2000-01-23
           name:
             middle: middle
@@ -5317,6 +5330,7 @@ components:
             street2: street2
             postal_code: postal_code
           email_address: email_address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           date_of_birth: 2000-01-23
           name:
             middle: middle
@@ -5361,6 +5375,7 @@ components:
         - failure_codes
         - failure_codes
         method: id_and_selfie
+        updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         state: storing
@@ -5392,7 +5407,11 @@ components:
           - plaid_identity_match
           type: string
         created_at:
-          description: ISO8601 datetime the customer was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         state:
@@ -5430,6 +5449,7 @@ components:
           - failure_codes
           - failure_codes
           method: id_and_selfie
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           state: storing
@@ -5440,6 +5460,7 @@ components:
           - failure_codes
           - failure_codes
           method: id_and_selfie
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           state: storing
@@ -5515,6 +5536,7 @@ components:
           street2: street2
           postal_code: postal_code
         account_guid: account_guid
+        updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         state: storing
         asset: asset
@@ -5544,7 +5566,11 @@ components:
           minLength: 32
           type: string
         created_at:
-          description: ISO8601 datetime the address was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         asset:
@@ -5612,6 +5638,7 @@ components:
             street2: street2
             postal_code: postal_code
           account_guid: account_guid
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           state: storing
           asset: asset
@@ -5639,6 +5666,7 @@ components:
             street2: street2
             postal_code: postal_code
           account_guid: account_guid
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           state: storing
           asset: asset
@@ -5673,6 +5701,7 @@ components:
       example:
         account_guid: account_guid
         address: address
+        updated_at: 2000-01-23T04:56:07.000+00:00
         format: standard
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -5707,7 +5736,11 @@ components:
           minLength: 32
           type: string
         created_at:
-          description: ISO8601 datetime the address was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         asset:
@@ -5745,6 +5778,7 @@ components:
         objects:
         - account_guid: account_guid
           address: address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           format: standard
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5758,6 +5792,7 @@ components:
           - labels
         - account_guid: account_guid
           address: address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           format: standard
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5896,12 +5931,14 @@ components:
         symbol: symbol
         side: buy
         fee: 2
+        created_at: 2000-01-23T04:56:07.000+00:00
         network_fee: 7
         issued_at: 2000-01-23T04:56:07.000+00:00
         network_fee_asset: network_fee_asset
         deliver_amount: 5
         product_type: trading
         expires_at: 2000-01-23T04:56:07.000+00:00
+        updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         receive_amount: 5
         asset: asset
@@ -5960,6 +5997,14 @@ components:
           description: The fee associated with the trade. Denominated in "counter_asset"
             base units for trade quotes.
           type: integer
+        created_at:
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
+          format: date-time
+          type: string
         issued_at:
           description: ISO8601 datetime the quote was created at.
           format: date-time
@@ -5997,12 +6042,14 @@ components:
         - symbol: symbol
           side: buy
           fee: 2
+          created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
           product_type: trading
           expires_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           receive_amount: 5
           asset: asset
@@ -6011,12 +6058,14 @@ components:
         - symbol: symbol
           side: buy
           fee: 2
+          created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
           product_type: trading
           expires_at: 2000-01-23T04:56:07.000+00:00
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           receive_amount: 5
           asset: asset
@@ -6054,6 +6103,7 @@ components:
     Workflow:
       example:
         failure_code: failure_code
+        updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         state: storing
@@ -6087,7 +6137,11 @@ components:
           nullable: true
           type: string
         created_at:
-          description: ISO8601 datetime the bank was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
       type: object
@@ -6242,11 +6296,11 @@ components:
         destination_account:
           $ref: '#/components/schemas/Transfer_destination_account'
         created_at:
-          description: ISO8601 datetime the bank was created at.
+          description: ISO8601 datetime the record was created at.
           format: date-time
           type: string
         updated_at:
-          description: ISO8601 datetime the transfer was last updated at.
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         labels:
@@ -6332,11 +6386,11 @@ components:
             base units
           type: integer
         created_at:
-          description: ISO8601 datetime the trade was created at.
+          description: ISO8601 datetime the record was created at.
           format: date-time
           type: string
         updated_at:
-          description: ISO8601 datetime the trade was last updated at.
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         labels:
@@ -6354,6 +6408,7 @@ components:
         - environment: sandbox
           failure_code: failure_code
           address: address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6365,6 +6420,7 @@ components:
         - environment: sandbox
           failure_code: failure_code
           address: address
+          updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6458,6 +6514,7 @@ components:
           balances:
             current: 0
             available: 0
+          updated_at: 2000-01-23T04:56:07.000+00:00
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -6520,6 +6577,7 @@ components:
           balances:
             current: 0
             available: 0
+          updated_at: 2000-01-23T04:56:07.000+00:00
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
@@ -6712,12 +6770,14 @@ components:
         total: 0
         objects:
         - failure_code: failure_code
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           state: storing
           type: plaid
           customer_guid: customer_guid
         - failure_code: failure_code
+          updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           state: storing
@@ -6750,6 +6810,7 @@ components:
       type: object
     Account:
       example:
+        updated_at: 2000-01-23T04:56:07.000+00:00
         platform_available: 5
         name: name
         guid: guid
@@ -6778,7 +6839,11 @@ components:
           minLength: 32
           type: string
         created_at:
-          description: ISO8601 datetime the account was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         asset:
@@ -6827,7 +6892,8 @@ components:
         per_page: 0
         total: 0
         objects:
-        - platform_available: 5
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          platform_available: 5
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6840,7 +6906,8 @@ components:
           labels:
           - labels
           - labels
-        - platform_available: 5
+        - updated_at: 2000-01-23T04:56:07.000+00:00
+          platform_available: 5
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -6954,6 +7021,7 @@ components:
         balances:
           current: 0
           available: 0
+        updated_at: 2000-01-23T04:56:07.000+00:00
         plaid_institution_id: plaid_institution_id
         name: name
         guid: guid
@@ -7004,7 +7072,11 @@ components:
           nullable: true
           type: string
         created_at:
-          description: ISO8601 datetime the exchange was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         plaid_institution_id:
@@ -7060,6 +7132,7 @@ components:
         environment: sandbox
         failure_code: failure_code
         address: address
+        updated_at: 2000-01-23T04:56:07.000+00:00
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -7110,7 +7183,11 @@ components:
           nullable: true
           type: string
         created_at:
-          description: ISO8601 datetime the wallet was created at.
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
         state:

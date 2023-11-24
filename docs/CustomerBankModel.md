@@ -10,7 +10,8 @@
 |**guid** | **String** | Auto-generated unique identifier for the customer. |  [optional] |
 |**bankGuid** | **String** | Auto-generated unique identifier for the customer&#39;s bank. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | The customer&#39;s type. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the customer was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The customer&#39;s state. |  [optional] |
 |**name** | [**CustomerNameBankModel**](CustomerNameBankModel.md) |  |  [optional] |
 |**address** | [**CustomerAddressBankModel**](CustomerAddressBankModel.md) |  |  [optional] |

@@ -14,7 +14,8 @@
 |**environment** | [**EnvironmentEnum**](#EnvironmentEnum) | The environment that the external bank account is operating in. |  [optional] |
 |**bankGuid** | **String** | The bank identifier. |  [optional] |
 |**customerGuid** | **String** | The customer identifier. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the exchange was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**plaidInstitutionId** | **String** | The Plaid institution ID for the account. |  [optional] |
 |**plaidAccountMask** | **String** | The account number mask for the account. |  [optional] |
 |**plaidAccountName** | **String** | The name for the account. |  [optional] |

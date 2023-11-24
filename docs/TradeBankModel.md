@@ -18,8 +18,8 @@
 |**receiveAmount** | **java.math.BigInteger** | The amount to be received in base units of the currency: currency is \&quot;asset\&quot; for buy and \&quot;counter_asset\&quot; for sell. |  [optional] |
 |**deliverAmount** | **java.math.BigInteger** | The amount to be delivered in base units of the currency: currency is \&quot;counter_asset\&quot; for buy and \&quot;asset\&quot; for sell. |  [optional] |
 |**fee** | **java.math.BigInteger** | The fee associated with the trade. Denominated in \&quot;counter_asset\&quot; base units |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the trade was created at. |  [optional] |
-|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the trade was last updated at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the trade. |  [optional] |
 
 

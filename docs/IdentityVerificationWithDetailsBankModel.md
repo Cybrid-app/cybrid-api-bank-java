@@ -11,7 +11,8 @@
 |**customerGuid** | **String** | The customer&#39;s identifier. |  [optional] |
 |**type** | [**TypeEnum**](#TypeEnum) | The type of identity verification. |  [optional] |
 |**method** | [**MethodEnum**](#MethodEnum) | The identity verification method. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the customer was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The state of the verification process. |  [optional] |
 |**outcome** | [**OutcomeEnum**](#OutcomeEnum) | The outcome of the verification process. |  [optional] |
 |**failureCodes** | **List&lt;String&gt;** | The reason codes explaining the outcome. |  [optional] |

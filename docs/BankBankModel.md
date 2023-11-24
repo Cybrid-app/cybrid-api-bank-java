@@ -16,7 +16,8 @@
 |**supportedCountryCodes** | **List&lt;String&gt;** | The bank&#39;s list of supported country codes. |  [optional] |
 |**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The bank&#39;s enabled features. |  |
 |**routableAccounts** | [**RoutableAccountsEnum**](#RoutableAccountsEnum) | Configuration for supporting creating routable bank accounts. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the bank was created at. |  |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 
 
 

@@ -9,7 +9,8 @@
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | The account type. |  [optional] |
 |**guid** | **String** | Auto-generated unique identifier for the account. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the account was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**asset** | **String** | The asset code. |  [optional] |
 |**name** | **String** | The name of the account. |  [optional] |
 |**bankGuid** | **String** | The bank identifier associated with the account. |  [optional] |

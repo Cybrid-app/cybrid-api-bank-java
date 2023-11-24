@@ -15,7 +15,8 @@
 |**customerGuid** | **String** | The customer identifier. |  [optional] |
 |**address** | **String** | The blockchain wallet address for the wallet. |  [optional] |
 |**tag** | **String** | The blockchain tag to use when transferring crypto to the wallet. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the wallet was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The state of an external wallet |  [optional] |
 |**failureCode** | **String** | The failure code of an external wallet (if any) |  [optional] |
 

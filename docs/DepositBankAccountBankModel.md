@@ -11,7 +11,8 @@
 |**bankGuid** | **String** | The address&#39; bank identifier. |  [optional] |
 |**customerGuid** | **String** | The address&#39; customer identifier. |  [optional] |
 |**accountGuid** | **String** | The address&#39; account identifier. |  [optional] |
-|**createdAt** | **OffsetDateTime** | ISO8601 datetime the address was created at. |  [optional] |
+|**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
+|**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The state of the address. |  [optional] |
 |**uniqueMemoId** | **String** | The unique memo identifier for the address. This is used to identify the recipient when sending funds to the account. This value MUST be included in all wire transfers to this account. |  [optional] |

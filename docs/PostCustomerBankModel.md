@@ -22,6 +22,7 @@
 
 | Name | Value |
 |---- | -----|
+| BUSINESS | &quot;business&quot; |
 | INDIVIDUAL | &quot;individual&quot; |
 
 

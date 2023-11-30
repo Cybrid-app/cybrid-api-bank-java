@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.111.9
+  version: v0.111.15
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5384,7 +5384,7 @@ components:
         failure_codes:
         - failure_codes
         - failure_codes
-        method: id_and_selfie
+        method: business_registration
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -5412,6 +5412,7 @@ components:
         method:
           description: The identity verification method.
           enum:
+          - business_registration
           - id_and_selfie
           - attested
           - plaid_identity_match
@@ -5458,7 +5459,7 @@ components:
         - failure_codes:
           - failure_codes
           - failure_codes
-          method: id_and_selfie
+          method: business_registration
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5469,7 +5470,7 @@ components:
         - failure_codes:
           - failure_codes
           - failure_codes
-          method: id_and_selfie
+          method: business_registration
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -7340,6 +7341,7 @@ components:
         method:
           description: The identity verification method.
           enum:
+          - business_registration
           - id_and_selfie
           - attested
           - plaid_identity_match

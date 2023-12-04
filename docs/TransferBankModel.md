@@ -31,6 +31,7 @@
 |**destinationAccount** | [**TransferDestinationAccountBankModel**](TransferDestinationAccountBankModel.md) |  |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
+|**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
 
 

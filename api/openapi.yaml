@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.111.20
+  version: v0.112.1
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6162,6 +6162,7 @@ components:
       - $ref: '#/components/schemas/WorkflowWithDetails_allOf'
     Transfer:
       example:
+        transfer_details: "{}"
         quote_guid: quote_guid
         fee: 2
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -6314,6 +6315,10 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
+        transfer_details:
+          description: The raw details on the transfer from the bank.
+          nullable: true
+          type: object
         labels:
           description: The labels associated with the transfer.
           items:
@@ -6626,7 +6631,8 @@ components:
         per_page: 0
         total: 0
         objects:
-        - quote_guid: quote_guid
+        - transfer_details: "{}"
+          quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:
@@ -6657,7 +6663,8 @@ components:
           asset: asset
           estimated_network_fee: 7
           customer_guid: customer_guid
-        - quote_guid: quote_guid
+        - transfer_details: "{}"
+          quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:

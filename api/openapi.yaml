@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.112.6
+  version: v0.112.7
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5227,22 +5227,33 @@ components:
           street: street
           street2: street2
           postal_code: postal_code
+        date_of_birth: 2000-01-23
+        created_at: 2000-01-23T04:56:07.000+00:00
+        verification_checks:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: passed
+          type: business_watchlists
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: passed
+          type: business_watchlists
+        type: business
+        labels:
+        - labels
+        - labels
         email_address: email_address
         updated_at: 2000-01-23T04:56:07.000+00:00
-        date_of_birth: 2000-01-23
         name:
           middle: middle
           last: last
           first: first
         guid: guid
-        created_at: 2000-01-23T04:56:07.000+00:00
         phone_number: phone_number
         state: storing
-        type: business
         bank_guid: bank_guid
-        labels:
-        - labels
-        - labels
       properties:
         guid:
           description: Auto-generated unique identifier for the customer.
@@ -5303,6 +5314,11 @@ components:
             type: string
           nullable: true
           type: array
+        verification_checks:
+          description: The verification checks associated with the customer.
+          items:
+            $ref: '#/components/schemas/VerificationCheck'
+          type: array
       type: object
     CustomerList:
       example:
@@ -5316,22 +5332,33 @@ components:
             street: street
             street2: street2
             postal_code: postal_code
+          date_of_birth: 2000-01-23
+          created_at: 2000-01-23T04:56:07.000+00:00
+          verification_checks:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: passed
+            type: business_watchlists
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: passed
+            type: business_watchlists
+          type: business
+          labels:
+          - labels
+          - labels
           email_address: email_address
           updated_at: 2000-01-23T04:56:07.000+00:00
-          date_of_birth: 2000-01-23
           name:
             middle: middle
             last: last
             first: first
           guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
           phone_number: phone_number
           state: storing
-          type: business
           bank_guid: bank_guid
-          labels:
-          - labels
-          - labels
         - address:
             subdivision: subdivision
             country_code: country_code
@@ -5339,22 +5366,33 @@ components:
             street: street
             street2: street2
             postal_code: postal_code
+          date_of_birth: 2000-01-23
+          created_at: 2000-01-23T04:56:07.000+00:00
+          verification_checks:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: passed
+            type: business_watchlists
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: passed
+            type: business_watchlists
+          type: business
+          labels:
+          - labels
+          - labels
           email_address: email_address
           updated_at: 2000-01-23T04:56:07.000+00:00
-          date_of_birth: 2000-01-23
           name:
             middle: middle
             last: last
             first: first
           guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
           phone_number: phone_number
           state: storing
-          type: business
           bank_guid: bank_guid
-          labels:
-          - labels
-          - labels
         page: 0
       properties:
         total:
@@ -5501,6 +5539,46 @@ components:
       - page
       - per_page
       - total
+      type: object
+    VerificationCheck:
+      example:
+        failure_codes:
+        - failure_codes
+        - failure_codes
+        state: passed
+        type: business_watchlists
+      properties:
+        type:
+          description: The type of verification check.
+          enum:
+          - business_watchlists
+          - business_verification
+          - business_tax_id_verification
+          - person_attested
+          - person_tax_id_attested
+          - person_watchlists
+          - person_verification
+          - person_authentication
+          - person_gov_id_verification
+          - person_tax_id_verification
+          type: string
+        state:
+          description: The state of the verification check.
+          enum:
+          - passed
+          - failed
+          - expired
+          - invalidated
+          type: string
+        failure_codes:
+          description: The reason codes explaining the outcome.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - state
+      - type
       type: object
     PostDepositBankAccount:
       properties:

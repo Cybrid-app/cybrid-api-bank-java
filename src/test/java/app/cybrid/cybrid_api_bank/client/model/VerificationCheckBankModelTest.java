@@ -13,9 +13,6 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import app.cybrid.cybrid_api_bank.client.model.BankBankModel;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -25,194 +22,47 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * BankListBankModel
+ * Model tests for VerificationCheckBankModel
  */
-@JsonPropertyOrder({
-  BankListBankModel.JSON_PROPERTY_TOTAL,
-  BankListBankModel.JSON_PROPERTY_PAGE,
-  BankListBankModel.JSON_PROPERTY_PER_PAGE,
-  BankListBankModel.JSON_PROPERTY_OBJECTS
-})
-@JsonTypeName("BankList")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-05T17:41:24.984233Z[Etc/UTC]")
-public class BankListBankModel {
-  public static final String JSON_PROPERTY_TOTAL = "total";
-  private java.math.BigInteger total;
+public class VerificationCheckBankModelTest {
+    private final VerificationCheckBankModel model = new VerificationCheckBankModel();
 
-  public static final String JSON_PROPERTY_PAGE = "page";
-  private java.math.BigInteger page;
-
-  public static final String JSON_PROPERTY_PER_PAGE = "per_page";
-  private java.math.BigInteger perPage;
-
-  public static final String JSON_PROPERTY_OBJECTS = "objects";
-  private List<BankBankModel> objects = new ArrayList<>();
-
-  public BankListBankModel() { 
-  }
-
-  public BankListBankModel total(java.math.BigInteger total) {
-    
-    this.total = total;
-    return this;
-  }
-
-   /**
-   * The total number of records available.
-   * minimum: 0
-   * @return total
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The total number of records available.")
-  @JsonProperty(JSON_PROPERTY_TOTAL)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public java.math.BigInteger getTotal() {
-    return total;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TOTAL)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTotal(java.math.BigInteger total) {
-    this.total = total;
-  }
-
-
-  public BankListBankModel page(java.math.BigInteger page) {
-    
-    this.page = page;
-    return this;
-  }
-
-   /**
-   * The page index to retrieve.
-   * minimum: 0
-   * @return page
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The page index to retrieve.")
-  @JsonProperty(JSON_PROPERTY_PAGE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public java.math.BigInteger getPage() {
-    return page;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_PAGE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPage(java.math.BigInteger page) {
-    this.page = page;
-  }
-
-
-  public BankListBankModel perPage(java.math.BigInteger perPage) {
-    
-    this.perPage = perPage;
-    return this;
-  }
-
-   /**
-   * The number of entities per page to return.
-   * minimum: 0
-   * @return perPage
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The number of entities per page to return.")
-  @JsonProperty(JSON_PROPERTY_PER_PAGE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public java.math.BigInteger getPerPage() {
-    return perPage;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_PER_PAGE)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPerPage(java.math.BigInteger perPage) {
-    this.perPage = perPage;
-  }
-
-
-  public BankListBankModel objects(List<BankBankModel> objects) {
-    
-    this.objects = objects;
-    return this;
-  }
-
-  public BankListBankModel addObjectsItem(BankBankModel objectsItem) {
-    this.objects.add(objectsItem);
-    return this;
-  }
-
-   /**
-   * Array of bank entities
-   * @return objects
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "Array of bank entities")
-  @JsonProperty(JSON_PROPERTY_OBJECTS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-
-  public List<BankBankModel> getObjects() {
-    return objects;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_OBJECTS)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setObjects(List<BankBankModel> objects) {
-    this.objects = objects;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Model tests for VerificationCheckBankModel
+     */
+    @Test
+    public void testVerificationCheckBankModel() {
+        // TODO: test VerificationCheckBankModel
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
     }
-    BankListBankModel bankList = (BankListBankModel) o;
-    return Objects.equals(this.total, bankList.total) &&
-        Objects.equals(this.page, bankList.page) &&
-        Objects.equals(this.perPage, bankList.perPage) &&
-        Objects.equals(this.objects, bankList.objects);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(total, page, perPage, objects);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class BankListBankModel {\n");
-    sb.append("    total: ").append(toIndentedString(total)).append("\n");
-    sb.append("    page: ").append(toIndentedString(page)).append("\n");
-    sb.append("    perPage: ").append(toIndentedString(perPage)).append("\n");
-    sb.append("    objects: ").append(toIndentedString(objects)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'state'
+     */
+    @Test
+    public void stateTest() {
+        // TODO: test state
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+     * Test the property 'failureCodes'
+     */
+    @Test
+    public void failureCodesTest() {
+        // TODO: test failureCodes
+    }
 
 }
-

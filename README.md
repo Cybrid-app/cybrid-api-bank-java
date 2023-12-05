@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.112.6
+- API version: v0.112.7
 
-- Build date: 2023-12-05T15:57:11.797421Z[Etc/UTC]
+- Build date: 2023-12-05T17:41:24.984233Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.112.6</version>
+  <version>v0.112.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.112.6"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.112.7"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.112.6.jar`
+- `target/cybrid-api-bank-java-v0.112.7.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -376,6 +376,7 @@ Class | Method | HTTP request | Description
  - [TransferDestinationAccountBankModel](docs/TransferDestinationAccountBankModel.md)
  - [TransferListBankModel](docs/TransferListBankModel.md)
  - [TransferSourceAccountBankModel](docs/TransferSourceAccountBankModel.md)
+ - [VerificationCheckBankModel](docs/VerificationCheckBankModel.md)
  - [WorkflowBankModel](docs/WorkflowBankModel.md)
  - [WorkflowWithDetailsAllOfBankModel](docs/WorkflowWithDetailsAllOfBankModel.md)
  - [WorkflowWithDetailsBankModel](docs/WorkflowWithDetailsBankModel.md)

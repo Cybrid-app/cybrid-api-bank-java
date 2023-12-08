@@ -31,6 +31,8 @@
 |---- | -----|
 | ATTESTATION_IDENTITY_RECORDS | &quot;attestation_identity_records&quot; |
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
+| BUSINESS_CUSTOMERS | &quot;business_customers&quot; |
+| INDIVIDUAL_CUSTOMERS | &quot;individual_customers&quot; |
 
 
 

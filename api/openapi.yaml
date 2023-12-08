@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.112.16
+  version: v0.112.17
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -775,15 +775,14 @@ paths:
         \ are an abstraction for real world individuals and businesses on the Cybrid\
         \ Platform and are used throughout the platform to perform high level operations,\
         \ e.g., create a quote, execute a trade, etc..\n\nCustomers can have additional\
-        \ resources attached to them, e.g., identity records, accounts, etc.\n\nAt\
-        \ present, Customer's can be created with type `individual`.\n\n## State\n\
-        \n| State | Description |\n|-------|-------------|\n| storing | The Platform\
-        \ is storing the customer details in our private store |\n| unverified | The\
-        \ Platform has not yet verified the customer's identity |\n| verified | The\
-        \ Platform has verified the customer's identity |\n| rejected | The Platform\
-        \ was not able to successfully verify the customer's identity |\n| frozen\
-        \ | The customer has been frozen on the Platform |\n\n\n\nRequired scope:\
-        \ **customers:execute**"
+        \ resources attached to them, e.g., identity verifications, accounts, etc.\n\
+        \n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
+        \ | The Platform is storing the customer details in our private store |\n\
+        | unverified | The Platform has not yet verified the customer's identity |\n\
+        | verified | The Platform has verified the customer's identity |\n| rejected\
+        \ | The Platform was not able to successfully verify the customer's identity\
+        \ |\n| frozen | The customer has been frozen on the Platform |\n\n\n\nRequired\
+        \ scope: **customers:execute**"
       operationId: createCustomer
       parameters: []
       requestBody:
@@ -5125,6 +5124,8 @@ components:
             - attestation_identity_records
             - kyc_identity_verifications
             - raw_routing_details
+            - individual_customers
+            - business_customers
             type: string
           type: array
         routable_accounts:
@@ -7324,6 +7325,8 @@ components:
             enum:
             - attestation_identity_records
             - kyc_identity_verifications
+            - business_customers
+            - individual_customers
             type: string
           type: array
         supported_fiat_account_assets:

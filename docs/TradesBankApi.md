@@ -170,7 +170,7 @@ public class Example {
 
 ## listTrades
 
-> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label)
+> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt)
 
 Get trades list
 
@@ -209,8 +209,10 @@ public class Example {
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list trades for.
         String state = "state_example"; // String | Comma separated states to list trades for.
         String label = "label_example"; // String | Comma separated labels to list trades for.
+        String createdAtGte = "createdAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601.
+        String createdAtLt = "createdAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
         try {
-            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label);
+            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TradesBankApi#listTrades");
@@ -236,6 +238,8 @@ public class Example {
 | **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional] |
 | **state** | **String**| Comma separated states to list trades for. | [optional] |
 | **label** | **String**| Comma separated labels to list trades for. | [optional] |
+| **createdAtGte** | **String**| Created at start date inclusive lower bound, ISO8601. | [optional] |
+| **createdAtLt** | **String**| Created at end date exclusive upper bound, ISO8601. | [optional] |
 
 ### Return type
 

@@ -170,7 +170,7 @@ public class Example {
 
 ## listTransfers
 
-> TransferListBankModel listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label)
+> TransferListBankModel listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt)
 
 Get transfers list
 
@@ -210,8 +210,10 @@ public class Example {
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list transfers for.
         String state = "state_example"; // String | Comma separated states to list transfers for.
         String label = "label_example"; // String | Comma separated labels to list transfers for.
+        String createdAtGte = "createdAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601
+        String createdAtLt = "createdAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
         try {
-            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label);
+            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TransfersBankApi#listTransfers");
@@ -238,6 +240,8 @@ public class Example {
 | **accountGuid** | **String**| Comma separated account_guids to list transfers for. | [optional] |
 | **state** | **String**| Comma separated states to list transfers for. | [optional] |
 | **label** | **String**| Comma separated labels to list transfers for. | [optional] |
+| **createdAtGte** | **String**| Created at start date inclusive lower bound, ISO8601 | [optional] |
+| **createdAtLt** | **String**| Created at end date exclusive upper bound, ISO8601. | [optional] |
 
 ### Return type
 

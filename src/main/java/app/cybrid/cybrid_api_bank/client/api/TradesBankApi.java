@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-11T18:35:22.342637Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-11T18:56:56.306793Z[Etc/UTC]")
 public class TradesBankApi {
     private ApiClient apiClient;
 
@@ -190,10 +190,12 @@ public class TradesBankApi {
      * @param label Comma separated labels to list trades for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601.
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param updatedAtGte Updated at start date inclusive lower bound, ISO8601.
+     * @param updatedAtLt Updated at end date exclusive upper bound, ISO8601.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTradesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    private ResponseSpec listTradesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -213,6 +215,8 @@ public class TradesBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_gte", createdAtGte));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_lt", createdAtLt));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "updated_at_gte", updatedAtGte));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "updated_at_lt", updatedAtLt));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -244,16 +248,18 @@ public class TradesBankApi {
      * @param label Comma separated labels to list trades for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601.
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param updatedAtGte Updated at start date inclusive lower bound, ISO8601.
+     * @param updatedAtLt Updated at end date exclusive upper bound, ISO8601.
      * @return TradeListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TradeListBankModel> listTrades(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    public Mono<TradeListBankModel> listTrades(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt).bodyToMono(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    public Mono<ResponseEntity<TradeListBankModel>> listTradesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TradeListBankModel> localVarReturnType = new ParameterizedTypeReference<TradeListBankModel>() {};
-        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt).toEntity(localVarReturnType);
+        return listTradesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).toEntity(localVarReturnType);
     }
 }

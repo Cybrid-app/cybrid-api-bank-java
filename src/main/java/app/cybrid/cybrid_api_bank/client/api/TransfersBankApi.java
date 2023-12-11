@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-11T18:35:22.342637Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-11T18:56:56.306793Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -191,10 +191,12 @@ public class TransfersBankApi {
      * @param label Comma separated labels to list transfers for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
+     * @param updatedAtLt Created at end date exclusive upper bound, ISO8601.
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -215,6 +217,8 @@ public class TransfersBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_gte", createdAtGte));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_lt", createdAtLt));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "updated_at_gte", updatedAtGte));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "updated_at_lt", updatedAtLt));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -247,16 +251,18 @@ public class TransfersBankApi {
      * @param label Comma separated labels to list transfers for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
+     * @param updatedAtLt Created at end date exclusive upper bound, ISO8601.
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt).bodyToMono(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt) throws WebClientResponseException {
+    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt).toEntity(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).toEntity(localVarReturnType);
     }
 }

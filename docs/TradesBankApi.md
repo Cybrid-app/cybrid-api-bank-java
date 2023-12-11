@@ -170,7 +170,7 @@ public class Example {
 
 ## listTrades
 
-> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt)
+> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt)
 
 Get trades list
 
@@ -211,8 +211,10 @@ public class Example {
         String label = "label_example"; // String | Comma separated labels to list trades for.
         String createdAtGte = "createdAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601.
         String createdAtLt = "createdAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
+        String updatedAtGte = "updatedAtGte_example"; // String | Updated at start date inclusive lower bound, ISO8601.
+        String updatedAtLt = "updatedAtLt_example"; // String | Updated at end date exclusive upper bound, ISO8601.
         try {
-            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt);
+            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TradesBankApi#listTrades");
@@ -240,6 +242,8 @@ public class Example {
 | **label** | **String**| Comma separated labels to list trades for. | [optional] |
 | **createdAtGte** | **String**| Created at start date inclusive lower bound, ISO8601. | [optional] |
 | **createdAtLt** | **String**| Created at end date exclusive upper bound, ISO8601. | [optional] |
+| **updatedAtGte** | **String**| Updated at start date inclusive lower bound, ISO8601. | [optional] |
+| **updatedAtLt** | **String**| Updated at end date exclusive upper bound, ISO8601. | [optional] |
 
 ### Return type
 

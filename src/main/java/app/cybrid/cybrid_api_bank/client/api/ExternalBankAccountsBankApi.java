@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-11T20:56:23.083125Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-12T11:14:00.811597Z[Etc/UTC]")
 public class ExternalBankAccountsBankApi {
     private ApiClient apiClient;
 

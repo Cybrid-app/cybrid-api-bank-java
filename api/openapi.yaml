@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.112.40
+  version: v0.113.2
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6312,6 +6312,7 @@ components:
         source_account:
           guid: guid
           type: trading
+        payment_rail: payment_rail
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -6462,6 +6463,11 @@ components:
           description: The raw details on the transfer from the bank.
           nullable: true
           type: object
+        payment_rail:
+          description: "The rail the payment was done on. One of: ach, eft, wire,\
+            \ rtp"
+          nullable: true
+          type: string
         labels:
           description: The labels associated with the transfer.
           items:
@@ -6781,6 +6787,7 @@ components:
           source_account:
             guid: guid
             type: trading
+          payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -6813,6 +6820,7 @@ components:
           source_account:
             guid: guid
             type: trading
+          payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00

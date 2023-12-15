@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.6
+  version: v0.113.8
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5049,13 +5049,10 @@ components:
         code: code
         decimals: 0
         name: name
-        type: fiat
+        type: type
       properties:
         type:
-          description: The asset type.
-          enum:
-          - fiat
-          - crypto
+          description: The asset type; one of fiat or crypto.
           type: string
         code:
           description: The unique code for the asset.
@@ -5092,12 +5089,12 @@ components:
           code: code
           decimals: 0
           name: name
-          type: fiat
+          type: type
         - symbol: symbol
           code: code
           decimals: 0
           name: name
-          type: fiat
+          type: type
         page: 0
       properties:
         total:
@@ -5126,15 +5123,15 @@ components:
     Bank:
       example:
         features:
-        - attestation_identity_records
-        - attestation_identity_records
+        - features
+        - features
         updated_at: 2000-01-23T04:56:07.000+00:00
-        routable_accounts: unsupported
+        routable_accounts: routable_accounts
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         organization_guid: organization_guid
-        type: sandbox
+        type: type
         supported_trading_symbols:
         - supported_trading_symbols
         - supported_trading_symbols
@@ -5161,10 +5158,7 @@ components:
           minLength: 1
           type: string
         type:
-          description: The bank's type.
-          enum:
-          - sandbox
-          - production
+          description: The bank type; one of sandbox or production.
           type: string
         supported_trading_symbols:
           description: The bank's list of supported trading symbols.
@@ -5184,20 +5178,13 @@ components:
         features:
           description: The bank's enabled features.
           items:
-            enum:
-            - attestation_identity_records
-            - kyc_identity_verifications
-            - raw_routing_details
-            - individual_customers
-            - business_customers
+            description: "A combination of: attestation_identity_records, kyc_identity_verifications,\
+              \ raw_routing_details, individual_customers, and business_customers."
             type: string
           type: array
         routable_accounts:
-          description: Configuration for supporting creating routable bank accounts.
-          enum:
-          - unsupported
-          - bank
-          - customer
+          description: "Configuration for supporting creating routable bank accounts:\
+            \ one of unsupported, bank, or customer."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -5221,15 +5208,15 @@ components:
         total: 0
         objects:
         - features:
-          - attestation_identity_records
-          - attestation_identity_records
+          - features
+          - features
           updated_at: 2000-01-23T04:56:07.000+00:00
-          routable_accounts: unsupported
+          routable_accounts: routable_accounts
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           organization_guid: organization_guid
-          type: sandbox
+          type: type
           supported_trading_symbols:
           - supported_trading_symbols
           - supported_trading_symbols
@@ -5240,15 +5227,15 @@ components:
           - supported_country_codes
           - supported_country_codes
         - features:
-          - attestation_identity_records
-          - attestation_identity_records
+          - features
+          - features
           updated_at: 2000-01-23T04:56:07.000+00:00
-          routable_accounts: unsupported
+          routable_accounts: routable_accounts
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           organization_guid: organization_guid
-          type: sandbox
+          type: type
           supported_trading_symbols:
           - supported_trading_symbols
           - supported_trading_symbols
@@ -5298,14 +5285,14 @@ components:
         - failure_codes:
           - failure_codes
           - failure_codes
-          state: passed
-          type: business_watchlists
+          state: state
+          type: type
         - failure_codes:
           - failure_codes
           - failure_codes
-          state: passed
-          type: business_watchlists
-        type: business
+          state: state
+          type: type
+        type: type
         labels:
         - labels
         - labels
@@ -5317,7 +5304,7 @@ components:
           first: first
         guid: guid
         phone_number: phone_number
-        state: storing
+        state: state
         bank_guid: bank_guid
       properties:
         guid:
@@ -5331,10 +5318,7 @@ components:
           minLength: 32
           type: string
         type:
-          description: The customer's type.
-          enum:
-          - business
-          - individual
+          description: The customer type; one of business or individual.
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -5345,13 +5329,8 @@ components:
           format: date-time
           type: string
         state:
-          description: The customer's state.
-          enum:
-          - storing
-          - unverified
-          - verified
-          - rejected
-          - frozen
+          description: "The customer state; one of storing, unverified, verified,\
+            \ rejected, or frozen."
           type: string
         name:
           $ref: '#/components/schemas/Customer_name'
@@ -5403,14 +5382,14 @@ components:
           - failure_codes:
             - failure_codes
             - failure_codes
-            state: passed
-            type: business_watchlists
+            state: state
+            type: type
           - failure_codes:
             - failure_codes
             - failure_codes
-            state: passed
-            type: business_watchlists
-          type: business
+            state: state
+            type: type
+          type: type
           labels:
           - labels
           - labels
@@ -5422,7 +5401,7 @@ components:
             first: first
           guid: guid
           phone_number: phone_number
-          state: storing
+          state: state
           bank_guid: bank_guid
         - address:
             subdivision: subdivision
@@ -5437,14 +5416,14 @@ components:
           - failure_codes:
             - failure_codes
             - failure_codes
-            state: passed
-            type: business_watchlists
+            state: state
+            type: type
           - failure_codes:
             - failure_codes
             - failure_codes
-            state: passed
-            type: business_watchlists
-          type: business
+            state: state
+            type: type
+          type: type
           labels:
           - labels
           - labels
@@ -5456,7 +5435,7 @@ components:
             first: first
           guid: guid
           phone_number: phone_number
-          state: storing
+          state: state
           bank_guid: bank_guid
         page: 0
       properties:
@@ -5487,13 +5466,13 @@ components:
         failure_codes:
         - failure_codes
         - failure_codes
-        method: business_registration
+        method: method
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
-        state: storing
-        type: kyc
-        outcome: passed
+        state: state
+        type: type
+        outcome: outcome
         customer_guid: customer_guid
       properties:
         guid:
@@ -5502,23 +5481,16 @@ components:
           minLength: 32
           type: string
         customer_guid:
-          description: The customer's identifier.
+          description: The identity verification's identifier.
           maxLength: 32
           minLength: 32
           type: string
         type:
-          description: The type of identity verification.
-          enum:
-          - kyc
-          - bank_account
+          description: The identity verification type; one of kyc or bank_account.
           type: string
         method:
-          description: The identity verification method.
-          enum:
-          - business_registration
-          - id_and_selfie
-          - attested
-          - plaid_identity_match
+          description: "The identity verification method; one of business_registration,\
+            \ id_and_selfie, attested, plaid_identity_match, or document_submission."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -5529,18 +5501,11 @@ components:
           format: date-time
           type: string
         state:
-          description: The state of the verification process.
-          enum:
-          - storing
-          - waiting
-          - expired
-          - completed
+          description: "The identity verification state; one of storing, waiting,\
+            \ expired, or completed."
           type: string
         outcome:
-          description: The outcome of the verification process.
-          enum:
-          - passed
-          - failed
+          description: The identity verification outcome; one of passed or failed.
           nullable: true
           type: string
         failure_codes:
@@ -5562,24 +5527,24 @@ components:
         - failure_codes:
           - failure_codes
           - failure_codes
-          method: business_registration
+          method: method
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
-          type: kyc
-          outcome: passed
+          state: state
+          type: type
+          outcome: outcome
           customer_guid: customer_guid
         - failure_codes:
           - failure_codes
           - failure_codes
-          method: business_registration
+          method: method
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
-          type: kyc
-          outcome: passed
+          state: state
+          type: type
+          outcome: outcome
           customer_guid: customer_guid
         page: 0
       properties:
@@ -5610,30 +5575,18 @@ components:
         failure_codes:
         - failure_codes
         - failure_codes
-        state: passed
-        type: business_watchlists
+        state: state
+        type: type
       properties:
         type:
-          description: The type of verification check.
-          enum:
-          - business_watchlists
-          - business_verification
-          - business_tax_id_verification
-          - person_attested
-          - person_tax_id_attested
-          - person_watchlists
-          - person_verification
-          - person_authentication
-          - person_gov_id_verification
-          - person_tax_id_verification
+          description: "The type of verification check; one of business_watchlists,\
+            \ business_verification, business_tax_id_verification, person_attested,\
+            \ person_tax_id_attested, person_watchlists, person_verification, person_authentication,\
+            \ person_gov_id_verification, or person_tax_id_verification."
           type: string
         state:
-          description: The state of the verification check.
-          enum:
-          - passed
-          - failed
-          - expired
-          - invalidated
+          description: "The state of the verification check; one of passed, failed,\
+            \ expired, or invalidated."
           type: string
         failure_codes:
           description: The reason codes explaining the outcome.
@@ -5671,9 +5624,9 @@ components:
       example:
         counterparty_name: counterparty_name
         routing_details:
-        - routing_number_type: CPA
+        - routing_number_type: routing_number_type
           routing_number: routing_number
-        - routing_number_type: CPA
+        - routing_number_type: routing_number_type
           routing_number: routing_number
         created_at: 2000-01-23T04:56:07.000+00:00
         account_details:
@@ -5692,7 +5645,7 @@ components:
         account_guid: account_guid
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
-        state: storing
+        state: state
         asset: asset
         unique_memo_id: unique_memo_id
         bank_guid: bank_guid
@@ -5731,10 +5684,7 @@ components:
           description: "The asset the transfer is related to, e.g., USD."
           type: string
         state:
-          description: The state of the address.
-          enum:
-          - storing
-          - created
+          description: The state of the address; one of storing or created.
           type: string
         unique_memo_id:
           description: The unique memo identifier for the address. This is used to
@@ -5773,9 +5723,9 @@ components:
         objects:
         - counterparty_name: counterparty_name
           routing_details:
-          - routing_number_type: CPA
+          - routing_number_type: routing_number_type
             routing_number: routing_number
-          - routing_number_type: CPA
+          - routing_number_type: routing_number_type
             routing_number: routing_number
           created_at: 2000-01-23T04:56:07.000+00:00
           account_details:
@@ -5794,16 +5744,16 @@ components:
           account_guid: account_guid
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
-          state: storing
+          state: state
           asset: asset
           unique_memo_id: unique_memo_id
           bank_guid: bank_guid
           customer_guid: customer_guid
         - counterparty_name: counterparty_name
           routing_details:
-          - routing_number_type: CPA
+          - routing_number_type: routing_number_type
             routing_number: routing_number
-          - routing_number_type: CPA
+          - routing_number_type: routing_number_type
             routing_number: routing_number
           created_at: 2000-01-23T04:56:07.000+00:00
           account_details:
@@ -5822,7 +5772,7 @@ components:
           account_guid: account_guid
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
-          state: storing
+          state: state
           asset: asset
           unique_memo_id: unique_memo_id
           bank_guid: bank_guid
@@ -5856,10 +5806,10 @@ components:
         account_guid: account_guid
         address: address
         updated_at: 2000-01-23T04:56:07.000+00:00
-        format: standard
+        format: format
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
-        state: storing
+        state: state
         tag: tag
         asset: asset
         bank_guid: bank_guid
@@ -5901,19 +5851,13 @@ components:
           description: "The asset the transfer is related to, e.g., USD."
           type: string
         state:
-          description: The state of the address.
-          enum:
-          - storing
-          - created
+          description: The state of the address; one of storing or created.
           type: string
         address:
           description: The blockchain address.
           type: string
         format:
-          description: The blockchain address format.
-          enum:
-          - standard
-          - legacy
+          description: The blockchain address format; one of standard or legacy.
           type: string
         tag:
           description: The blockchain address tag.
@@ -5933,10 +5877,10 @@ components:
         - account_guid: account_guid
           address: address
           updated_at: 2000-01-23T04:56:07.000+00:00
-          format: standard
+          format: format
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
+          state: state
           tag: tag
           asset: asset
           bank_guid: bank_guid
@@ -5947,10 +5891,10 @@ components:
         - account_guid: account_guid
           address: address
           updated_at: 2000-01-23T04:56:07.000+00:00
-          format: standard
+          format: format
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
+          state: state
           tag: tag
           asset: asset
           bank_guid: bank_guid
@@ -6063,11 +6007,6 @@ components:
             \ direction for funding quotes: either 'deposit' or 'withdrawal'. The\
             \ direction for crypto transfer quotes: 'withdrawal'. Book transfers do\
             \ not require a side. They are all 'deposit's. "
-          enum:
-          - buy
-          - sell
-          - deposit
-          - withdrawal
           nullable: true
           type: string
         receive_amount:
@@ -6083,14 +6022,14 @@ components:
     Quote:
       example:
         symbol: symbol
-        side: buy
+        side: side
         fee: 2
         created_at: 2000-01-23T04:56:07.000+00:00
         network_fee: 7
         issued_at: 2000-01-23T04:56:07.000+00:00
         network_fee_asset: network_fee_asset
         deliver_amount: 5
-        product_type: trading
+        product_type: product_type
         expires_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
@@ -6105,12 +6044,8 @@ components:
           minLength: 32
           type: string
         product_type:
-          description: The type of product the quote is for.
-          enum:
-          - trading
-          - funding
-          - book_transfer
-          - crypto_transfer
+          description: "The type of product the quote is for; one of trading, funding,\
+            \ book_transfer, or crypto_transfer."
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -6130,13 +6065,8 @@ components:
           nullable: true
           type: string
         side:
-          description: "The direction of the quote: either 'buy' or 'sell' for trade\
-            \ quotes."
-          enum:
-          - buy
-          - sell
-          - deposit
-          - withdrawal
+          description: "The direction of the quote; one of buy, sell, deposit, or\
+            \ withdrawal."
           type: string
         receive_amount:
           description: "The amount to be received in base units of the currency: currency\
@@ -6194,14 +6124,14 @@ components:
         total: 0
         objects:
         - symbol: symbol
-          side: buy
+          side: side
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
-          product_type: trading
+          product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
@@ -6210,14 +6140,14 @@ components:
           bank_guid: bank_guid
           customer_guid: customer_guid
         - symbol: symbol
-          side: buy
+          side: side
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
-          product_type: trading
+          product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
@@ -6260,8 +6190,8 @@ components:
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
-        state: storing
-        type: plaid
+        state: state
+        type: type
         customer_guid: customer_guid
       properties:
         guid:
@@ -6275,16 +6205,10 @@ components:
           minLength: 32
           type: string
         type:
-          description: The type of workflow.
-          enum:
-          - plaid
+          description: The type of workflow; one of plaid.
           type: string
         state:
-          description: The state of the workflow.
-          enum:
-          - storing
-          - completed
-          - failed
+          description: "The state of the workflow; one of storing, completed, or failed."
           type: string
         failure_code:
           description: The failure code for failed workflows.
@@ -6311,18 +6235,18 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         source_account:
           guid: guid
-          type: trading
+          type: type
         payment_rail: payment_rail
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
         txn_hash: txn_hash
-        state: storing
+        state: state
         bank_guid: bank_guid
         destination_account:
           guid: guid
-          type: trading
-        side: deposit
+          type: type
+        side: side
         failure_code: failure_code
         amount: 5
         network_fee_liability_amount: 3
@@ -6334,7 +6258,7 @@ components:
         estimated_amount: 5
         guid: guid
         external_bank_account_guid: external_bank_account_guid
-        transfer_type: funding
+        transfer_type: transfer_type
         asset: asset
         estimated_network_fee: 7
         customer_guid: customer_guid
@@ -6345,14 +6269,8 @@ components:
           minLength: 32
           type: string
         transfer_type:
-          description: The type of transfer.
-          enum:
-          - funding
-          - book
-          - crypto
-          - instant_funding
-          - funding_return
-          - crypto_return
+          description: "The type of transfer; one of funding, book, crypto, instant_funding,\
+            \ funding_return, or crypto_return."
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -6381,19 +6299,11 @@ components:
           description: "The asset the transfer is related to, e.g., USD."
           type: string
         side:
-          description: "The direction of the quote: 'deposit' or 'withdrawal'."
-          enum:
-          - deposit
-          - withdrawal
+          description: The direction of the quote; one of deposit or withdrawal.
           type: string
         state:
-          description: The transfer's state
-          enum:
-          - storing
-          - pending
-          - reviewing
-          - completed
-          - failed
+          description: "The state of the transfer; one of storing, pending, reviewing,\
+            \ completed, or failed."
           type: string
         failure_code:
           description: The failure code for failed transfers.
@@ -6478,7 +6388,7 @@ components:
     Trade:
       example:
         symbol: symbol
-        side: buy
+        side: side
         failure_code: failure_code
         quote_guid: quote_guid
         fee: 2
@@ -6489,9 +6399,9 @@ components:
         - labels
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
-        trade_type: platform
+        trade_type: trade_type
         receive_amount: 5
-        state: storing
+        state: state
         customer_guid: customer_guid
       properties:
         guid:
@@ -6500,10 +6410,7 @@ components:
           minLength: 32
           type: string
         trade_type:
-          description: The type of trade.
-          enum:
-          - platform
-          - liquidation
+          description: The type of trade; one of platform or liquidation.
           type: string
         customer_guid:
           description: The associated customer's identifier.
@@ -6519,20 +6426,11 @@ components:
             \ e.g., BTC-USD."
           type: string
         side:
-          description: "The direction of the quote: either 'buy' or 'sell'."
-          enum:
-          - buy
-          - sell
+          description: The direction of the trade; one of buy or sell.
           type: string
         state:
-          description: The trade's state
-          enum:
-          - storing
-          - pending
-          - cancelled
-          - completed
-          - settling
-          - failed
+          description: "The state of the trade; one of storing, pending, cancelled,\
+            \ completed, settling, or failed."
           type: string
         failure_code:
           description: The failure code for failed trades.
@@ -6570,7 +6468,7 @@ components:
         per_page: 0
         total: 0
         objects:
-        - environment: sandbox
+        - environment: environment
           failure_code: failure_code
           address: address
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -6578,11 +6476,11 @@ components:
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
-          state: storing
+          state: state
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
-        - environment: sandbox
+        - environment: environment
           failure_code: failure_code
           address: address
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -6590,7 +6488,7 @@ components:
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
-          state: storing
+          state: state
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -6627,7 +6525,7 @@ components:
         - failure_code: failure_code
           balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
-          account_kind: plaid
+          account_kind: account_kind
           plaid_account_mask: plaid_account_mask
           plaid_account_name: plaid_account_name
           pii:
@@ -6675,7 +6573,7 @@ components:
             names:
             - names
             - names
-          environment: sandbox
+          environment: environment
           balances:
             current: 0
             available: 0
@@ -6683,14 +6581,14 @@ components:
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
-          state: storing
+          state: state
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
         - failure_code: failure_code
           balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
-          account_kind: plaid
+          account_kind: account_kind
           plaid_account_mask: plaid_account_mask
           plaid_account_name: plaid_account_name
           pii:
@@ -6738,7 +6636,7 @@ components:
             names:
             - names
             - names
-          environment: sandbox
+          environment: environment
           balances:
             current: 0
             available: 0
@@ -6746,7 +6644,7 @@ components:
           plaid_institution_id: plaid_institution_id
           name: name
           guid: guid
-          state: storing
+          state: state
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -6786,18 +6684,18 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:
             guid: guid
-            type: trading
+            type: type
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
-          state: storing
+          state: state
           bank_guid: bank_guid
           destination_account:
             guid: guid
-            type: trading
-          side: deposit
+            type: type
+          side: side
           failure_code: failure_code
           amount: 5
           network_fee_liability_amount: 3
@@ -6809,7 +6707,7 @@ components:
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
-          transfer_type: funding
+          transfer_type: transfer_type
           asset: asset
           estimated_network_fee: 7
           customer_guid: customer_guid
@@ -6819,18 +6717,18 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           source_account:
             guid: guid
-            type: trading
+            type: type
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
-          state: storing
+          state: state
           bank_guid: bank_guid
           destination_account:
             guid: guid
-            type: trading
-          side: deposit
+            type: type
+          side: side
           failure_code: failure_code
           amount: 5
           network_fee_liability_amount: 3
@@ -6842,7 +6740,7 @@ components:
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
-          transfer_type: funding
+          transfer_type: transfer_type
           asset: asset
           estimated_network_fee: 7
           customer_guid: customer_guid
@@ -6877,7 +6775,7 @@ components:
         total: 0
         objects:
         - symbol: symbol
-          side: buy
+          side: side
           failure_code: failure_code
           quote_guid: quote_guid
           fee: 2
@@ -6888,12 +6786,12 @@ components:
           - labels
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
-          trade_type: platform
+          trade_type: trade_type
           receive_amount: 5
-          state: storing
+          state: state
           customer_guid: customer_guid
         - symbol: symbol
-          side: buy
+          side: side
           failure_code: failure_code
           quote_guid: quote_guid
           fee: 2
@@ -6904,9 +6802,9 @@ components:
           - labels
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
-          trade_type: platform
+          trade_type: trade_type
           receive_amount: 5
-          state: storing
+          state: state
           customer_guid: customer_guid
         page: 0
       properties:
@@ -6942,15 +6840,15 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
-          type: plaid
+          state: state
+          type: type
           customer_guid: customer_guid
         - failure_code: failure_code
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          state: storing
-          type: plaid
+          state: state
+          type: type
           customer_guid: customer_guid
         page: 0
       properties:
@@ -6985,8 +6883,8 @@ components:
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         platform_balance: 5
-        state: storing
-        type: trading
+        state: state
+        type: type
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
@@ -6995,12 +6893,7 @@ components:
         - labels
       properties:
         type:
-          description: The account type.
-          enum:
-          - trading
-          - fee
-          - fiat
-          - gas
+          description: "The account type; one of trading, fee, fiat, or gas."
           type: string
         guid:
           description: Auto-generated unique identifier for the account.
@@ -7044,10 +6937,7 @@ components:
             \ of the asset, that are available for use on the platform."
           type: integer
         state:
-          description: The account's state.
-          enum:
-          - storing
-          - created
+          description: The state of the account; one of storing or created.
           type: string
         labels:
           description: The labels associated with the account.
@@ -7067,8 +6957,8 @@ components:
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           platform_balance: 5
-          state: storing
-          type: trading
+          state: state
+          type: type
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -7081,8 +6971,8 @@ components:
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           platform_balance: 5
-          state: storing
-          type: trading
+          state: state
+          type: type
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
@@ -7128,17 +7018,14 @@ components:
       minimum: 1
       type: integer
     ListRequestOwner:
-      description: The owner of the entity.
-      enum:
-      - bank
-      - customer
+      description: The owner of the entity; one of bank or customer.
       type: string
     ExternalBankAccount:
       example:
         failure_code: failure_code
         balance_updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
-        account_kind: plaid
+        account_kind: account_kind
         plaid_account_mask: plaid_account_mask
         plaid_account_name: plaid_account_name
         pii:
@@ -7186,7 +7073,7 @@ components:
           names:
           - names
           - names
-        environment: sandbox
+        environment: environment
         balances:
           current: 0
           available: 0
@@ -7194,7 +7081,7 @@ components:
         plaid_institution_id: plaid_institution_id
         name: name
         guid: guid
-        state: storing
+        state: state
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
@@ -7215,18 +7102,12 @@ components:
           minLength: 1
           type: string
         account_kind:
-          description: The type of account.
-          enum:
-          - plaid
-          - plaid_processor_token
-          - raw_routing_details
+          description: "The type of account; one of plaid, plaid_processor_token,\
+            \ or raw_routing_details."
           type: string
         environment:
           description: The environment that the external bank account is operating
-            in.
-          enum:
-          - sandbox
-          - production
+            in; one of sandbox or production.
           type: string
         bank_guid:
           description: The bank identifier.
@@ -7267,15 +7148,8 @@ components:
           nullable: true
           type: string
         state:
-          description: The state of the external bank account.
-          enum:
-          - storing
-          - completed
-          - failed
-          - refresh_required
-          - unverified
-          - deleting
-          - deleted
+          description: "The state of the external bank account; one of storing, completed,\
+            \ failed, refresh_required, unverified, deleting, or deleted."
           type: string
         failure_code:
           description: The failure code for failed transfers.
@@ -7298,7 +7172,7 @@ components:
       type: object
     ExternalWallet:
       example:
-        environment: sandbox
+        environment: environment
         failure_code: failure_code
         address: address
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -7306,7 +7180,7 @@ components:
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         tag: tag
-        state: storing
+        state: state
         asset: asset
         bank_guid: bank_guid
         customer_guid: customer_guid
@@ -7327,10 +7201,8 @@ components:
           minLength: 1
           type: string
         environment:
-          description: The environment that the wallet is configured for.
-          enum:
-          - sandbox
-          - production
+          description: The environment that the wallet is configured for; one of sandbox
+            or production.
           type: string
         bank_guid:
           description: The bank identifier.
@@ -7360,14 +7232,8 @@ components:
           format: date-time
           type: string
         state:
-          description: The state of an external wallet
-          enum:
-          - storing
-          - pending
-          - failed
-          - completed
-          - deleting
-          - deleted
+          description: "The state of the external wallet; one of storing, pending,\
+            \ failed, completed, deleting, or deleted."
           type: string
         failure_code:
           description: The failure code of an external wallet (if any)
@@ -7505,6 +7371,7 @@ components:
           - id_and_selfie
           - attested
           - plaid_identity_match
+          - document_submission
           type: string
         customer_guid:
           description: The customer's identifier.
@@ -7970,15 +7837,8 @@ components:
           nullable: true
           type: string
         persona_state:
-          description: The Persona state of the backing inquiry.
-          enum:
-          - waiting
-          - pending
-          - reviewing
-          - processing
-          - expired
-          - completed
-          - unknown
+          description: "The Persona state of the backing inquiry; one of waiting,\
+            \ pending, reviewing, processing, expired, completed, or unknown."
           nullable: true
           type: string
         external_bank_account_guid:
@@ -8039,15 +7899,11 @@ components:
       type: object
     DepositBankAccount_routing_details_inner:
       example:
-        routing_number_type: CPA
+        routing_number_type: routing_number_type
         routing_number: routing_number
       properties:
         routing_number_type:
-          description: The type of routing number.
-          enum:
-          - CPA
-          - ABA
-          - SWIFT
+          description: "The type of routing number; one of CPA, ABA, or SWIFT."
           type: string
         routing_number:
           description: The routing number.
@@ -8067,7 +7923,7 @@ components:
       description: The source account in the transfer. Can be omitted for crypto deposits.
       example:
         guid: guid
-        type: trading
+        type: type
       nullable: true
       properties:
         guid:
@@ -8076,20 +7932,15 @@ components:
           minLength: 32
           type: string
         type:
-          description: The type of transfer account.
-          enum:
-          - trading
-          - fiat
-          - external_bank_account
-          - external_wallet
-          - one_time_address
+          description: "The type of transfer account; one of trading, fiat, external_bank_account,\
+            \ external_wallet, or one_time_address."
           type: string
       type: object
     Transfer_destination_account:
       description: The destination account in the transfer.
       example:
         guid: guid
-        type: trading
+        type: type
       nullable: true
       properties:
         guid:
@@ -8098,13 +7949,8 @@ components:
           minLength: 32
           type: string
         type:
-          description: The type of transfer account.
-          enum:
-          - trading
-          - fiat
-          - external_bank_account
-          - external_wallet
-          - one_time_address
+          description: "The type of transfer account; one of trading, fiat, external_bank_account,\
+            \ external_wallet, or one_time_address."
           type: string
       type: object
     ExternalBankAccount_balances:

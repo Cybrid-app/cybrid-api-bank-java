@@ -8,71 +8,17 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the identity verification. |  [optional] |
-|**customerGuid** | **String** | The customer&#39;s identifier. |  [optional] |
-|**type** | [**TypeEnum**](#TypeEnum) | The type of identity verification. |  [optional] |
-|**method** | [**MethodEnum**](#MethodEnum) | The identity verification method. |  [optional] |
+|**customerGuid** | **String** | The identity verification&#39;s identifier. |  [optional] |
+|**type** | **String** | The identity verification type; one of kyc or bank_account. |  [optional] |
+|**method** | **String** | The identity verification method; one of business_registration, id_and_selfie, attested, plaid_identity_match, or document_submission. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
-|**state** | [**StateEnum**](#StateEnum) | The state of the verification process. |  [optional] |
-|**outcome** | [**OutcomeEnum**](#OutcomeEnum) | The outcome of the verification process. |  [optional] |
+|**state** | **String** | The identity verification state; one of storing, waiting, expired, or completed. |  [optional] |
+|**outcome** | **String** | The identity verification outcome; one of passed or failed. |  [optional] |
 |**failureCodes** | **List&lt;String&gt;** | The reason codes explaining the outcome. |  [optional] |
 |**personaInquiryId** | **String** | The Persona identifier of the backing inquiry. |  [optional] |
-|**personaState** | [**PersonaStateEnum**](#PersonaStateEnum) | The Persona state of the backing inquiry. |  [optional] |
+|**personaState** | **String** | The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown. |  [optional] |
 |**externalBankAccountGuid** | **String** | The external bank account&#39;s identifier. |  [optional] |
-
-
-
-## Enum: TypeEnum
-
-| Name | Value |
-|---- | -----|
-| KYC | &quot;kyc&quot; |
-| BANK_ACCOUNT | &quot;bank_account&quot; |
-
-
-
-## Enum: MethodEnum
-
-| Name | Value |
-|---- | -----|
-| BUSINESS_REGISTRATION | &quot;business_registration&quot; |
-| ID_AND_SELFIE | &quot;id_and_selfie&quot; |
-| ATTESTED | &quot;attested&quot; |
-| PLAID_IDENTITY_MATCH | &quot;plaid_identity_match&quot; |
-
-
-
-## Enum: StateEnum
-
-| Name | Value |
-|---- | -----|
-| STORING | &quot;storing&quot; |
-| WAITING | &quot;waiting&quot; |
-| EXPIRED | &quot;expired&quot; |
-| COMPLETED | &quot;completed&quot; |
-
-
-
-## Enum: OutcomeEnum
-
-| Name | Value |
-|---- | -----|
-| PASSED | &quot;passed&quot; |
-| FAILED | &quot;failed&quot; |
-
-
-
-## Enum: PersonaStateEnum
-
-| Name | Value |
-|---- | -----|
-| WAITING | &quot;waiting&quot; |
-| PENDING | &quot;pending&quot; |
-| REVIEWING | &quot;reviewing&quot; |
-| PROCESSING | &quot;processing&quot; |
-| EXPIRED | &quot;expired&quot; |
-| COMPLETED | &quot;completed&quot; |
-| UNKNOWN | &quot;unknown&quot; |
 
 
 

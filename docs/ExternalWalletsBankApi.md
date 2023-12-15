@@ -282,7 +282,7 @@ public class Example {
         ExternalWalletsBankApi apiInstance = new ExternalWalletsBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
-        ListRequestOwnerBankModel owner = ListRequestOwnerBankModel.fromValue("bank"); // ListRequestOwnerBankModel | The owner of the entity.
+        String owner = "owner_example"; // String | The owner of the entity.
         String guid = "guid_example"; // String | Comma separated external_wallet_guids to list external_wallets for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list external_wallets for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list external_wallets for.
@@ -308,7 +308,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
-| **owner** | [**ListRequestOwnerBankModel**](.md)| The owner of the entity. | [optional] [enum: bank, customer] |
+| **owner** | **String**| The owner of the entity. | [optional] |
 | **guid** | **String**| Comma separated external_wallet_guids to list external_wallets for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list external_wallets for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list external_wallets for. | [optional] |

@@ -8,14 +8,14 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the transfer. |  [optional] |
-|**transferType** | [**TransferTypeEnum**](#TransferTypeEnum) | The type of transfer. |  [optional] |
+|**transferType** | **String** | The type of transfer; one of funding, book, crypto, instant_funding, funding_return, or crypto_return. |  [optional] |
 |**bankGuid** | **String** | The associated bank&#39;s identifier. |  [optional] |
 |**customerGuid** | **String** | The associated customer&#39;s identifier. |  [optional] |
 |**quoteGuid** | **String** | The associated quote&#39;s identifier. |  [optional] |
 |**externalBankAccountGuid** | **String** | The associated external bank account&#39;s identifier. |  [optional] |
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
-|**side** | [**SideEnum**](#SideEnum) | The direction of the quote: &#39;deposit&#39; or &#39;withdrawal&#39;. |  [optional] |
-|**state** | [**StateEnum**](#StateEnum) | The transfer&#39;s state |  [optional] |
+|**side** | **String** | The direction of the quote; one of deposit or withdrawal. |  [optional] |
+|**state** | **String** | The state of the transfer; one of storing, pending, reviewing, completed, or failed. |  [optional] |
 |**failureCode** | **String** | The failure code for failed transfers. |  [optional] |
 |**amount** | **java.math.BigInteger** | The actual amount in base units of the asset. |  [optional] |
 |**estimatedAmount** | **java.math.BigInteger** | The estimated amount in base units of the asset. |  [optional] |
@@ -34,40 +34,6 @@
 |**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |
 |**paymentRail** | **String** | The rail the payment was done on. One of: ach, eft, wire, rtp |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
-
-
-
-## Enum: TransferTypeEnum
-
-| Name | Value |
-|---- | -----|
-| FUNDING | &quot;funding&quot; |
-| BOOK | &quot;book&quot; |
-| CRYPTO | &quot;crypto&quot; |
-| INSTANT_FUNDING | &quot;instant_funding&quot; |
-| FUNDING_RETURN | &quot;funding_return&quot; |
-| CRYPTO_RETURN | &quot;crypto_return&quot; |
-
-
-
-## Enum: SideEnum
-
-| Name | Value |
-|---- | -----|
-| DEPOSIT | &quot;deposit&quot; |
-| WITHDRAWAL | &quot;withdrawal&quot; |
-
-
-
-## Enum: StateEnum
-
-| Name | Value |
-|---- | -----|
-| STORING | &quot;storing&quot; |
-| PENDING | &quot;pending&quot; |
-| REVIEWING | &quot;reviewing&quot; |
-| COMPLETED | &quot;completed&quot; |
-| FAILED | &quot;failed&quot; |
 
 
 

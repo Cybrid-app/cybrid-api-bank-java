@@ -13,7 +13,6 @@
 |**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The bank&#39;s enabled features. |  |
 |**supportedFiatAccountAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat assets. |  |
 |**supportedCountryCodes** | **List&lt;String&gt;** | The bank&#39;s list of supported country codes. |  [optional] |
-|**routableAccounts** | [**RoutableAccountsEnum**](#RoutableAccountsEnum) | Configuration for supporting creating routable bank accounts. |  [optional] |
 
 
 
@@ -33,16 +32,8 @@
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
 | BUSINESS_CUSTOMERS | &quot;business_customers&quot; |
 | INDIVIDUAL_CUSTOMERS | &quot;individual_customers&quot; |
-
-
-
-## Enum: RoutableAccountsEnum
-
-| Name | Value |
-|---- | -----|
-| UNSUPPORTED | &quot;unsupported&quot; |
-| BANK | &quot;bank&quot; |
-| CUSTOMER | &quot;customer&quot; |
+| ROUTABLE_ACCOUNTS_BANK | &quot;routable_accounts_bank&quot; |
+| ROUTABLE_ACCOUNTS_CUSTOMER | &quot;routable_accounts_customer&quot; |
 
 
 

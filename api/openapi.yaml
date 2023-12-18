@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.13
+  version: v0.113.17
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5126,7 +5126,6 @@ components:
         - features
         - features
         updated_at: 2000-01-23T04:56:07.000+00:00
-        routable_accounts: routable_accounts
         name: name
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -5179,13 +5178,10 @@ components:
           description: The bank's enabled features.
           items:
             description: "A combination of: attestation_identity_records, kyc_identity_verifications,\
-              \ raw_routing_details, individual_customers, and business_customers."
+              \ raw_routing_details, individual_customers, business_customers, routable_accounts_bank,\
+              \ and routable_accounts_customer."
             type: string
           type: array
-        routable_accounts:
-          description: "Configuration for supporting creating routable bank accounts:\
-            \ one of unsupported, bank, or customer."
-          type: string
         created_at:
           description: ISO8601 datetime the record was created at.
           format: date-time
@@ -5211,7 +5207,6 @@ components:
           - features
           - features
           updated_at: 2000-01-23T04:56:07.000+00:00
-          routable_accounts: routable_accounts
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -5230,7 +5225,6 @@ components:
           - features
           - features
           updated_at: 2000-01-23T04:56:07.000+00:00
-          routable_accounts: routable_accounts
           name: name
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -7265,6 +7259,8 @@ components:
             - kyc_identity_verifications
             - business_customers
             - individual_customers
+            - routable_accounts_bank
+            - routable_accounts_customer
             type: string
           type: array
         supported_fiat_account_assets:
@@ -7281,13 +7277,6 @@ components:
           maxItems: 1
           minItems: 1
           type: array
-        routable_accounts:
-          description: Configuration for supporting creating routable bank accounts.
-          enum:
-          - unsupported
-          - bank
-          - customer
-          type: string
       required:
       - features
       - name

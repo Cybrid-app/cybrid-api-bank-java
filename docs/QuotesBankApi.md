@@ -16,7 +16,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 Create Quote
 
-Creates a quote.  Required scope: **quotes:execute**
+Creates a quote.  ## Quote creation  Quotes can be created for a Bank or a Customer.  To create quotes for your Bank, omit the &#x60;customer_guid&#x60; parameter in the request body. To create quotes for your Customers, include the &#x60;customer_guid&#x60; parameter in the request body.    Required scope: **quotes:execute**
 
 ### Example
 

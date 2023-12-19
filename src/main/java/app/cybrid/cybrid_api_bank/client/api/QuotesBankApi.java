@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-19T15:37:00.928119Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-19T16:26:17.093515Z[Etc/UTC]")
 public class QuotesBankApi {
     private ApiClient apiClient;
 
@@ -51,7 +51,7 @@ public class QuotesBankApi {
 
     /**
      * Create Quote
-     * Creates a quote.  Required scope: **quotes:execute**
+     * Creates a quote.  ## Quote creation  Quotes can be created for a Bank or a Customer.  To create quotes for your Bank, omit the &#x60;customer_guid&#x60; parameter in the request body. To create quotes for your Customers, include the &#x60;customer_guid&#x60; parameter in the request body.    Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 
@@ -93,7 +93,7 @@ public class QuotesBankApi {
 
     /**
      * Create Quote
-     * Creates a quote.  Required scope: **quotes:execute**
+     * Creates a quote.  ## Quote creation  Quotes can be created for a Bank or a Customer.  To create quotes for your Bank, omit the &#x60;customer_guid&#x60; parameter in the request body. To create quotes for your Customers, include the &#x60;customer_guid&#x60; parameter in the request body.    Required scope: **quotes:execute**
      * <p><b>201</b> - quote created
      * <p><b>400</b> - Invalid requests
      * <p><b>401</b> - Unauthorized - Authentication failed, 

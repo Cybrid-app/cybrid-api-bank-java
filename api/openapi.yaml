@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.21
+  version: v0.113.22
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1832,17 +1832,21 @@ paths:
       - External Bank Accounts
       x-accepts: application/json
     post:
-      description: "Create an ExternalBankAccount.\n\n## State\n\n| State | Description\
-        \ |\n|-------|-------------|\n| storing | The Platform is storing the external\
-        \ bank account details in our private store |\n| completed | The Platform\
-        \ has created the external bank account |\n| unverified | The external bank\
-        \ account is created, but it has not yet been verified |\n| failed | The Platform\
-        \ was not able to successfully create the external bank account |\n| refresh_required\
-        \ | The Platform has created the external bank account, but needs to be refreshed\
-        \ |\n| deleting | The Platform is deleting the external bank account |\n|\
-        \ deleted | The Platform has deleted the external bank account |\n\n## Failure\
-        \ codes\n\n| Code | Description |\n|------|-------------|\n| invalid_routing_number\
-        \ | The provided routing number is invalid |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
+      description: "Create an ExternalBankAccount.\n\n## Account creation\n\nAccounts\
+        \ can be created for a Bank or a Customer.\n\nTo create accounts for your\
+        \ Bank, omit the `customer_guid` parameter in the request body. To create\
+        \ accounts for your Customers, include the `customer_guid` parameter in the\
+        \ request body.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the external bank account details in our\
+        \ private store |\n| completed | The Platform has created the external bank\
+        \ account |\n| unverified | The external bank account is created, but it has\
+        \ not yet been verified |\n| failed | The Platform was not able to successfully\
+        \ create the external bank account |\n| refresh_required | The Platform has\
+        \ created the external bank account, but needs to be refreshed |\n| deleting\
+        \ | The Platform is deleting the external bank account |\n| deleted | The\
+        \ Platform has deleted the external bank account |\n\n## Failure codes\n\n\
+        | Code | Description |\n|------|-------------|\n| invalid_routing_number |\
+        \ The provided routing number is invalid |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
       operationId: createExternalBankAccount
       parameters: []
       requestBody:
@@ -2408,18 +2412,22 @@ paths:
       - External Wallets
       x-accepts: application/json
     post:
-      description: "Create an ExternalWallet.\n\n## State\n\n| State | Description\
-        \ |\n|-------|-------------|\n| storing | The Platform is storing the external\
-        \ wallet details in our private store |\n| pending | The Platform is waiting\
-        \ for the external wallet to be created |\n| completed | The Platform has\
-        \ created the external wallet |\n| failed | The Platform was not able to successfully\
-        \ create the external wallet |\n| deleting | The Platform is deleting the\
-        \ external wallet |\n| deleted | The Platform has deleted the external wallet\
-        \ |\n\n\n\nExternal wallets can be added to the bank by leaving the customer_guid\
-        \ blank. External wallets added to the bank can be used by any customer of\
-        \ the bank.\n\nExternal wallets can also be added to a specific customer by\
-        \ providing the customer_guid. External wallets added to a customer can only\
-        \ be used by that customer.\n\nRequired scope: **external_wallets:execute**"
+      description: "Create an ExternalWallet.\n\n## Wallet creation\n\nExternal Wallets\
+        \ can be created for a Bank or a Customer.\n\nTo create a wallet for your\
+        \ Bank, omit the `customer_guid` parameter in the request body. To create\
+        \ a wallet for your Customers, include the `customer_guid` parameter in the\
+        \ request body.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the external wallet details in our private\
+        \ store |\n| pending | The Platform is waiting for the external wallet to\
+        \ be created |\n| completed | The Platform has created the external wallet\
+        \ |\n| failed | The Platform was not able to successfully create the external\
+        \ wallet |\n| deleting | The Platform is deleting the external wallet |\n\
+        | deleted | The Platform has deleted the external wallet |\n\n\n\nExternal\
+        \ wallets can be added to the bank by leaving the customer_guid blank. External\
+        \ wallets added to the bank can be used by any customer of the bank.\n\nExternal\
+        \ wallets can also be added to a specific customer by providing the customer_guid.\
+        \ External wallets added to a customer can only be used by that customer.\n\
+        \nRequired scope: **external_wallets:execute**"
       operationId: createExternalWallet
       parameters: []
       requestBody:
@@ -3208,13 +3216,15 @@ paths:
         \ hold cryptocurrency or a Customer to hold fiat on the Cybrid Platform.\n\
         \nAt present, account's can be created as `trading` or `fiat ` accounts and\
         \ are required before a Customer can generate quotes or execute a `trade`\
-        \ or `transfer`.\n\n## Asset\n\nThe asset is the specific cryptocurrency or\
-        \ fiat that the account holds, e.g., 'BTC' for Bitcoin or `USD` for US dollars.\
-        \ See the Symbols API for a complete list of cryptocurrencies and fiat supported.\
-        \ \n\n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
-        \ | The Platform is storing the account details in our private store |\n|\
-        \ created | The Platform has created the account |\n\n\n\nRequired scope:\
-        \ **accounts:execute**"
+        \ or `transfer`.\n\nTo create accounts for your Bank, omit the `customer_guid`\
+        \ parameter in the request body. To create accounts for your Customers, include\
+        \ the `customer_guid` parameter in the request body.\n\n## Asset\n\nThe asset\
+        \ is the specific cryptocurrency or fiat that the account holds, e.g., 'BTC'\
+        \ for Bitcoin or `USD` for US dollars. See the Symbols API for a complete\
+        \ list of cryptocurrencies and fiat supported. \n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the account\
+        \ details in our private store |\n| created | The Platform has created the\
+        \ account |\n\n\n\nRequired scope: **accounts:execute**"
       operationId: createAccount
       parameters: []
       requestBody:
@@ -3632,7 +3642,11 @@ paths:
       - Quotes
       x-accepts: application/json
     post:
-      description: "Creates a quote.\n\nRequired scope: **quotes:execute**"
+      description: "Creates a quote.\n\n## Quote creation\n\nQuotes can be created\
+        \ for a Bank or a Customer.\n\nTo create quotes for your Bank, omit the `customer_guid`\
+        \ parameter in the request body. To create quotes for your Customers, include\
+        \ the `customer_guid` parameter in the request body.\n\n\n\nRequired scope:\
+        \ **quotes:execute**"
       operationId: createQuote
       parameters: []
       requestBody:
@@ -4499,11 +4513,12 @@ paths:
     post:
       description: "Creates a transfer.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
         | storing | The Platform is storing the trade details in our private store\
-        \ |\n| pending | The Platform is executing the transfer |\n| completed | The\
-        \ Platform has successfully completed the transfer |\n| failed | The Platform\
-        \ was not able to successfully complete the transfer |\n\n## Failure codes\n\
-        \n| Code | Description |\n|------|-------------|\n| non_sufficient_funds |\
-        \ The customer does not have enough funds to complete the transfer |\n| refresh_required\
+        \ |\n| reviewing | The Platform is reviewing the transfer for compliance |\n\
+        | pending | The Platform is executing the transfer |\n| completed | The Platform\
+        \ has successfully completed the transfer |\n| failed | The Platform was not\
+        \ able to successfully complete the transfer |\n\n## Failure codes\n\n| Code\
+        \ | Description |\n|------|-------------|\n| non_sufficient_funds | The customer\
+        \ does not have enough funds to complete the transfer |\n| refresh_required\
         \ | The transfer's associated external_bank_account needs to be reconnected\
         \ via Plaid |\n| party_name_invalid | The transfer's associated external bank\
         \ account has an invalid party name |\n| limit_exceeded | The customer is\

@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-21T19:01:39.903212Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2023-12-21T22:55:37.931537Z[Etc/UTC]")
 public class ExternalWalletsBankApi {
     private ApiClient apiClient;
 
@@ -246,11 +246,12 @@ public class ExternalWalletsBankApi {
      * @param guid Comma separated external_wallet_guids to list external_wallets for.
      * @param bankGuid Comma separated bank_guids to list external_wallets for.
      * @param customerGuid Comma separated customer_guids to list external_wallets for.
+     * @param asset Comma separated assets to list external_wallets for.
      * @param state Comma separated states to list external_wallets for.
      * @return ExternalWalletListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listExternalWalletsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    private ResponseSpec listExternalWalletsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String asset, String state) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -266,6 +267,7 @@ public class ExternalWalletsBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "asset", asset));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
 
         final String[] localVarAccepts = { 
@@ -294,17 +296,18 @@ public class ExternalWalletsBankApi {
      * @param guid Comma separated external_wallet_guids to list external_wallets for.
      * @param bankGuid Comma separated bank_guids to list external_wallets for.
      * @param customerGuid Comma separated customer_guids to list external_wallets for.
+     * @param asset Comma separated assets to list external_wallets for.
      * @param state Comma separated states to list external_wallets for.
      * @return ExternalWalletListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<ExternalWalletListBankModel> listExternalWallets(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    public Mono<ExternalWalletListBankModel> listExternalWallets(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String asset, String state) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalWalletListBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalWalletListBankModel>() {};
-        return listExternalWalletsRequestCreation(page, perPage, owner, guid, bankGuid, customerGuid, state).bodyToMono(localVarReturnType);
+        return listExternalWalletsRequestCreation(page, perPage, owner, guid, bankGuid, customerGuid, asset, state).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<ExternalWalletListBankModel>> listExternalWalletsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    public Mono<ResponseEntity<ExternalWalletListBankModel>> listExternalWalletsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String owner, String guid, String bankGuid, String customerGuid, String asset, String state) throws WebClientResponseException {
         ParameterizedTypeReference<ExternalWalletListBankModel> localVarReturnType = new ParameterizedTypeReference<ExternalWalletListBankModel>() {};
-        return listExternalWalletsRequestCreation(page, perPage, owner, guid, bankGuid, customerGuid, state).toEntity(localVarReturnType);
+        return listExternalWalletsRequestCreation(page, perPage, owner, guid, bankGuid, customerGuid, asset, state).toEntity(localVarReturnType);
     }
 }

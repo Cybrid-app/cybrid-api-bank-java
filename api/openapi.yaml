@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.36
+  version: v0.113.37
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5111,6 +5111,11 @@ components:
       - symbol
       - type
       type: object
+    AssetTypes:
+      enum:
+      - fiat
+      - crypto
+      type: string
     AssetList:
       example:
         per_page: 0
@@ -5229,6 +5234,21 @@ components:
       - organization_guid
       - type
       type: object
+    BankType:
+      enum:
+      - sandbox
+      - production
+      type: string
+    BankFeature:
+      enum:
+      - attestation_identity_records
+      - kyc_identity_verifications
+      - raw_routing_details
+      - individual_customers
+      - business_customers
+      - routable_accounts_bank
+      - routable_accounts_customer
+      type: string
     BankList:
       example:
         per_page: 0
@@ -5389,6 +5409,19 @@ components:
             $ref: '#/components/schemas/VerificationCheck'
           type: array
       type: object
+    CustomerType:
+      enum:
+      - business
+      - individual
+      type: string
+    CustomerState:
+      enum:
+      - storing
+      - unverified
+      - verified
+      - rejected
+      - frozen
+      type: string
     CustomerList:
       example:
         per_page: 0
@@ -5540,6 +5573,41 @@ components:
           nullable: true
           type: array
       type: object
+    IdentityVerificationType:
+      enum:
+      - kyc
+      - bank_account
+      type: string
+    IdentityVerificationMethod:
+      enum:
+      - business_registration
+      - id_and_selfie
+      - attested
+      - plaid_identity_match
+      - document_submission
+      type: string
+    IdentityVerificationState:
+      enum:
+      - storing
+      - waiting
+      - expired
+      - completed
+      type: string
+    IdentityVerificationPersonaState:
+      enum:
+      - waiting
+      - pending
+      - reviewing
+      - processing
+      - expired
+      - completed
+      - unknown
+      type: string
+    IdentityVerificationOutcome:
+      enum:
+      - passed
+      - failed
+      type: string
     IdentityVerificationWithDetails:
       allOf:
       - $ref: '#/components/schemas/IdentityVerification'
@@ -5623,6 +5691,26 @@ components:
       - state
       - type
       type: object
+    VerificationCheckType:
+      enum:
+      - business_watchlists
+      - business_verification
+      - business_tax_id_verification
+      - person_attested
+      - person_tax_id_attested
+      - person_watchlists
+      - person_verification
+      - person_authentication
+      - person_gov_id_verification
+      - person_tax_id_verification
+      type: string
+    VerificationCheckState:
+      enum:
+      - passed
+      - failed
+      - expired
+      - invalidated
+      type: string
     PostDepositBankAccount:
       properties:
         account_guid:
@@ -5741,6 +5829,17 @@ components:
           nullable: true
           type: array
       type: object
+    DepositBankAccountState:
+      enum:
+      - storing
+      - created
+      type: string
+    DepositBankAccountRoutingNumberType:
+      enum:
+      - CPA
+      - ABA
+      - SWIFT
+      type: string
     DepositBankAccountList:
       example:
         per_page: 0
@@ -5894,6 +5993,16 @@ components:
           nullable: true
           type: array
       type: object
+    DepositAddressState:
+      enum:
+      - storing
+      - created
+      type: string
+    DepositAddressFormat:
+      enum:
+      - standard
+      - legacy
+      type: string
     DepositAddressList:
       example:
         per_page: 0
@@ -6143,6 +6252,20 @@ components:
           nullable: true
           type: string
       type: object
+    QuoteType:
+      enum:
+      - trading
+      - funding
+      - book_transfer
+      - crypto_transfer
+      type: string
+    QuoteSide:
+      enum:
+      - buy
+      - sell
+      - deposit
+      - withdrawal
+      type: string
     QuoteList:
       example:
         per_page: 0
@@ -6248,6 +6371,16 @@ components:
           format: date-time
           type: string
       type: object
+    WorkflowType:
+      enum:
+      - plaid
+      type: string
+    WorkflowState:
+      enum:
+      - storing
+      - completed
+      - failed
+      type: string
     WorkflowWithDetails:
       allOf:
       - $ref: '#/components/schemas/Workflow'
@@ -6410,6 +6543,36 @@ components:
           nullable: true
           type: array
       type: object
+    TransferType:
+      enum:
+      - funding
+      - book
+      - crypto
+      - instant_funding
+      - funding_return
+      - crypto_return
+      type: string
+    TransferSide:
+      enum:
+      - deposit
+      - withdrawal
+      type: string
+    TransferState:
+      enum:
+      - storing
+      - pending
+      - reviewing
+      - completed
+      - failed
+      type: string
+    TransferAccountType:
+      enum:
+      - trading
+      - fiat
+      - external_bank_account
+      - external_wallet
+      - one_time_address
+      type: string
     Trade:
       example:
         symbol: symbol
@@ -6488,6 +6651,25 @@ components:
           nullable: true
           type: array
       type: object
+    TradeType:
+      enum:
+      - platform
+      - liquidation
+      type: string
+    TradeSide:
+      enum:
+      - buy
+      - sell
+      type: string
+    TradeState:
+      enum:
+      - storing
+      - pending
+      - cancelled
+      - completed
+      - settling
+      - failed
+      type: string
     ExternalWalletList:
       example:
         per_page: 0
@@ -6971,6 +7153,18 @@ components:
           nullable: true
           type: array
       type: object
+    AccountType:
+      enum:
+      - trading
+      - fee
+      - fiat
+      - gas
+      type: string
+    AccountState:
+      enum:
+      - storing
+      - created
+      type: string
     AccountList:
       example:
         per_page: 0
@@ -7195,6 +7389,23 @@ components:
           nullable: true
           type: array
       type: object
+    ExternalBankAccountKind:
+      enum:
+      - modern_treasury_external_account
+      - plaid
+      - plaid_processor_token
+      - raw_routing_details
+      type: string
+    ExternalBankAccountState:
+      enum:
+      - storing
+      - completed
+      - failed
+      - refresh_required
+      - unverified
+      - deleting
+      - deleted
+      type: string
     ExternalWallet:
       example:
         environment: environment
@@ -7265,6 +7476,20 @@ components:
           nullable: true
           type: string
       type: object
+    ExternalWalletEnvironment:
+      enum:
+      - sandbox
+      - production
+      type: string
+    ExternalWalletState:
+      enum:
+      - storing
+      - pending
+      - failed
+      - completed
+      - deleting
+      - deleted
+      type: string
     PostBank:
       properties:
         name:

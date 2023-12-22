@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.113.36
+- API version: v0.113.37
 
-- Build date: 2023-12-22T13:45:46.984601Z[Etc/UTC]
+- Build date: 2023-12-22T14:19:01.428391Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -185,7 +185,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.113.36</version>
+  <version>v0.113.37</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +201,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.113.36"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.113.37"
   }
 ```
 
@@ -215,7 +215,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.113.36.jar`
+- `target/cybrid-api-bank-java-v0.113.37.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -316,31 +316,51 @@ Class | Method | HTTP request | Description
 
  - [AccountBankModel](docs/AccountBankModel.md)
  - [AccountListBankModel](docs/AccountListBankModel.md)
+ - [AccountStateBankModel](docs/AccountStateBankModel.md)
+ - [AccountTypeBankModel](docs/AccountTypeBankModel.md)
  - [AssetBankModel](docs/AssetBankModel.md)
  - [AssetListBankModel](docs/AssetListBankModel.md)
+ - [AssetTypesBankModel](docs/AssetTypesBankModel.md)
  - [BankBankModel](docs/BankBankModel.md)
+ - [BankFeatureBankModel](docs/BankFeatureBankModel.md)
  - [BankListBankModel](docs/BankListBankModel.md)
+ - [BankTypeBankModel](docs/BankTypeBankModel.md)
  - [CustomerAddressBankModel](docs/CustomerAddressBankModel.md)
  - [CustomerBankModel](docs/CustomerBankModel.md)
  - [CustomerListBankModel](docs/CustomerListBankModel.md)
  - [CustomerNameBankModel](docs/CustomerNameBankModel.md)
+ - [CustomerStateBankModel](docs/CustomerStateBankModel.md)
+ - [CustomerTypeBankModel](docs/CustomerTypeBankModel.md)
  - [DepositAddressBankModel](docs/DepositAddressBankModel.md)
+ - [DepositAddressFormatBankModel](docs/DepositAddressFormatBankModel.md)
  - [DepositAddressListBankModel](docs/DepositAddressListBankModel.md)
+ - [DepositAddressStateBankModel](docs/DepositAddressStateBankModel.md)
  - [DepositBankAccountAccountDetailsInnerBankModel](docs/DepositBankAccountAccountDetailsInnerBankModel.md)
  - [DepositBankAccountBankModel](docs/DepositBankAccountBankModel.md)
  - [DepositBankAccountCounterpartyAddressBankModel](docs/DepositBankAccountCounterpartyAddressBankModel.md)
  - [DepositBankAccountListBankModel](docs/DepositBankAccountListBankModel.md)
  - [DepositBankAccountRoutingDetailsInnerBankModel](docs/DepositBankAccountRoutingDetailsInnerBankModel.md)
+ - [DepositBankAccountRoutingNumberTypeBankModel](docs/DepositBankAccountRoutingNumberTypeBankModel.md)
+ - [DepositBankAccountStateBankModel](docs/DepositBankAccountStateBankModel.md)
  - [ErrorResponseBankModel](docs/ErrorResponseBankModel.md)
  - [ExternalBankAccountBalancesBankModel](docs/ExternalBankAccountBalancesBankModel.md)
  - [ExternalBankAccountBankModel](docs/ExternalBankAccountBankModel.md)
+ - [ExternalBankAccountKindBankModel](docs/ExternalBankAccountKindBankModel.md)
  - [ExternalBankAccountListBankModel](docs/ExternalBankAccountListBankModel.md)
  - [ExternalBankAccountPiiInnerAddressesInnerBankModel](docs/ExternalBankAccountPiiInnerAddressesInnerBankModel.md)
  - [ExternalBankAccountPiiInnerBankModel](docs/ExternalBankAccountPiiInnerBankModel.md)
+ - [ExternalBankAccountStateBankModel](docs/ExternalBankAccountStateBankModel.md)
  - [ExternalWalletBankModel](docs/ExternalWalletBankModel.md)
+ - [ExternalWalletEnvironmentBankModel](docs/ExternalWalletEnvironmentBankModel.md)
  - [ExternalWalletListBankModel](docs/ExternalWalletListBankModel.md)
+ - [ExternalWalletStateBankModel](docs/ExternalWalletStateBankModel.md)
  - [IdentityVerificationBankModel](docs/IdentityVerificationBankModel.md)
  - [IdentityVerificationListBankModel](docs/IdentityVerificationListBankModel.md)
+ - [IdentityVerificationMethodBankModel](docs/IdentityVerificationMethodBankModel.md)
+ - [IdentityVerificationOutcomeBankModel](docs/IdentityVerificationOutcomeBankModel.md)
+ - [IdentityVerificationPersonaStateBankModel](docs/IdentityVerificationPersonaStateBankModel.md)
+ - [IdentityVerificationStateBankModel](docs/IdentityVerificationStateBankModel.md)
+ - [IdentityVerificationTypeBankModel](docs/IdentityVerificationTypeBankModel.md)
  - [IdentityVerificationWithDetailsAllOfBankModel](docs/IdentityVerificationWithDetailsAllOfBankModel.md)
  - [IdentityVerificationWithDetailsBankModel](docs/IdentityVerificationWithDetailsBankModel.md)
  - [PatchBankBankModel](docs/PatchBankBankModel.md)
@@ -368,15 +388,28 @@ Class | Method | HTTP request | Description
  - [PostWorkflowBankModel](docs/PostWorkflowBankModel.md)
  - [QuoteBankModel](docs/QuoteBankModel.md)
  - [QuoteListBankModel](docs/QuoteListBankModel.md)
+ - [QuoteSideBankModel](docs/QuoteSideBankModel.md)
+ - [QuoteTypeBankModel](docs/QuoteTypeBankModel.md)
  - [SymbolPriceBankModel](docs/SymbolPriceBankModel.md)
  - [TradeBankModel](docs/TradeBankModel.md)
  - [TradeListBankModel](docs/TradeListBankModel.md)
+ - [TradeSideBankModel](docs/TradeSideBankModel.md)
+ - [TradeStateBankModel](docs/TradeStateBankModel.md)
+ - [TradeTypeBankModel](docs/TradeTypeBankModel.md)
+ - [TransferAccountTypeBankModel](docs/TransferAccountTypeBankModel.md)
  - [TransferBankModel](docs/TransferBankModel.md)
  - [TransferDestinationAccountBankModel](docs/TransferDestinationAccountBankModel.md)
  - [TransferListBankModel](docs/TransferListBankModel.md)
+ - [TransferSideBankModel](docs/TransferSideBankModel.md)
  - [TransferSourceAccountBankModel](docs/TransferSourceAccountBankModel.md)
+ - [TransferStateBankModel](docs/TransferStateBankModel.md)
+ - [TransferTypeBankModel](docs/TransferTypeBankModel.md)
  - [VerificationCheckBankModel](docs/VerificationCheckBankModel.md)
+ - [VerificationCheckStateBankModel](docs/VerificationCheckStateBankModel.md)
+ - [VerificationCheckTypeBankModel](docs/VerificationCheckTypeBankModel.md)
  - [WorkflowBankModel](docs/WorkflowBankModel.md)
+ - [WorkflowStateBankModel](docs/WorkflowStateBankModel.md)
+ - [WorkflowTypeBankModel](docs/WorkflowTypeBankModel.md)
  - [WorkflowWithDetailsAllOfBankModel](docs/WorkflowWithDetailsAllOfBankModel.md)
  - [WorkflowWithDetailsBankModel](docs/WorkflowWithDetailsBankModel.md)
  - [WorkflowsListBankModel](docs/WorkflowsListBankModel.md)

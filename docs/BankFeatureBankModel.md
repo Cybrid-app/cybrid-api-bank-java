@@ -1,0 +1,23 @@
+
+
+# BankFeatureBankModel
+
+## Enum
+
+
+* `ATTESTATION_IDENTITY_RECORDS` (value: `"attestation_identity_records"`)
+
+* `KYC_IDENTITY_VERIFICATIONS` (value: `"kyc_identity_verifications"`)
+
+* `RAW_ROUTING_DETAILS` (value: `"raw_routing_details"`)
+
+* `INDIVIDUAL_CUSTOMERS` (value: `"individual_customers"`)
+
+* `BUSINESS_CUSTOMERS` (value: `"business_customers"`)
+
+* `ROUTABLE_ACCOUNTS_BANK` (value: `"routable_accounts_bank"`)
+
+* `ROUTABLE_ACCOUNTS_CUSTOMER` (value: `"routable_accounts_customer"`)
+
+
+

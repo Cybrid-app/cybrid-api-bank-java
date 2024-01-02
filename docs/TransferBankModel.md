@@ -32,7 +32,7 @@
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |
-|**paymentRail** | **String** | The rail the payment was done on. One of: ach, eft, wire, rtp, book |  [optional] |
+|**paymentRail** | **String** | The rail the payment was done on. One of: ach, eft, wire, rtp |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
 
 

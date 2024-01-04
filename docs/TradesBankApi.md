@@ -170,7 +170,7 @@ public class Example {
 
 ## listTrades
 
-> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt)
+> TradeListBankModel listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt)
 
 Get trades list
 
@@ -208,13 +208,14 @@ public class Example {
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list trades for.
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list trades for.
         String state = "state_example"; // String | Comma separated states to list trades for.
+        String side = "side_example"; // String | Comma separated sides to list trades for.
         String label = "label_example"; // String | Comma separated labels to list trades for.
         String createdAtGte = "createdAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601.
         String createdAtLt = "createdAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
         String updatedAtGte = "updatedAtGte_example"; // String | Updated at start date inclusive lower bound, ISO8601.
         String updatedAtLt = "updatedAtLt_example"; // String | Updated at end date exclusive upper bound, ISO8601.
         try {
-            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt);
+            TradeListBankModel result = apiInstance.listTrades(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TradesBankApi#listTrades");
@@ -239,6 +240,7 @@ public class Example {
 | **customerGuid** | **String**| Comma separated customer_guids to list trades for. | [optional] |
 | **accountGuid** | **String**| Comma separated account_guids to list trades for. | [optional] |
 | **state** | **String**| Comma separated states to list trades for. | [optional] |
+| **side** | **String**| Comma separated sides to list trades for. | [optional] |
 | **label** | **String**| Comma separated labels to list trades for. | [optional] |
 | **createdAtGte** | **String**| Created at start date inclusive lower bound, ISO8601. | [optional] |
 | **createdAtLt** | **String**| Created at end date exclusive upper bound, ISO8601. | [optional] |

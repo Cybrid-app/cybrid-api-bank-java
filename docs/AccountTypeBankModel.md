@@ -13,5 +13,7 @@
 
 * `GAS` (value: `"gas"`)
 
+* `RESERVE` (value: `"reserve"`)
+
 
 

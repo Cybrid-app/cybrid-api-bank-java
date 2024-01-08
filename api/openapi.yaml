@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.55
+  version: v0.113.56
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6418,6 +6418,8 @@ components:
         source_account:
           guid: guid
           type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
         payment_rail: payment_rail
         network_fee_asset: network_fee_asset
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
@@ -6428,6 +6430,8 @@ components:
         destination_account:
           guid: guid
           type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
         side: side
         failure_code: failure_code
         amount: 5
@@ -6916,6 +6920,8 @@ components:
           source_account:
             guid: guid
             type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
@@ -6926,6 +6932,8 @@ components:
           destination_account:
             guid: guid
             type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
           side: side
           failure_code: failure_code
           amount: 5
@@ -6949,6 +6957,8 @@ components:
           source_account:
             guid: guid
             type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
@@ -6959,6 +6969,8 @@ components:
           destination_account:
             guid: guid
             type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
           side: side
           failure_code: failure_code
           amount: 5
@@ -8194,6 +8206,8 @@ components:
       example:
         guid: guid
         type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
       nullable: true
       properties:
         guid:
@@ -8204,6 +8218,18 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, or one_time_address."
+          type: string
+        bank_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
       type: object
     Transfer_destination_account:
@@ -8211,6 +8237,8 @@ components:
       example:
         guid: guid
         type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
       nullable: true
       properties:
         guid:
@@ -8221,6 +8249,18 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, or one_time_address."
+          type: string
+        bank_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
       type: object
     ExternalBankAccount_balances:

@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.101
+  version: v0.113.103
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8462,7 +8462,7 @@ components:
       - street
       type: object
     PostExternalBankAccount_counterparty_bank_account:
-      description: The counterparty's name on the account.
+      description: The counterparty's bank account information.
       nullable: true
       properties:
         routing_number_type:
@@ -8487,18 +8487,19 @@ components:
       nullable: true
       properties:
         first:
-          description: The customer's first name.
+          description: The customer's first name. Used for individual accounts.
           type: string
         middle:
-          description: The customer's middle name.
+          description: The customer's middle name. Used for individual accounts.
           nullable: true
           type: string
         last:
-          description: The customer's last name.
+          description: The customer's last name. Used for individual accounts.
           type: string
-      required:
-      - first
-      - last
+        full:
+          description: The customers's full name on the account. Used for business
+            accounts.
+          type: string
       type: object
     PostExternalBankAccount_counterparty_address:
       description: The counterparty's address on the external account.

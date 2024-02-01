@@ -2,7 +2,7 @@
 
 # PostExternalBankAccountCounterpartyAddressBankModel
 
-The counterparty's address on the external account.
+The counterparty's address on their checking account.
 
 ## Properties
 

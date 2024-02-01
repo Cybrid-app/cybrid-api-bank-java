@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.109
+  version: v0.113.114
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8001,7 +8001,7 @@ components:
         counterparty_address:
           $ref: '#/components/schemas/PostExternalBankAccount_counterparty_address'
         counterparty_email_address:
-          description: The counterparty's email address on the account.
+          description: The counterparty's email address on their checking account.
           nullable: true
           type: string
       required:
@@ -8466,7 +8466,7 @@ components:
       - street
       type: object
     PostExternalBankAccount_counterparty_bank_account:
-      description: The counterparty's bank account information.
+      description: The counterparty's checking bank account information.
       nullable: true
       properties:
         routing_number_type:
@@ -8487,7 +8487,7 @@ components:
       - routing_number_type
       type: object
     PostExternalBankAccount_counterparty_name:
-      description: The counterparty's name on the account.
+      description: The counterparty's name on their checking account.
       nullable: true
       properties:
         first:
@@ -8506,7 +8506,7 @@ components:
           type: string
       type: object
     PostExternalBankAccount_counterparty_address:
-      description: The counterparty's address on the external account.
+      description: The counterparty's address on their checking account.
       nullable: true
       properties:
         street:

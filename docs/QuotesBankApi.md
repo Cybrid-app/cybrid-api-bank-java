@@ -87,7 +87,6 @@ public class Example {
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 | **422** | Unable to process request |  -  |
-| **500** | Internal server error |  -  |
 
 
 ## getQuote

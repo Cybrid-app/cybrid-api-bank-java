@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-10T18:50:21.034761Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-12T14:32:49.912591Z[Etc/UTC]")
 public class QuotesBankApi {
     private ApiClient apiClient;
 
@@ -57,7 +57,6 @@ public class QuotesBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>422</b> - Unable to process request
-     * <p><b>500</b> - Internal server error
      * @param postQuoteBankModel The postQuoteBankModel parameter
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -99,7 +98,6 @@ public class QuotesBankApi {
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * <p><b>403</b> - Invalid scope
      * <p><b>422</b> - Unable to process request
-     * <p><b>500</b> - Internal server error
      * @param postQuoteBankModel The postQuoteBankModel parameter
      * @return QuoteBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API

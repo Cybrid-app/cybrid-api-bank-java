@@ -200,7 +200,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.135
+  version: v0.113.137
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1586,19 +1586,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unable to process request
-        "500":
-          content:
-            application/json:
-              examples:
-                internal_server_error:
-                  value:
-                    status: 500
-                    error_message: "Unable to process request: Internal account not\
-                      \ found"
-                    message_code: internal_server_error
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Internal server error
       security:
       - BearerAuth: []
         oauth2:
@@ -3773,19 +3760,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unable to process request
-        "500":
-          content:
-            application/json:
-              examples:
-                internal_server_error:
-                  value:
-                    status: 500
-                    error_message: "Unable to process request: exchange has no fiat\
-                      \ account"
-                    message_code: internal_server_error
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Internal server error
       security:
       - BearerAuth: []
         oauth2:

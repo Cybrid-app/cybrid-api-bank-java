@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.113.154
+- API version: v0.114.0
 
-- Build date: 2024-02-16T14:36:57.971890Z[Etc/UTC]
+- Build date: 2024-02-16T17:26:10.794843Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -73,10 +73,10 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -101,6 +101,7 @@ The following scopes are available on the platform and can be requested when gen
 | Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Organization, Bank, Customer)    |
 | Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Organization, Bank, Customer) |
 | Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)               |
+| Invoice               | invoices:read (Organization, Bank, Customer)               | invoices:write (Bank, Customer)               | invoices:execute (Bank, Customer)                |
 
 ## Available Endpoints
 
@@ -121,6 +122,8 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
 | Bank         | ExternalWallet       | /api/external_wallets          | Create, get, list and delete external wallets, which connect customer wallets to the platform     |
 | Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  |
+| Bank         | Invoice              | /api/invoices                  | Create, get and list invoices                                                                     |
+| Bank         | PaymentInstruction   | /api/payment_instructions      | Create, get and list payment instructions for invoices                                            |
 | Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 |
 | Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      |
 | Bank         | Symbol               | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           |
@@ -185,7 +188,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.113.154</version>
+  <version>v0.114.0</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -201,7 +204,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.113.154"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.114.0"
   }
 ```
 
@@ -215,7 +218,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.113.154.jar`
+- `target/cybrid-api-bank-java-v0.114.0.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -296,6 +299,12 @@ Class | Method | HTTP request | Description
 *IdentityVerificationsBankApi* | [**createIdentityVerification**](docs/IdentityVerificationsBankApi.md#createIdentityVerification) | **POST** /api/identity_verifications | Create Identity Verification
 *IdentityVerificationsBankApi* | [**getIdentityVerification**](docs/IdentityVerificationsBankApi.md#getIdentityVerification) | **GET** /api/identity_verifications/{identity_verification_guid} | Get Identity Verification
 *IdentityVerificationsBankApi* | [**listIdentityVerifications**](docs/IdentityVerificationsBankApi.md#listIdentityVerifications) | **GET** /api/identity_verifications | List Identity Verifications
+*InvoicesBankApi* | [**createInvoice**](docs/InvoicesBankApi.md#createInvoice) | **POST** /api/invoices | Create Invoice
+*InvoicesBankApi* | [**getInvoice**](docs/InvoicesBankApi.md#getInvoice) | **GET** /api/invoices/{invoice_guid} | Get Invoice
+*InvoicesBankApi* | [**listInvoices**](docs/InvoicesBankApi.md#listInvoices) | **GET** /api/invoices | List Invoices
+*PaymentInstructionsBankApi* | [**createPaymentInstruction**](docs/PaymentInstructionsBankApi.md#createPaymentInstruction) | **POST** /api/payment_instructions | Create Payment Instruction
+*PaymentInstructionsBankApi* | [**getPaymentInstruction**](docs/PaymentInstructionsBankApi.md#getPaymentInstruction) | **GET** /api/payment_instructions/{payment_instruction_guid} | Get Payment Instruction
+*PaymentInstructionsBankApi* | [**listPaymentInstructions**](docs/PaymentInstructionsBankApi.md#listPaymentInstructions) | **GET** /api/payment_instructions | List Payment Instructions
 *PricesBankApi* | [**listPrices**](docs/PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price
 *QuotesBankApi* | [**createQuote**](docs/QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote
 *QuotesBankApi* | [**getQuote**](docs/QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote
@@ -363,9 +372,13 @@ Class | Method | HTTP request | Description
  - [IdentityVerificationTypeBankModel](docs/IdentityVerificationTypeBankModel.md)
  - [IdentityVerificationWithDetailsAllOfBankModel](docs/IdentityVerificationWithDetailsAllOfBankModel.md)
  - [IdentityVerificationWithDetailsBankModel](docs/IdentityVerificationWithDetailsBankModel.md)
+ - [InvoiceBankModel](docs/InvoiceBankModel.md)
+ - [InvoiceListBankModel](docs/InvoiceListBankModel.md)
  - [PatchBankBankModel](docs/PatchBankBankModel.md)
  - [PatchCustomerBankModel](docs/PatchCustomerBankModel.md)
  - [PatchExternalBankAccountBankModel](docs/PatchExternalBankAccountBankModel.md)
+ - [PaymentInstructionBankModel](docs/PaymentInstructionBankModel.md)
+ - [PaymentInstructionListBankModel](docs/PaymentInstructionListBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
  - [PostCustomerAddressBankModel](docs/PostCustomerAddressBankModel.md)
@@ -382,6 +395,8 @@ Class | Method | HTTP request | Description
  - [PostIdentityVerificationAddressBankModel](docs/PostIdentityVerificationAddressBankModel.md)
  - [PostIdentityVerificationBankModel](docs/PostIdentityVerificationBankModel.md)
  - [PostIdentityVerificationNameBankModel](docs/PostIdentityVerificationNameBankModel.md)
+ - [PostInvoiceBankModel](docs/PostInvoiceBankModel.md)
+ - [PostPaymentInstructionBankModel](docs/PostPaymentInstructionBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
  - [PostTransferBankModel](docs/PostTransferBankModel.md)
@@ -456,6 +471,9 @@ Authentication schemes defined for the API:
   - deposit_addresses:execute: deposit_addresses execute
   - deposit_bank_accounts:read: deposit_bank_accounts read
   - deposit_bank_accounts:execute: deposit_bank_accounts execute
+  - invoices:read: invoices read
+  - invoices:write: invoices write
+  - invoices:execute: invoices execute
 
 
 ## Recommendation

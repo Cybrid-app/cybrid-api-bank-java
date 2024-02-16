@@ -76,25 +76,25 @@ info:
     \ quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read\
     \ external_bank_accounts:write external_bank_accounts:execute external_wallets:read\
     \ external_wallets:execute workflows:read workflows:execute deposit_addresses:read\
-    \ deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute\"\
-    \n  }' -H \"Content-Type: application/json\"\n\n# When using Organization credentials\
-    \ set `scope` to 'organizations:read organizations:write organization_applications:execute\
-    \ banks:read banks:write banks:execute bank_applications:execute users:read users:execute\
-    \ customers:read accounts:read prices:read quotes:execute quotes:read trades:execute\
-    \ trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read\
-    \ workflows:read deposit_addresses:read deposit_bank_accounts:read'\n```\n<font\
-    \ color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full\
-    \ scope access. Delete scopes if you'd like to restrict access.**</font>\n\n##\
-    \ Authentication Scopes\n\nThe Cybrid platform supports the use of scopes to control\
-    \ the level of access a token is limited to. Scopes do not grant access to resources;\
-    \ instead, they provide limits, in support of the least privilege principal.\n\
-    \nThe following scopes are available on the platform and can be requested when\
-    \ generating either an Organization, Bank or Customer token. Generally speaking,\
-    \ the _Read_ scope is required to read and list resources, the _Write_ scope is\
-    \ required to update a resource and the _Execute_ scope is required to create\
-    \ a resource.\n\n| Resource              | Read scope (Token Type)           \
-    \                         | Write scope (Token Type)                      | Execute\
-    \ scope (Token Type)                       |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
+    \ deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute\
+    \ invoices:read invoices:write invoices:execute\"\n  }' -H \"Content-Type: application/json\"\
+    \n\n# When using Organization credentials set `scope` to 'organizations:read organizations:write\
+    \ organization_applications:execute banks:read banks:write banks:execute bank_applications:execute\
+    \ users:read users:execute customers:read accounts:read prices:read quotes:execute\
+    \ quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read\
+    \ external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read\
+    \ invoices:read'\n```\n<font color=\"orange\">**⚠️ Note: The above curl will create\
+    \ a bearer token with full scope access. Delete scopes if you'd like to restrict\
+    \ access.**</font>\n\n## Authentication Scopes\n\nThe Cybrid platform supports\
+    \ the use of scopes to control the level of access a token is limited to. Scopes\
+    \ do not grant access to resources; instead, they provide limits, in support of\
+    \ the least privilege principal.\n\nThe following scopes are available on the\
+    \ platform and can be requested when generating either an Organization, Bank or\
+    \ Customer token. Generally speaking, the _Read_ scope is required to read and\
+    \ list resources, the _Write_ scope is required to update a resource and the _Execute_\
+    \ scope is required to create a resource.\n\n| Resource              | Read scope\
+    \ (Token Type)                                    | Write scope (Token Type) \
+    \                     | Execute scope (Token Type)                       |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
     | Account               | accounts:read (Organization, Bank, Customer)       \
     \        |                                               | accounts:execute (Bank,\
     \ Customer)                |\n| Bank                  | banks:read (Organization,\
@@ -125,8 +125,10 @@ info:
     \ Customer)              |                                               | transfers:execute\
     \ (Organization, Bank, Customer) |\n| Workflow              | workflows:read (Organization,\
     \ Bank, Customer)              |                                             \
-    \  | workflows:execute (Bank, Customer)               |\n\n## Available Endpoints\n\
-    \nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
+    \  | workflows:execute (Bank, Customer)               |\n| Invoice           \
+    \    | invoices:read (Organization, Bank, Customer)               | invoices:write\
+    \ (Bank, Customer)               | invoices:execute (Bank, Customer)         \
+    \       |\n\n## Available Endpoints\n\nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
     \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
     \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
@@ -160,47 +162,52 @@ info:
     \          | Create, get, list and delete external wallets, which connect customer\
     \ wallets to the platform     |\n| Bank         | IdentityVerification | /api/identity_verifications\
     \    | Create and list identity verifications, which are performed on customers\
-    \ for KYC                  |\n| Bank         | Price                | /api/prices\
-    \                    | Get the current prices for assets on the platform     \
-    \                                            |\n| Bank         | Quote       \
-    \         | /api/quotes                    | Create and list quotes, which are\
-    \ required to execute trades                                      |\n| Bank  \
-    \       | Symbol               | /api/symbols                   | Get a list of\
-    \ symbols supported for trade (ex: BTC-USD)                                  \
-    \         |\n| Bank         | Trade                | /api/trades             \
-    \       | Create and list trades, which buy or sell cryptocurrency           \
-    \                               |\n| Bank         | Transfer             | /api/transfers\
-    \                 | Create, get and list transfers (e.g., funding, book)     \
-    \                                         |\n| Bank         | Workflow       \
-    \      | /api/workflows                 | Create, get and list workflows     \
-    \                                                               |\n\n## Understanding\
-    \ Object Models & Endpoints\n\n**Organizations**\n\nAn `Organization` is meant\
-    \ to represent the organization partnering with Cybrid to use our platform.\n\n\
-    An `Organization` typically does not directly interact with `customers`. Instead,\
-    \ an Organization has one or more `banks`, which encompass the financial service\
-    \ offerings of the platform.\n\n**Banks**\n\nA `Bank` is owned by an `Organization`\
-    \ and can be thought of as an environment or container for `customers` and product\
-    \ offerings. Banks are created in either `Sandbox` or `Production` mode, where\
-    \ `Sandbox` is the environment that you would test, prototype and build in prior\
-    \ to moving to `Production`.\n\nAn `Organization` can have multiple `banks`, in\
-    \ either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed\
-    \ by stubbed data and process flows. For instance, funding source transfer processes\
-    \ as well as trades will be simulated rather than performed, however asset prices\
-    \ are representative of real-world values. You have an unlimited amount of simulated\
-    \ fiat currency for testing purposes.\n\n**Customers**\n\n`Customers` represent\
-    \ your banking users on the platform. At present, we offer support for `Individuals`\
-    \ as Customers.\n\n`Customers` must be verified (i.e., KYC'd) in our system before\
-    \ they can play any part on the platform, which means they must have an associated\
-    \ and a passing `Identity Verification`. See the Identity Verifications section\
-    \ for more details on how a customer can be verified.\n\n`Customers` must also\
-    \ have an `Account` to be able to transact, in the desired asset class. See the\
-    \ Accounts APIs for more details on setting up accounts for the customer.\n"
+    \ for KYC                  |\n| Bank         | Invoice              | /api/invoices\
+    \                  | Create, get and list invoices                           \
+    \                                          |\n| Bank         | PaymentInstruction\
+    \   | /api/payment_instructions      | Create, get and list payment instructions\
+    \ for invoices                                            |\n| Bank         |\
+    \ Price                | /api/prices                    | Get the current prices\
+    \ for assets on the platform                                                 |\n\
+    | Bank         | Quote                | /api/quotes                    | Create\
+    \ and list quotes, which are required to execute trades                      \
+    \                |\n| Bank         | Symbol               | /api/symbols     \
+    \              | Get a list of symbols supported for trade (ex: BTC-USD)     \
+    \                                      |\n| Bank         | Trade             \
+    \   | /api/trades                    | Create and list trades, which buy or sell\
+    \ cryptocurrency                                          |\n| Bank         |\
+    \ Transfer             | /api/transfers                 | Create, get and list\
+    \ transfers (e.g., funding, book)                                            \
+    \  |\n| Bank         | Workflow             | /api/workflows                 |\
+    \ Create, get and list workflows                                             \
+    \                       |\n\n## Understanding Object Models & Endpoints\n\n**Organizations**\n\
+    \nAn `Organization` is meant to represent the organization partnering with Cybrid\
+    \ to use our platform.\n\nAn `Organization` typically does not directly interact\
+    \ with `customers`. Instead, an Organization has one or more `banks`, which encompass\
+    \ the financial service offerings of the platform.\n\n**Banks**\n\nA `Bank` is\
+    \ owned by an `Organization` and can be thought of as an environment or container\
+    \ for `customers` and product offerings. Banks are created in either `Sandbox`\
+    \ or `Production` mode, where `Sandbox` is the environment that you would test,\
+    \ prototype and build in prior to moving to `Production`.\n\nAn `Organization`\
+    \ can have multiple `banks`, in either `Sandbox` or `Production` environments.\
+    \ A `Sandbox Bank` will be backed by stubbed data and process flows. For instance,\
+    \ funding source transfer processes as well as trades will be simulated rather\
+    \ than performed, however asset prices are representative of real-world values.\
+    \ You have an unlimited amount of simulated fiat currency for testing purposes.\n\
+    \n**Customers**\n\n`Customers` represent your banking users on the platform. At\
+    \ present, we offer support for `Individuals` as Customers.\n\n`Customers` must\
+    \ be verified (i.e., KYC'd) in our system before they can play any part on the\
+    \ platform, which means they must have an associated and a passing `Identity Verification`.\
+    \ See the Identity Verifications section for more details on how a customer can\
+    \ be verified.\n\n`Customers` must also have an `Account` to be able to transact,\
+    \ in the desired asset class. See the Accounts APIs for more details on setting\
+    \ up accounts for the customer.\n"
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.113.154
+  version: v0.114.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3066,6 +3073,618 @@ paths:
       tags:
       - IdentityVerifications
       x-accepts: application/json
+  /api/invoices:
+    get:
+      description: "Retrieves a list of invoices.\n\nRequired scope: **invoices:read**"
+      operationId: listInvoices
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated guids to list invoices for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list invoices for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list invoices for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated account_guids to list invoices for.
+        explode: true
+        in: query
+        name: account_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list invoices for.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceList'
+          description: get list of invoices
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: comma separated bank guids must be at the most
+                      4096 characters long
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:read
+      summary: List Invoices
+      tags:
+      - Invoices
+      x-accepts: application/json
+    post:
+      description: "Creates a invoice.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing    | The Platform is storing the invoice details in our private\
+        \ store |\n| unpaid     | The invoice is unpaid. Payment instructions can\
+        \ be generated for an invoice in this state |\n| cancelling | The invocie\
+        \ is in the process of being cancelled |\n| cancelled  | The invoice has been\
+        \ cancelled | \n| settling   | The invoice has been paid and the funds associated\
+        \ with this invoice are in the process of being settled |\n| paid       |\
+        \ The invoice has been paid and the funds associated with this invoice have\
+        \ been settled | \n\n\n\nRequired scope: **invoices:execute**"
+      operationId: createInvoice
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostInvoice'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+          description: Invoice created
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:execute
+      summary: Create Invoice
+      tags:
+      - Invoices
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/invoices/{invoice_guid}:
+    get:
+      description: "Retrieves a invoice.\n\nRequired scope: **invoices:read**"
+      operationId: getInvoice
+      parameters:
+      - description: Identifier for the payment instruction.
+        explode: false
+        in: path
+        name: invoice_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+          description: invoice found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: invoice not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: invoice not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:read
+      summary: Get Invoice
+      tags:
+      - Invoices
+      x-accepts: application/json
+  /api/payment_instructions:
+    get:
+      description: "Retrieves a list of payment instructions.\n\nRequired scope: **invoices:read**"
+      operationId: listPaymentInstructions
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated guids to list payment instructions for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list payment instructions for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list payment instructions for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated invoice_guids to list payment instructions for.
+        explode: true
+        in: query
+        name: invoice_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentInstructionList'
+          description: get list of payment instructions
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: comma separated bank guids must be at the most
+                      4096 characters long
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:read
+      summary: List Payment Instructions
+      tags:
+      - PaymentInstructions
+      x-accepts: application/json
+    post:
+      description: "Creates a payment instruction.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the payment\
+        \ instruction details in our private store |\n| created | The Platform has\
+        \ created the payment instruction |\n| expired | The PaymentInstruction is\
+        \ no longer valid |\n\n\n\nRequired scope: **invoices:write**"
+      operationId: createPaymentInstruction
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostPaymentInstruction'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentInstruction'
+          description: Payment Instruction created
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:write"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:write
+      summary: Create Payment Instruction
+      tags:
+      - PaymentInstructions
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/payment_instructions/{payment_instruction_guid}:
+    get:
+      description: "Retrieves a payment_instruction.\n\nRequired scope: **invoices:read**"
+      operationId: getPaymentInstruction
+      parameters:
+      - description: Identifier for the payment instruction.
+        explode: false
+        in: path
+        name: payment_instruction_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentInstruction'
+          description: payment_instruction found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank\
+                      \ or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: payment_instruction not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: payment_instruction not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:read
+      summary: Get Payment Instruction
+      tags:
+      - PaymentInstructions
+      x-accepts: application/json
   /api/accounts:
     get:
       description: "Retrieves a list of accounts.\n\nRequired scope: **accounts:read**"
@@ -5730,6 +6349,297 @@ components:
           type: array
       required:
       - account_guid
+      type: object
+    PostInvoice:
+      properties:
+        asset:
+          description: The asset code the customer will receive the funds in.
+          maxLength: 8
+          minLength: 1
+          type: string
+        customer_guid:
+          description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        receive_amount:
+          description: "The amount to be received in base units of the asset, i.e.,\
+            \ the amount the customer will receive after fees. ONLY one of receive_amount\
+            \ or deliver_amount is required."
+          nullable: true
+          type: integer
+        deliver_amount:
+          description: "The amount to be delivered in base units of the asset, i.e.,\
+            \ the amount the customer will receive before fees. ONLY one of receive_amount\
+            \ or deliver_amount is required."
+          nullable: true
+          type: integer
+        labels:
+          description: The labels associated with the customer.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - asset
+      type: object
+    PostPaymentInstruction:
+      properties:
+        invoice_guid:
+          description: The invoice guid.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+      required:
+      - invoice_guid
+      type: object
+    Invoice:
+      example:
+        account_guid: account_guid
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        fee: 2
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        invoice_type: invoice_type
+        receive_amount: 5
+        state: state
+        asset: asset
+        customer_guid: customer_guid
+        deliver_amount: 5
+        labels:
+        - labels
+        - labels
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the payment instruction.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        account_guid:
+          description: The account payment will ultimately be received into.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
+          format: date-time
+          type: string
+        invoice_type:
+          description: The type of invoice; one of lightning.
+          type: string
+        asset:
+          description: The asset code the customer will receive the funds in.
+          maxLength: 8
+          minLength: 1
+          type: string
+        receive_amount:
+          description: "The amount to be received in base units of the asset, i.e.,\
+            \ the amount the customer will receive after fees. ONLY one of receive_amount\
+            \ or deliver_amount is required."
+          nullable: true
+          type: integer
+        deliver_amount:
+          description: "The amount to be delivered in base units of the asset, i.e.,\
+            \ the amount the customer will receive before fees. ONLY one of receive_amount\
+            \ or deliver_amount is required."
+          nullable: true
+          type: integer
+        fee:
+          description: The fee associated with this invoice in base units of the asset.
+          nullable: true
+          type: integer
+        state:
+          description: "The state of the invoice; one of storing, unpaid, cancelling,\
+            \ cancelled, settling, or paid."
+          type: string
+        labels:
+          description: The labels associated with the invoice.
+          items:
+            type: string
+          nullable: true
+          type: array
+      type: object
+    InvoiceList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - account_guid: account_guid
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fee: 2
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          invoice_type: invoice_type
+          receive_amount: 5
+          state: state
+          asset: asset
+          customer_guid: customer_guid
+          deliver_amount: 5
+          labels:
+          - labels
+          - labels
+        - account_guid: account_guid
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          fee: 2
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          invoice_type: invoice_type
+          receive_amount: 5
+          state: state
+          asset: asset
+          customer_guid: customer_guid
+          deliver_amount: 5
+          labels:
+          - labels
+          - labels
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/Invoice'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
+    PaymentInstruction:
+      example:
+        expected_payment_amount: 5
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        guid: guid
+        created_at: 2000-01-23T04:56:07.000+00:00
+        network_address: network_address
+        invoice_guid: invoice_guid
+        expired_at: 2000-01-23T04:56:07.000+00:00
+        state: state
+        expected_payment_asset: expected_payment_asset
+        customer_guid: customer_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the payment instruction.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        invoice_guid:
+          description: The invoice identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        created_at:
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
+          format: date-time
+          type: string
+        expired_at:
+          description: ISO8601 datetime the instructions expired at.
+          format: date-time
+          nullable: true
+          type: string
+        network_address:
+          description: The network address to pay the invoice to.
+          nullable: true
+          type: string
+        expected_payment_asset:
+          description: "The asset the payor must pay the invoice in, e.g., BTC."
+          nullable: true
+          type: string
+        expected_payment_amount:
+          description: The amount to be paid in base units of expected_payment_asset.
+          nullable: true
+          type: integer
+        state:
+          description: "The state of the payment instruction; one of storing, created,\
+            \ or expired."
+          type: string
+      type: object
+    PaymentInstructionList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - expected_payment_amount: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          network_address: network_address
+          invoice_guid: invoice_guid
+          expired_at: 2000-01-23T04:56:07.000+00:00
+          state: state
+          expected_payment_asset: expected_payment_asset
+          customer_guid: customer_guid
+        - expected_payment_amount: 5
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          created_at: 2000-01-23T04:56:07.000+00:00
+          network_address: network_address
+          invoice_guid: invoice_guid
+          expired_at: 2000-01-23T04:56:07.000+00:00
+          state: state
+          expected_payment_asset: expected_payment_asset
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/PaymentInstruction'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
       type: object
     DepositBankAccount:
       example:
@@ -8542,6 +9452,9 @@ components:
             deposit_addresses:execute: deposit_addresses execute
             deposit_bank_accounts:read: deposit_bank_accounts read
             deposit_bank_accounts:execute: deposit_bank_accounts execute
+            invoices:read: invoices read
+            invoices:write: invoices write
+            invoices:execute: invoices execute
           tokenUrl: https://id.sandbox.cybrid.app/oauth/token
       type: oauth2
     BearerAuth:

@@ -37,6 +37,7 @@
 |---- | -----|
 | BUSINESS_REGISTRATION | &quot;business_registration&quot; |
 | ID_AND_SELFIE | &quot;id_and_selfie&quot; |
+| TAX_ID_AND_SELFIE | &quot;tax_id_and_selfie&quot; |
 | ATTESTED | &quot;attested&quot; |
 | PLAID_IDENTITY_MATCH | &quot;plaid_identity_match&quot; |
 | DOCUMENT_SUBMISSION | &quot;document_submission&quot; |

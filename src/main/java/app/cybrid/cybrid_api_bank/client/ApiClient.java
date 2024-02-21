@@ -69,7 +69,7 @@ import app.cybrid.cybrid_api_bank.client.auth.HttpBearerAuth;
 import app.cybrid.cybrid_api_bank.client.auth.ApiKeyAuth;
 import app.cybrid.cybrid_api_bank.client.auth.OAuth;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-21T13:50:33.601026Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-21T15:44:15.845365Z[Etc/UTC]")
 public class ApiClient extends JavaTimeFormatter {
     public enum CollectionFormat {
         CSV(","), TSV("\t"), SSV(" "), PIPES("|"), MULTI(null);

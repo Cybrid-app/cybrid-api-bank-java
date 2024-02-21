@@ -163,7 +163,7 @@ info:
     \ wallets to the platform     |\n| Bank         | IdentityVerification | /api/identity_verifications\
     \    | Create and list identity verifications, which are performed on customers\
     \ for KYC                  |\n| Bank         | Invoice              | /api/invoices\
-    \                  | Create, get and list invoices                           \
+    \                  | Create, get, cancel and list invoices                   \
     \                                          |\n| Bank         | PaymentInstruction\
     \   | /api/payment_instructions      | Create, get and list payment instructions\
     \ for invoices                                            |\n| Bank         |\
@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.5
+  version: v0.114.6
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3296,6 +3296,94 @@ paths:
       x-content-type: application/json
       x-accepts: application/json
   /api/invoices/{invoice_guid}:
+    delete:
+      description: "Cancels an invoice.\n\nRequired scope: **invoices:execute**"
+      operationId: cancelInvoice
+      parameters:
+      - description: Identifier for the invoice.
+        explode: false
+        in: path
+        name: invoice_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+          description: Invoice cancelled
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: customer or bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: invoices:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: Invoice not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invoice not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - invoices:execute
+      summary: Cancel Invoice
+      tags:
+      - Invoices
+      x-accepts: application/json
     get:
       description: "Retrieves a invoice.\n\nRequired scope: **invoices:read**"
       operationId: getInvoice
@@ -6392,12 +6480,6 @@ components:
           description: The invoice guid.
           maxLength: 32
           minLength: 32
-          type: string
-        customer_guid:
-          description: The unique identifier for the customer.
-          maxLength: 32
-          minLength: 32
-          nullable: true
           type: string
       required:
       - invoice_guid

@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.114.5
+- API version: v0.114.6
 
-- Build date: 2024-02-21T15:44:15.845365Z[Etc/UTC]
+- Build date: 2024-02-21T16:20:51.562385Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -122,7 +122,7 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
 | Bank         | ExternalWallet       | /api/external_wallets          | Create, get, list and delete external wallets, which connect customer wallets to the platform     |
 | Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  |
-| Bank         | Invoice              | /api/invoices                  | Create, get and list invoices                                                                     |
+| Bank         | Invoice              | /api/invoices                  | Create, get, cancel and list invoices                                                             |
 | Bank         | PaymentInstruction   | /api/payment_instructions      | Create, get and list payment instructions for invoices                                            |
 | Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 |
 | Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      |
@@ -188,7 +188,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.114.5</version>
+  <version>v0.114.6</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -204,7 +204,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.114.5"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.114.6"
   }
 ```
 
@@ -218,7 +218,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.114.5.jar`
+- `target/cybrid-api-bank-java-v0.114.6.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -299,6 +299,7 @@ Class | Method | HTTP request | Description
 *IdentityVerificationsBankApi* | [**createIdentityVerification**](docs/IdentityVerificationsBankApi.md#createIdentityVerification) | **POST** /api/identity_verifications | Create Identity Verification
 *IdentityVerificationsBankApi* | [**getIdentityVerification**](docs/IdentityVerificationsBankApi.md#getIdentityVerification) | **GET** /api/identity_verifications/{identity_verification_guid} | Get Identity Verification
 *IdentityVerificationsBankApi* | [**listIdentityVerifications**](docs/IdentityVerificationsBankApi.md#listIdentityVerifications) | **GET** /api/identity_verifications | List Identity Verifications
+*InvoicesBankApi* | [**cancelInvoice**](docs/InvoicesBankApi.md#cancelInvoice) | **DELETE** /api/invoices/{invoice_guid} | Cancel Invoice
 *InvoicesBankApi* | [**createInvoice**](docs/InvoicesBankApi.md#createInvoice) | **POST** /api/invoices | Create Invoice
 *InvoicesBankApi* | [**getInvoice**](docs/InvoicesBankApi.md#getInvoice) | **GET** /api/invoices/{invoice_guid} | Get Invoice
 *InvoicesBankApi* | [**listInvoices**](docs/InvoicesBankApi.md#listInvoices) | **GET** /api/invoices | List Invoices

@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-21T15:44:15.845365Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-21T16:20:51.562385Z[Etc/UTC]")
 public class InvoicesBankApi {
     private ApiClient apiClient;
 
@@ -49,6 +49,66 @@ public class InvoicesBankApi {
         this.apiClient = apiClient;
     }
 
+    /**
+     * Cancel Invoice
+     * Cancels an invoice.  Required scope: **invoices:execute**
+     * <p><b>200</b> - Invoice cancelled
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - Invoice not found
+     * @param invoiceGuid Identifier for the invoice.
+     * @return InvoiceBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec cancelInvoiceRequestCreation(String invoiceGuid) throws WebClientResponseException {
+        Object postBody = null;
+        // verify the required parameter 'invoiceGuid' is set
+        if (invoiceGuid == null) {
+            throw new WebClientResponseException("Missing the required parameter 'invoiceGuid' when calling cancelInvoice", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("invoice_guid", invoiceGuid);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
+
+        ParameterizedTypeReference<InvoiceBankModel> localVarReturnType = new ParameterizedTypeReference<InvoiceBankModel>() {};
+        return apiClient.invokeAPI("/api/invoices/{invoice_guid}", HttpMethod.DELETE, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Cancel Invoice
+     * Cancels an invoice.  Required scope: **invoices:execute**
+     * <p><b>200</b> - Invoice cancelled
+     * <p><b>401</b> - Unauthorized - Authentication failed, 
+     * <p><b>403</b> - Invalid scope
+     * <p><b>404</b> - Invoice not found
+     * @param invoiceGuid Identifier for the invoice.
+     * @return InvoiceBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<InvoiceBankModel> cancelInvoice(String invoiceGuid) throws WebClientResponseException {
+        ParameterizedTypeReference<InvoiceBankModel> localVarReturnType = new ParameterizedTypeReference<InvoiceBankModel>() {};
+        return cancelInvoiceRequestCreation(invoiceGuid).bodyToMono(localVarReturnType);
+    }
+
+    public Mono<ResponseEntity<InvoiceBankModel>> cancelInvoiceWithHttpInfo(String invoiceGuid) throws WebClientResponseException {
+        ParameterizedTypeReference<InvoiceBankModel> localVarReturnType = new ParameterizedTypeReference<InvoiceBankModel>() {};
+        return cancelInvoiceRequestCreation(invoiceGuid).toEntity(localVarReturnType);
+    }
     /**
      * Create Invoice
      * Creates a invoice.  ## State  | State | Description | |-------|-------------| | storing    | The Platform is storing the invoice details in our private store | | unpaid     | The invoice is unpaid. Payment instructions can be generated for an invoice in this state | | cancelling | The invocie is in the process of being cancelled | | cancelled  | The invoice has been cancelled |  | settling   | The invoice has been paid and the funds associated with this invoice are in the process of being settled | | paid       | The invoice has been paid and the funds associated with this invoice have been settled |     Required scope: **invoices:execute**

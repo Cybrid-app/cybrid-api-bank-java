@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.9
+  version: v0.114.10
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5265,26 +5265,253 @@ paths:
           content:
             application/json:
               examples:
-                missing_parameter:
+                example_1:
                   value:
                     status: 400
-                    error_message: "Missing parameter. Required: quote_guid"
-                    message_code: missing_parameter
-                invalid_value:
-                  value:
-                    status: 400
-                    error_message: Invalid value. quote guid must be at the most 32
-                      characters long
-                    message_code: invalid_value
-                invalid_parameter:
-                  value:
-                    status: 400
-                    error_message: Invalid parameter. expected_error not permitted
-                      in production
+                    error_message: Expected error invalid
                     message_code: invalid_parameter
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests
+          description: Bad Request
+        "409":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    status: 409
+                    error_message: Transfer already exists for this quote
+                    message_code: quote_already_exists
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict
+        "422":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    status: 422
+                    error_message: Transfer invalid
+                    message_code: invalid_transfer
+                example_2:
+                  value:
+                    status: 422
+                    error_message: Asset not supported
+                    message_code: invalid_value
+                example_3:
+                  value:
+                    status: 422
+                    error_message: Quote not found
+                    message_code: no_quote
+                example_4:
+                  value:
+                    status: 422
+                    error_message: Quote expired
+                    message_code: quote_expired
+                example_5:
+                  value:
+                    status: 422
+                    error_message: Quote invalid
+                    message_code: invalid_parameter
+                example_6:
+                  value:
+                    status: 422
+                    error_message: Customer has been frozen
+                    message_code: frozen_customer
+                example_7:
+                  value:
+                    status: 422
+                    error_message: Customer has been rejected
+                    message_code: rejected_customer
+                example_8:
+                  value:
+                    status: 422
+                    error_message: Customer has not been verified
+                    message_code: unverified_customer
+                example_9:
+                  value:
+                    status: 422
+                    error_message: Account not found
+                    message_code: no_account
+                example_10:
+                  value:
+                    status: 422
+                    error_message: Account invalid
+                    message_code: invalid_account
+                example_11:
+                  value:
+                    status: 422
+                    error_message: Source account not found
+                    message_code: no_source_account
+                example_12:
+                  value:
+                    status: 422
+                    error_message: Source account invalid
+                    message_code: invalid_source_account
+                example_13:
+                  value:
+                    status: 422
+                    error_message: Destination account not found
+                    message_code: no_destination_account
+                example_14:
+                  value:
+                    status: 422
+                    error_message: Destination account invalid
+                    message_code: invalid_destination_account
+                example_15:
+                  value:
+                    status: 422
+                    error_message: External bank account not found
+                    message_code: invalid_external_bank_account
+                example_16:
+                  value:
+                    status: 422
+                    error_message: External bank account invalid
+                    message_code: invalid_external_bank_account
+                example_17:
+                  value:
+                    status: 422
+                    error_message: External wallet not found
+                    message_code: invalid_external_bank_account
+                example_18:
+                  value:
+                    status: 422
+                    error_message: External wallet invalid
+                    message_code: invalid_external_bank_account
+                example_19:
+                  value:
+                    status: 422
+                    error_message: Bank fee account not found
+                    message_code: no_fee_account
+                example_20:
+                  value:
+                    status: 422
+                    error_message: Bank fee account invalid
+                    message_code: invalid_fee_account
+                example_21:
+                  value:
+                    status: 422
+                    error_message: Invalid country for payment rail
+                    message_code: invalid_payment_rail_for_country
+                example_22:
+                  value:
+                    status: 422
+                    error_message: Invalid direction for payment rail
+                    message_code: invalid_payment_rail_for_direction
+                example_23:
+                  value:
+                    status: 422
+                    error_message: Bank fiat account not found
+                    message_code: no_fiat_account
+                example_24:
+                  value:
+                    status: 422
+                    error_message: Bank fiat account state invalid
+                    message_code: invalid_fiat_account
+                example_25:
+                  value:
+                    status: 422
+                    error_message: Deposit address account not found
+                    message_code: no_account
+                example_26:
+                  value:
+                    status: 422
+                    error_message: Amount not valid
+                    message_code: invalid_value
+                example_27:
+                  value:
+                    status: 422
+                    error_message: Deposit bank account account not found
+                    message_code: no_account
+                example_28:
+                  value:
+                    status: 422
+                    error_message: Amount not valid
+                    message_code: invalid_value
+                example_29:
+                  value:
+                    status: 422
+                    error_message: Parent deposit bank account account not found
+                    message_code: no_account
+                example_30:
+                  value:
+                    status: 422
+                    error_message: Quote not found
+                    message_code: no_quote
+                example_31:
+                  value:
+                    status: 422
+                    error_message: Source account not found
+                    message_code: no_source_account
+                example_32:
+                  value:
+                    status: 422
+                    error_message: Destination account not found
+                    message_code: no_destination_account
+                example_33:
+                  value:
+                    status: 422
+                    error_message: Source account invalid
+                    message_code: invalid_source_account
+                example_34:
+                  value:
+                    status: 422
+                    error_message: Destination account invalid
+                    message_code: invalid_destination_account
+                example_35:
+                  value:
+                    status: 422
+                    error_message: Quote not found
+                    message_code: no_quote
+                example_36:
+                  value:
+                    status: 422
+                    error_message: Source account not found
+                    message_code: no_source_account
+                example_37:
+                  value:
+                    status: 422
+                    error_message: Destination account not found
+                    message_code: no_destination_account
+                example_38:
+                  value:
+                    status: 422
+                    error_message: Network fee account not found
+                    message_code: no_network_fee_account
+                example_39:
+                  value:
+                    status: 422
+                    error_message: Source account invalid
+                    message_code: invalid_source_account
+                example_40:
+                  value:
+                    status: 422
+                    error_message: Destination account invalid
+                    message_code: invalid_destination_account
+                example_41:
+                  value:
+                    status: 422
+                    error_message: Transfer invalid
+                    message_code: invalid_transfer
+                example_42:
+                  value:
+                    status: 422
+                    error_message: Transfer not found
+                    message_code: no_transfer
+                example_43:
+                  value:
+                    status: 422
+                    error_message: Transfer invalid
+                    message_code: invalid_transfer
+                example_44:
+                  value:
+                    status: 422
+                    error_message: Transfer not found
+                    message_code: no_transfer
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unprocessable Entity
         "401":
           content:
             application/json:
@@ -5334,31 +5561,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Invalid scope
-        "409":
-          content:
-            application/json:
-              examples:
-                already_exists:
-                  value:
-                    status: 409
-                    error_message: "Data exists: Transfer for quote already exists"
-                    message_code: data_exists
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Data already exists
-        "422":
-          content:
-            application/json:
-              examples:
-                unprocessable_request:
-                  value:
-                    status: 422
-                    error_message: "Unable to process request: QuoteExpiredException\
-                      \ - Quote has expired"
-                    message_code: quote_expired
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Unable to process request
       security:
       - BearerAuth: []
         oauth2:

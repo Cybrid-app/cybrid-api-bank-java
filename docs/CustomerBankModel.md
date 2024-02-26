@@ -15,6 +15,8 @@
 |**state** | **String** | The customer state; one of storing, unverified, verified, rejected, or frozen. |  [optional] |
 |**name** | [**CustomerNameBankModel**](CustomerNameBankModel.md) |  |  [optional] |
 |**address** | [**CustomerAddressBankModel**](CustomerAddressBankModel.md) |  |  [optional] |
+|**aliases** | [**List&lt;CustomerAliasesInnerBankModel&gt;**](CustomerAliasesInnerBankModel.md) | The customer&#39;s aliases. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
+|**website** | **String** | The customer&#39;s website. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**dateOfBirth** | **LocalDate** | The customer&#39;s DOB. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**phoneNumber** | **String** | The customer&#39;s phone number. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**emailAddress** | **String** | The customer&#39;s email address. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |

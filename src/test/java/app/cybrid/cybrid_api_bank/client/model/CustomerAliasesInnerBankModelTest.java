@@ -13,8 +13,6 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,153 +20,55 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * IdentityVerificationWithDetailsAllOfBankModel
+ * Model tests for CustomerAliasesInnerBankModel
  */
-@JsonPropertyOrder({
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_PERSONA_INQUIRY_ID,
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_PERSONA_STATE,
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID
-})
-@JsonTypeName("IdentityVerificationWithDetails_allOf")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-26T17:51:17.530679Z[Etc/UTC]")
-public class IdentityVerificationWithDetailsAllOfBankModel {
-  public static final String JSON_PROPERTY_PERSONA_INQUIRY_ID = "persona_inquiry_id";
-  private String personaInquiryId;
+public class CustomerAliasesInnerBankModelTest {
+    private final CustomerAliasesInnerBankModel model = new CustomerAliasesInnerBankModel();
 
-  public static final String JSON_PROPERTY_PERSONA_STATE = "persona_state";
-  private String personaState;
-
-  public static final String JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID = "external_bank_account_guid";
-  private String externalBankAccountGuid;
-
-  public IdentityVerificationWithDetailsAllOfBankModel() { 
-  }
-
-  public IdentityVerificationWithDetailsAllOfBankModel personaInquiryId(String personaInquiryId) {
-    
-    this.personaInquiryId = personaInquiryId;
-    return this;
-  }
-
-   /**
-   * The Persona identifier of the backing inquiry.
-   * @return personaInquiryId
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Persona identifier of the backing inquiry.")
-  @JsonProperty(JSON_PROPERTY_PERSONA_INQUIRY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getPersonaInquiryId() {
-    return personaInquiryId;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_PERSONA_INQUIRY_ID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaInquiryId(String personaInquiryId) {
-    this.personaInquiryId = personaInquiryId;
-  }
-
-
-  public IdentityVerificationWithDetailsAllOfBankModel personaState(String personaState) {
-    
-    this.personaState = personaState;
-    return this;
-  }
-
-   /**
-   * The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.
-   * @return personaState
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.")
-  @JsonProperty(JSON_PROPERTY_PERSONA_STATE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getPersonaState() {
-    return personaState;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_PERSONA_STATE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaState(String personaState) {
-    this.personaState = personaState;
-  }
-
-
-  public IdentityVerificationWithDetailsAllOfBankModel externalBankAccountGuid(String externalBankAccountGuid) {
-    
-    this.externalBankAccountGuid = externalBankAccountGuid;
-    return this;
-  }
-
-   /**
-   * The external bank account&#39;s identifier.
-   * @return externalBankAccountGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The external bank account's identifier.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getExternalBankAccountGuid() {
-    return externalBankAccountGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExternalBankAccountGuid(String externalBankAccountGuid) {
-    this.externalBankAccountGuid = externalBankAccountGuid;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Model tests for CustomerAliasesInnerBankModel
+     */
+    @Test
+    public void testCustomerAliasesInnerBankModel() {
+        // TODO: test CustomerAliasesInnerBankModel
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'first'
+     */
+    @Test
+    public void firstTest() {
+        // TODO: test first
     }
-    IdentityVerificationWithDetailsAllOfBankModel identityVerificationWithDetailsAllOf = (IdentityVerificationWithDetailsAllOfBankModel) o;
-    return Objects.equals(this.personaInquiryId, identityVerificationWithDetailsAllOf.personaInquiryId) &&
-        Objects.equals(this.personaState, identityVerificationWithDetailsAllOf.personaState) &&
-        Objects.equals(this.externalBankAccountGuid, identityVerificationWithDetailsAllOf.externalBankAccountGuid);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(personaInquiryId, personaState, externalBankAccountGuid);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class IdentityVerificationWithDetailsAllOfBankModel {\n");
-    sb.append("    personaInquiryId: ").append(toIndentedString(personaInquiryId)).append("\n");
-    sb.append("    personaState: ").append(toIndentedString(personaState)).append("\n");
-    sb.append("    externalBankAccountGuid: ").append(toIndentedString(externalBankAccountGuid)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'middle'
+     */
+    @Test
+    public void middleTest() {
+        // TODO: test middle
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+     * Test the property 'last'
+     */
+    @Test
+    public void lastTest() {
+        // TODO: test last
+    }
+
+    /**
+     * Test the property 'full'
+     */
+    @Test
+    public void fullTest() {
+        // TODO: test full
+    }
 
 }
-

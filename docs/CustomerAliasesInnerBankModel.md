@@ -1,8 +1,7 @@
 
 
-# CustomerNameBankModel
+# CustomerAliasesInnerBankModel
 
-The customer's name. Only available for GET operations when 'include_pii' is set.
 
 ## Properties
 

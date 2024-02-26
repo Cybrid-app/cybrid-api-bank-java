@@ -26,106 +26,137 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * IdentityVerificationWithDetailsAllOfBankModel
+ * CustomerAliasesInnerBankModel
  */
 @JsonPropertyOrder({
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_PERSONA_INQUIRY_ID,
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_PERSONA_STATE,
-  IdentityVerificationWithDetailsAllOfBankModel.JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID
+  CustomerAliasesInnerBankModel.JSON_PROPERTY_FIRST,
+  CustomerAliasesInnerBankModel.JSON_PROPERTY_MIDDLE,
+  CustomerAliasesInnerBankModel.JSON_PROPERTY_LAST,
+  CustomerAliasesInnerBankModel.JSON_PROPERTY_FULL
 })
-@JsonTypeName("IdentityVerificationWithDetails_allOf")
+@JsonTypeName("Customer_aliases_inner")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-26T17:51:17.530679Z[Etc/UTC]")
-public class IdentityVerificationWithDetailsAllOfBankModel {
-  public static final String JSON_PROPERTY_PERSONA_INQUIRY_ID = "persona_inquiry_id";
-  private String personaInquiryId;
+public class CustomerAliasesInnerBankModel {
+  public static final String JSON_PROPERTY_FIRST = "first";
+  private String first;
 
-  public static final String JSON_PROPERTY_PERSONA_STATE = "persona_state";
-  private String personaState;
+  public static final String JSON_PROPERTY_MIDDLE = "middle";
+  private String middle;
 
-  public static final String JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID = "external_bank_account_guid";
-  private String externalBankAccountGuid;
+  public static final String JSON_PROPERTY_LAST = "last";
+  private String last;
 
-  public IdentityVerificationWithDetailsAllOfBankModel() { 
+  public static final String JSON_PROPERTY_FULL = "full";
+  private String full;
+
+  public CustomerAliasesInnerBankModel() { 
   }
 
-  public IdentityVerificationWithDetailsAllOfBankModel personaInquiryId(String personaInquiryId) {
+  public CustomerAliasesInnerBankModel first(String first) {
     
-    this.personaInquiryId = personaInquiryId;
+    this.first = first;
     return this;
   }
 
    /**
-   * The Persona identifier of the backing inquiry.
-   * @return personaInquiryId
+   * The customer&#39;s first name.
+   * @return first
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Persona identifier of the backing inquiry.")
-  @JsonProperty(JSON_PROPERTY_PERSONA_INQUIRY_ID)
+  @ApiModelProperty(value = "The customer's first name.")
+  @JsonProperty(JSON_PROPERTY_FIRST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getPersonaInquiryId() {
-    return personaInquiryId;
+  public String getFirst() {
+    return first;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PERSONA_INQUIRY_ID)
+  @JsonProperty(JSON_PROPERTY_FIRST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaInquiryId(String personaInquiryId) {
-    this.personaInquiryId = personaInquiryId;
+  public void setFirst(String first) {
+    this.first = first;
   }
 
 
-  public IdentityVerificationWithDetailsAllOfBankModel personaState(String personaState) {
+  public CustomerAliasesInnerBankModel middle(String middle) {
     
-    this.personaState = personaState;
+    this.middle = middle;
     return this;
   }
 
    /**
-   * The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.
-   * @return personaState
+   * The customer&#39;s middle name.
+   * @return middle
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown.")
-  @JsonProperty(JSON_PROPERTY_PERSONA_STATE)
+  @ApiModelProperty(value = "The customer's middle name.")
+  @JsonProperty(JSON_PROPERTY_MIDDLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getPersonaState() {
-    return personaState;
+  public String getMiddle() {
+    return middle;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PERSONA_STATE)
+  @JsonProperty(JSON_PROPERTY_MIDDLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPersonaState(String personaState) {
-    this.personaState = personaState;
+  public void setMiddle(String middle) {
+    this.middle = middle;
   }
 
 
-  public IdentityVerificationWithDetailsAllOfBankModel externalBankAccountGuid(String externalBankAccountGuid) {
+  public CustomerAliasesInnerBankModel last(String last) {
     
-    this.externalBankAccountGuid = externalBankAccountGuid;
+    this.last = last;
     return this;
   }
 
    /**
-   * The external bank account&#39;s identifier.
-   * @return externalBankAccountGuid
+   * The customer&#39;s last name.
+   * @return last
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The external bank account's identifier.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
+  @ApiModelProperty(value = "The customer's last name.")
+  @JsonProperty(JSON_PROPERTY_LAST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getExternalBankAccountGuid() {
-    return externalBankAccountGuid;
+  public String getLast() {
+    return last;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
+  @JsonProperty(JSON_PROPERTY_LAST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExternalBankAccountGuid(String externalBankAccountGuid) {
-    this.externalBankAccountGuid = externalBankAccountGuid;
+  public void setLast(String last) {
+    this.last = last;
+  }
+
+
+  public CustomerAliasesInnerBankModel full(String full) {
+    
+    this.full = full;
+    return this;
+  }
+
+   /**
+   * The customer&#39;s full name.
+   * @return full
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The customer's full name.")
+  @JsonProperty(JSON_PROPERTY_FULL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getFull() {
+    return full;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_FULL)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFull(String full) {
+    this.full = full;
   }
 
 
@@ -137,24 +168,26 @@ public class IdentityVerificationWithDetailsAllOfBankModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    IdentityVerificationWithDetailsAllOfBankModel identityVerificationWithDetailsAllOf = (IdentityVerificationWithDetailsAllOfBankModel) o;
-    return Objects.equals(this.personaInquiryId, identityVerificationWithDetailsAllOf.personaInquiryId) &&
-        Objects.equals(this.personaState, identityVerificationWithDetailsAllOf.personaState) &&
-        Objects.equals(this.externalBankAccountGuid, identityVerificationWithDetailsAllOf.externalBankAccountGuid);
+    CustomerAliasesInnerBankModel customerAliasesInner = (CustomerAliasesInnerBankModel) o;
+    return Objects.equals(this.first, customerAliasesInner.first) &&
+        Objects.equals(this.middle, customerAliasesInner.middle) &&
+        Objects.equals(this.last, customerAliasesInner.last) &&
+        Objects.equals(this.full, customerAliasesInner.full);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(personaInquiryId, personaState, externalBankAccountGuid);
+    return Objects.hash(first, middle, last, full);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class IdentityVerificationWithDetailsAllOfBankModel {\n");
-    sb.append("    personaInquiryId: ").append(toIndentedString(personaInquiryId)).append("\n");
-    sb.append("    personaState: ").append(toIndentedString(personaState)).append("\n");
-    sb.append("    externalBankAccountGuid: ").append(toIndentedString(externalBankAccountGuid)).append("\n");
+    sb.append("class CustomerAliasesInnerBankModel {\n");
+    sb.append("    first: ").append(toIndentedString(first)).append("\n");
+    sb.append("    middle: ").append(toIndentedString(middle)).append("\n");
+    sb.append("    last: ").append(toIndentedString(last)).append("\n");
+    sb.append("    full: ").append(toIndentedString(full)).append("\n");
     sb.append("}");
     return sb.toString();
   }

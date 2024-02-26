@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.17
+  version: v0.114.18
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6224,6 +6224,7 @@ components:
       type: object
     Customer:
       example:
+        website: website
         address:
           subdivision: subdivision
           country_code: country_code
@@ -6231,6 +6232,15 @@ components:
           street: street
           street2: street2
           postal_code: postal_code
+        aliases:
+        - middle: middle
+          last: last
+          first: first
+          full: full
+        - middle: middle
+          last: last
+          first: first
+          full: full
         date_of_birth: 2000-01-23
         created_at: 2000-01-23T04:56:07.000+00:00
         verification_checks:
@@ -6254,6 +6264,7 @@ components:
           middle: middle
           last: last
           first: first
+          full: full
         guid: guid
         phone_number: phone_number
         state: state
@@ -6288,6 +6299,18 @@ components:
           $ref: '#/components/schemas/Customer_name'
         address:
           $ref: '#/components/schemas/Customer_address'
+        aliases:
+          description: The customer's aliases. Only available for GET operations when
+            'include_pii' is set.
+          items:
+            $ref: '#/components/schemas/Customer_aliases_inner'
+          nullable: true
+          type: array
+        website:
+          description: The customer's website. Only available for GET operations when
+            'include_pii' is set.
+          nullable: true
+          type: string
         date_of_birth:
           description: The customer's DOB. Only available for GET operations when
             'include_pii' is set.
@@ -6334,13 +6357,23 @@ components:
         per_page: 0
         total: 0
         objects:
-        - address:
+        - website: website
+          address:
             subdivision: subdivision
             country_code: country_code
             city: city
             street: street
             street2: street2
             postal_code: postal_code
+          aliases:
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          - middle: middle
+            last: last
+            first: first
+            full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
           verification_checks:
@@ -6364,17 +6397,28 @@ components:
             middle: middle
             last: last
             first: first
+            full: full
           guid: guid
           phone_number: phone_number
           state: state
           bank_guid: bank_guid
-        - address:
+        - website: website
+          address:
             subdivision: subdivision
             country_code: country_code
             city: city
             street: street
             street2: street2
             postal_code: postal_code
+          aliases:
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          - middle: middle
+            last: last
+            first: first
+            full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
           verification_checks:
@@ -6398,6 +6442,7 @@ components:
             middle: middle
             last: last
             first: first
+            full: full
           guid: guid
           phone_number: phone_number
           state: state
@@ -9235,6 +9280,7 @@ components:
         middle: middle
         last: last
         first: first
+        full: full
       nullable: true
       properties:
         first:
@@ -9247,6 +9293,10 @@ components:
           type: string
         last:
           description: The customer's last name.
+          nullable: true
+          type: string
+        full:
+          description: The customer's full name.
           nullable: true
           type: string
       type: object
@@ -9284,6 +9334,30 @@ components:
           type: string
         country_code:
           description: The ISO 3166 country 2-Alpha country code of the address.
+          nullable: true
+          type: string
+      type: object
+    Customer_aliases_inner:
+      example:
+        middle: middle
+        last: last
+        first: first
+        full: full
+      properties:
+        first:
+          description: The customer's first name.
+          nullable: true
+          type: string
+        middle:
+          description: The customer's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The customer's last name.
+          nullable: true
+          type: string
+        full:
+          description: The customer's full name.
           nullable: true
           type: string
       type: object

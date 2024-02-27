@@ -13,21 +13,197 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import java.util.Objects;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for ExternalBankAccountKindBankModel
+ * PostFeeBankModel
  */
-public class ExternalBankAccountKindBankModelTest {
-    /**
-     * Model tests for ExternalBankAccountKindBankModel
-     */
-    @Test
-    public void testExternalBankAccountKindBankModel() {
-        // TODO: test ExternalBankAccountKindBankModel
+@JsonPropertyOrder({
+  PostFeeBankModel.JSON_PROPERTY_TYPE,
+  PostFeeBankModel.JSON_PROPERTY_SPREAD_FEE,
+  PostFeeBankModel.JSON_PROPERTY_FIXED_FEE
+})
+@JsonTypeName("PostFee")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-02-27T19:04:44.898646Z[Etc/UTC]")
+public class PostFeeBankModel {
+  /**
+   * The fee&#39;s type
+   */
+  public enum TypeEnum {
+    SPREAD("spread"),
+    
+    FIXED("fixed");
+
+    private String value;
+
+    TypeEnum(String value) {
+      this.value = value;
     }
 
+    @JsonValue
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    @JsonCreator
+    public static TypeEnum fromValue(String value) {
+      for (TypeEnum b : TypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+  }
+
+  public static final String JSON_PROPERTY_TYPE = "type";
+  private TypeEnum type;
+
+  public static final String JSON_PROPERTY_SPREAD_FEE = "spread_fee";
+  private java.math.BigInteger spreadFee;
+
+  public static final String JSON_PROPERTY_FIXED_FEE = "fixed_fee";
+  private java.math.BigInteger fixedFee;
+
+  public PostFeeBankModel() { 
+  }
+
+  public PostFeeBankModel type(TypeEnum type) {
+    
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * The fee&#39;s type
+   * @return type
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The fee's type")
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public TypeEnum getType() {
+    return type;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setType(TypeEnum type) {
+    this.type = type;
+  }
+
+
+  public PostFeeBankModel spreadFee(java.math.BigInteger spreadFee) {
+    
+    this.spreadFee = spreadFee;
+    return this;
+  }
+
+   /**
+   * The percentage amount, in basis points, to apply when charging a fee.
+   * @return spreadFee
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The percentage amount, in basis points, to apply when charging a fee.")
+  @JsonProperty(JSON_PROPERTY_SPREAD_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public java.math.BigInteger getSpreadFee() {
+    return spreadFee;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_SPREAD_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setSpreadFee(java.math.BigInteger spreadFee) {
+    this.spreadFee = spreadFee;
+  }
+
+
+  public PostFeeBankModel fixedFee(java.math.BigInteger fixedFee) {
+    
+    this.fixedFee = fixedFee;
+    return this;
+  }
+
+   /**
+   * The fixed amount to apply when charging a fee; for trades, the fiat asset is used.
+   * @return fixedFee
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The fixed amount to apply when charging a fee; for trades, the fiat asset is used.")
+  @JsonProperty(JSON_PROPERTY_FIXED_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public java.math.BigInteger getFixedFee() {
+    return fixedFee;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_FIXED_FEE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setFixedFee(java.math.BigInteger fixedFee) {
+    this.fixedFee = fixedFee;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    PostFeeBankModel postFee = (PostFeeBankModel) o;
+    return Objects.equals(this.type, postFee.type) &&
+        Objects.equals(this.spreadFee, postFee.spreadFee) &&
+        Objects.equals(this.fixedFee, postFee.fixedFee);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(type, spreadFee, fixedFee);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class PostFeeBankModel {\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    spreadFee: ").append(toIndentedString(spreadFee)).append("\n");
+    sb.append("    fixedFee: ").append(toIndentedString(fixedFee)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+
 }
+

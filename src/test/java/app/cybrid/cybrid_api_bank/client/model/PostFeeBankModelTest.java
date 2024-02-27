@@ -13,21 +13,54 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
 
 /**
- * Model tests for ExternalBankAccountKindBankModel
+ * Model tests for PostFeeBankModel
  */
-public class ExternalBankAccountKindBankModelTest {
+public class PostFeeBankModelTest {
+    private final PostFeeBankModel model = new PostFeeBankModel();
+
     /**
-     * Model tests for ExternalBankAccountKindBankModel
+     * Model tests for PostFeeBankModel
      */
     @Test
-    public void testExternalBankAccountKindBankModel() {
-        // TODO: test ExternalBankAccountKindBankModel
+    public void testPostFeeBankModel() {
+        // TODO: test PostFeeBankModel
+    }
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
+
+    /**
+     * Test the property 'spreadFee'
+     */
+    @Test
+    public void spreadFeeTest() {
+        // TODO: test spreadFee
+    }
+
+    /**
+     * Test the property 'fixedFee'
+     */
+    @Test
+    public void fixedFeeTest() {
+        // TODO: test fixedFee
     }
 
 }

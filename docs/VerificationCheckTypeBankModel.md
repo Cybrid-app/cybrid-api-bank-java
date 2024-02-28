@@ -25,5 +25,9 @@
 
 * `PERSON_TAX_ID_VERIFICATION` (value: `"person_tax_id_verification"`)
 
+* `EXTERNAL_BANK_ACCOUNT_VERIFICATION` (value: `"external_bank_account_verification"`)
+
+* `EXTERNAL_BANK_ACCOUNT_ATTESTED` (value: `"external_bank_account_attested"`)
+
 
 

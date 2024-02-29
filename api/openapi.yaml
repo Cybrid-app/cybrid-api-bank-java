@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.27
+  version: v0.114.28
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6908,12 +6908,14 @@ components:
     PaymentInstruction:
       example:
         expected_payment_amount: 5
+        failure_code: failure_code
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         network_address: network_address
         invoice_guid: invoice_guid
         expired_at: 2000-01-23T04:56:07.000+00:00
+        failed_at: 2000-01-23T04:56:07.000+00:00
         state: state
         expected_payment_asset: expected_payment_asset
         customer_guid: customer_guid
@@ -6947,6 +6949,11 @@ components:
           format: date-time
           nullable: true
           type: string
+        failed_at:
+          description: ISO8601 datetime the instructions failed to be created at.
+          format: date-time
+          nullable: true
+          type: string
         network_address:
           description: The network address to pay the invoice to.
           nullable: true
@@ -6959,9 +6966,14 @@ components:
           description: The amount to be paid in base units of expected_payment_asset.
           nullable: true
           type: integer
+        failure_code:
+          description: "The reason code explaining the failure; ond of invoice_paid,\
+            \ invoice_cancelled, or invalid_amount."
+          nullable: true
+          type: string
         state:
           description: "The state of the payment instruction; one of storing, created,\
-            \ or expired."
+            \ expired, or failed."
           type: string
       type: object
     PaymentInstructionList:
@@ -6970,22 +6982,26 @@ components:
         total: 0
         objects:
         - expected_payment_amount: 5
+          failure_code: failure_code
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           network_address: network_address
           invoice_guid: invoice_guid
           expired_at: 2000-01-23T04:56:07.000+00:00
+          failed_at: 2000-01-23T04:56:07.000+00:00
           state: state
           expected_payment_asset: expected_payment_asset
           customer_guid: customer_guid
         - expected_payment_amount: 5
+          failure_code: failure_code
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           network_address: network_address
           invoice_guid: invoice_guid
           expired_at: 2000-01-23T04:56:07.000+00:00
+          failed_at: 2000-01-23T04:56:07.000+00:00
           state: state
           expected_payment_asset: expected_payment_asset
           customer_guid: customer_guid

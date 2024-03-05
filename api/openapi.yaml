@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.38
+  version: v0.114.39
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6779,9 +6779,9 @@ components:
         fee: 2
         guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
-        invoice_type: invoice_type
         receive_amount: 5
         state: state
+        type: type
         asset: asset
         customer_guid: customer_guid
         deliver_amount: 5
@@ -6813,7 +6813,7 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
-        invoice_type:
+        type:
           description: The type of invoice; one of lightning.
           type: string
         asset:
@@ -6858,9 +6858,9 @@ components:
           fee: 2
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          invoice_type: invoice_type
           receive_amount: 5
           state: state
+          type: type
           asset: asset
           customer_guid: customer_guid
           deliver_amount: 5
@@ -6872,9 +6872,9 @@ components:
           fee: 2
           guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          invoice_type: invoice_type
           receive_amount: 5
           state: state
+          type: type
           asset: asset
           customer_guid: customer_guid
           deliver_amount: 5

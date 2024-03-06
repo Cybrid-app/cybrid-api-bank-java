@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.40
+  version: v0.114.41
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5244,8 +5244,9 @@ paths:
         \ via Plaid |\n| party_name_invalid | The transfer's associated external bank\
         \ account has an invalid party name |\n| limit_exceeded | The customer is\
         \ over the limits that have been set for them for this activity |\n| compliance_rejection\
-        \ | The transfer was rejected for compliance reasons |\n\n\n\nRequired scope:\
-        \ **transfers:execute**"
+        \ | The transfer was rejected for compliance reasons |\n| payment_rail_invalid\
+        \ | The payment rail specified for the transfer is not supported by the external\
+        \ bank account |\n\n\n\nRequired scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:

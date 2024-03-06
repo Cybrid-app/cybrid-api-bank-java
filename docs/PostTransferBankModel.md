@@ -14,6 +14,7 @@
 |**externalWalletGuid** | **String** | The customer&#39;s external wallet&#39;s identifier. |  [optional] |
 |**externalBankAccountGuid** | **String** | The customer&#39;s &#39;plaid&#39; or &#39;plaid_processor_token&#39; external bank account&#39;s identifier. |  [optional] |
 |**paymentRail** | **String** | The desired payment rail to initiate the transfer for. Valid values are: ach, eft, wire. Valid for funding transfers only. |  [optional] |
+|**beneficiaryMemo** | **String** | The memo to send to the counterparty. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
 
 

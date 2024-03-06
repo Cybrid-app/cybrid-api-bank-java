@@ -207,7 +207,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.114.42
+  version: v0.114.44
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9180,6 +9180,12 @@ components:
         payment_rail:
           description: "The desired payment rail to initiate the transfer for. Valid\
             \ values are: ach, eft, wire. Valid for funding transfers only."
+          type: string
+        beneficiary_memo:
+          description: The memo to send to the counterparty.
+          maxLength: 128
+          minLength: 1
+          nullable: true
           type: string
         labels:
           description: The labels associated with the transfer.

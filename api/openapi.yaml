@@ -208,7 +208,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.21
+  version: v0.115.22
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7754,7 +7754,7 @@ components:
           type: string
         transfer_type:
           description: "The type of transfer; one of funding, book, crypto, instant_funding,\
-            \ funding_return, or crypto_return."
+            \ funding_return, crypto_return, or loss_recovery."
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -7877,6 +7877,7 @@ components:
       - instant_funding
       - funding_return
       - crypto_return
+      - loss_recovery
       type: string
     TransferSide:
       enum:
@@ -7898,6 +7899,7 @@ components:
       - external_bank_account
       - external_wallet
       - one_time_address
+      - reserve
       type: string
     Trade:
       example:
@@ -9555,7 +9557,7 @@ components:
           type: string
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
-            \ external_wallet, or one_time_address."
+            \ external_wallet, one_time_address, or reserve."
           type: string
         bank_guid:
           description: The account's identifier.
@@ -9586,7 +9588,7 @@ components:
           type: string
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
-            \ external_wallet, or one_time_address."
+            \ external_wallet, one_time_address, or reserve."
           type: string
         bank_guid:
           description: The account's identifier.

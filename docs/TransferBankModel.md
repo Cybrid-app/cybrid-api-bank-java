@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the transfer. |  [optional] |
-|**transferType** | **String** | The type of transfer; one of funding, book, crypto, instant_funding, funding_return, or crypto_return. |  [optional] |
+|**transferType** | **String** | The type of transfer; one of funding, book, crypto, instant_funding, funding_return, crypto_return, or loss_recovery. |  [optional] |
 |**bankGuid** | **String** | The associated bank&#39;s identifier. |  [optional] |
 |**customerGuid** | **String** | The associated customer&#39;s identifier. |  [optional] |
 |**quoteGuid** | **String** | The associated quote&#39;s identifier. |  [optional] |

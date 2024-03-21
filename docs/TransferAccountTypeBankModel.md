@@ -15,5 +15,7 @@
 
 * `ONE_TIME_ADDRESS` (value: `"one_time_address"`)
 
+* `RESERVE` (value: `"reserve"`)
+
 
 

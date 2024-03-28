@@ -17,7 +17,6 @@
 
 | Name | Value |
 |---- | -----|
-| INVALID_QUOTE_GUID | &quot;invalid_quote_guid&quot; |
 | EXPIRED_QUOTE | &quot;expired_quote&quot; |
 | NON_SUFFICIENT_FUNDS | &quot;non_sufficient_funds&quot; |
 

@@ -89,7 +89,7 @@ public class Example {
 
 ## getIdentityVerification
 
-> IdentityVerificationWithDetailsBankModel getIdentityVerification(identityVerificationGuid)
+> IdentityVerificationWithDetailsBankModel getIdentityVerification(identityVerificationGuid, includePii)
 
 Get Identity Verification
 
@@ -121,8 +121,9 @@ public class Example {
 
         IdentityVerificationsBankApi apiInstance = new IdentityVerificationsBankApi(defaultClient);
         String identityVerificationGuid = "identityVerificationGuid_example"; // String | Identifier for the identity verification.
+        Boolean includePii = true; // Boolean | Include PII in the response.
         try {
-            IdentityVerificationWithDetailsBankModel result = apiInstance.getIdentityVerification(identityVerificationGuid);
+            IdentityVerificationWithDetailsBankModel result = apiInstance.getIdentityVerification(identityVerificationGuid, includePii);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IdentityVerificationsBankApi#getIdentityVerification");
@@ -141,6 +142,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **identityVerificationGuid** | **String**| Identifier for the identity verification. | |
+| **includePii** | **Boolean**| Include PII in the response. | [optional] |
 
 ### Return type
 

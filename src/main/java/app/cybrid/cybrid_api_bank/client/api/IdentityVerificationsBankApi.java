@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-04-01T16:36:21.030005Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-04-01T19:45:31.800778Z[Etc/UTC]")
 public class IdentityVerificationsBankApi {
     private ApiClient apiClient;
 
@@ -116,10 +116,11 @@ public class IdentityVerificationsBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - identity_verification not found
      * @param identityVerificationGuid Identifier for the identity verification.
+     * @param includePii Include PII in the response.
      * @return IdentityVerificationWithDetailsBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getIdentityVerificationRequestCreation(String identityVerificationGuid) throws WebClientResponseException {
+    private ResponseSpec getIdentityVerificationRequestCreation(String identityVerificationGuid, Boolean includePii) throws WebClientResponseException {
         Object postBody = null;
         // verify the required parameter 'identityVerificationGuid' is set
         if (identityVerificationGuid == null) {
@@ -134,6 +135,8 @@ public class IdentityVerificationsBankApi {
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_pii", includePii));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -156,17 +159,18 @@ public class IdentityVerificationsBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - identity_verification not found
      * @param identityVerificationGuid Identifier for the identity verification.
+     * @param includePii Include PII in the response.
      * @return IdentityVerificationWithDetailsBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<IdentityVerificationWithDetailsBankModel> getIdentityVerification(String identityVerificationGuid) throws WebClientResponseException {
+    public Mono<IdentityVerificationWithDetailsBankModel> getIdentityVerification(String identityVerificationGuid, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<IdentityVerificationWithDetailsBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityVerificationWithDetailsBankModel>() {};
-        return getIdentityVerificationRequestCreation(identityVerificationGuid).bodyToMono(localVarReturnType);
+        return getIdentityVerificationRequestCreation(identityVerificationGuid, includePii).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<IdentityVerificationWithDetailsBankModel>> getIdentityVerificationWithHttpInfo(String identityVerificationGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<IdentityVerificationWithDetailsBankModel>> getIdentityVerificationWithHttpInfo(String identityVerificationGuid, Boolean includePii) throws WebClientResponseException {
         ParameterizedTypeReference<IdentityVerificationWithDetailsBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityVerificationWithDetailsBankModel>() {};
-        return getIdentityVerificationRequestCreation(identityVerificationGuid).toEntity(localVarReturnType);
+        return getIdentityVerificationRequestCreation(identityVerificationGuid, includePii).toEntity(localVarReturnType);
     }
     /**
      * List Identity Verifications

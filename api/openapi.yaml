@@ -208,7 +208,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.63
+  version: v0.115.64
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5254,10 +5254,12 @@ paths:
         \ account has an invalid party name |\n| payment_rail_invalid | The payment\
         \ rail specified for the transfer is not supported by the external bank account\
         \ |\n| compliance_rejection | The transfer was rejected for compliance reasons\
-        \ |\n| limit_exceeded | The customer is over the limits that have been set\
-        \ for them for this activity |\n| network_fee_too_low | The transfer was rejected\
-        \ due to the network fee being too low |\n| amount_too_low | The transfer\
-        \ was rejected due to the amount being too low |\n\n\n\nRequired scope: **transfers:execute**"
+        \ |\n| cancelled | The transfer was manually cancelled |\n| reversed | The\
+        \ transfer was reversed |\n| limit_exceeded | The customer is over the limits\
+        \ that have been set for them for this activity |\n| network_fee_too_low |\
+        \ The transfer was rejected due to the network fee being too low |\n| amount_too_low\
+        \ | The transfer was rejected due to the amount being too low |\n\n\n\nRequired\
+        \ scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:

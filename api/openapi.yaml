@@ -208,7 +208,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.79
+  version: v0.115.81
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1849,7 +1849,9 @@ paths:
         \ | The Platform is deleting the external bank account |\n| deleted | The\
         \ Platform has deleted the external bank account |\n\n## Failure codes\n\n\
         | Code | Description |\n|------|-------------|\n| invalid_routing_number |\
-        \ The provided routing number is invalid |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
+        \ The provided routing number is invalid |\n| refresh_required | The Plaid\
+        \ processor token used to create the account needs to be refreshed |\n\n\n\
+        \nRequired scope: **external_bank_accounts:execute**"
       operationId: createExternalBankAccount
       parameters: []
       requestBody:
@@ -2908,11 +2910,15 @@ paths:
         \ number of the person |\n| phone_number_check_failure | Failure due to an\
         \ issue verifying the phone number of the person |\n| email_address_check_failure\
         \ | Failure due to an issue verifying the email address of the person |\n\
-        | plaid_failure | Failure due to an issue interacting with Plaid |\n| decision_timeout\
-        \ | Failure due to an issue verifying the email address of the person |\n\
-        | requested_failure | In sandbox, the caller requested that the process failed\
-        \ |\n| deleted_account | Failure due to the bank account having been deleted\
-        \ before a decision was made |\n\n\n\nRequired scope: **customers:write**"
+        | plaid_failure | Failure due to an issue interacting with Plaid |\n| plaid_item_login_required\
+        \ | Failure due to the Plaid token for the account requiring re-login |\n\
+        | plaid_invalid_product | Failure due to the Plaid product not being supported\
+        \ (contact support) |\n| plaid_no_accounts | Failure due to the Plaid token\
+        \ having access to no accounts |\n| decision_timeout | Failure due to an issue\
+        \ verifying the email address of the person |\n| requested_failure | In sandbox,\
+        \ the caller requested that the process failed |\n| deleted_account | Failure\
+        \ due to the bank account having been deleted before a decision was made |\n\
+        \n\n\nRequired scope: **customers:write**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:

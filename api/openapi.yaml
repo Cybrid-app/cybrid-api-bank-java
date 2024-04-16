@@ -208,7 +208,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.99
+  version: v0.115.100
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4830,10 +4830,12 @@ paths:
         \ the trade |\n| completed | The Platform has successfully completed the trade\
         \ |\n| failed | The Platform was not able to successfully complete the trade\
         \ |\n\n## Failure codes\n\n| Code | Description |\n|------|-------------|\n\
-        | non_sufficient_funds | The customer does not have enough funds to complete\
-        \ the trade |\n| unsupported | The trading pair is not supported for this\
-        \ customer |\n| limit_exceeded | The customer is over the limits that have\
-        \ been set for them for this activity |\n\n\n\nRequired scope: **trades:execute**"
+        | non_sufficient_funds | The delivery account does not have enough funds to\
+        \ complete the trade |\n| unsupported | The trading pair is not supported\
+        \ for this customer |\n| limit_exceeded | The customer is over the limits\
+        \ that have been set for them for this activity |\n| expired_quote | The quote\
+        \ expired before it could be executed |\n| market_volatility | The quote could\
+        \ not be executed due to market volatility |\n\n\n\nRequired scope: **trades:execute**"
       operationId: createTrade
       parameters: []
       requestBody:
@@ -7912,7 +7914,9 @@ components:
             \ completed, or failed."
           type: string
         failure_code:
-          description: The failure code for failed transfers.
+          description: "The failure code for failed transfers; one of non_sufficient_funds,\
+            \ refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection,\
+            \ cancelled, reversed, limit_exceeded, network_fee_too_low, or amount_too_low."
           nullable: true
           type: string
         amount:
@@ -8023,6 +8027,19 @@ components:
       - one_time_address
       - reserve
       type: string
+    TransferFailureCode:
+      enum:
+      - non_sufficient_funds
+      - refresh_required
+      - party_name_invalid
+      - payment_rail_invalid
+      - compliance_rejection
+      - cancelled
+      - reversed
+      - limit_exceeded
+      - network_fee_too_low
+      - amount_too_low
+      type: string
     Trade:
       example:
         symbol: symbol
@@ -8071,7 +8088,8 @@ components:
             \ completed, settling, or failed."
           type: string
         failure_code:
-          description: The failure code for failed trades.
+          description: "The failure code for failed trades; one of non_sufficient_funds,\
+            \ unsupported, limit_exceeded, expired_quote, or market_volatility."
           nullable: true
           type: string
         receive_amount:
@@ -8119,6 +8137,14 @@ components:
       - completed
       - settling
       - failed
+      type: string
+    TradeFailureCode:
+      enum:
+      - non_sufficient_funds
+      - unsupported
+      - limit_exceeded
+      - expired_quote
+      - market_volatility
       type: string
     ExternalWalletList:
       example:

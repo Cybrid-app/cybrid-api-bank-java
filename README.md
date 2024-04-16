@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.115.99
+- API version: v0.115.100
 
-- Build date: 2024-04-16T12:51:24.052385Z[Etc/UTC]
+- Build date: 2024-04-16T15:00:02.086366Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -188,7 +188,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.115.99</version>
+  <version>v0.115.100</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -204,7 +204,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.115.99"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.115.100"
   }
 ```
 
@@ -218,7 +218,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.115.99.jar`
+- `target/cybrid-api-bank-java-v0.115.100.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -412,6 +412,7 @@ Class | Method | HTTP request | Description
  - [QuoteTypeBankModel](docs/QuoteTypeBankModel.md)
  - [SymbolPriceBankModel](docs/SymbolPriceBankModel.md)
  - [TradeBankModel](docs/TradeBankModel.md)
+ - [TradeFailureCodeBankModel](docs/TradeFailureCodeBankModel.md)
  - [TradeListBankModel](docs/TradeListBankModel.md)
  - [TradeSideBankModel](docs/TradeSideBankModel.md)
  - [TradeStateBankModel](docs/TradeStateBankModel.md)
@@ -419,6 +420,7 @@ Class | Method | HTTP request | Description
  - [TransferAccountTypeBankModel](docs/TransferAccountTypeBankModel.md)
  - [TransferBankModel](docs/TransferBankModel.md)
  - [TransferDestinationAccountBankModel](docs/TransferDestinationAccountBankModel.md)
+ - [TransferFailureCodeBankModel](docs/TransferFailureCodeBankModel.md)
  - [TransferListBankModel](docs/TransferListBankModel.md)
  - [TransferSideBankModel](docs/TransferSideBankModel.md)
  - [TransferSourceAccountBankModel](docs/TransferSourceAccountBankModel.md)

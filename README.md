@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.115.100
+- API version: v0.115.102
 
-- Build date: 2024-04-16T15:00:02.086366Z[Etc/UTC]
+- Build date: 2024-04-16T18:21:45.706467Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -73,10 +73,10 @@ curl -X POST https://id.sandbox.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:write counterparties:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -188,7 +188,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.115.100</version>
+  <version>v0.115.102</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -204,7 +204,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.115.100"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.115.102"
   }
 ```
 
@@ -218,7 +218,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.115.100.jar`
+- `target/cybrid-api-bank-java-v0.115.102.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -457,6 +457,9 @@ Authentication schemes defined for the API:
   - bank_applications:execute: bank_applications execute
   - accounts:read: accounts read
   - accounts:execute: accounts execute
+  - counterparties:read: counterparties read
+  - counterparties:write: counterparties write
+  - counterparties:execute: counterparties execute
   - customers:read: customers read
   - customers:write: customers write
   - customers:execute: customers execute

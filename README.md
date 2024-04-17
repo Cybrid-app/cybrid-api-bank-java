@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.115.105
+- API version: v0.115.106
 
-- Build date: 2024-04-17T14:24:26.365967Z[Etc/UTC]
+- Build date: 2024-04-17T15:57:52.663149Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -91,6 +91,7 @@ The following scopes are available on the platform and can be requested when gen
 | Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)                |
 | Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                     |
 | Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                         |
+| Counterparty          | counterparties:read (Organization, Bank, Customer)         | counterparties:write (Bank, Customer)         | counterparties:execute (Bank)                    |
 | Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)       |
 | External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  |
 | External Wallet       | external_wallet:read (Organization, Bank, Customer)        |                                               | external_wallet:execute (Bank, Customer)         |
@@ -118,6 +119,7 @@ The available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/s
 | Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     |
 | Bank         | Bank                 | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             |
 | Bank         | Customer             | /api/customers                 | Create and list customers                                                                         |
+| Bank         | Counterparty         | /api/counterparties            | Create and list counterparties                                                                    |
 | Bank         | DepositAddress       | /api/deposit_addresses         | Create, get and list deposit addresses                                                            |
 | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform |
 | Bank         | ExternalWallet       | /api/external_wallets          | Create, get, list and delete external wallets, which connect customer wallets to the platform     |
@@ -188,7 +190,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.115.105</version>
+  <version>v0.115.106</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -204,7 +206,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.115.105"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.115.106"
   }
 ```
 
@@ -218,7 +220,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.115.105.jar`
+- `target/cybrid-api-bank-java-v0.115.106.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

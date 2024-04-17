@@ -105,33 +105,36 @@ info:
     \      | banks:execute (Organization)                     |\n| Customer      \
     \        | customers:read (Organization, Bank, Customer)              | customers:write\
     \ (Bank, Customer)              | customers:execute (Bank)                   \
-    \      |\n| Deposit Address       | deposit_addresses:read (Organization, Bank,\
-    \ Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute\
-    \ (Bank, Customer)       |\n| External Bank Account | external_bank_accounts:read\
-    \ (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer)\
-    \ | external_bank_accounts:execute (Bank, Customer)  |\n| External Wallet    \
-    \   | external_wallet:read (Organization, Bank, Customer)        |           \
-    \                                    | external_wallet:execute (Bank, Customer)\
-    \         |\n| Organization          | organizations:read (Organization)     \
-    \                     | organizations:write (Organization)            |      \
-    \                                            |\n| User                  | users:read\
-    \ (Organization)                                  |                          \
-    \                     | users:execute (Organization)                     |\n|\
-    \ Price                 | prices:read (Bank, Customer)                       \
-    \        |                                               |                   \
-    \                               |\n| Quote                 | quotes:read (Organization,\
-    \ Bank, Customer)                 |                                          \
-    \     | quotes:execute (Organization, Bank, Customer)    |\n| Trade          \
-    \       | trades:read (Organization, Bank, Customer)                 |       \
-    \                                        | trades:execute (Organization, Bank,\
-    \ Customer)    |\n| Transfer              | transfers:read (Organization, Bank,\
-    \ Customer)              |                                               | transfers:execute\
-    \ (Organization, Bank, Customer) |\n| Workflow              | workflows:read (Organization,\
+    \      |\n| Counterparty          | counterparties:read (Organization, Bank, Customer)\
+    \         | counterparties:write (Bank, Customer)         | counterparties:execute\
+    \ (Bank)                    |\n| Deposit Address       | deposit_addresses:read\
+    \ (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)\
+    \      | deposit_addresses:execute (Bank, Customer)       |\n| External Bank Account\
+    \ | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write\
+    \ (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  |\n| External\
+    \ Wallet       | external_wallet:read (Organization, Bank, Customer)        |\
+    \                                               | external_wallet:execute (Bank,\
+    \ Customer)         |\n| Organization          | organizations:read (Organization)\
+    \                          | organizations:write (Organization)            | \
+    \                                                 |\n| User                  |\
+    \ users:read (Organization)                                  |               \
+    \                                | users:execute (Organization)              \
+    \       |\n| Price                 | prices:read (Bank, Customer)            \
+    \                   |                                               |        \
+    \                                          |\n| Quote                 | quotes:read\
+    \ (Organization, Bank, Customer)                 |                           \
+    \                    | quotes:execute (Organization, Bank, Customer)    |\n| Trade\
+    \                 | trades:read (Organization, Bank, Customer)               \
+    \  |                                               | trades:execute (Organization,\
+    \ Bank, Customer)    |\n| Transfer              | transfers:read (Organization,\
     \ Bank, Customer)              |                                             \
-    \  | workflows:execute (Bank, Customer)               |\n| Invoice           \
-    \    | invoices:read (Organization, Bank, Customer)               | invoices:write\
-    \ (Bank, Customer)               | invoices:execute (Bank, Customer)         \
-    \       |\n\n## Available Endpoints\n\nThe available APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
+    \  | transfers:execute (Organization, Bank, Customer) |\n| Workflow          \
+    \    | workflows:read (Organization, Bank, Customer)              |          \
+    \                                     | workflows:execute (Bank, Customer)   \
+    \            |\n| Invoice               | invoices:read (Organization, Bank, Customer)\
+    \               | invoices:write (Bank, Customer)               | invoices:execute\
+    \ (Bank, Customer)                |\n\n## Available Endpoints\n\nThe available\
+    \ APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
     \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
     \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
@@ -157,9 +160,11 @@ info:
     \ parent to customers, accounts, etc                             |\n| Bank   \
     \      | Customer             | /api/customers                 | Create and list\
     \ customers                                                                  \
-    \       |\n| Bank         | DepositAddress       | /api/deposit_addresses    \
-    \     | Create, get and list deposit addresses                               \
-    \                             |\n| Bank         | ExternalBankAccount  | /api/external_bank_accounts\
+    \       |\n| Bank         | Counterparty         | /api/counterparties       \
+    \     | Create and list counterparties                                       \
+    \                             |\n| Bank         | DepositAddress       | /api/deposit_addresses\
+    \         | Create, get and list deposit addresses                           \
+    \                                 |\n| Bank         | ExternalBankAccount  | /api/external_bank_accounts\
     \    | Create, get and list external bank accounts, which connect customer bank\
     \ accounts to the platform |\n| Bank         | ExternalWallet       | /api/external_wallets\
     \          | Create, get, list and delete external wallets, which connect customer\
@@ -210,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.105
+  version: v0.115.106
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app

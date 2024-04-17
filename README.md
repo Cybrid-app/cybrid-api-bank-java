@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.115.102
+- API version: v0.115.104
 
-- Build date: 2024-04-16T18:21:45.706467Z[Etc/UTC]
+- Build date: 2024-04-17T13:42:28.261193Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -188,7 +188,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.115.102</version>
+  <version>v0.115.104</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -204,7 +204,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.115.102"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.115.104"
   }
 ```
 
@@ -218,7 +218,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.115.102.jar`
+- `target/cybrid-api-bank-java-v0.115.104.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -277,6 +277,9 @@ Class | Method | HTTP request | Description
 *BanksBankApi* | [**getBank**](docs/BanksBankApi.md#getBank) | **GET** /api/banks/{bank_guid} | Get Bank
 *BanksBankApi* | [**listBanks**](docs/BanksBankApi.md#listBanks) | **GET** /api/banks | Get banks list
 *BanksBankApi* | [**updateBank**](docs/BanksBankApi.md#updateBank) | **PATCH** /api/banks/{bank_guid} | Patch Bank
+*CounterpartiesBankApi* | [**createCounterparty**](docs/CounterpartiesBankApi.md#createCounterparty) | **POST** /api/counterparties | Create Counterparty
+*CounterpartiesBankApi* | [**getCounterparty**](docs/CounterpartiesBankApi.md#getCounterparty) | **GET** /api/counterparties/{counterparty_guid} | Get Counterparty
+*CounterpartiesBankApi* | [**listCounterparties**](docs/CounterpartiesBankApi.md#listCounterparties) | **GET** /api/counterparties | Get counterparties list
 *CustomersBankApi* | [**createCustomer**](docs/CustomersBankApi.md#createCustomer) | **POST** /api/customers | Create Customer
 *CustomersBankApi* | [**getCustomer**](docs/CustomersBankApi.md#getCustomer) | **GET** /api/customers/{customer_guid} | Get Customer
 *CustomersBankApi* | [**listCustomers**](docs/CustomersBankApi.md#listCustomers) | **GET** /api/customers | Get customers list
@@ -335,6 +338,13 @@ Class | Method | HTTP request | Description
  - [BankFeatureBankModel](docs/BankFeatureBankModel.md)
  - [BankListBankModel](docs/BankListBankModel.md)
  - [BankTypeBankModel](docs/BankTypeBankModel.md)
+ - [CounterpartyAddressBankModel](docs/CounterpartyAddressBankModel.md)
+ - [CounterpartyAliasesInnerBankModel](docs/CounterpartyAliasesInnerBankModel.md)
+ - [CounterpartyBankModel](docs/CounterpartyBankModel.md)
+ - [CounterpartyListBankModel](docs/CounterpartyListBankModel.md)
+ - [CounterpartyNameBankModel](docs/CounterpartyNameBankModel.md)
+ - [CounterpartyStateBankModel](docs/CounterpartyStateBankModel.md)
+ - [CounterpartyTypeBankModel](docs/CounterpartyTypeBankModel.md)
  - [CustomerAddressBankModel](docs/CustomerAddressBankModel.md)
  - [CustomerAliasesInnerBankModel](docs/CustomerAliasesInnerBankModel.md)
  - [CustomerBankModel](docs/CustomerBankModel.md)
@@ -385,6 +395,8 @@ Class | Method | HTTP request | Description
  - [PaymentInstructionListBankModel](docs/PaymentInstructionListBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
+ - [PostCounterpartyBankModel](docs/PostCounterpartyBankModel.md)
+ - [PostCounterpartyNameBankModel](docs/PostCounterpartyNameBankModel.md)
  - [PostCustomerAddressBankModel](docs/PostCustomerAddressBankModel.md)
  - [PostCustomerBankModel](docs/PostCustomerBankModel.md)
  - [PostCustomerNameBankModel](docs/PostCustomerNameBankModel.md)

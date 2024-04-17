@@ -210,7 +210,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.102
+  version: v0.115.104
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -659,6 +659,169 @@ paths:
       tags:
       - Banks
       x-content-type: application/json
+      x-accepts: application/json
+  /api/counterparties:
+    get:
+      description: "Retrieves a listing of counterparties.\n\nRequired scope: **counterparties:read**"
+      operationId: listCounterparties
+      parameters:
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated bank_guids to list counterparties for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list counterparties for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated counterparty_guids to list counterparties for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated labels to list counterparties for.
+        explode: true
+        in: query
+        name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CounterpartyList'
+          description: get list of counterparties
+      security:
+      - BearerAuth: []
+        oauth2:
+        - counterparties:read
+      summary: Get counterparties list
+      tags:
+      - Counterparties
+      x-accepts: application/json
+    post:
+      description: "Creates a counterparty.\n\n## Counterparty Type\n\nCounterparty\
+        \ resources are an abstraction for real world individuals and businesses that\
+        \ are not directly on the Cybrid Platform.\n\n## State\n\n| State | Description\
+        \ |\n|-------|-------------|\n| storing | The Platform is storing the counterparty\
+        \ details in our private store |\n| unverified | The Platform has not yet\
+        \ verified the counterparty's identity |\n| verified | The Platform has verified\
+        \ the counterparty's identity |\n| rejected | The Platform was not able to\
+        \ successfully verify the counterparty's identity |\n\n\n\nRequired scope:\
+        \ **counterparties:execute**"
+      operationId: createCounterparty
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCounterparty'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Counterparty'
+          description: counterparty created
+        "422":
+          content:
+            application/json:
+              examples:
+                example_1:
+                  value:
+                    status: 422
+                    error_message: Bank not found
+                    message_code: unknown_bank
+                example_2:
+                  value:
+                    status: 422
+                    error_message: Customer not found
+                    message_code: no_customer
+                example_3:
+                  value:
+                    status: 422
+                    error_message: Bank not found
+                    message_code: unknown_bank
+                example_4:
+                  value:
+                    status: 422
+                    error_message: Customer not found
+                    message_code: no_customer
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unprocessable Entity
+      security:
+      - BearerAuth: []
+        oauth2:
+        - counterparties:execute
+      summary: Create Counterparty
+      tags:
+      - Counterparties
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/counterparties/{counterparty_guid}:
+    get:
+      description: "Retrieves a counterparty.\n\nRequired scope: **counterparties:read**"
+      operationId: getCounterparty
+      parameters:
+      - description: Identifier for the counterparty.
+        explode: false
+        in: path
+        name: counterparty_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Include PII in the response.
+        explode: true
+        in: query
+        name: include_pii
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Counterparty'
+          description: counterparty found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - counterparties:read
+      summary: Get Counterparty
+      tags:
+      - Counterparties
       x-accepts: application/json
   /api/customers:
     get:
@@ -6247,6 +6410,239 @@ components:
       - per_page
       - total
       type: object
+    Counterparty:
+      example:
+        address:
+          subdivision: subdivision
+          country_code: country_code
+          city: city
+          street: street
+          street2: street2
+          postal_code: postal_code
+        aliases:
+        - middle: middle
+          last: last
+          first: first
+          full: full
+        - middle: middle
+          last: last
+          first: first
+          full: full
+        date_of_birth: 2000-01-23
+        created_at: 2000-01-23T04:56:07.000+00:00
+        verification_checks:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        type: type
+        labels:
+        - labels
+        - labels
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        name:
+          middle: middle
+          last: last
+          first: first
+          full: full
+        guid: guid
+        state: state
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the counterparty.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: The counterparty type; one of business or individual.
+          type: string
+        bank_guid:
+          description: Auto-generated unique identifier for the counterparty's bank.
+          maxLength: 32
+          minLength: 32
+          type: string
+        customer_guid:
+          description: Auto-generated unique identifier for the counterparty's customer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        created_at:
+          description: ISO8601 datetime the record was created at.
+          format: date-time
+          type: string
+        updated_at:
+          description: ISO8601 datetime the record was last updated at.
+          format: date-time
+          type: string
+        state:
+          description: "The counterparty state; one of storing, unverified, verified,\
+            \ or rejected."
+          type: string
+        name:
+          $ref: '#/components/schemas/Counterparty_name'
+        address:
+          $ref: '#/components/schemas/Counterparty_address'
+        aliases:
+          description: The counterparty's aliases. Only available for GET operations
+            when 'include_pii' is set.
+          items:
+            $ref: '#/components/schemas/Counterparty_aliases_inner'
+          nullable: true
+          type: array
+        date_of_birth:
+          description: The counterparty's DOB. Only available for GET operations when
+            'include_pii' is set.
+          format: date
+          nullable: true
+          type: string
+        labels:
+          description: The labels associated with the customer.
+          items:
+            type: string
+          nullable: true
+          type: array
+        verification_checks:
+          description: The verification checks associated with the customer.
+          items:
+            $ref: '#/components/schemas/VerificationCheck'
+          type: array
+      type: object
+    CounterpartyType:
+      enum:
+      - business
+      - individual
+      type: string
+    CounterpartyState:
+      enum:
+      - storing
+      - unverified
+      - verified
+      - rejected
+      type: string
+    CounterpartyList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          aliases:
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          date_of_birth: 2000-01-23
+          created_at: 2000-01-23T04:56:07.000+00:00
+          verification_checks:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          type: type
+          labels:
+          - labels
+          - labels
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name:
+            middle: middle
+            last: last
+            first: first
+            full: full
+          guid: guid
+          state: state
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        - address:
+            subdivision: subdivision
+            country_code: country_code
+            city: city
+            street: street
+            street2: street2
+            postal_code: postal_code
+          aliases:
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          - middle: middle
+            last: last
+            first: first
+            full: full
+          date_of_birth: 2000-01-23
+          created_at: 2000-01-23T04:56:07.000+00:00
+          verification_checks:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          type: type
+          labels:
+          - labels
+          - labels
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          name:
+            middle: middle
+            last: last
+            first: first
+            full: full
+          guid: guid
+          state: state
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          items:
+            $ref: '#/components/schemas/Counterparty'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
+      type: object
     Customer:
       example:
         website: website
@@ -9088,6 +9484,32 @@ components:
           - unverified
           type: string
       type: object
+    PostCounterparty:
+      properties:
+        type:
+          description: The counterparty's type.
+          enum:
+          - business
+          - individual
+          type: string
+        name:
+          $ref: '#/components/schemas/PostCounterparty_name'
+        address:
+          $ref: '#/components/schemas/PostCustomer_address'
+        date_of_birth:
+          description: The counterparty's date of birth.
+          format: date
+          nullable: true
+          type: string
+        labels:
+          description: The labels associated with the counterparty.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - type
+      type: object
     PostIdentityVerification:
       properties:
         type:
@@ -9515,6 +9937,94 @@ components:
       - error_message
       - message_code
       - status
+      type: object
+    Counterparty_name:
+      description: The counterparty's name. Only available for GET operations when
+        'include_pii' is set.
+      example:
+        middle: middle
+        last: last
+        first: first
+        full: full
+      nullable: true
+      properties:
+        first:
+          description: The counterparty's first name.
+          nullable: true
+          type: string
+        middle:
+          description: The counterparty's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The counterparty's last name.
+          nullable: true
+          type: string
+        full:
+          description: The counterparty's full name.
+          nullable: true
+          type: string
+      type: object
+    Counterparty_address:
+      description: The counterparty's address. Only available for GET operations when
+        'include_pii' is set.
+      example:
+        subdivision: subdivision
+        country_code: country_code
+        city: city
+        street: street
+        street2: street2
+        postal_code: postal_code
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          nullable: true
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          nullable: true
+          type: string
+        subdivision:
+          description: The provide/state/region of the address; not used by all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          nullable: true
+          type: string
+      type: object
+    Counterparty_aliases_inner:
+      example:
+        middle: middle
+        last: last
+        first: first
+        full: full
+      properties:
+        first:
+          description: The counterparty's first name.
+          nullable: true
+          type: string
+        middle:
+          description: The counterparty's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The counterparty's last name.
+          nullable: true
+          type: string
+        full:
+          description: The counterparty's full name.
+          nullable: true
+          type: string
       type: object
     Customer_name:
       description: The customer's name. Only available for GET operations when 'include_pii'
@@ -9984,6 +10494,26 @@ components:
       - city
       - country_code
       - street
+      type: object
+    PostCounterparty_name:
+      nullable: true
+      properties:
+        first:
+          description: The counterparty's first name.
+          nullable: true
+          type: string
+        middle:
+          description: The counterparty's middle name.
+          nullable: true
+          type: string
+        last:
+          description: The counterparty's last name.
+          nullable: true
+          type: string
+        full:
+          description: The counterparty's full name.
+          nullable: true
+          type: string
       type: object
     PostIdentityVerification_name:
       description: The customer's name; required when method is set to 'attested'.

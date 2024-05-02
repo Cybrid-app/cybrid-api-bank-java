@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.133
+  version: v0.115.134
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8195,6 +8195,7 @@ components:
         created_at: 2000-01-23T04:56:07.000+00:00
         state: state
         type: type
+        bank_guid: bank_guid
         customer_guid: customer_guid
       properties:
         guid:
@@ -8202,10 +8203,17 @@ components:
           maxLength: 32
           minLength: 32
           type: string
+        bank_guid:
+          description: The associated banks's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         customer_guid:
           description: The associated customer's identifier.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         type:
           description: The type of workflow; one of plaid.
@@ -8942,6 +8950,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           state: state
           type: type
+          bank_guid: bank_guid
           customer_guid: customer_guid
         - failure_code: failure_code
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8949,6 +8958,7 @@ components:
           created_at: 2000-01-23T04:56:07.000+00:00
           state: state
           type: type
+          bank_guid: bank_guid
           customer_guid: customer_guid
         page: 0
       properties:

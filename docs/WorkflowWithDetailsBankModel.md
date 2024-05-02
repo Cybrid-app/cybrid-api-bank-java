@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the workflow. |  [optional] |
+|**bankGuid** | **String** | The associated banks&#39;s identifier. |  [optional] |
 |**customerGuid** | **String** | The associated customer&#39;s identifier. |  [optional] |
 |**type** | **String** | The type of workflow; one of plaid. |  [optional] |
 |**state** | **String** | The state of the workflow; one of storing, completed, or failed. |  [optional] |

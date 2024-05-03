@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.115.134
+- API version: v0.115.137
 
-- Build date: 2024-05-02T16:27:10.595367Z[Etc/UTC]
+- Build date: 2024-05-03T13:49:33.777131Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -190,7 +190,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.115.134</version>
+  <version>v0.115.137</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -206,7 +206,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.115.134"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.115.137"
   }
 ```
 
@@ -220,7 +220,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.115.134.jar`
+- `target/cybrid-api-bank-java-v0.115.137.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -340,6 +340,12 @@ Class | Method | HTTP request | Description
  - [BankFeatureBankModel](docs/BankFeatureBankModel.md)
  - [BankListBankModel](docs/BankListBankModel.md)
  - [BankTypeBankModel](docs/BankTypeBankModel.md)
+ - [ComplianceCheckBankModel](docs/ComplianceCheckBankModel.md)
+ - [ComplianceCheckOutcomeBankModel](docs/ComplianceCheckOutcomeBankModel.md)
+ - [ComplianceCheckTypeBankModel](docs/ComplianceCheckTypeBankModel.md)
+ - [ComplianceDecisionBankModel](docs/ComplianceDecisionBankModel.md)
+ - [ComplianceDecisionStateBankModel](docs/ComplianceDecisionStateBankModel.md)
+ - [ComplianceDecisionTypeBankModel](docs/ComplianceDecisionTypeBankModel.md)
  - [CounterpartyAddressBankModel](docs/CounterpartyAddressBankModel.md)
  - [CounterpartyAliasesInnerBankModel](docs/CounterpartyAliasesInnerBankModel.md)
  - [CounterpartyBankModel](docs/CounterpartyBankModel.md)
@@ -440,9 +446,6 @@ Class | Method | HTTP request | Description
  - [TransferSourceAccountBankModel](docs/TransferSourceAccountBankModel.md)
  - [TransferStateBankModel](docs/TransferStateBankModel.md)
  - [TransferTypeBankModel](docs/TransferTypeBankModel.md)
- - [VerificationCheckBankModel](docs/VerificationCheckBankModel.md)
- - [VerificationCheckStateBankModel](docs/VerificationCheckStateBankModel.md)
- - [VerificationCheckTypeBankModel](docs/VerificationCheckTypeBankModel.md)
  - [WorkflowBankModel](docs/WorkflowBankModel.md)
  - [WorkflowStateBankModel](docs/WorkflowStateBankModel.md)
  - [WorkflowTypeBankModel](docs/WorkflowTypeBankModel.md)

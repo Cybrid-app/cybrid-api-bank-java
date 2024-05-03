@@ -1,6 +1,6 @@
 
 
-# VerificationCheckTypeBankModel
+# ComplianceCheckTypeBankModel
 
 ## Enum
 

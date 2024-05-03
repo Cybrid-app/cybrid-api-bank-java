@@ -18,8 +18,9 @@
 |**address** | [**CounterpartyAddressBankModel**](CounterpartyAddressBankModel.md) |  |  [optional] |
 |**aliases** | [**List&lt;CounterpartyAliasesInnerBankModel&gt;**](CounterpartyAliasesInnerBankModel.md) | The counterparty&#39;s aliases. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**dateOfBirth** | **LocalDate** | The counterparty&#39;s DOB. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
-|**labels** | **List&lt;String&gt;** | The labels associated with the customer. |  [optional] |
-|**verificationChecks** | [**List&lt;VerificationCheckBankModel&gt;**](VerificationCheckBankModel.md) | The verification checks associated with the customer. |  [optional] |
+|**labels** | **List&lt;String&gt;** | The labels associated with the counterparty. |  [optional] |
+|**complianceDecisions** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | The compliance decisions associated with the counterparty. |  [optional] |
+|**verificationChecks** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | Deprecated; use compliance_decisions instead. |  [optional] |
 
 
 

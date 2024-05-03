@@ -1,6 +1,6 @@
 
 
-# VerificationCheckStateBankModel
+# ComplianceDecisionStateBankModel
 
 ## Enum
 

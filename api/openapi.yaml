@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.134
+  version: v0.115.137
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6448,6 +6448,17 @@ components:
           state: state
           type: type
         type: type
+        compliance_decisions:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
         labels:
         - labels
         - labels
@@ -6511,15 +6522,20 @@ components:
           nullable: true
           type: string
         labels:
-          description: The labels associated with the customer.
+          description: The labels associated with the counterparty.
           items:
             type: string
           nullable: true
           type: array
-        verification_checks:
-          description: The verification checks associated with the customer.
+        compliance_decisions:
+          description: The compliance decisions associated with the counterparty.
           items:
-            $ref: '#/components/schemas/VerificationCheck'
+            $ref: '#/components/schemas/ComplianceDecision'
+          type: array
+        verification_checks:
+          description: Deprecated; use compliance_decisions instead.
+          items:
+            $ref: '#/components/schemas/ComplianceDecision'
           type: array
       type: object
     CounterpartyType:
@@ -6569,6 +6585,17 @@ components:
             state: state
             type: type
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           labels:
           - labels
           - labels
@@ -6612,6 +6639,17 @@ components:
             state: state
             type: type
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           labels:
           - labels
           - labels
@@ -6682,6 +6720,17 @@ components:
           state: state
           type: type
         type: type
+        compliance_decisions:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
         labels:
         - labels
         - labels
@@ -6760,10 +6809,15 @@ components:
             type: string
           nullable: true
           type: array
-        verification_checks:
-          description: The verification checks associated with the customer.
+        compliance_decisions:
+          description: The compliance decisions associated with the customer.
           items:
-            $ref: '#/components/schemas/VerificationCheck'
+            $ref: '#/components/schemas/ComplianceDecision'
+          type: array
+        verification_checks:
+          description: Deprecated; use compliance_decisions instead.
+          items:
+            $ref: '#/components/schemas/ComplianceDecision'
           type: array
       type: object
     CustomerType:
@@ -6815,6 +6869,17 @@ components:
             state: state
             type: type
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           labels:
           - labels
           - labels
@@ -6860,6 +6925,17 @@ components:
             state: state
             type: type
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           labels:
           - labels
           - labels
@@ -6920,6 +6996,17 @@ components:
           type: type
         state: state
         type: type
+        compliance_decisions:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
         outcome: outcome
         customer_guid: customer_guid
       properties:
@@ -6963,10 +7050,15 @@ components:
             type: string
           nullable: true
           type: array
-        verification_checks:
-          description: The checks associated with the identity verification.
+        compliance_decisions:
+          description: The compliance decisions associated with the identity verification.
           items:
-            $ref: '#/components/schemas/VerificationCheck'
+            $ref: '#/components/schemas/ComplianceDecision'
+          type: array
+        verification_checks:
+          description: Deprecated; use compliance_decisions instead.
+          items:
+            $ref: '#/components/schemas/ComplianceDecision'
           type: array
       type: object
     IdentityVerificationType:
@@ -7024,6 +7116,17 @@ components:
           state: state
           type: type
         type: type
+        compliance_decisions:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          state: state
+          type: type
         persona_state: persona_state
         pii:
           address:
@@ -7046,6 +7149,17 @@ components:
         guid: guid
         external_bank_account_guid: external_bank_account_guid
         state: state
+        compliance_checks:
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          type: type
+          outcome: outcome
+        - failure_codes:
+          - failure_codes
+          - failure_codes
+          type: type
+          outcome: outcome
         outcome: outcome
         customer_guid: customer_guid
       properties:
@@ -7089,10 +7203,20 @@ components:
             type: string
           nullable: true
           type: array
-        verification_checks:
-          description: The checks associated with the identity verification.
+        compliance_checks:
+          description: The compliance checks associated with the identity verification.
           items:
-            $ref: '#/components/schemas/VerificationCheck'
+            $ref: '#/components/schemas/ComplianceCheck'
+          type: array
+        compliance_decisions:
+          description: The compliance decisions associated with the identity verification.
+          items:
+            $ref: '#/components/schemas/ComplianceDecision'
+          type: array
+        verification_checks:
+          description: Deprecated; use compliance_decisions instead.
+          items:
+            $ref: '#/components/schemas/ComplianceDecision'
           type: array
         persona_inquiry_id:
           description: The Persona identifier of the backing inquiry.
@@ -7137,6 +7261,17 @@ components:
             type: type
           state: state
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           outcome: outcome
           customer_guid: customer_guid
         - failure_codes:
@@ -7159,6 +7294,17 @@ components:
             type: type
           state: state
           type: type
+          compliance_decisions:
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
+          - failure_codes:
+            - failure_codes
+            - failure_codes
+            state: state
+            type: type
           outcome: outcome
           customer_guid: customer_guid
         page: 0
@@ -7185,7 +7331,57 @@ components:
       - per_page
       - total
       type: object
-    VerificationCheck:
+    ComplianceCheck:
+      example:
+        failure_codes:
+        - failure_codes
+        - failure_codes
+        type: type
+        outcome: outcome
+      properties:
+        type:
+          description: "The type of compliance check; one of business_watchlists,\
+            \ business_verification, business_tax_id_verification, person_attested,\
+            \ person_tax_id_attested, person_watchlists, person_verification, person_authentication,\
+            \ person_gov_id_verification, person_tax_id_verification, external_bank_account_verification,\
+            \ or external_bank_account_attested."
+          type: string
+        outcome:
+          description: "The outcome of the compliance check; one of passed, failed,\
+            \ or inconclusive."
+          type: string
+        failure_codes:
+          description: The reason codes explaining the outcome.
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - state
+      - type
+      type: object
+    ComplianceCheckType:
+      enum:
+      - business_watchlists
+      - business_verification
+      - business_tax_id_verification
+      - person_attested
+      - person_tax_id_attested
+      - person_watchlists
+      - person_verification
+      - person_authentication
+      - person_gov_id_verification
+      - person_tax_id_verification
+      - external_bank_account_verification
+      - external_bank_account_attested
+      type: string
+    ComplianceCheckOutcome:
+      enum:
+      - passed
+      - failed
+      - inconclusive
+      type: string
+    ComplianceDecision:
       example:
         failure_codes:
         - failure_codes
@@ -7214,7 +7410,7 @@ components:
       - state
       - type
       type: object
-    VerificationCheckType:
+    ComplianceDecisionType:
       enum:
       - business_watchlists
       - business_verification
@@ -7229,7 +7425,7 @@ components:
       - external_bank_account_verification
       - external_bank_account_attested
       type: string
-    VerificationCheckState:
+    ComplianceDecisionState:
       enum:
       - passed
       - failed

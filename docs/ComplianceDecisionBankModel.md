@@ -1,6 +1,6 @@
 
 
-# VerificationCheckBankModel
+# ComplianceDecisionBankModel
 
 
 ## Properties

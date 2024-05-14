@@ -21,6 +21,7 @@
 |---- | -----|
 | TRADING | &quot;trading&quot; |
 | FIAT | &quot;fiat&quot; |
+| INVOICE_OPERATIONS | &quot;invoice_operations&quot; |
 
 
 

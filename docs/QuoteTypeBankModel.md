@@ -13,5 +13,7 @@
 
 * `CRYPTO_TRANSFER` (value: `"crypto_transfer"`)
 
+* `INTER_ACCOUNT` (value: `"inter_account"`)
+
 
 

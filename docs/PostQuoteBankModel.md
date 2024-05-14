@@ -27,6 +27,7 @@
 | FUNDING | &quot;funding&quot; |
 | BOOK_TRANSFER | &quot;book_transfer&quot; |
 | CRYPTO_TRANSFER | &quot;crypto_transfer&quot; |
+| INTER_ACCOUNT | &quot;inter_account&quot; |
 
 
 

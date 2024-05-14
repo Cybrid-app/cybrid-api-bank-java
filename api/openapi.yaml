@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.115.152
+  version: v0.116.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4112,17 +4112,19 @@ paths:
         \ a specific cryptocurrency or fiat and is comprised of transactions and a\
         \ current balance.\n\nAn account is required to allow a Bank or Customer to\
         \ hold cryptocurrency or a Customer to hold fiat on the Cybrid Platform.\n\
-        \nAt present, account's can be created as `trading` or `fiat ` accounts and\
+        \nAt present, accounts can be created as `trading` or `fiat ` accounts and\
         \ are required before a Customer can generate quotes or execute a `trade`\
         \ or `transfer`.\n\nTo create accounts for your Bank, omit the `customer_guid`\
         \ parameter in the request body. To create accounts for your Customers, include\
-        \ the `customer_guid` parameter in the request body.\n\n## Asset\n\nThe asset\
-        \ is the specific cryptocurrency or fiat that the account holds, e.g., 'BTC'\
-        \ for Bitcoin or `USD` for US dollars. See the Symbols API for a complete\
-        \ list of cryptocurrencies and fiat supported. \n\n## State\n\n| State | Description\
-        \ |\n|-------|-------------|\n| storing | The Platform is storing the account\
-        \ details in our private store |\n| created | The Platform has created the\
-        \ account |\n\n\n\nRequired scope: **accounts:execute**"
+        \ the `customer_guid` parameter in the request body.\n\nAt the bank level,\
+        \ `invoice_operations` accounts can be configured to pre-fund your customers'\
+        \ Lightning Network operations.\n\n## Asset\n\nThe asset is the specific cryptocurrency\
+        \ or fiat that the account holds, e.g., 'BTC' for Bitcoin or `USD` for US\
+        \ dollars. See the Symbols API for a complete list of cryptocurrencies and\
+        \ fiat supported. \n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the account details in our private store\
+        \ |\n| created | The Platform has created the account |\n\n\n\nRequired scope:\
+        \ **accounts:execute**"
       operationId: createAccount
       parameters: []
       requestBody:
@@ -8138,6 +8140,7 @@ components:
           - funding
           - book_transfer
           - crypto_transfer
+          - inter_account
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8231,7 +8234,7 @@ components:
           type: string
         product_type:
           description: "The type of product the quote is for; one of trading, funding,\
-            \ book_transfer, or crypto_transfer."
+            \ book_transfer, crypto_transfer, or inter_account."
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8310,6 +8313,7 @@ components:
       - funding
       - book_transfer
       - crypto_transfer
+      - inter_account
       type: string
     QuoteSide:
       enum:
@@ -8492,7 +8496,7 @@ components:
           type: string
         transfer_type:
           description: "The type of transfer; one of funding, book, crypto, instant_funding,\
-            \ funding_return, crypto_return, or loss_recovery."
+            \ funding_return, crypto_return, loss_recovery, or inter_account."
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -8618,6 +8622,7 @@ components:
       - funding_return
       - crypto_return
       - loss_recovery
+      - inter_account
       type: string
     TransferSide:
       enum:
@@ -8640,6 +8645,7 @@ components:
       - external_wallet
       - one_time_address
       - reserve
+      - invoice_operations
       type: string
     TransferFailureCode:
       enum:
@@ -9200,7 +9206,8 @@ components:
         - labels
       properties:
         type:
-          description: "The account type; one of trading, fee, fiat, gas, or reserve."
+          description: "The account type; one of trading, fee, fiat, gas, reserve,\
+            \ or invoice_operations."
           type: string
         guid:
           description: Auto-generated unique identifier for the account.
@@ -9260,6 +9267,7 @@ components:
       - fiat
       - gas
       - reserve
+      - invoice_operations
       type: string
     AccountState:
       enum:
@@ -9853,6 +9861,7 @@ components:
           enum:
           - trading
           - fiat
+          - invoice_operations
           type: string
         customer_guid:
           description: The customer identifier associated with the account.
@@ -9948,6 +9957,7 @@ components:
           - book
           - crypto
           - instant_funding
+          - inter_account
           type: string
         source_account_guid:
           description: The source account's identifier. Required for book transfers.
@@ -10523,7 +10533,7 @@ components:
           type: string
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
-            \ external_wallet, one_time_address, or reserve."
+            \ external_wallet, one_time_address, reserve, or invoice_operations."
           type: string
         bank_guid:
           description: The account's identifier.
@@ -10554,7 +10564,7 @@ components:
           type: string
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
-            \ external_wallet, one_time_address, or reserve."
+            \ external_wallet, one_time_address, reserve, or invoice_operations."
           type: string
         bank_guid:
           description: The account's identifier.

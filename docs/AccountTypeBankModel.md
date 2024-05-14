@@ -15,5 +15,7 @@
 
 * `RESERVE` (value: `"reserve"`)
 
+* `INVOICE_OPERATIONS` (value: `"invoice_operations"`)
+
 
 

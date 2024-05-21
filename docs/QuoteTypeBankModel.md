@@ -15,5 +15,7 @@
 
 * `INTER_ACCOUNT` (value: `"inter_account"`)
 
+* `LIGHTNING_TRANSFER` (value: `"lightning_transfer"`)
+
 
 

@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.116.9
+  version: v0.117.1
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8141,6 +8141,7 @@ components:
           - book_transfer
           - crypto_transfer
           - inter_account
+          - lightning_transfer
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8159,6 +8160,11 @@ components:
             \ funding, book transfer and crypto transfer quotes."
           maxLength: 8
           minLength: 1
+          type: string
+        network_address:
+          description: The network address to pay the invoice to. Populated for lightning_transfer
+            quotes.
+          nullable: true
           type: string
         symbol:
           description: Symbol the quote is being requested for. Format is "asset-counter_asset"
@@ -8222,6 +8228,7 @@ components:
         expires_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
+        network_address: network_address
         receive_amount: 5
         asset: asset
         bank_guid: bank_guid
@@ -8234,7 +8241,7 @@ components:
           type: string
         product_type:
           description: "The type of product the quote is for; one of trading, funding,\
-            \ book_transfer, crypto_transfer, or inter_account."
+            \ book_transfer, crypto_transfer, inter_account, or lightning_transfer."
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8306,6 +8313,11 @@ components:
           minLength: 1
           nullable: true
           type: string
+        network_address:
+          description: The network address to pay the invoice to. Populated for lightning_transfer
+            quotes.
+          nullable: true
+          type: string
       type: object
     QuoteType:
       enum:
@@ -8314,6 +8326,7 @@ components:
       - book_transfer
       - crypto_transfer
       - inter_account
+      - lightning_transfer
       type: string
     QuoteSide:
       enum:
@@ -8339,6 +8352,7 @@ components:
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
+          network_address: network_address
           receive_amount: 5
           asset: asset
           bank_guid: bank_guid
@@ -8355,6 +8369,7 @@ components:
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
+          network_address: network_address
           receive_amount: 5
           asset: asset
           bank_guid: bank_guid

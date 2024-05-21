@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.117.2
+  version: v0.117.3
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9576,11 +9576,11 @@ components:
           type: string
         address:
           description: The blockchain wallet address for the wallet.
-          maxLength: 256
+          maxLength: 512
           type: string
         tag:
           description: The blockchain tag to use when transferring crypto to the wallet.
-          maxLength: 256
+          maxLength: 512
           nullable: true
           type: string
         created_at:
@@ -10153,11 +10153,11 @@ components:
           type: string
         address:
           description: The blockchain wallet address for the wallet.
-          maxLength: 256
+          maxLength: 512
           type: string
         tag:
           description: The blockchain tag to use when transferring crypto to the wallet.
-          maxLength: 256
+          maxLength: 512
           nullable: true
           type: string
       required:

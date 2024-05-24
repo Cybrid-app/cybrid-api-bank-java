@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-23T15:48:55.745043Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-24T14:59:13.009212Z[Etc/UTC]")
 public class InvoicesBankApi {
     private ApiClient apiClient;
 
@@ -240,11 +240,13 @@ public class InvoicesBankApi {
      * @param bankGuid Comma separated bank_guids to list invoices for.
      * @param customerGuid Comma separated customer_guids to list invoices for.
      * @param accountGuid Comma separated account_guids to list invoices for.
+     * @param state Comma separated states to list invoices for.
+     * @param environment The environment parameter
      * @param label Comma separated labels to list invoices for.
      * @return InvoiceListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listInvoicesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String label) throws WebClientResponseException {
+    private ResponseSpec listInvoicesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String environment, String label) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -260,6 +262,8 @@ public class InvoicesBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "account_guid", accountGuid));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "environment", environment));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
 
         final String[] localVarAccepts = { 
@@ -288,17 +292,19 @@ public class InvoicesBankApi {
      * @param bankGuid Comma separated bank_guids to list invoices for.
      * @param customerGuid Comma separated customer_guids to list invoices for.
      * @param accountGuid Comma separated account_guids to list invoices for.
+     * @param state Comma separated states to list invoices for.
+     * @param environment The environment parameter
      * @param label Comma separated labels to list invoices for.
      * @return InvoiceListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<InvoiceListBankModel> listInvoices(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String label) throws WebClientResponseException {
+    public Mono<InvoiceListBankModel> listInvoices(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String environment, String label) throws WebClientResponseException {
         ParameterizedTypeReference<InvoiceListBankModel> localVarReturnType = new ParameterizedTypeReference<InvoiceListBankModel>() {};
-        return listInvoicesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, label).bodyToMono(localVarReturnType);
+        return listInvoicesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, environment, label).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<InvoiceListBankModel>> listInvoicesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String label) throws WebClientResponseException {
+    public Mono<ResponseEntity<InvoiceListBankModel>> listInvoicesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String accountGuid, String state, String environment, String label) throws WebClientResponseException {
         ParameterizedTypeReference<InvoiceListBankModel> localVarReturnType = new ParameterizedTypeReference<InvoiceListBankModel>() {};
-        return listInvoicesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, label).toEntity(localVarReturnType);
+        return listInvoicesRequestCreation(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, environment, label).toEntity(localVarReturnType);
     }
 }

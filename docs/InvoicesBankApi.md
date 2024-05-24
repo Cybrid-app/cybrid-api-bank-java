@@ -246,7 +246,7 @@ public class Example {
 
 ## listInvoices
 
-> InvoiceListBankModel listInvoices(page, perPage, guid, bankGuid, customerGuid, accountGuid, label)
+> InvoiceListBankModel listInvoices(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, environment, label)
 
 List Invoices
 
@@ -283,9 +283,11 @@ public class Example {
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list invoices for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list invoices for.
         String accountGuid = "accountGuid_example"; // String | Comma separated account_guids to list invoices for.
+        String state = "state_example"; // String | Comma separated states to list invoices for.
+        String environment = "sandbox"; // String | 
         String label = "label_example"; // String | Comma separated labels to list invoices for.
         try {
-            InvoiceListBankModel result = apiInstance.listInvoices(page, perPage, guid, bankGuid, customerGuid, accountGuid, label);
+            InvoiceListBankModel result = apiInstance.listInvoices(page, perPage, guid, bankGuid, customerGuid, accountGuid, state, environment, label);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling InvoicesBankApi#listInvoices");
@@ -309,6 +311,8 @@ public class Example {
 | **bankGuid** | **String**| Comma separated bank_guids to list invoices for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list invoices for. | [optional] |
 | **accountGuid** | **String**| Comma separated account_guids to list invoices for. | [optional] |
+| **state** | **String**| Comma separated states to list invoices for. | [optional] |
+| **environment** | **String**|  | [optional] [enum: sandbox, production] |
 | **label** | **String**| Comma separated labels to list invoices for. | [optional] |
 
 ### Return type

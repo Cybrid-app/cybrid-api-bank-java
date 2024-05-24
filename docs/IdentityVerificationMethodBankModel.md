@@ -13,6 +13,8 @@
 
 * `ATTESTED` (value: `"attested"`)
 
+* `ATTESTED_OWNERSHIP` (value: `"attested_ownership"`)
+
 * `PLAID_IDENTITY_MATCH` (value: `"plaid_identity_match"`)
 
 * `DOCUMENT_SUBMISSION` (value: `"document_submission"`)

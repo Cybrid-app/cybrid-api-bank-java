@@ -169,7 +169,7 @@ public class Example {
 
 ## listIdentityVerifications
 
-> IdentityVerificationListBankModel listIdentityVerifications(page, perPage, guid, bankGuid, customerGuid, state)
+> IdentityVerificationListBankModel listIdentityVerifications(page, perPage, guid, bankGuid, customerGuid, state, type)
 
 List Identity Verifications
 
@@ -206,8 +206,9 @@ public class Example {
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list identity verifications for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list identity verifications for.
         String state = "state_example"; // String | Comma separated states to list identity verifications for.
+        String type = "type_example"; // String | Comma separated types to list identity verifications for.
         try {
-            IdentityVerificationListBankModel result = apiInstance.listIdentityVerifications(page, perPage, guid, bankGuid, customerGuid, state);
+            IdentityVerificationListBankModel result = apiInstance.listIdentityVerifications(page, perPage, guid, bankGuid, customerGuid, state, type);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling IdentityVerificationsBankApi#listIdentityVerifications");
@@ -231,6 +232,7 @@ public class Example {
 | **bankGuid** | **String**| Comma separated bank_guids to list identity verifications for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list identity verifications for. | [optional] |
 | **state** | **String**| Comma separated states to list identity verifications for. | [optional] |
+| **type** | **String**| Comma separated types to list identity verifications for. | [optional] |
 
 ### Return type
 

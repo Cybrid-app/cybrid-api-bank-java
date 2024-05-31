@@ -170,7 +170,7 @@ public class Example {
 
 ## listTransfers
 
-> TransferListBankModel listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt)
+> TransferListBankModel listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, txnHash, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt)
 
 Get transfers list
 
@@ -211,12 +211,13 @@ public class Example {
         String state = "state_example"; // String | Comma separated states to list transfers for.
         String side = "side_example"; // String | Comma separated sides to list transfers for.
         String label = "label_example"; // String | Comma separated labels to list transfers for.
+        String txnHash = "txnHash_example"; // String | Comma separated transaction hashes to list transfers for.
         String createdAtGte = "createdAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601
         String createdAtLt = "createdAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
         String updatedAtGte = "updatedAtGte_example"; // String | Created at start date inclusive lower bound, ISO8601
         String updatedAtLt = "updatedAtLt_example"; // String | Created at end date exclusive upper bound, ISO8601.
         try {
-            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt);
+            TransferListBankModel result = apiInstance.listTransfers(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, txnHash, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling TransfersBankApi#listTransfers");
@@ -244,6 +245,7 @@ public class Example {
 | **state** | **String**| Comma separated states to list transfers for. | [optional] |
 | **side** | **String**| Comma separated sides to list transfers for. | [optional] |
 | **label** | **String**| Comma separated labels to list transfers for. | [optional] |
+| **txnHash** | **String**| Comma separated transaction hashes to list transfers for. | [optional] |
 | **createdAtGte** | **String**| Created at start date inclusive lower bound, ISO8601 | [optional] |
 | **createdAtLt** | **String**| Created at end date exclusive upper bound, ISO8601. | [optional] |
 | **updatedAtGte** | **String**| Created at start date inclusive lower bound, ISO8601 | [optional] |

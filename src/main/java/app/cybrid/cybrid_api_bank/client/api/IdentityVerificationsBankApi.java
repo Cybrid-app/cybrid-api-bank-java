@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-31T14:02:14.021868Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-31T16:07:46.033152Z[Etc/UTC]")
 public class IdentityVerificationsBankApi {
     private ApiClient apiClient;
 
@@ -185,10 +185,11 @@ public class IdentityVerificationsBankApi {
      * @param bankGuid Comma separated bank_guids to list identity verifications for.
      * @param customerGuid Comma separated customer_guids to list identity verifications for.
      * @param state Comma separated states to list identity verifications for.
+     * @param type Comma separated types to list identity verifications for.
      * @return IdentityVerificationListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listIdentityVerificationsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    private ResponseSpec listIdentityVerificationsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state, String type) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -204,6 +205,7 @@ public class IdentityVerificationsBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -231,16 +233,17 @@ public class IdentityVerificationsBankApi {
      * @param bankGuid Comma separated bank_guids to list identity verifications for.
      * @param customerGuid Comma separated customer_guids to list identity verifications for.
      * @param state Comma separated states to list identity verifications for.
+     * @param type Comma separated types to list identity verifications for.
      * @return IdentityVerificationListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<IdentityVerificationListBankModel> listIdentityVerifications(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    public Mono<IdentityVerificationListBankModel> listIdentityVerifications(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state, String type) throws WebClientResponseException {
         ParameterizedTypeReference<IdentityVerificationListBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityVerificationListBankModel>() {};
-        return listIdentityVerificationsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state).bodyToMono(localVarReturnType);
+        return listIdentityVerificationsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state, type).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<IdentityVerificationListBankModel>> listIdentityVerificationsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state) throws WebClientResponseException {
+    public Mono<ResponseEntity<IdentityVerificationListBankModel>> listIdentityVerificationsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String state, String type) throws WebClientResponseException {
         ParameterizedTypeReference<IdentityVerificationListBankModel> localVarReturnType = new ParameterizedTypeReference<IdentityVerificationListBankModel>() {};
-        return listIdentityVerificationsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state).toEntity(localVarReturnType);
+        return listIdentityVerificationsRequestCreation(page, perPage, guid, bankGuid, customerGuid, state, type).toEntity(localVarReturnType);
     }
 }

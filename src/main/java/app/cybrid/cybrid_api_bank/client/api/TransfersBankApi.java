@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-31T14:02:14.021868Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-05-31T16:07:46.033152Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -190,6 +190,7 @@ public class TransfersBankApi {
      * @param state Comma separated states to list transfers for.
      * @param side Comma separated sides to list transfers for.
      * @param label Comma separated labels to list transfers for.
+     * @param txnHash Comma separated transaction hashes to list transfers for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
      * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
@@ -197,7 +198,7 @@ public class TransfersBankApi {
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
+    private ResponseSpec listTransfersRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String txnHash, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -217,6 +218,7 @@ public class TransfersBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "state", state));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "side", side));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "txn_hash", txnHash));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_gte", createdAtGte));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "created_at_lt", createdAtLt));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "updated_at_gte", updatedAtGte));
@@ -252,6 +254,7 @@ public class TransfersBankApi {
      * @param state Comma separated states to list transfers for.
      * @param side Comma separated sides to list transfers for.
      * @param label Comma separated labels to list transfers for.
+     * @param txnHash Comma separated transaction hashes to list transfers for.
      * @param createdAtGte Created at start date inclusive lower bound, ISO8601
      * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
      * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
@@ -259,13 +262,13 @@ public class TransfersBankApi {
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
+    public Mono<TransferListBankModel> listTransfers(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String txnHash, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).bodyToMono(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, txnHash, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
+    public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String txnHash, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
-        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).toEntity(localVarReturnType);
+        return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, txnHash, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).toEntity(localVarReturnType);
     }
 }

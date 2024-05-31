@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.117.23
+  version: v0.117.25
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -2968,6 +2968,14 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated types to list identity verifications for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -5328,6 +5336,14 @@ paths:
         explode: true
         in: query
         name: label
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated transaction hashes to list transfers for.
+        explode: true
+        in: query
+        name: txn_hash
         required: false
         schema:
           type: string

@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.117.30
+  version: v0.118.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4585,8 +4585,11 @@ paths:
       description: "Creates a quote.\n\n## Quote creation\n\nQuotes can be created\
         \ for a Bank or a Customer.\n\nTo create quotes for your Bank, omit the `customer_guid`\
         \ parameter in the request body. To create quotes for your Customers, include\
-        \ the `customer_guid` parameter in the request body.\n\n\n\nRequired scope:\
-        \ **quotes:execute**"
+        \ the `customer_guid` parameter in the request body.\n\n## Failure codes\n\
+        \n| Code | Description |\n|------|-------------|\n| invalid_amount | The amount\
+        \ on the invoice is unprocessable |\n| insufficient_balance | There are insufficient\
+        \ funds to process the quote |\n| invalid_invoice | The invoice cannot be\
+        \ processed |\n\n\n\nRequired scope: **quotes:execute**"
       operationId: createQuote
       parameters: []
       requestBody:
@@ -4683,9 +4686,9 @@ paths:
                 unprocessable_request:
                   value:
                     status: 422
-                    error_message: "Unable to process request: InvalidQuoteAmountException\
-                      \ - quote amount is below the configured threshold"
-                    message_code: invalid_quote_amount
+                    error_message: "Unable to process request: InvalidInvoice - Invalid\
+                      \ invoice"
+                    message_code: invalid_invoice
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unable to process request
@@ -5599,67 +5602,67 @@ paths:
                 example_15:
                   value:
                     status: 422
-                    error_message: External bank account not found
-                    message_code: invalid_external_bank_account
+                    error_message: Invoice operations account not found
+                    message_code: no_invoice_operations_account
                 example_16:
                   value:
                     status: 422
-                    error_message: External bank account invalid
-                    message_code: invalid_external_bank_account
+                    error_message: Invoice operations account invalid
+                    message_code: invalid_invoice_operations_account
                 example_17:
                   value:
                     status: 422
-                    error_message: External wallet not found
+                    error_message: External bank account not found
                     message_code: invalid_external_bank_account
                 example_18:
                   value:
                     status: 422
-                    error_message: External wallet invalid
+                    error_message: External bank account invalid
                     message_code: invalid_external_bank_account
                 example_19:
                   value:
                     status: 422
+                    error_message: External wallet not found
+                    message_code: invalid_external_bank_account
+                example_20:
+                  value:
+                    status: 422
+                    error_message: External wallet invalid
+                    message_code: invalid_external_bank_account
+                example_21:
+                  value:
+                    status: 422
                     error_message: Bank fee account not found
                     message_code: no_fee_account
-                example_20:
+                example_22:
                   value:
                     status: 422
                     error_message: Bank fee account invalid
                     message_code: invalid_fee_account
-                example_21:
+                example_23:
                   value:
                     status: 422
                     error_message: Invalid country for payment rail
                     message_code: invalid_payment_rail_for_country
-                example_22:
+                example_24:
                   value:
                     status: 422
                     error_message: Invalid direction for payment rail
                     message_code: invalid_payment_rail_for_direction
-                example_23:
+                example_25:
                   value:
                     status: 422
                     error_message: Bank fiat account not found
                     message_code: no_fiat_account
-                example_24:
+                example_26:
                   value:
                     status: 422
                     error_message: Bank fiat account state invalid
                     message_code: invalid_fiat_account
-                example_25:
-                  value:
-                    status: 422
-                    error_message: Deposit address account not found
-                    message_code: no_account
-                example_26:
-                  value:
-                    status: 422
-                    error_message: Amount not valid
-                    message_code: invalid_value
                 example_27:
                   value:
                     status: 422
-                    error_message: Deposit bank account account not found
+                    error_message: Deposit address account not found
                     message_code: no_account
                 example_28:
                   value:
@@ -5669,79 +5672,89 @@ paths:
                 example_29:
                   value:
                     status: 422
-                    error_message: Parent deposit bank account account not found
+                    error_message: Deposit bank account account not found
                     message_code: no_account
                 example_30:
                   value:
                     status: 422
+                    error_message: Amount not valid
+                    message_code: invalid_value
+                example_31:
+                  value:
+                    status: 422
+                    error_message: Parent deposit bank account account not found
+                    message_code: no_account
+                example_32:
+                  value:
+                    status: 422
                     error_message: Quote not found
                     message_code: no_quote
-                example_31:
+                example_33:
                   value:
                     status: 422
                     error_message: Source account not found
                     message_code: no_source_account
-                example_32:
+                example_34:
                   value:
                     status: 422
                     error_message: Destination account not found
                     message_code: no_destination_account
-                example_33:
+                example_35:
                   value:
                     status: 422
                     error_message: Source account invalid
                     message_code: invalid_source_account
-                example_34:
+                example_36:
                   value:
                     status: 422
                     error_message: Destination account invalid
                     message_code: invalid_destination_account
-                example_35:
+                example_37:
                   value:
                     status: 422
                     error_message: Quote not found
                     message_code: no_quote
-                example_36:
+                example_38:
                   value:
                     status: 422
                     error_message: Source account not found
                     message_code: no_source_account
-                example_37:
+                example_39:
                   value:
                     status: 422
                     error_message: Destination account not found
                     message_code: no_destination_account
-                example_38:
+                example_40:
                   value:
                     status: 422
                     error_message: Network fee account not found
                     message_code: no_network_fee_account
-                example_39:
+                example_41:
                   value:
                     status: 422
                     error_message: Source account invalid
                     message_code: invalid_source_account
-                example_40:
+                example_42:
                   value:
                     status: 422
                     error_message: Destination account invalid
                     message_code: invalid_destination_account
-                example_41:
-                  value:
-                    status: 422
-                    error_message: Transfer invalid
-                    message_code: invalid_transfer
-                example_42:
-                  value:
-                    status: 422
-                    error_message: Transfer not found
-                    message_code: no_transfer
                 example_43:
                   value:
                     status: 422
                     error_message: Transfer invalid
                     message_code: invalid_transfer
                 example_44:
+                  value:
+                    status: 422
+                    error_message: Transfer not found
+                    message_code: no_transfer
+                example_45:
+                  value:
+                    status: 422
+                    error_message: Transfer invalid
+                    message_code: invalid_transfer
+                example_46:
                   value:
                     status: 422
                     error_message: Transfer not found
@@ -8553,7 +8566,7 @@ components:
           type: string
         transfer_type:
           description: "The type of transfer; one of funding, book, crypto, instant_funding,\
-            \ funding_return, crypto_return, loss_recovery, or inter_account."
+            \ funding_return, crypto_return, loss_recovery, inter_account, or lightning."
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -8680,6 +8693,7 @@ components:
       - crypto_return
       - loss_recovery
       - inter_account
+      - lightning
       type: string
     TransferSide:
       enum:
@@ -10017,6 +10031,12 @@ components:
           - crypto
           - instant_funding
           - inter_account
+          - lightning
+          type: string
+        customer_guid:
+          description: The customer's identifier.
+          maxLength: 32
+          minLength: 32
           type: string
         source_account_guid:
           description: The source account's identifier. Required for book transfers.
@@ -10036,6 +10056,15 @@ components:
         external_bank_account_guid:
           description: The customer's 'plaid' or 'plaid_processor_token' external
             bank account's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        network_fee_account_guid:
+          description: "The network fee account's identifier. Required for network\
+            \ fee transfers. Must be the identifier for the customer's or bank's fiat\
+            \ account. For customer's to pay the network fees, include the customer's\
+            \ fiat account guid. For bank's to pay the network fees, include the bank's\
+            \ fiat account guid."
           maxLength: 32
           minLength: 32
           type: string

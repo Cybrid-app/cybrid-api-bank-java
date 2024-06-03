@@ -21,5 +21,7 @@
 
 * `INTER_ACCOUNT` (value: `"inter_account"`)
 
+* `LIGHTNING` (value: `"lightning"`)
+
 
 

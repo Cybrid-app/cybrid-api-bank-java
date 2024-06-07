@@ -19,5 +19,9 @@
 
 * `INVOICE_OPERATIONS` (value: `"invoice_operations"`)
 
+* `FEE` (value: `"fee"`)
+
+* `GAS` (value: `"gas"`)
+
 
 

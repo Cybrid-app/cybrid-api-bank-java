@@ -21,5 +21,7 @@
 
 * `DOCUMENT_SUBMISSION` (value: `"document_submission"`)
 
+* `WATCHLISTS` (value: `"watchlists"`)
+
 
 

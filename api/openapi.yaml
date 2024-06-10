@@ -78,26 +78,26 @@ info:
     \ external_bank_accounts:execute external_wallets:read external_wallets:execute\
     \ workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\
     \ deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write\
-    \ invoices:execute\"\n  }' -H \"Content-Type: application/json\"\n\n# When using\
-    \ Organization credentials set `scope` to 'organizations:read organizations:write\
-    \ organization_applications:execute banks:read banks:write banks:execute bank_applications:execute\
-    \ users:read users:execute counterparties:read customers:read accounts:read prices:read\
-    \ quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute\
-    \ external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read\
-    \ deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write\
-    \ subscriptions:execute'\n```\n<font color=\"orange\">**⚠️ Note: The above curl\
-    \ will create a bearer token with full scope access. Delete scopes if you'd like\
-    \ to restrict access.**</font>\n\n## Authentication Scopes\n\nThe Cybrid platform\
-    \ supports the use of scopes to control the level of access a token is limited\
-    \ to. Scopes do not grant access to resources; instead, they provide limits, in\
-    \ support of the least privilege principal.\n\nThe following scopes are available\
-    \ on the platform and can be requested when generating either an Organization,\
-    \ Bank or Customer token. Generally speaking, the _Read_ scope is required to\
-    \ read and list resources, the _Write_ scope is required to update a resource\
-    \ and the _Execute_ scope is required to create a resource.\n\n| Resource    \
-    \          | Read scope (Token Type)                                    | Write\
-    \ scope (Token Type)                      | Execute scope (Token Type)       \
-    \                |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
+    \ invoices:execute identity_verifications:read identity_verifications:write identity_verifications:execute\"\
+    \n  }' -H \"Content-Type: application/json\"\n\n# When using Organization credentials\
+    \ set `scope` to 'organizations:read organizations:write organization_applications:execute\
+    \ banks:read banks:write banks:execute bank_applications:execute users:read users:execute\
+    \ counterparties:read customers:read accounts:read prices:read quotes:execute\
+    \ quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read\
+    \ external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read\
+    \ invoices:read subscriptions:read subscriptions:write subscriptions:execute identity_verifications:read'\n\
+    ```\n<font color=\"orange\">**⚠️ Note: The above curl will create a bearer token\
+    \ with full scope access. Delete scopes if you'd like to restrict access.**</font>\n\
+    \n## Authentication Scopes\n\nThe Cybrid platform supports the use of scopes to\
+    \ control the level of access a token is limited to. Scopes do not grant access\
+    \ to resources; instead, they provide limits, in support of the least privilege\
+    \ principal.\n\nThe following scopes are available on the platform and can be\
+    \ requested when generating either an Organization, Bank or Customer token. Generally\
+    \ speaking, the _Read_ scope is required to read and list resources, the _Write_\
+    \ scope is required to update a resource and the _Execute_ scope is required to\
+    \ create a resource.\n\n| Resource              | Read scope (Token Type)    \
+    \                                | Write scope (Token Type)                  \
+    \    | Execute scope (Token Type)                       |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
     | Account               | accounts:read (Organization, Bank, Customer)       \
     \        |                                               | accounts:execute (Bank,\
     \ Customer)                |\n| Bank                  | banks:read (Organization,\
@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.8
+  version: v0.118.14
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -2916,7 +2916,7 @@ paths:
   /api/identity_verifications:
     get:
       description: "Retrieves a list of identity verifications.\n\nRequired scope:\
-        \ **customers:read**"
+        \ **identity_verifications:read**"
       operationId: listIdentityVerifications
       parameters:
       - description: The page index to retrieve.
@@ -3040,7 +3040,7 @@ paths:
                 invalid_scope:
                   value:
                     status: 403
-                    error_message: "Invalid scopes. Required: customers:read"
+                    error_message: "Invalid scopes. Required: identity_verifications:read"
                     message_code: invalid_scopes
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -3048,7 +3048,7 @@ paths:
       security:
       - BearerAuth: []
         oauth2:
-        - customers:read
+        - identity_verifications:read
       summary: List Identity Verifications
       tags:
       - IdentityVerifications
@@ -3062,13 +3062,16 @@ paths:
         \ to accept their KYC/AML process and have it attested to in our platform.\n\
         \n## State\n\n| State | Description |\n|-------|-------------|\n| storing\
         \ | The Platform is storing the identity verification details in our private\
-        \ store |\n| waiting | The Platform is waiting for the customer to complete\
-        \ the identity verification process |\n| expired | The identity verification\
-        \ process has expired |\n| completed | The identity verification process has\
-        \ been completed |\n\n## Outcome\n\n| State | Description |\n|-------|-------------|\n\
-        | passed | The customer has passed the identity verification process |\n|\
-        \ failed | The customer has failed the identity verification process |\n\n\
-        ## Failure Codes\n\n| Code | Description |\n|-------|-------------|\n| id_check_failure\
+        \ store |\n| waiting | The Platform is waiting for the customer to start the\
+        \ identity verification process |\n| pending | The Platform is waiting for\
+        \ the customer to finish the identity verification process |\n| reviewing\
+        \ | The Platform is waiting for compliance to review the identity verification\
+        \ results |\n| expired | The identity verification process has expired |\n\
+        | completed | The identity verification process has been completed |\n\n##\
+        \ Outcome\n\n| State | Description |\n|-------|-------------|\n| passed |\
+        \ The customer has passed the identity verification process |\n| failed |\
+        \ The customer has failed the identity verification process |\n\n## Failure\
+        \ Codes\n\n| Code | Description |\n|-------|-------------|\n| id_check_failure\
         \ | Failure due to an issue verifying the provided ID |\n| id_quality_check_failure\
         \ | Failure due to an issue verifying the provided ID based on the image quality\
         \ |\n| id_barcode_check_failure | Failure due to an issue verifying the provided\
@@ -3103,7 +3106,7 @@ paths:
         \ | Failure due to an issue verifying the email address of the person |\n\
         | requested_failure | In sandbox, the caller requested that the process failed\
         \ |\n| deleted_account | Failure due to the bank account having been deleted\
-        \ before a decision was made |\n\n\n\nRequired scope: **customers:write**"
+        \ before a decision was made |\n\n\n\nRequired scope: **identity_verifications:execute**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:
@@ -3163,7 +3166,7 @@ paths:
                 invalid_scope:
                   value:
                     status: 403
-                    error_message: "Invalid scopes. Required: customers:write"
+                    error_message: "Invalid scopes. Required: identity_verifications:execute"
                     message_code: invalid_scopes
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -3171,7 +3174,7 @@ paths:
       security:
       - BearerAuth: []
         oauth2:
-        - customers:write
+        - identity_verifications:execute
       summary: Create Identity Verification
       tags:
       - IdentityVerifications
@@ -3179,7 +3182,7 @@ paths:
       x-accepts: application/json
   /api/identity_verifications/{identity_verification_guid}:
     get:
-      description: "Retrieves an identity verification.\n\nRequired scope: **customers:read**"
+      description: "Retrieves an identity verification.\n\nRequired scope: **identity_verifications:read**"
       operationId: getIdentityVerification
       parameters:
       - description: Identifier for the identity verification.
@@ -3249,7 +3252,7 @@ paths:
                 invalid_scope:
                   value:
                     status: 403
-                    error_message: "Invalid scopes. Required: customers:read"
+                    error_message: "Invalid scopes. Required: identity_verifications:read"
                     message_code: invalid_scopes
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -3269,7 +3272,7 @@ paths:
       security:
       - BearerAuth: []
         oauth2:
-        - customers:read
+        - identity_verifications:read
       summary: Get Identity Verification
       tags:
       - IdentityVerifications
@@ -7032,12 +7035,11 @@ components:
       type: object
     IdentityVerification:
       example:
+        counterparty_guid: counterparty_guid
         failure_codes:
         - failure_codes
         - failure_codes
         method: method
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
         verification_checks:
         - failure_codes:
@@ -7050,7 +7052,6 @@ components:
           - failure_codes
           state: state
           type: type
-        state: state
         type: type
         compliance_decisions:
         - failure_codes:
@@ -7063,6 +7064,10 @@ components:
           - failure_codes
           state: state
           type: type
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        guid: guid
+        external_bank_account_guid: external_bank_account_guid
+        state: state
         outcome: outcome
         customer_guid: customer_guid
       properties:
@@ -7071,18 +7076,14 @@ components:
           maxLength: 32
           minLength: 32
           type: string
-        customer_guid:
-          description: The identity verification's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
         type:
-          description: The identity verification type; one of kyc or bank_account.
+          description: "The identity verification type; one of kyc, bank_account,\
+            \ or counterparty."
           type: string
         method:
           description: "The identity verification method; one of business_registration,\
             \ id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership,\
-            \ plaid_identity_match, or document_submission."
+            \ plaid_identity_match, document_submission, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7092,9 +7093,27 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
+        customer_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        external_bank_account_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         state:
           description: "The identity verification state; one of storing, waiting,\
-            \ expired, or completed."
+            \ pending, reviewing, expired, or completed."
           type: string
         outcome:
           description: The identity verification outcome; one of passed or failed.
@@ -7121,6 +7140,7 @@ components:
       enum:
       - kyc
       - bank_account
+      - counterparty
       type: string
     IdentityVerificationMethod:
       enum:
@@ -7132,11 +7152,14 @@ components:
       - account_ownership
       - plaid_identity_match
       - document_submission
+      - watchlists
       type: string
     IdentityVerificationState:
       enum:
       - storing
       - waiting
+      - pending
+      - reviewing
       - expired
       - completed
       type: string
@@ -7157,6 +7180,7 @@ components:
       type: string
     IdentityVerificationWithDetails:
       example:
+        counterparty_guid: counterparty_guid
         failure_codes:
         - failure_codes
         - failure_codes
@@ -7226,18 +7250,14 @@ components:
           maxLength: 32
           minLength: 32
           type: string
-        customer_guid:
-          description: The identity verification's identifier.
-          maxLength: 32
-          minLength: 32
-          type: string
         type:
-          description: The identity verification type; one of kyc or bank_account.
+          description: "The identity verification type; one of kyc, bank_account,\
+            \ or counterparty."
           type: string
         method:
           description: "The identity verification method; one of business_registration,\
             \ id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership,\
-            \ plaid_identity_match, or document_submission."
+            \ plaid_identity_match, document_submission, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7247,9 +7267,27 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
+        customer_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        external_bank_account_guid:
+          description: The identity verification's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         state:
           description: "The identity verification state; one of storing, waiting,\
-            \ expired, or completed."
+            \ pending, reviewing, expired, or completed."
           type: string
         outcome:
           description: The identity verification outcome; one of passed or failed.
@@ -7285,12 +7323,6 @@ components:
             \ pending, reviewing, processing, expired, completed, or unknown."
           nullable: true
           type: string
-        external_bank_account_guid:
-          description: The external bank account's identifier.
-          maxLength: 32
-          minLength: 32
-          nullable: true
-          type: string
         pii:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii'
       type: object
@@ -7299,12 +7331,11 @@ components:
         per_page: 0
         total: 0
         objects:
-        - failure_codes:
+        - counterparty_guid: counterparty_guid
+          failure_codes:
           - failure_codes
           - failure_codes
           method: method
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           verification_checks:
           - failure_codes:
@@ -7317,7 +7348,6 @@ components:
             - failure_codes
             state: state
             type: type
-          state: state
           type: type
           compliance_decisions:
           - failure_codes:
@@ -7330,14 +7360,17 @@ components:
             - failure_codes
             state: state
             type: type
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          external_bank_account_guid: external_bank_account_guid
+          state: state
           outcome: outcome
           customer_guid: customer_guid
-        - failure_codes:
+        - counterparty_guid: counterparty_guid
+          failure_codes:
           - failure_codes
           - failure_codes
           method: method
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
           verification_checks:
           - failure_codes:
@@ -7350,7 +7383,6 @@ components:
             - failure_codes
             state: state
             type: type
-          state: state
           type: type
           compliance_decisions:
           - failure_codes:
@@ -7363,6 +7395,10 @@ components:
             - failure_codes
             state: state
             type: type
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
+          external_bank_account_guid: external_bank_account_guid
+          state: state
           outcome: outcome
           customer_guid: customer_guid
         page: 0
@@ -9816,6 +9852,7 @@ components:
           enum:
           - kyc
           - bank_account
+          - counterparty
           type: string
         method:
           description: The identity verification method.
@@ -9828,6 +9865,7 @@ components:
           - account_ownership
           - plaid_identity_match
           - document_submission
+          - watchlists
           type: string
         customer_guid:
           description: The customer's identifier.
@@ -10998,6 +11036,9 @@ components:
             invoices:read: invoices read
             invoices:write: invoices write
             invoices:execute: invoices execute
+            identity_verifications:read: identity_verifications read
+            identity_verifications:write: identity_verifications write
+            identity_verifications:execute: identity_verifications execute
           tokenUrl: https://id.sandbox.cybrid.app/oauth/token
       type: oauth2
     BearerAuth:

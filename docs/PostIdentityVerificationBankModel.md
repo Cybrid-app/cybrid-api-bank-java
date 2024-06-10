@@ -28,6 +28,7 @@
 |---- | -----|
 | KYC | &quot;kyc&quot; |
 | BANK_ACCOUNT | &quot;bank_account&quot; |
+| COUNTERPARTY | &quot;counterparty&quot; |
 
 
 
@@ -43,6 +44,7 @@
 | ACCOUNT_OWNERSHIP | &quot;account_ownership&quot; |
 | PLAID_IDENTITY_MATCH | &quot;plaid_identity_match&quot; |
 | DOCUMENT_SUBMISSION | &quot;document_submission&quot; |
+| WATCHLISTS | &quot;watchlists&quot; |
 
 
 

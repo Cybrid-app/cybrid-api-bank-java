@@ -20,7 +20,6 @@
 |**failureCodes** | **List&lt;String&gt;** | The reason codes explaining the outcome. |  [optional] |
 |**complianceChecks** | [**List&lt;ComplianceCheckBankModel&gt;**](ComplianceCheckBankModel.md) | The compliance checks associated with the identity verification. |  [optional] |
 |**complianceDecisions** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | The compliance decisions associated with the identity verification. |  [optional] |
-|**verificationChecks** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | Deprecated; use compliance_decisions instead. |  [optional] |
 |**personaInquiryId** | **String** | The Persona identifier of the backing inquiry. |  [optional] |
 |**personaState** | **String** | The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown. |  [optional] |
 |**pii** | [**IdentityVerificationWithDetailsPiiBankModel**](IdentityVerificationWithDetailsPiiBankModel.md) |  |  [optional] |

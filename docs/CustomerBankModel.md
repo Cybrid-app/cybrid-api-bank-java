@@ -22,7 +22,6 @@
 |**emailAddress** | **String** | The customer&#39;s email address. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the customer. |  [optional] |
 |**complianceDecisions** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | The compliance decisions associated with the customer. |  [optional] |
-|**verificationChecks** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | Deprecated; use compliance_decisions instead. |  [optional] |
 
 
 

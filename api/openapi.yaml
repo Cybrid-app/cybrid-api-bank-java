@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.16
+  version: v0.118.17
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6495,17 +6495,6 @@ components:
           full: full
         date_of_birth: 2000-01-23
         created_at: 2000-01-23T04:56:07.000+00:00
-        verification_checks:
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
         type: type
         compliance_decisions:
         - failure_codes:
@@ -6591,11 +6580,6 @@ components:
           items:
             $ref: '#/components/schemas/ComplianceDecision'
           type: array
-        verification_checks:
-          description: Deprecated; use compliance_decisions instead.
-          items:
-            $ref: '#/components/schemas/ComplianceDecision'
-          type: array
       type: object
     CounterpartyType:
       enum:
@@ -6632,17 +6616,6 @@ components:
             full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
           type: type
           compliance_decisions:
           - failure_codes:
@@ -6686,17 +6659,6 @@ components:
             full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
           type: type
           compliance_decisions:
           - failure_codes:
@@ -6767,17 +6729,6 @@ components:
           full: full
         date_of_birth: 2000-01-23
         created_at: 2000-01-23T04:56:07.000+00:00
-        verification_checks:
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
         type: type
         compliance_decisions:
         - failure_codes:
@@ -6873,11 +6824,6 @@ components:
           items:
             $ref: '#/components/schemas/ComplianceDecision'
           type: array
-        verification_checks:
-          description: Deprecated; use compliance_decisions instead.
-          items:
-            $ref: '#/components/schemas/ComplianceDecision'
-          type: array
       type: object
     CustomerType:
       enum:
@@ -6916,17 +6862,6 @@ components:
             full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
           type: type
           compliance_decisions:
           - failure_codes:
@@ -6972,17 +6907,6 @@ components:
             full: full
           date_of_birth: 2000-01-23
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
           type: type
           compliance_decisions:
           - failure_codes:
@@ -7040,18 +6964,11 @@ components:
         - failure_codes
         - failure_codes
         method: method
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        guid: guid
         created_at: 2000-01-23T04:56:07.000+00:00
-        verification_checks:
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
+        external_bank_account_guid: external_bank_account_guid
+        state: state
         type: type
         compliance_decisions:
         - failure_codes:
@@ -7064,10 +6981,6 @@ components:
           - failure_codes
           state: state
           type: type
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        guid: guid
-        external_bank_account_guid: external_bank_account_guid
-        state: state
         outcome: outcome
         customer_guid: customer_guid
       properties:
@@ -7130,11 +7043,6 @@ components:
           items:
             $ref: '#/components/schemas/ComplianceDecision'
           type: array
-        verification_checks:
-          description: Deprecated; use compliance_decisions instead.
-          items:
-            $ref: '#/components/schemas/ComplianceDecision'
-          type: array
       type: object
     IdentityVerificationType:
       enum:
@@ -7186,17 +7094,6 @@ components:
         - failure_codes
         method: method
         created_at: 2000-01-23T04:56:07.000+00:00
-        verification_checks:
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
-        - failure_codes:
-          - failure_codes
-          - failure_codes
-          state: state
-          type: type
         type: type
         compliance_decisions:
         - failure_codes:
@@ -7309,11 +7206,6 @@ components:
           items:
             $ref: '#/components/schemas/ComplianceDecision'
           type: array
-        verification_checks:
-          description: Deprecated; use compliance_decisions instead.
-          items:
-            $ref: '#/components/schemas/ComplianceDecision'
-          type: array
         persona_inquiry_id:
           description: The Persona identifier of the backing inquiry.
           nullable: true
@@ -7336,18 +7228,11 @@ components:
           - failure_codes
           - failure_codes
           method: method
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
+          external_bank_account_guid: external_bank_account_guid
+          state: state
           type: type
           compliance_decisions:
           - failure_codes:
@@ -7360,10 +7245,6 @@ components:
             - failure_codes
             state: state
             type: type
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          guid: guid
-          external_bank_account_guid: external_bank_account_guid
-          state: state
           outcome: outcome
           customer_guid: customer_guid
         - counterparty_guid: counterparty_guid
@@ -7371,18 +7252,11 @@ components:
           - failure_codes
           - failure_codes
           method: method
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          guid: guid
           created_at: 2000-01-23T04:56:07.000+00:00
-          verification_checks:
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
-          - failure_codes:
-            - failure_codes
-            - failure_codes
-            state: state
-            type: type
+          external_bank_account_guid: external_bank_account_guid
+          state: state
           type: type
           compliance_decisions:
           - failure_codes:
@@ -7395,10 +7269,6 @@ components:
             - failure_codes
             state: state
             type: type
-          updated_at: 2000-01-23T04:56:07.000+00:00
-          guid: guid
-          external_bank_account_guid: external_bank_account_guid
-          state: state
           outcome: outcome
           customer_guid: customer_guid
         page: 0

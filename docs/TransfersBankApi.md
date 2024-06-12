@@ -85,7 +85,7 @@ public class Example {
 | **201** | Transfer created |  -  |
 | **400** | Bad Request |  -  |
 | **409** | Conflict |  -  |
-| **422** | Unprocessable Entity |  -  |
+| **422** | Unprocessable Content |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
 

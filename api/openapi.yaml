@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.17
+  version: v0.118.19
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -782,7 +782,7 @@ paths:
                     message_code: no_customer
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Unprocessable Entity
+          description: Unprocessable Content
       security:
       - BearerAuth: []
         oauth2:
@@ -5764,7 +5764,7 @@ paths:
                     message_code: no_transfer
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Unprocessable Entity
+          description: Unprocessable Content
         "401":
           content:
             application/json:

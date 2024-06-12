@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-06-12T13:49:10.147271Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-06-12T15:51:34.301487Z[Etc/UTC]")
 public class CounterpartiesBankApi {
     private ApiClient apiClient;
 
@@ -53,7 +53,7 @@ public class CounterpartiesBankApi {
      * Create Counterparty
      * Creates a counterparty.  ## Counterparty Type  Counterparty resources are an abstraction for real world individuals and businesses that are not directly on the Cybrid Platform.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the counterparty details in our private store | | unverified | The Platform has not yet verified the counterparty&#39;s identity | | verified | The Platform has verified the counterparty&#39;s identity | | rejected | The Platform was not able to successfully verify the counterparty&#39;s identity |    Required scope: **counterparties:execute**
      * <p><b>201</b> - counterparty created
-     * <p><b>422</b> - Unprocessable Entity
+     * <p><b>422</b> - Unprocessable Content
      * @param postCounterpartyBankModel The postCounterpartyBankModel parameter
      * @return CounterpartyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -91,7 +91,7 @@ public class CounterpartiesBankApi {
      * Create Counterparty
      * Creates a counterparty.  ## Counterparty Type  Counterparty resources are an abstraction for real world individuals and businesses that are not directly on the Cybrid Platform.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the counterparty details in our private store | | unverified | The Platform has not yet verified the counterparty&#39;s identity | | verified | The Platform has verified the counterparty&#39;s identity | | rejected | The Platform was not able to successfully verify the counterparty&#39;s identity |    Required scope: **counterparties:execute**
      * <p><b>201</b> - counterparty created
-     * <p><b>422</b> - Unprocessable Entity
+     * <p><b>422</b> - Unprocessable Content
      * @param postCounterpartyBankModel The postCounterpartyBankModel parameter
      * @return CounterpartyBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API

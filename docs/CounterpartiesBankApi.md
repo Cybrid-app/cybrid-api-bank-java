@@ -83,7 +83,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | counterparty created |  -  |
-| **422** | Unprocessable Entity |  -  |
+| **422** | Unprocessable Content |  -  |
 
 
 ## getCounterparty

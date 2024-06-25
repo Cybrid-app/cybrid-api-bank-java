@@ -19,5 +19,7 @@
 
 * `ROUTABLE_ACCOUNTS_CUSTOMER` (value: `"routable_accounts_customer"`)
 
+* `ACCESSIBLE_IDENTIFICATION_NUMBERS` (value: `"accessible_identification_numbers"`)
+
 
 

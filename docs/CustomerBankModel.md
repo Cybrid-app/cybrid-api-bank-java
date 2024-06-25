@@ -22,6 +22,8 @@
 |**emailAddress** | **String** | The customer&#39;s email address. Only available for GET operations when &#39;include_pii&#39; is set. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the customer. |  [optional] |
 |**complianceDecisions** | [**List&lt;ComplianceDecisionBankModel&gt;**](ComplianceDecisionBankModel.md) | The compliance decisions associated with the customer. |  [optional] |
+|**identificationNumbers** | [**List&lt;IdentificationNumberBankModel&gt;**](IdentificationNumberBankModel.md) | The customer&#39;s identification numbers. Only available for GET operations when &#39;include_pii&#39; is set and bank has access. |  [optional] |
+|**activityLimits** | [**List&lt;ActivityLimitBankModel&gt;**](ActivityLimitBankModel.md) | The asset limits associated with the customer. |  [optional] |
 
 
 

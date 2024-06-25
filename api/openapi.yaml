@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.22
+  version: v0.118.41
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6276,6 +6276,44 @@ components:
       - fiat
       - crypto
       type: string
+    ActivityType:
+      description: 'The activity type '
+      enum:
+      - trading
+      - funding
+      - book_transfer
+      - crypto_transfer
+      type: string
+    ActivityLimit:
+      example:
+        amount: 5
+        activities:
+        - activities
+        - activities
+        name: name
+        interval: 5
+        asset: asset
+      properties:
+        name:
+          description: The name of the limit.
+          type: string
+        asset:
+          description: The asset code for the limit.
+          type: string
+        amount:
+          description: The limit amount for the asset.
+          type: integer
+        interval:
+          description: The limit interval in seconds for the asset.
+          type: integer
+        activities:
+          description: The activities associated with the limit.
+          items:
+            description: "The activity type; one of trading, funding, book_transfer,\
+              \ or crypto_transfer."
+            type: string
+          type: array
+      type: object
     AssetList:
       example:
         per_page: 0
@@ -6375,7 +6413,7 @@ components:
           items:
             description: "A combination of: attestation_identity_records, kyc_identity_verifications,\
               \ raw_routing_details, individual_customers, business_customers, routable_accounts_bank,\
-              \ and routable_accounts_customer."
+              \ routable_accounts_customer, and accessible_identification_numbers."
             type: string
           type: array
         created_at:
@@ -6408,6 +6446,7 @@ components:
       - business_customers
       - routable_accounts_bank
       - routable_accounts_customer
+      - accessible_identification_numbers
       type: string
     BankList:
       example:
@@ -6741,6 +6780,13 @@ components:
           - failure_codes
           state: state
           type: type
+        identification_numbers:
+        - identification_number: identification_number
+          issuing_country_code: issuing_country_code
+          type: type
+        - identification_number: identification_number
+          issuing_country_code: issuing_country_code
+          type: type
         labels:
         - labels
         - labels
@@ -6754,6 +6800,21 @@ components:
         guid: guid
         phone_number: phone_number
         state: state
+        activity_limits:
+        - amount: 5
+          activities:
+          - activities
+          - activities
+          name: name
+          interval: 5
+          asset: asset
+        - amount: 5
+          activities:
+          - activities
+          - activities
+          name: name
+          interval: 5
+          asset: asset
         bank_guid: bank_guid
       properties:
         guid:
@@ -6824,6 +6885,18 @@ components:
           items:
             $ref: '#/components/schemas/ComplianceDecision'
           type: array
+        identification_numbers:
+          description: The customer's identification numbers. Only available for GET
+            operations when 'include_pii' is set and bank has access.
+          items:
+            $ref: '#/components/schemas/IdentificationNumber'
+          nullable: true
+          type: array
+        activity_limits:
+          description: The asset limits associated with the customer.
+          items:
+            $ref: '#/components/schemas/ActivityLimit'
+          type: array
       type: object
     CustomerType:
       enum:
@@ -6874,6 +6947,13 @@ components:
             - failure_codes
             state: state
             type: type
+          identification_numbers:
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
           labels:
           - labels
           - labels
@@ -6887,6 +6967,21 @@ components:
           guid: guid
           phone_number: phone_number
           state: state
+          activity_limits:
+          - amount: 5
+            activities:
+            - activities
+            - activities
+            name: name
+            interval: 5
+            asset: asset
+          - amount: 5
+            activities:
+            - activities
+            - activities
+            name: name
+            interval: 5
+            asset: asset
           bank_guid: bank_guid
         - website: website
           address:
@@ -6919,6 +7014,13 @@ components:
             - failure_codes
             state: state
             type: type
+          identification_numbers:
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
           labels:
           - labels
           - labels
@@ -6932,6 +7034,21 @@ components:
           guid: guid
           phone_number: phone_number
           state: state
+          activity_limits:
+          - amount: 5
+            activities:
+            - activities
+            - activities
+            name: name
+            interval: 5
+            asset: asset
+          - amount: 5
+            activities:
+            - activities
+            - activities
+            name: name
+            interval: 5
+            asset: asset
           bank_guid: bank_guid
         page: 0
       properties:
@@ -9494,6 +9611,29 @@ components:
       - deleting
       - deleted
       type: string
+    IdentificationNumber:
+      example:
+        identification_number: identification_number
+        issuing_country_code: issuing_country_code
+        type: type
+      properties:
+        type:
+          description: "The source of the identification number; one of drivers_license,\
+            \ passport, passport_card, residence_card, social_security_number, tax_identification_number,\
+            \ or identification_card."
+          type: string
+        issuing_country_code:
+          description: The ISO 3166 country 2-Alpha country code of the identification
+            number issuer.
+          type: string
+        identification_number:
+          description: The identification number.
+          type: string
+      required:
+      - identification_number
+      - issuing_country_code
+      - type
+      type: object
     ExternalWallet:
       example:
         environment: environment

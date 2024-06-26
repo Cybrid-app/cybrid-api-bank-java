@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.46
+  version: v0.118.48
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3078,8 +3078,11 @@ paths:
         \ | Failure due to an issue verifying the provided ID based on it being a\
         \ digital replica |\n| database_check_failure | Failure due to an issue verifying\
         \ the provided information against authoritative data sources |\n| selfie_failure\
-        \ | Failure due to an issue verifying the provided selfie photo |\n| duplicate_person_check_failure\
-        \ | Failure due to a customer already existing for this person |\n| name_check_failure\
+        \ | Failure due to an issue verifying the provided selfie photo |\n| country_comparison_check_failure\
+        \ | Failure due the customer verification being performed out of country |\n\
+        | duplicate_person_check_failure | Failure due to a customer already existing\
+        \ for this person |\n| prohibited_person_check_failure | Failure due to a\
+        \ person being on prohibited from accessing the service |\n| name_check_failure\
         \ | Failure due to an issue verifying the name of the person |\n| address_check_failure\
         \ | Failure due to an issue verifying the address of the person |\n| dob_check_failure\
         \ | Failure due to an issue verifying the date of birth of the person |\n\
@@ -3087,16 +3090,18 @@ paths:
         \ number of the person |\n| phone_number_check_failure | Failure due to an\
         \ issue verifying the phone number of the person |\n| email_address_check_failure\
         \ | Failure due to an issue verifying the email address of the person |\n\
-        | plaid_failure | Failure due to an issue interacting with Plaid |\n| plaid_item_login_required\
-        \ | Failure due to the Plaid token for the account requiring re-login |\n\
-        | plaid_invalid_product | Failure due to the Plaid product not being supported\
-        \ (contact support) |\n| plaid_no_accounts | Failure due to the Plaid token\
-        \ having access to no accounts |\n| plaid_item_not_found | Failure due to\
-        \ Plaid not being able to find the associated account |\n| decision_timeout\
-        \ | Failure due to an issue verifying the email address of the person |\n\
-        | requested_failure | In sandbox, the caller requested that the process failed\
-        \ |\n| deleted_account | Failure due to the bank account having been deleted\
-        \ before a decision was made |\n\n\n\nRequired scope: **identity_verifications:execute**"
+        | compliance_rejection | Failure due to compliance rejecting the identity\
+        \ verification |\n| plaid_failure | Failure due to an issue interacting with\
+        \ Plaid |\n| plaid_item_login_required | Failure due to the Plaid token for\
+        \ the account requiring re-login |\n| plaid_invalid_product | Failure due\
+        \ to the Plaid product not being supported (contact support) |\n| plaid_no_accounts\
+        \ | Failure due to the Plaid token having access to no accounts |\n| plaid_item_not_found\
+        \ | Failure due to Plaid not being able to find the associated account |\n\
+        | decision_timeout | Failure due to an issue verifying the email address of\
+        \ the person |\n| requested_failure | In sandbox, the caller requested that\
+        \ the process failed |\n| deleted_account | Failure due to the bank account\
+        \ having been deleted before a decision was made |\n\n\n\nRequired scope:\
+        \ **identity_verifications:execute**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:
@@ -7074,19 +7079,19 @@ components:
           format: date-time
           type: string
         customer_guid:
-          description: The identity verification's identifier.
+          description: The customer's identifier.
           maxLength: 32
           minLength: 32
           nullable: true
           type: string
         counterparty_guid:
-          description: The identity verification's identifier.
+          description: The counterparty's identifier.
           maxLength: 32
           minLength: 32
           nullable: true
           type: string
         external_bank_account_guid:
-          description: The identity verification's identifier.
+          description: The external bank account's identifier.
           maxLength: 32
           minLength: 32
           nullable: true
@@ -9907,6 +9912,12 @@ components:
           type: string
         customer_guid:
           description: The customer's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The counterparty's identifier.
           maxLength: 32
           minLength: 32
           nullable: true

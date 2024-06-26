@@ -10,6 +10,7 @@
 |**type** | [**TypeEnum**](#TypeEnum) | The type of identity verification. |  |
 |**method** | [**MethodEnum**](#MethodEnum) | The identity verification method. |  |
 |**customerGuid** | **String** | The customer&#39;s identifier. |  [optional] |
+|**counterpartyGuid** | **String** | The counterparty&#39;s identifier. |  [optional] |
 |**countryCode** | **String** | The ISO 3166 country 2-Alpha country the customer is being verified in; required when method is set to &#39;id_and_selfie&#39;. If not present, will default to the Bank&#39;s configured country code. |  [optional] |
 |**name** | [**PostIdentityVerificationNameBankModel**](PostIdentityVerificationNameBankModel.md) |  |  [optional] |
 |**address** | [**PostIdentityVerificationAddressBankModel**](PostIdentityVerificationAddressBankModel.md) |  |  [optional] |

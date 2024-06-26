@@ -13,7 +13,7 @@ info:
     \ which contains many helpful links to platform resources.\n\n## Getting Started\n\
     \nThis is Cybrid's public interactive API documentation, which allows you to fully\
     \ test our APIs. If you'd like to use a different tool to exercise our APIs, you\
-    \ can download the [Open API 3.0 yaml](https://bank.sandbox.cybrid.app/api/schema/v1/swagger.yaml)\
+    \ can download the [Open API 3.0 yaml](https://bank.production.cybrid.app/api/schema/v1/swagger.yaml)\
     \ for import.\n\nIf you're new to our APIs and the Cybrid Platform, follow the\
     \ below guides to get set up and familiar with the platform:\n\n1. [Understanding\
     \ the Platform](https://kb.cybrid.xyz/understanding-the-platform)\n2. [Getting\
@@ -43,32 +43,32 @@ info:
     \ following pages:*\n\n| API                                                 \
     \             | Description                                                 |\n\
     |------------------------------------------------------------------|-------------------------------------------------------------|\n\
-    | [Organization API](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
-    \   | APIs to manage organizations                                |\n| [Bank API](https://bank.sandbox.cybrid.app/api/schema/swagger-ui)\
+    | [Organization API](https://organization.production.cybrid.app/api/schema/swagger-ui)\
+    \   | APIs to manage organizations                                |\n| [Bank API](https://bank.production.cybrid.app/api/schema/swagger-ui)\
     \                   | APIs to manage banks (and all downstream customer activity)\
-    \ |\n| [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui) \
-    \                      | APIs to manage organization and bank identities     \
-    \        |\n\nFor questions please contact [Support](mailto:support@cybrid.xyz)\
+    \ |\n| [Identities API](https://id.production.cybrid.app/api/schema/swagger-ui)\
+    \                       | APIs to manage organization and bank identities    \
+    \         |\n\nFor questions please contact [Support](mailto:support@cybrid.xyz)\
     \ at any time for assistance, or contact the [Product Team](mailto:product@cybrid.xyz)\
     \ for product suggestions.\n\n## Authenticating with the API\n\nThe Cybrid Platform\
     \ uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials\
     \ to create `Organization` and `Bank` tokens can be generated via the [Cybrid\
-    \ Sandbox](https://id.sandbox.cybrid.app). Access tokens can be generated for\
-    \ a `Customer` as well via the [Cybrid IdP](https://id.sandbox.cybrid.app) as\
-    \ well.\n\nAn `Organization` access token applies broadly to the whole Organization\
+    \ Sandbox](https://id.production.cybrid.app). Access tokens can be generated for\
+    \ a `Customer` as well via the [Cybrid IdP](https://id.production.cybrid.app)\
+    \ as well.\n\nAn `Organization` access token applies broadly to the whole Organization\
     \ and all of its `Banks`, whereas, a `Bank` access token is specific to an individual\
     \ Bank. `Customer` tokens, similarly, are scoped to a specific customer in a bank.\n\
     \nBoth `Organization` and `Bank` tokens can be created using the OAuth Client\
     \ Credential Grant flow. Each Organization and Bank has its own unique `Client\
     \ ID` and `Secret` that allows for machine-to-machine authentication.\n\nA `Bank`\
-    \ can then generate `Customer` access tokens via API using our [Identities API](https://id.sandbox.cybrid.app/api/schema/swagger-ui).\n\
+    \ can then generate `Customer` access tokens via API using our [Identities API](https://id.production.cybrid.app/api/schema/swagger-ui).\n\
     \n<font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or\
     \ in your source code repository.**</font>\n\nYour `Client ID` and `Secret` can\
     \ be exchanged for a time-limited `Bearer Token` by interacting with the Cybrid\
     \ Identity Provider or through interacting with the **Authorize** button in this\
     \ document.\n\nThe following curl command can be used to quickly generate a `Bearer\
     \ Token` for use in testing the API or demo applications.\n\n```\n# Example request\
-    \ when using Bank credentials\ncurl -X POST https://id.sandbox.cybrid.app/oauth/token\
+    \ when using Bank credentials\ncurl -X POST https://id.production.cybrid.app/oauth/token\
     \ -d '{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"<Your\
     \ Client ID>\",\n    \"client_secret\": \"<Your Secret>\",\n    \"scope\": \"\
     banks:read banks:write bank_applications:execute accounts:read accounts:execute\
@@ -134,9 +134,9 @@ info:
     \            |\n| Invoice               | invoices:read (Organization, Bank, Customer)\
     \               | invoices:write (Bank, Customer)               | invoices:execute\
     \ (Bank, Customer)                |\n\n## Available Endpoints\n\nThe available\
-    \ APIs for the [Identity](https://id.sandbox.cybrid.app/api/schema/swagger-ui),\
-    \ [Organization](https://organization.sandbox.cybrid.app/api/schema/swagger-ui)\
-    \ and [Bank](https://bank.sandbox.cybrid.app/api/schema/swagger-ui) API services\
+    \ APIs for the [Identity](https://id.production.cybrid.app/api/schema/swagger-ui),\
+    \ [Organization](https://organization.production.cybrid.app/api/schema/swagger-ui)\
+    \ and [Bank](https://bank.production.cybrid.app/api/schema/swagger-ui) API services\
     \ are listed below:\n\n| API Service  | Model                | API Endpoint Path\
     \              | Description                                                 \
     \                                      |\n|--------------|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------|\n\
@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.48
+  version: v0.118.49
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -11100,7 +11100,7 @@ components:
             identity_verifications:read: identity_verifications read
             identity_verifications:write: identity_verifications write
             identity_verifications:execute: identity_verifications execute
-          tokenUrl: https://id.sandbox.cybrid.app/oauth/token
+          tokenUrl: https://id.production.cybrid.app/oauth/token
       type: oauth2
     BearerAuth:
       bearerFormat: JWT

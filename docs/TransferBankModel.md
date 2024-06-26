@@ -28,7 +28,9 @@
 |**txnHash** | **String** | The hash of the blockchain transaction |  [optional] |
 |**referenceTransferGuid** | **String** | The guid of the related transfer. Only present on &#x60;funding_return&#x60; transfers. |  [optional] |
 |**sourceAccount** | [**TransferSourceAccountBankModel**](TransferSourceAccountBankModel.md) |  |  [optional] |
+|**sourceParticipants** | [**List&lt;TransferParticipantBankModel&gt;**](TransferParticipantBankModel.md) | The participants in the source account. |  [optional] |
 |**destinationAccount** | [**TransferDestinationAccountBankModel**](TransferDestinationAccountBankModel.md) |  |  [optional] |
+|**destinationParticipants** | [**List&lt;TransferParticipantBankModel&gt;**](TransferParticipantBankModel.md) | The participants in the source account. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |

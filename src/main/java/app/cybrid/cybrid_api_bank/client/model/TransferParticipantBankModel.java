@@ -13,6 +13,8 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import java.util.Objects;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,63 +22,153 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for AssetBankModel
+ * TransferParticipantBankModel
  */
-public class AssetBankModelTest {
-    private final AssetBankModel model = new AssetBankModel();
+@JsonPropertyOrder({
+  TransferParticipantBankModel.JSON_PROPERTY_TYPE,
+  TransferParticipantBankModel.JSON_PROPERTY_AMOUNT,
+  TransferParticipantBankModel.JSON_PROPERTY_GUID
+})
+@JsonTypeName("TransferParticipant")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-06-26T15:35:18.206228Z[Etc/UTC]")
+public class TransferParticipantBankModel {
+  public static final String JSON_PROPERTY_TYPE = "type";
+  private String type;
 
-    /**
-     * Model tests for AssetBankModel
-     */
-    @Test
-    public void testAssetBankModel() {
-        // TODO: test AssetBankModel
-    }
+  public static final String JSON_PROPERTY_AMOUNT = "amount";
+  private java.math.BigInteger amount;
 
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // TODO: test type
-    }
+  public static final String JSON_PROPERTY_GUID = "guid";
+  private String guid;
 
-    /**
-     * Test the property 'code'
-     */
-    @Test
-    public void codeTest() {
-        // TODO: test code
-    }
+  public TransferParticipantBankModel() { 
+  }
 
-    /**
-     * Test the property 'name'
-     */
-    @Test
-    public void nameTest() {
-        // TODO: test name
-    }
+  public TransferParticipantBankModel type(String type) {
+    
+    this.type = type;
+    return this;
+  }
 
-    /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
+   /**
+   * The type of participant; one of unknown, bank, customer, or counterparty.
+   * @return type
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The type of participant; one of unknown, bank, customer, or counterparty.")
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-    /**
-     * Test the property 'decimals'
-     */
-    @Test
-    public void decimalsTest() {
-        // TODO: test decimals
+  public String getType() {
+    return type;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setType(String type) {
+    this.type = type;
+  }
+
+
+  public TransferParticipantBankModel amount(java.math.BigInteger amount) {
+    
+    this.amount = amount;
+    return this;
+  }
+
+   /**
+   * The amount in base units of the asset.
+   * @return amount
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The amount in base units of the asset.")
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public java.math.BigInteger getAmount() {
+    return amount;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setAmount(java.math.BigInteger amount) {
+    this.amount = amount;
+  }
+
+
+  public TransferParticipantBankModel guid(String guid) {
+    
+    this.guid = guid;
+    return this;
+  }
+
+   /**
+   * The participant&#39;s identifier.
+   * @return guid
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The participant's identifier.")
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+
+  public String getGuid() {
+    return guid;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setGuid(String guid) {
+    this.guid = guid;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TransferParticipantBankModel transferParticipant = (TransferParticipantBankModel) o;
+    return Objects.equals(this.type, transferParticipant.type) &&
+        Objects.equals(this.amount, transferParticipant.amount) &&
+        Objects.equals(this.guid, transferParticipant.guid);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(type, amount, guid);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class TransferParticipantBankModel {\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
+    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 
 }
+

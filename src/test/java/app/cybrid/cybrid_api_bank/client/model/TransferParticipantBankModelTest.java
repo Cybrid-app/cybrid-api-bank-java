@@ -26,17 +26,17 @@ import org.junit.Test;
 
 
 /**
- * Model tests for AssetBankModel
+ * Model tests for TransferParticipantBankModel
  */
-public class AssetBankModelTest {
-    private final AssetBankModel model = new AssetBankModel();
+public class TransferParticipantBankModelTest {
+    private final TransferParticipantBankModel model = new TransferParticipantBankModel();
 
     /**
-     * Model tests for AssetBankModel
+     * Model tests for TransferParticipantBankModel
      */
     @Test
-    public void testAssetBankModel() {
-        // TODO: test AssetBankModel
+    public void testTransferParticipantBankModel() {
+        // TODO: test TransferParticipantBankModel
     }
 
     /**
@@ -48,35 +48,19 @@ public class AssetBankModelTest {
     }
 
     /**
-     * Test the property 'code'
+     * Test the property 'amount'
      */
     @Test
-    public void codeTest() {
-        // TODO: test code
+    public void amountTest() {
+        // TODO: test amount
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'guid'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
-    }
-
-    /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
-     * Test the property 'decimals'
-     */
-    @Test
-    public void decimalsTest() {
-        // TODO: test decimals
+    public void guidTest() {
+        // TODO: test guid
     }
 
 }

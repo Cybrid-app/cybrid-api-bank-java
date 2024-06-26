@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.41
+  version: v0.118.44
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5762,6 +5762,16 @@ paths:
                     status: 422
                     error_message: Transfer not found
                     message_code: no_transfer
+                example_47:
+                  value:
+                    status: 422
+                    error_message: Transfer invalid
+                    message_code: invalid_transfer
+                example_48:
+                  value:
+                    status: 422
+                    error_message: Transfer not found
+                    message_code: no_transfer
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unprocessable Content
@@ -8589,7 +8599,8 @@ components:
           type: string
         transfer_type:
           description: "The type of transfer; one of funding, book, crypto, instant_funding,\
-            \ funding_return, crypto_return, loss_recovery, inter_account, or lightning."
+            \ funding_return, crypto_return, loss_recovery, inter_account, lightning,\
+            \ or instant_funding_return."
           type: string
         bank_guid:
           description: The associated bank's identifier.
@@ -8717,6 +8728,7 @@ components:
       - loss_recovery
       - inter_account
       - lightning
+      - instant_funding_return
       type: string
     TransferSide:
       enum:

@@ -13,8 +13,6 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,187 +20,47 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * The destination account in the transfer.
+ * Model tests for PostTransferParticipantBankModel
  */
-@ApiModel(description = "The destination account in the transfer.")
-@JsonPropertyOrder({
-  TransferDestinationAccountBankModel.JSON_PROPERTY_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_TYPE,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_BANK_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_CUSTOMER_GUID
-})
-@JsonTypeName("Transfer_destination_account")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-06-28T18:42:54.370404Z[Etc/UTC]")
-public class TransferDestinationAccountBankModel {
-  public static final String JSON_PROPERTY_GUID = "guid";
-  private String guid;
+public class PostTransferParticipantBankModelTest {
+    private final PostTransferParticipantBankModel model = new PostTransferParticipantBankModel();
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private String type;
-
-  public static final String JSON_PROPERTY_BANK_GUID = "bank_guid";
-  private String bankGuid;
-
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
-
-  public TransferDestinationAccountBankModel() { 
-  }
-
-  public TransferDestinationAccountBankModel guid(String guid) {
-    
-    this.guid = guid;
-    return this;
-  }
-
-   /**
-   * Auto-generated unique identifier for the transfer account.
-   * @return guid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Auto-generated unique identifier for the transfer account.")
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getGuid() {
-    return guid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setGuid(String guid) {
-    this.guid = guid;
-  }
-
-
-  public TransferDestinationAccountBankModel type(String type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, or gas.
-   * @return type
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, or gas.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getType() {
-    return type;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setType(String type) {
-    this.type = type;
-  }
-
-
-  public TransferDestinationAccountBankModel bankGuid(String bankGuid) {
-    
-    this.bankGuid = bankGuid;
-    return this;
-  }
-
-   /**
-   * The account&#39;s identifier.
-   * @return bankGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getBankGuid() {
-    return bankGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBankGuid(String bankGuid) {
-    this.bankGuid = bankGuid;
-  }
-
-
-  public TransferDestinationAccountBankModel customerGuid(String customerGuid) {
-    
-    this.customerGuid = customerGuid;
-    return this;
-  }
-
-   /**
-   * The account&#39;s identifier.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getCustomerGuid() {
-    return customerGuid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Model tests for PostTransferParticipantBankModel
+     */
+    @Test
+    public void testPostTransferParticipantBankModel() {
+        // TODO: test PostTransferParticipantBankModel
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
     }
-    TransferDestinationAccountBankModel transferDestinationAccount = (TransferDestinationAccountBankModel) o;
-    return Objects.equals(this.guid, transferDestinationAccount.guid) &&
-        Objects.equals(this.type, transferDestinationAccount.type) &&
-        Objects.equals(this.bankGuid, transferDestinationAccount.bankGuid) &&
-        Objects.equals(this.customerGuid, transferDestinationAccount.customerGuid);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(guid, type, bankGuid, customerGuid);
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class TransferDestinationAccountBankModel {\n");
-    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    bankGuid: ").append(toIndentedString(bankGuid)).append("\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'amount'
+     */
+    @Test
+    public void amountTest() {
+        // TODO: test amount
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+     * Test the property 'guid'
+     */
+    @Test
+    public void guidTest() {
+        // TODO: test guid
+    }
 
 }
-

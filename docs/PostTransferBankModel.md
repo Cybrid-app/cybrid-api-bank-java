@@ -11,9 +11,9 @@
 |**transferType** | [**TransferTypeEnum**](#TransferTypeEnum) | The type of transfer. |  |
 |**customerGuid** | **String** | The customer&#39;s identifier. |  [optional] |
 |**sourceAccountGuid** | **String** | The source account&#39;s identifier. Required for book transfers. |  [optional] |
-|**sourceParticipants** | [**List&lt;TransferParticipantBankModel&gt;**](TransferParticipantBankModel.md) | The source participants for the transfer. |  [optional] |
+|**sourceParticipants** | [**List&lt;PostTransferParticipantBankModel&gt;**](PostTransferParticipantBankModel.md) | The source participants for the transfer. |  [optional] |
 |**destinationAccountGuid** | **String** | The destination account&#39;s identifier. Required for book transfers. |  [optional] |
-|**destinationParticipants** | [**List&lt;TransferParticipantBankModel&gt;**](TransferParticipantBankModel.md) | The destination participants for the transfer. |  [optional] |
+|**destinationParticipants** | [**List&lt;PostTransferParticipantBankModel&gt;**](PostTransferParticipantBankModel.md) | The destination participants for the transfer. |  [optional] |
 |**externalWalletGuid** | **String** | The customer&#39;s external wallet&#39;s identifier. |  [optional] |
 |**externalBankAccountGuid** | **String** | The customer&#39;s &#39;plaid&#39; or &#39;plaid_processor_token&#39; external bank account&#39;s identifier. |  [optional] |
 |**networkFeeAccountGuid** | **String** | The network fee account&#39;s identifier. Required for network fee transfers. Must be the identifier for the customer&#39;s or bank&#39;s fiat account. For customer&#39;s to pay the network fees, include the customer&#39;s fiat account guid. For bank&#39;s to pay the network fees, include the bank&#39;s fiat account guid. |  [optional] |

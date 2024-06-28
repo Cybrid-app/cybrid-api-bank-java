@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.50
+  version: v0.118.53
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9870,6 +9870,12 @@ components:
           - business
           - individual
           type: string
+        customer_guid:
+          description: The owning customer's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         name:
           $ref: '#/components/schemas/PostCounterparty_name'
         address:
@@ -10135,7 +10141,7 @@ components:
         source_participants:
           description: The source participants for the transfer.
           items:
-            $ref: '#/components/schemas/TransferParticipant'
+            $ref: '#/components/schemas/PostTransferParticipant'
           nullable: true
           type: array
         destination_account_guid:
@@ -10146,7 +10152,7 @@ components:
         destination_participants:
           description: The destination participants for the transfer.
           items:
-            $ref: '#/components/schemas/TransferParticipant'
+            $ref: '#/components/schemas/PostTransferParticipant'
           nullable: true
           type: array
         external_wallet_guid:
@@ -10188,6 +10194,28 @@ components:
       required:
       - quote_guid
       - transfer_type
+      type: object
+    PostTransferParticipant:
+      properties:
+        type:
+          description: The type of participant
+          enum:
+          - bank
+          - customer
+          - counterparty
+          type: string
+        amount:
+          description: The amount in base units of the asset.
+          type: integer
+        guid:
+          description: The participant's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+      required:
+      - amount
+      - guid
+      - type
       type: object
     PostTrade:
       properties:

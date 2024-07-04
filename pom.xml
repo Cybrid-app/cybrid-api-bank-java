@@ -5,7 +5,7 @@
     <artifactId>cybrid-api-bank-java</artifactId>
     <packaging>jar</packaging>
     <name>cybrid-api-bank-java</name>
-    <version>v0.118.64</version>
+    <version>v0.118.65</version>
     <url>https://github.com/Cybrid-app/cybrid-api-bank-java/</url>
     <description>OpenAPI Java</description>
     <scm>

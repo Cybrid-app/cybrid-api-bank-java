@@ -5,21 +5,21 @@
 ## Enum
 
 
-* `BUSINESS_REGISTRATION` (value: `"business_registration"`)
+* `ATTESTED` (value: `"attested"`)
+
+* `DOCUMENT_SUBMISSION` (value: `"document_submission"`)
 
 * `ID_AND_SELFIE` (value: `"id_and_selfie"`)
 
 * `TAX_ID_AND_SELFIE` (value: `"tax_id_and_selfie"`)
 
-* `ATTESTED` (value: `"attested"`)
+* `BUSINESS_REGISTRATION` (value: `"business_registration"`)
+
+* `PLAID_IDENTITY_MATCH` (value: `"plaid_identity_match"`)
 
 * `ATTESTED_OWNERSHIP` (value: `"attested_ownership"`)
 
 * `ACCOUNT_OWNERSHIP` (value: `"account_ownership"`)
-
-* `PLAID_IDENTITY_MATCH` (value: `"plaid_identity_match"`)
-
-* `DOCUMENT_SUBMISSION` (value: `"document_submission"`)
 
 * `WATCHLISTS` (value: `"watchlists"`)
 

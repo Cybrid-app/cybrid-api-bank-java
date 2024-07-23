@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.86
+  version: v0.118.88
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7066,9 +7066,9 @@ components:
             \ or counterparty."
           type: string
         method:
-          description: "The identity verification method; one of business_registration,\
-            \ id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership,\
-            \ plaid_identity_match, document_submission, or watchlists."
+          description: "The identity verification method; one of attested, document_submission,\
+            \ id_and_selfie, tax_id_and_selfie, business_registration, plaid_identity_match,\
+            \ attested_ownership, account_ownership, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7124,14 +7124,14 @@ components:
       type: string
     IdentityVerificationMethod:
       enum:
-      - business_registration
+      - attested
+      - document_submission
       - id_and_selfie
       - tax_id_and_selfie
-      - attested
+      - business_registration
+      - plaid_identity_match
       - attested_ownership
       - account_ownership
-      - plaid_identity_match
-      - document_submission
       - watchlists
       type: string
     IdentityVerificationState:
@@ -7224,9 +7224,9 @@ components:
             \ or counterparty."
           type: string
         method:
-          description: "The identity verification method; one of business_registration,\
-            \ id_and_selfie, tax_id_and_selfie, attested, attested_ownership, account_ownership,\
-            \ plaid_identity_match, document_submission, or watchlists."
+          description: "The identity verification method; one of attested, document_submission,\
+            \ id_and_selfie, tax_id_and_selfie, business_registration, plaid_identity_match,\
+            \ attested_ownership, account_ownership, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -9906,14 +9906,14 @@ components:
         method:
           description: The identity verification method.
           enum:
-          - business_registration
+          - attested
+          - document_submission
           - id_and_selfie
           - tax_id_and_selfie
-          - attested
+          - business_registration
+          - plaid_identity_match
           - attested_ownership
           - account_ownership
-          - plaid_identity_match
-          - document_submission
           - watchlists
           type: string
         customer_guid:

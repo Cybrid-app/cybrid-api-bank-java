@@ -7,6 +7,8 @@
 
 * `TRADING` (value: `"trading"`)
 
+* `TRADING_EXIT` (value: `"trading_exit"`)
+
 * `FUNDING` (value: `"funding"`)
 
 * `BOOK_TRANSFER` (value: `"book_transfer"`)

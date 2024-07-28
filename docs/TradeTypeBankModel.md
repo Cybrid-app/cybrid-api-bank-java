@@ -9,5 +9,7 @@
 
 * `LIQUIDATION` (value: `"liquidation"`)
 
+* `EXIT` (value: `"exit"`)
+
 
 

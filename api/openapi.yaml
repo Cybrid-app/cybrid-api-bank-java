@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.105
+  version: v0.118.106
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8171,6 +8171,7 @@ components:
           description: The type of product the quote is for.
           enum:
           - trading
+          - trading_exit
           - funding
           - book_transfer
           - crypto_transfer
@@ -8228,6 +8229,11 @@ components:
           items:
             $ref: '#/components/schemas/PostFee'
           type: array
+        reference_trade_guid:
+          description: The guid of the related trade. Only present on `exit` trades.
+          maxLength: 32
+          minLength: 32
+          type: string
       type: object
     PostFee:
       properties:
@@ -8274,8 +8280,8 @@ components:
           minLength: 32
           type: string
         product_type:
-          description: "The type of product the quote is for; one of trading, funding,\
-            \ book_transfer, crypto_transfer, inter_account, or lightning_transfer."
+          description: "The type of product the quote is for; one of trading, trading_exit,\
+            \ funding, book_transfer, crypto_transfer, inter_account, or lightning_transfer."
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8356,6 +8362,7 @@ components:
     QuoteType:
       enum:
       - trading
+      - trading_exit
       - funding
       - book_transfer
       - crypto_transfer
@@ -8782,6 +8789,7 @@ components:
         receive_amount: 5
         state: state
         customer_guid: customer_guid
+        reference_trade_guid: reference_trade_guid
       properties:
         guid:
           description: Auto-generated unique identifier for the trade.
@@ -8789,7 +8797,7 @@ components:
           minLength: 32
           type: string
         trade_type:
-          description: The type of trade; one of platform or liquidation.
+          description: "The type of trade; one of platform, liquidation, or exit."
           type: string
         customer_guid:
           description: The associated customer's identifier.
@@ -8828,6 +8836,12 @@ components:
           description: The fee associated with the trade. Denominated in "counter_asset"
             base units
           type: integer
+        reference_trade_guid:
+          description: The guid of the related trade. Only present on `exit` trades.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         created_at:
           description: ISO8601 datetime the record was created at.
           format: date-time
@@ -8847,6 +8861,7 @@ components:
       enum:
       - platform
       - liquidation
+      - exit
       type: string
     TradeSide:
       enum:
@@ -9233,6 +9248,7 @@ components:
           receive_amount: 5
           state: state
           customer_guid: customer_guid
+          reference_trade_guid: reference_trade_guid
         - symbol: symbol
           side: side
           failure_code: failure_code
@@ -9249,6 +9265,7 @@ components:
           receive_amount: 5
           state: state
           customer_guid: customer_guid
+          reference_trade_guid: reference_trade_guid
         page: 0
       properties:
         total:
@@ -10222,6 +10239,13 @@ components:
       type: object
     PostTrade:
       properties:
+        trade_type:
+          default: platform
+          description: The type of trade.
+          enum:
+          - platform
+          - exit
+          type: string
         quote_guid:
           description: The associated quote's identifier.
           maxLength: 32

@@ -7,9 +7,19 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**tradeType** | [**TradeTypeEnum**](#TradeTypeEnum) | The type of trade. |  [optional] |
 |**quoteGuid** | **String** | The associated quote&#39;s identifier. |  |
 |**expectedError** | [**ExpectedErrorEnum**](#ExpectedErrorEnum) | The optional expected error to simulate trade failure. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the trade. |  [optional] |
+
+
+
+## Enum: TradeTypeEnum
+
+| Name | Value |
+|---- | -----|
+| PLATFORM | &quot;platform&quot; |
+| EXIT | &quot;exit&quot; |
 
 
 

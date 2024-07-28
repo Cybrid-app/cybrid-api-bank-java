@@ -25,5 +25,7 @@
 
 * `AMOUNT_TOO_LOW` (value: `"amount_too_low"`)
 
+* `INTERNAL_ERROR` (value: `"internal_error"`)
+
 
 

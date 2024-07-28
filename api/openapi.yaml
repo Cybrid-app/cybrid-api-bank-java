@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.102
+  version: v0.118.105
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5482,8 +5482,9 @@ paths:
         \ transfer was reversed |\n| limit_exceeded | The customer is over the limits\
         \ that have been set for them for this activity |\n| network_fee_too_low |\
         \ The transfer was rejected due to the network fee being too low |\n| amount_too_low\
-        \ | The transfer was rejected due to the amount being too low |\n\n\n\nRequired\
-        \ scope: **transfers:execute**"
+        \ | The transfer was rejected due to the amount being too low |\n| internal_error\
+        \ | An internal error occurred while processing the transfer, please try again\
+        \ |\n\n\n\nRequired scope: **transfers:execute**"
       operationId: createTransfer
       parameters: []
       requestBody:
@@ -8597,7 +8598,8 @@ components:
         failure_code:
           description: "The failure code for failed transfers; one of non_sufficient_funds,\
             \ refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection,\
-            \ cancelled, reversed, limit_exceeded, network_fee_too_low, or amount_too_low."
+            \ cancelled, reversed, limit_exceeded, network_fee_too_low, amount_too_low,\
+            \ or internal_error."
           nullable: true
           type: string
         amount:
@@ -8760,6 +8762,7 @@ components:
       - limit_exceeded
       - network_fee_too_low
       - amount_too_low
+      - internal_error
       type: string
     Trade:
       example:

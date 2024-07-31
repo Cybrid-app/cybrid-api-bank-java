@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.114
+  version: v0.118.115
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10170,6 +10170,8 @@ components:
           description: The source participants for the transfer.
           items:
             $ref: '#/components/schemas/PostTransferParticipant'
+          maxItems: 50
+          minItems: 0
           nullable: true
           type: array
         destination_account_guid:
@@ -10181,6 +10183,8 @@ components:
           description: The destination participants for the transfer.
           items:
             $ref: '#/components/schemas/PostTransferParticipant'
+          maxItems: 50
+          minItems: 0
           nullable: true
           type: array
         external_wallet_guid:

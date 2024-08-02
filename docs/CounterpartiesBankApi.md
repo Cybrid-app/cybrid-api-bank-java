@@ -165,7 +165,7 @@ public class Example {
 
 ## listCounterparties
 
-> CounterpartyListBankModel listCounterparties(page, perPage, bankGuid, type, customerGuid, guid, label)
+> CounterpartyListBankModel listCounterparties(page, perPage, type, bankGuid, customerGuid, guid, label)
 
 Get counterparties list
 
@@ -198,13 +198,13 @@ public class Example {
         CounterpartiesBankApi apiInstance = new CounterpartiesBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | 
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | 
+        String type = "type_example"; // String | Comma separated types to list counterparties for.
         String bankGuid = "bankGuid_example"; // String | Comma separated bank_guids to list counterparties for.
-        String type = "type_example"; // String | Comma separated counterparty_types to list counterparties for.
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list counterparties for.
         String guid = "guid_example"; // String | Comma separated counterparty_guids to list counterparties for.
         String label = "label_example"; // String | Comma separated labels to list counterparties for.
         try {
-            CounterpartyListBankModel result = apiInstance.listCounterparties(page, perPage, bankGuid, type, customerGuid, guid, label);
+            CounterpartyListBankModel result = apiInstance.listCounterparties(page, perPage, type, bankGuid, customerGuid, guid, label);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CounterpartiesBankApi#listCounterparties");
@@ -224,8 +224,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**|  | [optional] |
 | **perPage** | **java.math.BigInteger**|  | [optional] |
+| **type** | **String**| Comma separated types to list counterparties for. | [optional] |
 | **bankGuid** | **String**| Comma separated bank_guids to list counterparties for. | [optional] |
-| **type** | **String**| Comma separated counterparty_types to list counterparties for. | [optional] |
 | **customerGuid** | **String**| Comma separated customer_guids to list counterparties for. | [optional] |
 | **guid** | **String**| Comma separated counterparty_guids to list counterparties for. | [optional] |
 | **label** | **String**| Comma separated labels to list counterparties for. | [optional] |

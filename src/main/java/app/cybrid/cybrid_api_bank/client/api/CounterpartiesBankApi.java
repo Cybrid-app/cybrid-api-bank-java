@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-02T17:18:56.369144Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-02T19:38:26.161872Z[Etc/UTC]")
 public class CounterpartiesBankApi {
     private ApiClient apiClient;
 
@@ -169,15 +169,15 @@ public class CounterpartiesBankApi {
      * <p><b>200</b> - get list of counterparties
      * @param page The page parameter
      * @param perPage The perPage parameter
+     * @param type Comma separated types to list counterparties for.
      * @param bankGuid Comma separated bank_guids to list counterparties for.
-     * @param type Comma separated counterparty_types to list counterparties for.
      * @param customerGuid Comma separated customer_guids to list counterparties for.
      * @param guid Comma separated counterparty_guids to list counterparties for.
      * @param label Comma separated labels to list counterparties for.
      * @return CounterpartyListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listCounterpartiesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String bankGuid, String type, String customerGuid, String guid, String label) throws WebClientResponseException {
+    private ResponseSpec listCounterpartiesRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String type, String bankGuid, String customerGuid, String guid, String label) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -189,8 +189,8 @@ public class CounterpartiesBankApi {
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
-        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "bank_guid", bankGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
@@ -214,21 +214,21 @@ public class CounterpartiesBankApi {
      * <p><b>200</b> - get list of counterparties
      * @param page The page parameter
      * @param perPage The perPage parameter
+     * @param type Comma separated types to list counterparties for.
      * @param bankGuid Comma separated bank_guids to list counterparties for.
-     * @param type Comma separated counterparty_types to list counterparties for.
      * @param customerGuid Comma separated customer_guids to list counterparties for.
      * @param guid Comma separated counterparty_guids to list counterparties for.
      * @param label Comma separated labels to list counterparties for.
      * @return CounterpartyListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<CounterpartyListBankModel> listCounterparties(java.math.BigInteger page, java.math.BigInteger perPage, String bankGuid, String type, String customerGuid, String guid, String label) throws WebClientResponseException {
+    public Mono<CounterpartyListBankModel> listCounterparties(java.math.BigInteger page, java.math.BigInteger perPage, String type, String bankGuid, String customerGuid, String guid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<CounterpartyListBankModel> localVarReturnType = new ParameterizedTypeReference<CounterpartyListBankModel>() {};
-        return listCounterpartiesRequestCreation(page, perPage, bankGuid, type, customerGuid, guid, label).bodyToMono(localVarReturnType);
+        return listCounterpartiesRequestCreation(page, perPage, type, bankGuid, customerGuid, guid, label).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<CounterpartyListBankModel>> listCounterpartiesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String bankGuid, String type, String customerGuid, String guid, String label) throws WebClientResponseException {
+    public Mono<ResponseEntity<CounterpartyListBankModel>> listCounterpartiesWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String type, String bankGuid, String customerGuid, String guid, String label) throws WebClientResponseException {
         ParameterizedTypeReference<CounterpartyListBankModel> localVarReturnType = new ParameterizedTypeReference<CounterpartyListBankModel>() {};
-        return listCounterpartiesRequestCreation(page, perPage, bankGuid, type, customerGuid, guid, label).toEntity(localVarReturnType);
+        return listCounterpartiesRequestCreation(page, perPage, type, bankGuid, customerGuid, guid, label).toEntity(localVarReturnType);
     }
 }

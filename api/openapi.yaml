@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.119
+  version: v0.118.120
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -274,6 +274,14 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated types to list banks for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
         style: form
       - description: Comma separated bank_guids to list banks for.
         explode: true
@@ -684,18 +692,18 @@ paths:
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
         style: form
-      - description: Comma separated bank_guids to list counterparties for.
+      - description: Comma separated types to list counterparties for.
         explode: true
         in: query
-        name: bank_guid
+        name: type
         required: false
         schema:
           type: string
         style: form
-      - description: Comma separated counterparty_types to list counterparties for.
+      - description: Comma separated bank_guids to list counterparties for.
         explode: true
         in: query
-        name: type
+        name: bank_guid
         required: false
         schema:
           type: string
@@ -844,6 +852,14 @@ paths:
         required: false
         schema:
           $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated types to list customers for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
         style: form
       - description: Comma separated bank_guids to list customers for.
         explode: true

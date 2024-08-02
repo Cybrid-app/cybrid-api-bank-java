@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-02T17:18:56.369144Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-02T19:38:26.161872Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -180,11 +180,12 @@ public class BanksBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param type Comma separated types to list banks for.
      * @param guid Comma separated bank_guids to list banks for.
      * @return BankListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listBanksRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    private ResponseSpec listBanksRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String type, String guid) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -196,6 +197,7 @@ public class BanksBankApi {
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "guid", guid));
 
         final String[] localVarAccepts = { 
@@ -219,18 +221,19 @@ public class BanksBankApi {
      * <p><b>403</b> - Invalid scope
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param type Comma separated types to list banks for.
      * @param guid Comma separated bank_guids to list banks for.
      * @return BankListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<BankListBankModel> listBanks(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    public Mono<BankListBankModel> listBanks(java.math.BigInteger page, java.math.BigInteger perPage, String type, String guid) throws WebClientResponseException {
         ParameterizedTypeReference<BankListBankModel> localVarReturnType = new ParameterizedTypeReference<BankListBankModel>() {};
-        return listBanksRequestCreation(page, perPage, guid).bodyToMono(localVarReturnType);
+        return listBanksRequestCreation(page, perPage, type, guid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<BankListBankModel>> listBanksWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid) throws WebClientResponseException {
+    public Mono<ResponseEntity<BankListBankModel>> listBanksWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String type, String guid) throws WebClientResponseException {
         ParameterizedTypeReference<BankListBankModel> localVarReturnType = new ParameterizedTypeReference<BankListBankModel>() {};
-        return listBanksRequestCreation(page, perPage, guid).toEntity(localVarReturnType);
+        return listBanksRequestCreation(page, perPage, type, guid).toEntity(localVarReturnType);
     }
     /**
      * Patch Bank

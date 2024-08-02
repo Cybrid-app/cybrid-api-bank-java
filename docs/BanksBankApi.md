@@ -170,7 +170,7 @@ public class Example {
 
 ## listBanks
 
-> BankListBankModel listBanks(page, perPage, guid)
+> BankListBankModel listBanks(page, perPage, type, guid)
 
 Get banks list
 
@@ -203,9 +203,10 @@ public class Example {
         BanksBankApi apiInstance = new BanksBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
+        String type = "type_example"; // String | Comma separated types to list banks for.
         String guid = "guid_example"; // String | Comma separated bank_guids to list banks for.
         try {
-            BankListBankModel result = apiInstance.listBanks(page, perPage, guid);
+            BankListBankModel result = apiInstance.listBanks(page, perPage, type, guid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling BanksBankApi#listBanks");
@@ -225,6 +226,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
+| **type** | **String**| Comma separated types to list banks for. | [optional] |
 | **guid** | **String**| Comma separated bank_guids to list banks for. | [optional] |
 
 ### Return type

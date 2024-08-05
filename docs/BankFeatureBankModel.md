@@ -15,10 +15,6 @@
 
 * `BUSINESS_CUSTOMERS` (value: `"business_customers"`)
 
-* `ROUTABLE_ACCOUNTS_BANK` (value: `"routable_accounts_bank"`)
-
-* `ROUTABLE_ACCOUNTS_CUSTOMER` (value: `"routable_accounts_customer"`)
-
 * `ACCESSIBLE_IDENTIFICATION_NUMBERS` (value: `"accessible_identification_numbers"`)
 
 

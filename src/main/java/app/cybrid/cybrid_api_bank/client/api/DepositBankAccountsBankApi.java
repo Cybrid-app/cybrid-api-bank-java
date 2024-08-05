@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-04T14:27:49.589519Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-05T12:21:12.214484Z[Etc/UTC]")
 public class DepositBankAccountsBankApi {
     private ApiClient apiClient;
 
@@ -183,10 +183,12 @@ public class DepositBankAccountsBankApi {
      * @param customerGuid Comma separated customer_guids to list deposit bank accounts for.
      * @param label Comma separated labels to list deposit bank accounts for.
      * @param uniqueMemoId Comma separated unique memo ids to list deposit bank accounts for.
+     * @param type Comma separated types to list deposit bank accounts for.
+     * @param parentDepositBankAccountGuid Comma separated guids for parent accounts to list deposit bank accounts for.
      * @return DepositBankAccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listDepositBankAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId) throws WebClientResponseException {
+    private ResponseSpec listDepositBankAccountsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId, String type, String parentDepositBankAccountGuid) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -203,6 +205,8 @@ public class DepositBankAccountsBankApi {
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "customer_guid", customerGuid));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "label", label));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "unique_memo_id", uniqueMemoId));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "type", type));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "parent_deposit_bank_account_guid", parentDepositBankAccountGuid));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -231,16 +235,18 @@ public class DepositBankAccountsBankApi {
      * @param customerGuid Comma separated customer_guids to list deposit bank accounts for.
      * @param label Comma separated labels to list deposit bank accounts for.
      * @param uniqueMemoId Comma separated unique memo ids to list deposit bank accounts for.
+     * @param type Comma separated types to list deposit bank accounts for.
+     * @param parentDepositBankAccountGuid Comma separated guids for parent accounts to list deposit bank accounts for.
      * @return DepositBankAccountListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<DepositBankAccountListBankModel> listDepositBankAccounts(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId) throws WebClientResponseException {
+    public Mono<DepositBankAccountListBankModel> listDepositBankAccounts(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId, String type, String parentDepositBankAccountGuid) throws WebClientResponseException {
         ParameterizedTypeReference<DepositBankAccountListBankModel> localVarReturnType = new ParameterizedTypeReference<DepositBankAccountListBankModel>() {};
-        return listDepositBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId).bodyToMono(localVarReturnType);
+        return listDepositBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId, type, parentDepositBankAccountGuid).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<DepositBankAccountListBankModel>> listDepositBankAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId) throws WebClientResponseException {
+    public Mono<ResponseEntity<DepositBankAccountListBankModel>> listDepositBankAccountsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String bankGuid, String customerGuid, String label, String uniqueMemoId, String type, String parentDepositBankAccountGuid) throws WebClientResponseException {
         ParameterizedTypeReference<DepositBankAccountListBankModel> localVarReturnType = new ParameterizedTypeReference<DepositBankAccountListBankModel>() {};
-        return listDepositBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId).toEntity(localVarReturnType);
+        return listDepositBankAccountsRequestCreation(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId, type, parentDepositBankAccountGuid).toEntity(localVarReturnType);
     }
 }

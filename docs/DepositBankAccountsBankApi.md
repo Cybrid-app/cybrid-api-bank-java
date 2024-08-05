@@ -168,7 +168,7 @@ public class Example {
 
 ## listDepositBankAccounts
 
-> DepositBankAccountListBankModel listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId)
+> DepositBankAccountListBankModel listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId, type, parentDepositBankAccountGuid)
 
 List Deposit Bank Accounts
 
@@ -206,8 +206,10 @@ public class Example {
         String customerGuid = "customerGuid_example"; // String | Comma separated customer_guids to list deposit bank accounts for.
         String label = "label_example"; // String | Comma separated labels to list deposit bank accounts for.
         String uniqueMemoId = "uniqueMemoId_example"; // String | Comma separated unique memo ids to list deposit bank accounts for.
+        String type = "type_example"; // String | Comma separated types to list deposit bank accounts for.
+        String parentDepositBankAccountGuid = "parentDepositBankAccountGuid_example"; // String | Comma separated guids for parent accounts to list deposit bank accounts for.
         try {
-            DepositBankAccountListBankModel result = apiInstance.listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId);
+            DepositBankAccountListBankModel result = apiInstance.listDepositBankAccounts(page, perPage, guid, bankGuid, customerGuid, label, uniqueMemoId, type, parentDepositBankAccountGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling DepositBankAccountsBankApi#listDepositBankAccounts");
@@ -232,6 +234,8 @@ public class Example {
 | **customerGuid** | **String**| Comma separated customer_guids to list deposit bank accounts for. | [optional] |
 | **label** | **String**| Comma separated labels to list deposit bank accounts for. | [optional] |
 | **uniqueMemoId** | **String**| Comma separated unique memo ids to list deposit bank accounts for. | [optional] |
+| **type** | **String**| Comma separated types to list deposit bank accounts for. | [optional] |
+| **parentDepositBankAccountGuid** | **String**| Comma separated guids for parent accounts to list deposit bank accounts for. | [optional] |
 
 ### Return type
 

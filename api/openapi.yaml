@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.118.125
+  version: v0.119.1
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1620,6 +1620,23 @@ paths:
         schema:
           type: string
         style: form
+      - description: Comma separated types to list deposit bank accounts for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated guids for parent accounts to list deposit bank
+          accounts for.
+        explode: true
+        in: query
+        name: parent_deposit_bank_account_guid
+        required: false
+        schema:
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -1773,8 +1790,8 @@ paths:
                 unprocessable_request:
                   value:
                     status: 422
-                    error_message: "Unable to process request: UnsupportedRoutableAccounts\
-                      \ - Bank does not support routable accounts"
+                    error_message: "Unable to process request: UnsupportedConfiguration\
+                      \ - Invalid type or parameters"
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -5596,6 +5613,21 @@ paths:
                 invalid_value_8:
                   value:
                     status: 422
+                    error_message: Send as account not found
+                    message_code: invalid_value
+                invalid_value_9:
+                  value:
+                    status: 422
+                    error_message: Send as account not valid for transfer
+                    message_code: invalid_value
+                invalid_value_10:
+                  value:
+                    status: 422
+                    error_message: Send as account cannot be defined for this transfer
+                    message_code: invalid_value
+                invalid_value_11:
+                  value:
+                    status: 422
                     error_message: Amount not valid
                     message_code: invalid_value
                 no_quote:
@@ -5653,6 +5685,16 @@ paths:
                     status: 422
                     error_message: Account invalid
                     message_code: invalid_account
+                invalid_fiat_account_1:
+                  value:
+                    status: 422
+                    error_message: Multiple accounts found
+                    message_code: invalid_fiat_account
+                invalid_fiat_account_2:
+                  value:
+                    status: 422
+                    error_message: Bank fiat account state invalid
+                    message_code: invalid_fiat_account
                 no_source_account:
                   value:
                     status: 422
@@ -5728,11 +5770,6 @@ paths:
                     status: 422
                     error_message: Bank fiat account not found
                     message_code: no_fiat_account
-                invalid_fiat_account:
-                  value:
-                    status: 422
-                    error_message: Bank fiat account state invalid
-                    message_code: invalid_fiat_account
                 no_network_fee_account:
                   value:
                     status: 422
@@ -6393,8 +6430,8 @@ components:
           description: The bank's enabled features.
           items:
             description: "A combination of: attestation_identity_records, kyc_identity_verifications,\
-              \ raw_routing_details, individual_customers, business_customers, routable_accounts_bank,\
-              \ routable_accounts_customer, and accessible_identification_numbers."
+              \ raw_routing_details, individual_customers, business_customers, and\
+              \ accessible_identification_numbers."
             type: string
           type: array
         created_at:
@@ -6425,8 +6462,6 @@ components:
       - raw_routing_details
       - individual_customers
       - business_customers
-      - routable_accounts_bank
-      - routable_accounts_customer
       - accessible_identification_numbers
       type: string
     BankList:
@@ -7496,6 +7531,12 @@ components:
       type: string
     PostDepositBankAccount:
       properties:
+        type:
+          description: The account type.
+          enum:
+          - main
+          - sub_account
+          type: string
         account_guid:
           description: The fiat account guid.
           maxLength: 32
@@ -7503,6 +7544,13 @@ components:
           type: string
         customer_guid:
           description: The unique identifier for the customer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        parent_deposit_bank_account_guid:
+          description: The unique identifier for the bank-level deposit bank account.
+            This is only required for sub-accounts.
           maxLength: 32
           minLength: 32
           nullable: true
@@ -7541,6 +7589,14 @@ components:
             \ or deliver_amount is required."
           nullable: true
           type: integer
+        account_guid:
+          description: The identifier for the account to use for the transfer. Required
+            if the customer has multiple fiat accounts. Currently only valid for invoices
+            paid to a fiat account.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         labels:
           description: The labels associated with the customer.
           items:
@@ -7834,6 +7890,7 @@ components:
         account_details:
         - account_number: account_number
         - account_number: account_number
+        type: type
         labels:
         - labels
         - labels
@@ -7857,6 +7914,9 @@ components:
           description: Auto-generated unique identifier for the identity verification.
           maxLength: 32
           minLength: 32
+          type: string
+        type:
+          description: The account type; one of main or sub_account.
           type: string
         bank_guid:
           description: The address' bank identifier.
@@ -7944,6 +8004,7 @@ components:
           account_details:
           - account_number: account_number
           - account_number: account_number
+          type: type
           labels:
           - labels
           - labels
@@ -7972,6 +8033,7 @@ components:
           account_details:
           - account_number: account_number
           - account_number: account_number
+          type: type
           labels:
           - labels
           - labels
@@ -9821,8 +9883,6 @@ components:
             - kyc_identity_verifications
             - business_customers
             - individual_customers
-            - routable_accounts_bank
-            - routable_accounts_customer
             type: string
           type: array
         supported_fiat_account_assets:
@@ -10178,6 +10238,30 @@ components:
           maxLength: 32
           minLength: 32
           type: string
+        fiat_account_guid:
+          description: The identifier for the fiat account to use for the transfer.
+            Required if the customer or bank has multiple fiat accounts. Only valid
+            for funding transfers.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_fiat_account_guid:
+          description: The identifier for the fiat account to use for the transfer.
+            Required if the customer has multiple fiat accounts. Only valid for instant
+            funding and lightning transfers.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        bank_fiat_account_guid:
+          description: The identifier for the fiat account to use for the transfer.
+            Required if the bank has multiple fiat accounts. Only valid for instant
+            funding and lightning transfers.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         source_account_guid:
           description: The source account's identifier. Required for book transfers.
           maxLength: 32
@@ -10234,6 +10318,13 @@ components:
           minLength: 1
           nullable: true
           type: string
+        send_as_deposit_bank_account_guid:
+          description: The deposit bank account's identifier. Optional for funding
+            transfers. Only valid for withdrawals. The deposit bank account must be
+            owned by the customer or bank initiating the transfer.
+          maxLength: 32
+          minLength: 32
+          type: string
         labels:
           description: The labels associated with the transfer.
           items:
@@ -10279,6 +10370,13 @@ components:
           description: The associated quote's identifier.
           maxLength: 32
           minLength: 32
+          type: string
+        fiat_account_guid:
+          description: The identifier for the fiat account to use for the trade. Required
+            if the customer or bank has multiple fiat accounts.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
         expected_error:
           description: The optional expected error to simulate trade failure.

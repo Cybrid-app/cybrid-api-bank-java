@@ -32,8 +32,6 @@
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
 | BUSINESS_CUSTOMERS | &quot;business_customers&quot; |
 | INDIVIDUAL_CUSTOMERS | &quot;individual_customers&quot; |
-| ROUTABLE_ACCOUNTS_BANK | &quot;routable_accounts_bank&quot; |
-| ROUTABLE_ACCOUNTS_CUSTOMER | &quot;routable_accounts_customer&quot; |
 
 
 

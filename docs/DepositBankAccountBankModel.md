@@ -21,6 +21,7 @@
 |**counterpartyAddress** | [**DepositBankAccountCounterpartyAddressBankModel**](DepositBankAccountCounterpartyAddressBankModel.md) |  |  [optional] |
 |**accountDetails** | [**List&lt;DepositBankAccountAccountDetailsInnerBankModel&gt;**](DepositBankAccountAccountDetailsInnerBankModel.md) | The account details for the bank account. |  [optional] |
 |**routingDetails** | [**List&lt;DepositBankAccountRoutingDetailsInnerBankModel&gt;**](DepositBankAccountRoutingDetailsInnerBankModel.md) | The account details for the bank account. |  [optional] |
+|**parentDepositBankAccountGuid** | **String** | The unique identifier for the bank-level deposit bank account. This is only set for sub-accounts. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the address. |  [optional] |
 
 

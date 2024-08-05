@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.2
+  version: v0.119.4
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7532,7 +7532,13 @@ components:
     PostDepositBankAccount:
       properties:
         type:
-          description: The account type.
+          description: The account type. To generate deposit bank accounts with their
+            own unique account number set this to "main". To generate deposit bank
+            accounts with the same account number as the parent deposit bank account
+            set this to "sub_account". This setting will only generate a unique identifier
+            for the deposit bank and will not result in a unique account number being
+            generated. "sub_account" is only  available for customer-level deposit
+            bank accounts.
           enum:
           - main
           - sub_account
@@ -7905,6 +7911,7 @@ components:
         updated_at: 2000-01-23T04:56:07.000+00:00
         guid: guid
         state: state
+        parent_deposit_bank_account_guid: parent_deposit_bank_account_guid
         asset: asset
         unique_memo_id: unique_memo_id
         bank_guid: bank_guid
@@ -7971,6 +7978,13 @@ components:
             $ref: '#/components/schemas/DepositBankAccount_routing_details_inner'
           nullable: true
           type: array
+        parent_deposit_bank_account_guid:
+          description: The unique identifier for the bank-level deposit bank account.
+            This is only set for sub-accounts.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         labels:
           description: The labels associated with the address.
           items:
@@ -8019,6 +8033,7 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           state: state
+          parent_deposit_bank_account_guid: parent_deposit_bank_account_guid
           asset: asset
           unique_memo_id: unique_memo_id
           bank_guid: bank_guid
@@ -8048,6 +8063,7 @@ components:
           updated_at: 2000-01-23T04:56:07.000+00:00
           guid: guid
           state: state
+          parent_deposit_bank_account_guid: parent_deposit_bank_account_guid
           asset: asset
           unique_memo_id: unique_memo_id
           bank_guid: bank_guid

@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T18:33:45.292105Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T19:27:19.391770Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -53,11 +53,11 @@ public class TransfersBankApi {
      * Create Transfer
      * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | reviewing | The Platform is reviewing the transfer for compliance | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |  ## Failure codes  | Code | Description | |------|-------------| | non_sufficient_funds | The customer does not have enough funds to complete the transfer | | refresh_required | The transfer&#39;s associated external_bank_account needs to be reconnected via Plaid | | party_name_invalid | The transfer&#39;s associated external bank account has an invalid party name | | payment_rail_invalid | The payment rail specified for the transfer is not supported by the external bank account | | compliance_rejection | The transfer was rejected for compliance reasons | | cancelled | The transfer was manually cancelled | | reversed | The transfer was reversed | | limit_exceeded | The customer is over the limits that have been set for them for this activity | | network_fee_too_low | The transfer was rejected due to the network fee being too low | | amount_too_low | The transfer was rejected due to the amount being too low | | internal_error | An internal error occurred while processing the transfer, please try again |    Required scope: **transfers:execute**
      * <p><b>201</b> - Transfer created
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * <p><b>400</b> - Bad Request
      * <p><b>409</b> - Conflict
      * <p><b>422</b> - Unprocessable Content
-     * <p><b>401</b> - Unauthorized - Authentication failed, 
-     * <p><b>403</b> - Invalid scope
      * @param postTransferBankModel The postTransferBankModel parameter
      * @return TransferBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -95,11 +95,11 @@ public class TransfersBankApi {
      * Create Transfer
      * Creates a transfer.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the trade details in our private store | | reviewing | The Platform is reviewing the transfer for compliance | | pending | The Platform is executing the transfer | | completed | The Platform has successfully completed the transfer | | failed | The Platform was not able to successfully complete the transfer |  ## Failure codes  | Code | Description | |------|-------------| | non_sufficient_funds | The customer does not have enough funds to complete the transfer | | refresh_required | The transfer&#39;s associated external_bank_account needs to be reconnected via Plaid | | party_name_invalid | The transfer&#39;s associated external bank account has an invalid party name | | payment_rail_invalid | The payment rail specified for the transfer is not supported by the external bank account | | compliance_rejection | The transfer was rejected for compliance reasons | | cancelled | The transfer was manually cancelled | | reversed | The transfer was reversed | | limit_exceeded | The customer is over the limits that have been set for them for this activity | | network_fee_too_low | The transfer was rejected due to the network fee being too low | | amount_too_low | The transfer was rejected due to the amount being too low | | internal_error | An internal error occurred while processing the transfer, please try again |    Required scope: **transfers:execute**
      * <p><b>201</b> - Transfer created
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * <p><b>400</b> - Bad Request
      * <p><b>409</b> - Conflict
      * <p><b>422</b> - Unprocessable Content
-     * <p><b>401</b> - Unauthorized - Authentication failed, 
-     * <p><b>403</b> - Invalid scope
      * @param postTransferBankModel The postTransferBankModel parameter
      * @return TransferBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API

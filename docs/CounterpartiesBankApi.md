@@ -83,6 +83,8 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | counterparty created |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 | **422** | Unprocessable Content |  -  |
 
 
@@ -161,6 +163,8 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | counterparty found |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 
 
 ## listCounterparties
@@ -248,4 +252,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | get list of counterparties |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 

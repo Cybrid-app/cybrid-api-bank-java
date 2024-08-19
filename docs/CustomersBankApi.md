@@ -84,6 +84,8 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | customer created |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 | **422** | Unprocessable Content |  -  |
 
 
@@ -330,5 +332,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | customer found |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
 | **400** | Bad Request |  -  |
 

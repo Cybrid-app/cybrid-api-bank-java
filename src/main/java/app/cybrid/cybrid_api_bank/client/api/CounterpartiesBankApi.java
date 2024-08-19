@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T18:33:45.292105Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T19:27:19.391770Z[Etc/UTC]")
 public class CounterpartiesBankApi {
     private ApiClient apiClient;
 
@@ -53,6 +53,8 @@ public class CounterpartiesBankApi {
      * Create Counterparty
      * Creates a counterparty.  ## Counterparty Type  Counterparty resources are an abstraction for real world individuals and businesses that are not directly on the Cybrid Platform.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the counterparty details in our private store | | unverified | The Platform has not yet verified the counterparty&#39;s identity | | verified | The Platform has verified the counterparty&#39;s identity | | rejected | The Platform was not able to successfully verify the counterparty&#39;s identity |    Required scope: **counterparties:execute**
      * <p><b>201</b> - counterparty created
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * <p><b>422</b> - Unprocessable Content
      * @param postCounterpartyBankModel The postCounterpartyBankModel parameter
      * @return CounterpartyBankModel
@@ -91,6 +93,8 @@ public class CounterpartiesBankApi {
      * Create Counterparty
      * Creates a counterparty.  ## Counterparty Type  Counterparty resources are an abstraction for real world individuals and businesses that are not directly on the Cybrid Platform.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the counterparty details in our private store | | unverified | The Platform has not yet verified the counterparty&#39;s identity | | verified | The Platform has verified the counterparty&#39;s identity | | rejected | The Platform was not able to successfully verify the counterparty&#39;s identity |    Required scope: **counterparties:execute**
      * <p><b>201</b> - counterparty created
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * <p><b>422</b> - Unprocessable Content
      * @param postCounterpartyBankModel The postCounterpartyBankModel parameter
      * @return CounterpartyBankModel
@@ -109,6 +113,8 @@ public class CounterpartiesBankApi {
      * Get Counterparty
      * Retrieves a counterparty.  Required scope: **counterparties:read**
      * <p><b>200</b> - counterparty found
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * @param counterpartyGuid Identifier for the counterparty.
      * @param includePii Include PII in the response.
      * @return CounterpartyBankModel
@@ -149,6 +155,8 @@ public class CounterpartiesBankApi {
      * Get Counterparty
      * Retrieves a counterparty.  Required scope: **counterparties:read**
      * <p><b>200</b> - counterparty found
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * @param counterpartyGuid Identifier for the counterparty.
      * @param includePii Include PII in the response.
      * @return CounterpartyBankModel
@@ -167,6 +175,8 @@ public class CounterpartiesBankApi {
      * Get counterparties list
      * Retrieves a listing of counterparties.  Required scope: **counterparties:read**
      * <p><b>200</b> - get list of counterparties
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param type Comma separated types to list counterparties for.
@@ -212,6 +222,8 @@ public class CounterpartiesBankApi {
      * Get counterparties list
      * Retrieves a listing of counterparties.  Required scope: **counterparties:read**
      * <p><b>200</b> - get list of counterparties
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
      * @param page The page parameter
      * @param perPage The perPage parameter
      * @param type Comma separated types to list counterparties for.

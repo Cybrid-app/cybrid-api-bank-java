@@ -84,10 +84,9 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Bank created |  -  |
-| **400** | Invalid requests |  -  |
-| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
-| **403** | Invalid scope |  -  |
-| **422** | Unable to process request |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Content |  -  |
 
 
 ## getBank
@@ -326,7 +325,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | bank found |  -  |
-| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
-| **403** | Invalid scope |  -  |
-| **404** | bank not found |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **422** | Unprocessable Content |  -  |
 

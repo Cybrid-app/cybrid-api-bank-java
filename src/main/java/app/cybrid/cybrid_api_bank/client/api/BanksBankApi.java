@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T13:39:50.510113Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T18:33:45.292105Z[Etc/UTC]")
 public class BanksBankApi {
     private ApiClient apiClient;
 
@@ -54,10 +54,9 @@ public class BanksBankApi {
      * Create Bank
      * Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
      * <p><b>201</b> - Bank created
-     * <p><b>400</b> - Invalid requests
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>422</b> - Unable to process request
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>422</b> - Unprocessable Content
      * @param postBankBankModel The postBankBankModel parameter
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -95,10 +94,9 @@ public class BanksBankApi {
      * Create Bank
      * Creates a bank.  ## Bank Type  Bank&#39;s can be created in either &#x60;sandbox&#x60; or &#x60;production&#x60; mode. Sandbox Banks will not transact in real fiat dollars or cryptocurrencies.  Via the API, only &#x60;sandbox&#x60; banks can be created. In order to enable a &#x60;production&#x60; bank please contact [Support](mailto:support@cybrid.app).  ## Attestation Identity Records  Attestation Identity Records is a method the Cybrid Platform uses to verify the identity of a Bank&#39;s customers. Please see the documentation under the create Identity Record API for more technical detail.  This feature must specifically be enabled in the Bank&#39;s &#x60;features&#x60; array by including the &#x60;attestation_identity_records&#x60; flag. At present, attestation identity records is the supported method for verifying a customer&#39;s identity on the platform.  Please contact [Support](mailto:support@cybrid.app) to inquire about enabling this option for your Organization.    Required scope: **banks:execute**
      * <p><b>201</b> - Bank created
-     * <p><b>400</b> - Invalid requests
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>422</b> - Unable to process request
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>422</b> - Unprocessable Content
      * @param postBankBankModel The postBankBankModel parameter
      * @return BankBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -239,9 +237,9 @@ public class BanksBankApi {
      * Patch Bank
      * Update a bank.  Required scope: **banks:write**
      * <p><b>200</b> - bank found
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - bank not found
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>422</b> - Unprocessable Content
      * @param bankGuid Identifier for the bank.
      * @param patchBankBankModel The patchBankBankModel parameter
      * @return BankBankModel
@@ -286,9 +284,9 @@ public class BanksBankApi {
      * Patch Bank
      * Update a bank.  Required scope: **banks:write**
      * <p><b>200</b> - bank found
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - bank not found
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>422</b> - Unprocessable Content
      * @param bankGuid Identifier for the bank.
      * @param patchBankBankModel The patchBankBankModel parameter
      * @return BankBankModel

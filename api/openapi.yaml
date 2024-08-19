@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.30
+  version: v0.119.31
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -385,45 +385,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Bank'
           description: Bank created
-        "400":
-          content:
-            application/json:
-              examples:
-                missing_parameter:
-                  value:
-                    status: 400
-                    error_message: "Missing parameter. Required: name, type, features,\
-                      \ supported_trading_symbols, supported_country_codes"
-                    message_code: missing_parameter
-                invalid_parameter_value:
-                  value:
-                    status: 400
-                    error_message: "Invalid value exception. Parameter: type supported\
-                      \ values: [\"sandbox\"] "
-                    message_code: invalid_value
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests
         "401":
           content:
             application/json:
@@ -455,7 +416,7 @@ paths:
                     message_code: authentication_failed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, invalid subject"
+          description: Unauthorized
         "403":
           content:
             application/json:
@@ -467,20 +428,47 @@ paths:
                     message_code: invalid_scopes
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
+          description: Forbidden
         "422":
           content:
             application/json:
               examples:
-                unsupported_parameter:
+                unsupported_value_1:
                   value:
-                    status: 415
-                    error_message: "Unsupported value exception. Parameter: features\
-                      \ supported values: [ attestation_identity_records ]"
+                    status: 422
+                    error_message: Fiat asset not supported
+                    message_code: unsupported_value
+                unsupported_value_2:
+                  value:
+                    status: 422
+                    error_message: Trading symbol not supported
+                    message_code: unsupported_value
+                unsupported_value_3:
+                  value:
+                    status: 422
+                    error_message: Trading symbols contain an asset that is not configured
+                      as supported
+                    message_code: unsupported_value
+                unsupported_value_4:
+                  value:
+                    status: 422
+                    error_message: Country code not supported
+                    message_code: unsupported_value
+                unsupported_value_5:
+                  value:
+                    status: 422
+                    error_message: Bank must be configured with attestation_identity_records
+                      or kyc_identity_verifications
+                    message_code: unsupported_value
+                unsupported_value_6:
+                  value:
+                    status: 422
+                    error_message: Bank must be configured with individual_customers
+                      or business_customers
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Unable to process request
+          description: Unprocessable Content
       security:
       - BearerAuth: []
         oauth2:
@@ -633,14 +621,9 @@ paths:
                     status: 401
                     error_message: Signature has expired
                     message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, invalid subject"
+          description: Unauthorized
         "403":
           content:
             application/json:
@@ -652,19 +635,19 @@ paths:
                     message_code: invalid_scopes
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
-        "404":
+          description: Forbidden
+        "422":
           content:
             application/json:
               examples:
-                invalid_value:
+                unsupported_value:
                   value:
-                    status: 400
-                    error_message: invalid bank_guid value
-                    message_code: invalid_value
+                    status: 422
+                    error_message: Trading symbol not supported
+                    message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: bank not found
+          description: Unprocessable Content
       security:
       - BearerAuth: []
         oauth2:

@@ -29,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-16T00:46:13.488262Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-19T12:57:15.388900Z[Etc/UTC]")
 public class CustomersBankApi {
     private ApiClient apiClient;
 
@@ -54,9 +54,7 @@ public class CustomersBankApi {
      * Create Customer
      * Creates a customer.  ## Customer Type  Customer resources are an abstraction for real world individuals and businesses on the Cybrid Platform and are used throughout the platform to perform high level operations, e.g., create a quote, execute a trade, etc..  Customers can have additional resources attached to them, e.g., identity verifications, accounts, etc.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the customer details in our private store | | unverified | The Platform has not yet verified the customer&#39;s identity | | verified | The Platform has verified the customer&#39;s identity | | rejected | The Platform was not able to successfully verify the customer&#39;s identity | | frozen | The customer has been frozen on the Platform |    Required scope: **customers:execute**
      * <p><b>201</b> - customer created
-     * <p><b>400</b> - Invalid requests
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
+     * <p><b>422</b> - Unprocessable Content
      * @param postCustomerBankModel The postCustomerBankModel parameter
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -94,9 +92,7 @@ public class CustomersBankApi {
      * Create Customer
      * Creates a customer.  ## Customer Type  Customer resources are an abstraction for real world individuals and businesses on the Cybrid Platform and are used throughout the platform to perform high level operations, e.g., create a quote, execute a trade, etc..  Customers can have additional resources attached to them, e.g., identity verifications, accounts, etc.  ## State  | State | Description | |-------|-------------| | storing | The Platform is storing the customer details in our private store | | unverified | The Platform has not yet verified the customer&#39;s identity | | verified | The Platform has verified the customer&#39;s identity | | rejected | The Platform was not able to successfully verify the customer&#39;s identity | | frozen | The customer has been frozen on the Platform |    Required scope: **customers:execute**
      * <p><b>201</b> - customer created
-     * <p><b>400</b> - Invalid requests
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
+     * <p><b>422</b> - Unprocessable Content
      * @param postCustomerBankModel The postCustomerBankModel parameter
      * @return CustomerBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
@@ -249,9 +245,7 @@ public class CustomersBankApi {
      * Patch Customer
      * Update a customer.  Required scope: **customers:write**
      * <p><b>200</b> - customer found
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - customer not found
+     * <p><b>400</b> - Bad Request
      * @param customerGuid Identifier for the customer.
      * @param patchCustomerBankModel The patchCustomerBankModel parameter
      * @return CustomerBankModel
@@ -296,9 +290,7 @@ public class CustomersBankApi {
      * Patch Customer
      * Update a customer.  Required scope: **customers:write**
      * <p><b>200</b> - customer found
-     * <p><b>401</b> - Unauthorized - Authentication failed, invalid subject
-     * <p><b>403</b> - Invalid scope
-     * <p><b>404</b> - customer not found
+     * <p><b>400</b> - Bad Request
      * @param customerGuid Identifier for the customer.
      * @param patchCustomerBankModel The patchCustomerBankModel parameter
      * @return CustomerBankModel

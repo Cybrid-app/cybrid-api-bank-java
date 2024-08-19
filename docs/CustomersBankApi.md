@@ -84,9 +84,7 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | customer created |  -  |
-| **400** | Invalid requests |  -  |
-| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
-| **403** | Invalid scope |  -  |
+| **422** | Unprocessable Content |  -  |
 
 
 ## getCustomer
@@ -332,7 +330,5 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | customer found |  -  |
-| **401** | Unauthorized - Authentication failed, invalid subject |  -  |
-| **403** | Invalid scope |  -  |
-| **404** | customer not found |  -  |
+| **400** | Bad Request |  -  |
 

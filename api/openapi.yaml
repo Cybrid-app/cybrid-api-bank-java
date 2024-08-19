@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.27
+  version: v0.119.29
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -991,73 +991,63 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
           description: customer created
-        "400":
+        "422":
           content:
             application/json:
               examples:
-                missing_parameter:
+                unknown_bank:
                   value:
-                    status: 400
-                    error_message: "Missing parameter. Required: type"
+                    status: 422
+                    error_message: Bank not found
+                    message_code: unknown_bank
+                unsupported_value:
+                  value:
+                    status: 422
+                    error_message: Bank must be configured to support customer type
+                    message_code: unsupported_value
+                missing_parameter_1:
+                  value:
+                    status: 422
+                    error_message: Customer name required
                     message_code: missing_parameter
-                invalid_parameter_value:
+                missing_parameter_2:
                   value:
-                    status: 400
-                    error_message: "Invalid value exception. Parameter: type supported\
-                      \ values: [\"individual\"] "
+                    status: 422
+                    error_message: Customer address required
+                    message_code: missing_parameter
+                missing_parameter_3:
+                  value:
+                    status: 422
+                    error_message: Customer date of birth required
+                    message_code: missing_parameter
+                missing_parameter_4:
+                  value:
+                    status: 422
+                    error_message: Customer email address required
+                    message_code: missing_parameter
+                missing_parameter_5:
+                  value:
+                    status: 422
+                    error_message: Customer identification numbers required
+                    message_code: missing_parameter
+                invalid_value_1:
+                  value:
+                    status: 422
+                    error_message: Identification number duplicate type supplied
+                    message_code: invalid_value
+                invalid_value_2:
+                  value:
+                    status: 422
+                    error_message: Identification number not supported
+                    message_code: invalid_value
+                invalid_value_3:
+                  value:
+                    status: 422
+                    error_message: Address country code not supported
                     message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid requests
-        "401":
-          content:
-            application/json:
-              examples:
-                invalid_subject:
-                  value:
-                    status: 401
-                    error_message: "Invalid Subject type. Required: bank"
-                    message_code: invalid_subject
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, invalid subject"
-        "403":
-          content:
-            application/json:
-              examples:
-                invalid_scope:
-                  value:
-                    status: 403
-                    error_message: "Invalid scopes. Required: customers:execute"
-                    message_code: invalid_scopes
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
+          description: Unprocessable Content
       security:
       - BearerAuth: []
         oauth2:
@@ -1189,67 +1179,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/Customer'
           description: customer found
-        "401":
+        "400":
           content:
             application/json:
               examples:
-                invalid_subject:
-                  value:
-                    status: 401
-                    error_message: "Invalid Subject type. Required: customer"
-                    message_code: invalid_subject
-                invalid_signature:
-                  value:
-                    status: 401
-                    error_message: Signature verification raised
-                    message_code: authentication_failed
-                invalid_audience:
-                  value:
-                    status: 401
-                    error_message: Invalid audience
-                    message_code: authentication_failed
-                invalid_issuer:
-                  value:
-                    status: 401
-                    error_message: Invalid issuer
-                    message_code: authentication_failed
-                expired_signature:
-                  value:
-                    status: 401
-                    error_message: Signature has expired
-                    message_code: authentication_failed
-                malformed_auth_header:
-                  value:
-                    status: 401
-                    error_message: Authorization header is malformed.
-                    message_code: authentication_malformed
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: "Unauthorized - Authentication failed, invalid subject"
-        "403":
-          content:
-            application/json:
-              examples:
-                invalid_scope:
-                  value:
-                    status: 403
-                    error_message: "Invalid scopes. Required: customers:write"
-                    message_code: invalid_scopes
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Invalid scope
-        "404":
-          content:
-            application/json:
-              examples:
-                invalid_value:
+                invalid_parameter:
                   value:
                     status: 400
-                    error_message: invalid customer_guid value
-                    message_code: invalid_value
+                    error_message: Invalid state
+                    message_code: invalid_parameter
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: customer not found
+          description: Bad Request
       security:
       - BearerAuth: []
         oauth2:

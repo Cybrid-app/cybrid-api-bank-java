@@ -13,6 +13,8 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
+import java.util.Objects;
+import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,31 +22,120 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * Model tests for PatchCustomerBankModel
+ * ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
  */
-public class PatchCustomerBankModelTest {
-    private final PatchCustomerBankModel model = new PatchCustomerBankModel();
+@JsonPropertyOrder({
+  ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel.JSON_PROPERTY_ROUTING_NUMBER_TYPE,
+  ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel.JSON_PROPERTY_ROUTING_NUMBER
+})
+@JsonTypeName("ExternalBankAccount_pii_inner_routing_details_inner")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-08-23T14:51:40.506375Z[Etc/UTC]")
+public class ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel {
+  public static final String JSON_PROPERTY_ROUTING_NUMBER_TYPE = "routing_number_type";
+  private String routingNumberType;
 
-    /**
-     * Model tests for PatchCustomerBankModel
-     */
-    @Test
-    public void testPatchCustomerBankModel() {
-        // TODO: test PatchCustomerBankModel
-    }
+  public static final String JSON_PROPERTY_ROUTING_NUMBER = "routing_number";
+  private String routingNumber;
 
-    /**
-     * Test the property 'state'
-     */
-    @Test
-    public void stateTest() {
-        // TODO: test state
+  public ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel() { 
+  }
+
+  public ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel routingNumberType(String routingNumberType) {
+    
+    this.routingNumberType = routingNumberType;
+    return this;
+  }
+
+   /**
+   * The type of routing number; one of CPA or ABA.
+   * @return routingNumberType
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The type of routing number; one of CPA or ABA.")
+  @JsonProperty(JSON_PROPERTY_ROUTING_NUMBER_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getRoutingNumberType() {
+    return routingNumberType;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ROUTING_NUMBER_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setRoutingNumberType(String routingNumberType) {
+    this.routingNumberType = routingNumberType;
+  }
+
+
+  public ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel routingNumber(String routingNumber) {
+    
+    this.routingNumber = routingNumber;
+    return this;
+  }
+
+   /**
+   * The routing number.
+   * @return routingNumber
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The routing number.")
+  @JsonProperty(JSON_PROPERTY_ROUTING_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+
+  public String getRoutingNumber() {
+    return routingNumber;
+  }
+
+
+  @JsonProperty(JSON_PROPERTY_ROUTING_NUMBER)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  public void setRoutingNumber(String routingNumber) {
+    this.routingNumber = routingNumber;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel externalBankAccountPiiInnerRoutingDetailsInner = (ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel) o;
+    return Objects.equals(this.routingNumberType, externalBankAccountPiiInnerRoutingDetailsInner.routingNumberType) &&
+        Objects.equals(this.routingNumber, externalBankAccountPiiInnerRoutingDetailsInner.routingNumber);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(routingNumberType, routingNumber);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel {\n");
+    sb.append("    routingNumberType: ").append(toIndentedString(routingNumberType)).append("\n");
+    sb.append("    routingNumber: ").append(toIndentedString(routingNumber)).append("\n");
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces
+   * (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
 
 }
+

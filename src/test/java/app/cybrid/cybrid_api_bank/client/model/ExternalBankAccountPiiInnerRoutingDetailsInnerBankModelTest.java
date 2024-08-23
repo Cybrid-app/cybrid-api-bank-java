@@ -26,25 +26,33 @@ import org.junit.Test;
 
 
 /**
- * Model tests for PatchCustomerBankModel
+ * Model tests for ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
  */
-public class PatchCustomerBankModelTest {
-    private final PatchCustomerBankModel model = new PatchCustomerBankModel();
+public class ExternalBankAccountPiiInnerRoutingDetailsInnerBankModelTest {
+    private final ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel model = new ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel();
 
     /**
-     * Model tests for PatchCustomerBankModel
+     * Model tests for ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
      */
     @Test
-    public void testPatchCustomerBankModel() {
-        // TODO: test PatchCustomerBankModel
+    public void testExternalBankAccountPiiInnerRoutingDetailsInnerBankModel() {
+        // TODO: test ExternalBankAccountPiiInnerRoutingDetailsInnerBankModel
     }
 
     /**
-     * Test the property 'state'
+     * Test the property 'routingNumberType'
      */
     @Test
-    public void stateTest() {
-        // TODO: test state
+    public void routingNumberTypeTest() {
+        // TODO: test routingNumberType
+    }
+
+    /**
+     * Test the property 'routingNumber'
+     */
+    @Test
+    public void routingNumberTest() {
+        // TODO: test routingNumber
     }
 
 }

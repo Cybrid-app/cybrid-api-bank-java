@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.42
+  version: v0.119.43
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9219,6 +9219,14 @@ components:
             names:
             - names
             - names
+            routing_details:
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            account_details:
+            - account_number: account_number
+            - account_number: account_number
           - email_addresses:
             - email_addresses
             - email_addresses
@@ -9241,6 +9249,14 @@ components:
             names:
             - names
             - names
+            routing_details:
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            account_details:
+            - account_number: account_number
+            - account_number: account_number
           environment: environment
           balances:
             current: 0
@@ -9282,6 +9298,14 @@ components:
             names:
             - names
             - names
+            routing_details:
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            account_details:
+            - account_number: account_number
+            - account_number: account_number
           - email_addresses:
             - email_addresses
             - email_addresses
@@ -9304,6 +9328,14 @@ components:
             names:
             - names
             - names
+            routing_details:
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            - routing_number_type: routing_number_type
+              routing_number: routing_number
+            account_details:
+            - account_number: account_number
+            - account_number: account_number
           environment: environment
           balances:
             current: 0
@@ -9774,6 +9806,14 @@ components:
           names:
           - names
           - names
+          routing_details:
+          - routing_number_type: routing_number_type
+            routing_number: routing_number
+          - routing_number_type: routing_number_type
+            routing_number: routing_number
+          account_details:
+          - account_number: account_number
+          - account_number: account_number
         - email_addresses:
           - email_addresses
           - email_addresses
@@ -9796,6 +9836,14 @@ components:
           names:
           - names
           - names
+          routing_details:
+          - routing_number_type: routing_number_type
+            routing_number: routing_number
+          - routing_number_type: routing_number_type
+            routing_number: routing_number
+          account_details:
+          - account_number: account_number
+          - account_number: account_number
         environment: environment
         balances:
           current: 0
@@ -11160,6 +11208,21 @@ components:
           description: The ISO 3166 country 2-Alpha country code of the address.
           type: string
       type: object
+    ExternalBankAccount_pii_inner_routing_details_inner:
+      example:
+        routing_number_type: routing_number_type
+        routing_number: routing_number
+      properties:
+        routing_number_type:
+          description: The type of routing number; one of CPA or ABA.
+          type: string
+        routing_number:
+          description: The routing number.
+          type: string
+      required:
+      - routing_number
+      - routing_number_type
+      type: object
     ExternalBankAccount_pii_inner:
       example:
         email_addresses:
@@ -11184,6 +11247,14 @@ components:
         names:
         - names
         - names
+        routing_details:
+        - routing_number_type: routing_number_type
+          routing_number: routing_number
+        - routing_number_type: routing_number_type
+          routing_number: routing_number
+        account_details:
+        - account_number: account_number
+        - account_number: account_number
       properties:
         names:
           description: Array of names on the account
@@ -11207,6 +11278,18 @@ components:
           description: Array of phone numbers associated to the account
           items:
             type: string
+          nullable: true
+          type: array
+        account_details:
+          description: The account details for the bank account.
+          items:
+            $ref: '#/components/schemas/DepositBankAccount_account_details_inner'
+          nullable: true
+          type: array
+        routing_details:
+          description: The routing details for the bank account.
+          items:
+            $ref: '#/components/schemas/ExternalBankAccount_pii_inner_routing_details_inner'
           nullable: true
           type: array
       type: object

@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.75
+  version: v0.119.76
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3267,32 +3267,33 @@ paths:
         \ |\n| id_country_allowed_check_failure | Failure due to an issue verifying\
         \ the provided ID based on the issuing country |\n| id_digital_replica_check_failure\
         \ | Failure due to an issue verifying the provided ID based on it being a\
-        \ digital replica |\n| database_check_failure | Failure due to an issue verifying\
-        \ the provided information against authoritative data sources |\n| selfie_failure\
-        \ | Failure due to an issue verifying the provided selfie photo |\n| country_comparison_check_failure\
-        \ | Failure due the customer verification being performed out of country |\n\
-        | duplicate_person_check_failure | Failure due to a customer already existing\
-        \ for this person |\n| prohibited_person_check_failure | Failure due to a\
-        \ person being on prohibited from accessing the service |\n| name_check_failure\
-        \ | Failure due to an issue verifying the name of the person |\n| address_check_failure\
-        \ | Failure due to an issue verifying the address of the person |\n| dob_check_failure\
-        \ | Failure due to an issue verifying the date of birth of the person |\n\
-        | id_number_check_failure | Failure due to an issue verifying an identification\
-        \ number of the person |\n| phone_number_check_failure | Failure due to an\
-        \ issue verifying the phone number of the person |\n| email_address_check_failure\
+        \ digital replica |\n| id_paper_replica_check_failure | Failure due to an\
+        \ issue verifying the provided ID based on it being a paper replica |\n| database_check_failure\
+        \ | Failure due to an issue verifying the provided information against authoritative\
+        \ data sources |\n| selfie_failure | Failure due to an issue verifying the\
+        \ provided selfie photo |\n| country_comparison_check_failure | Failure due\
+        \ the customer verification being performed out of country |\n| duplicate_person_check_failure\
+        \ | Failure due to a customer already existing for this person |\n| prohibited_person_check_failure\
+        \ | Failure due to a person being on prohibited from accessing the service\
+        \ |\n| name_check_failure | Failure due to an issue verifying the name of\
+        \ the person |\n| address_check_failure | Failure due to an issue verifying\
+        \ the address of the person |\n| dob_check_failure | Failure due to an issue\
+        \ verifying the date of birth of the person |\n| id_number_check_failure |\
+        \ Failure due to an issue verifying an identification number of the person\
+        \ |\n| phone_number_check_failure | Failure due to an issue verifying the\
+        \ phone number of the person |\n| email_address_check_failure | Failure due\
+        \ to an issue verifying the email address of the person |\n| compliance_rejection\
+        \ | Failure due to compliance rejecting the identity verification |\n| plaid_failure\
+        \ | Failure due to an issue interacting with Plaid |\n| plaid_item_login_required\
+        \ | Failure due to the Plaid token for the account requiring re-login |\n\
+        | plaid_invalid_product | Failure due to the Plaid product not being supported\
+        \ (contact support) |\n| plaid_no_accounts | Failure due to the Plaid token\
+        \ having access to no accounts |\n| plaid_item_not_found | Failure due to\
+        \ Plaid not being able to find the associated account |\n| decision_timeout\
         \ | Failure due to an issue verifying the email address of the person |\n\
-        | compliance_rejection | Failure due to compliance rejecting the identity\
-        \ verification |\n| plaid_failure | Failure due to an issue interacting with\
-        \ Plaid |\n| plaid_item_login_required | Failure due to the Plaid token for\
-        \ the account requiring re-login |\n| plaid_invalid_product | Failure due\
-        \ to the Plaid product not being supported (contact support) |\n| plaid_no_accounts\
-        \ | Failure due to the Plaid token having access to no accounts |\n| plaid_item_not_found\
-        \ | Failure due to Plaid not being able to find the associated account |\n\
-        | decision_timeout | Failure due to an issue verifying the email address of\
-        \ the person |\n| requested_failure | In sandbox, the caller requested that\
-        \ the process failed |\n| deleted_account | Failure due to the bank account\
-        \ having been deleted before a decision was made |\n\n\n\nRequired scope:\
-        \ **identity_verifications:execute**"
+        | requested_failure | In sandbox, the caller requested that the process failed\
+        \ |\n| deleted_account | Failure due to the bank account having been deleted\
+        \ before a decision was made |\n\n\n\nRequired scope: **identity_verifications:execute**"
       operationId: createIdentityVerification
       parameters: []
       requestBody:

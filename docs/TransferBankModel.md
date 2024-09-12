@@ -16,7 +16,7 @@
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
 |**side** | **String** | The direction of the quote; one of deposit or withdrawal. |  [optional] |
 |**state** | **String** | The state of the transfer; one of storing, pending, reviewing, completed, or failed. |  [optional] |
-|**failureCode** | **String** | The failure code for failed transfers; one of non_sufficient_funds, refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection, cancelled, reversed, limit_exceeded, network_fee_too_low, amount_too_low, or internal_error. |  [optional] |
+|**failureCode** | **String** | The failure code for failed transfers; one of non_sufficient_funds, refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection, cancelled, reversed, limit_exceeded, network_fee_too_low, amount_too_low, internal_error, or invalid_address. |  [optional] |
 |**amount** | **java.math.BigInteger** | The actual amount in base units of the asset. |  [optional] |
 |**estimatedAmount** | **java.math.BigInteger** | The estimated amount in base units of the asset. |  [optional] |
 |**fee** | **java.math.BigInteger** | The fee associated with the transfer. |  [optional] |

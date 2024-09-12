@@ -27,5 +27,7 @@
 
 * `INTERNAL_ERROR` (value: `"internal_error"`)
 
+* `INVALID_ADDRESS` (value: `"invalid_address"`)
+
 
 

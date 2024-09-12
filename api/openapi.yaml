@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.87
+  version: v0.119.88
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -2195,10 +2195,13 @@ paths:
         \ | The Platform is deleting the external bank account |\n| deleted | The\
         \ Platform has deleted the external bank account |\n\n## Failure codes\n\n\
         | Code | Description |\n|------|-------------|\n| invalid_routing_number |\
-        \ The provided routing number is invalid |\n| refresh_required | The Plaid\
-        \ processor token used to create the account needs to be refreshed |\n| plaid_processor_token\
-        \ | An account could not be created due to an invalid Plaid processor token\
-        \ or an error with Plaid |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
+        \ The provided routing number is invalid |\n| duplicate | An account with\
+        \ the same details already exists |\n| plaid_processor_token | An account\
+        \ could not be created due to an invalid Plaid processor token or an error\
+        \ with Plaid |\n| plaid_multiple_accounts | The supplied Plaid token is associated\
+        \ with multiple accounts. Must only be a single account. |\n| create_failed\
+        \ | The bank account and associated holder could not be created correctly\
+        \ |\n\n\n\nRequired scope: **external_bank_accounts:execute**"
       operationId: createExternalBankAccount
       parameters: []
       requestBody:

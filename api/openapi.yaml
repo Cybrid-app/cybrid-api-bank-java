@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.113
+  version: v0.119.116
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3519,6 +3519,14 @@ paths:
         explode: true
         in: query
         name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated assets to list invoices for.
+        explode: true
+        in: query
+        name: asset
         required: false
         schema:
           type: string

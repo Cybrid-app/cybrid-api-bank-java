@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.137
+  version: v0.119.138
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4882,7 +4882,7 @@ paths:
                 unprocessable_request:
                   value:
                     status: 422
-                    error_message: "Unable to process request: InvalidInvoice - Invalid\
+                    error_message: "Unable to process request: InvalidAddress - Invalid\
                       \ invoice"
                     message_code: invalid_invoice
               schema:
@@ -8489,6 +8489,20 @@ components:
           description: The guid of the related trade. Only present on `exit` trades.
           maxLength: 32
           minLength: 32
+          type: string
+        source_account_guid:
+          description: The source account's identifier. Required for inter-account
+            transfers.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        destination_account_guid:
+          description: The destination account's identifier. Required for inter-account
+            transfers.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
       type: object
     PostFee:

@@ -21,6 +21,7 @@
 |**counterpartyName** | [**PostExternalBankAccountCounterpartyNameBankModel**](PostExternalBankAccountCounterpartyNameBankModel.md) |  |  [optional] |
 |**counterpartyAddress** | [**PostExternalBankAccountCounterpartyAddressBankModel**](PostExternalBankAccountCounterpartyAddressBankModel.md) |  |  [optional] |
 |**counterpartyEmailAddress** | **String** | The counterparty&#39;s email address on their checking account. |  [optional] |
+|**counterpartyGuid** | **String** | The counterparty identifier. |  [optional] |
 
 
 

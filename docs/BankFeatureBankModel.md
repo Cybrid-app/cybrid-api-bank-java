@@ -17,5 +17,7 @@
 
 * `ACCESSIBLE_IDENTIFICATION_NUMBERS` (value: `"accessible_identification_numbers"`)
 
+* `COUNTERPARTY_EXTERNAL_ACCOUNTS` (value: `"counterparty_external_accounts"`)
+
 
 

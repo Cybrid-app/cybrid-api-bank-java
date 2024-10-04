@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.120.1
+  version: v0.120.2
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10999,6 +10999,7 @@ components:
       properties:
         street:
           description: The first line of the address.
+          nullable: true
           type: string
         street2:
           description: The optional second line of the address.
@@ -11006,6 +11007,7 @@ components:
           type: string
         city:
           description: The city of the address.
+          nullable: true
           type: string
         subdivision:
           description: The provide/state/region of the address; not used by all countries.
@@ -11019,6 +11021,7 @@ components:
           description: The ISO 3166 country 2-Alpha country code of the address.
           maxLength: 2
           minLength: 2
+          nullable: true
           type: string
       required:
       - city
@@ -11228,6 +11231,7 @@ components:
       properties:
         street:
           description: The first line of the address.
+          nullable: true
           type: string
         street2:
           description: The optional second line of the address.
@@ -11235,6 +11239,7 @@ components:
           type: string
         city:
           description: The city of the address.
+          nullable: true
           type: string
         subdivision:
           description: The provide/state/region of the address; not used by all countries.
@@ -11246,6 +11251,7 @@ components:
           type: string
         country_code:
           description: The ISO 3166 country 2-Alpha country code of the address.
+          nullable: true
           type: string
       type: object
     ExternalBankAccount_pii_inner_routing_details_inner:

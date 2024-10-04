@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.119.171
+  version: v0.120.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10543,9 +10543,9 @@ components:
         network_fee_account_guid:
           description: "The network fee account's identifier. Required for network\
             \ fee transfers. Must be the identifier for the customer's or bank's fiat\
-            \ account. For customer's to pay the network fees, include the customer's\
-            \ fiat account guid. For bank's to pay the network fees, include the bank's\
-            \ fiat account guid."
+            \ or trading account. For customer's to pay the network fees, include\
+            \ the customer's fiat or trading account guid. For bank's to pay the network\
+            \ fees, include the bank's fiat or trading account guid."
           maxLength: 32
           minLength: 32
           type: string

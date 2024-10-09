@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.120.14
+  version: v0.120.15
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -356,15 +356,7 @@ paths:
         \ `sandbox` or `production` mode. Sandbox Banks will not transact in real\
         \ fiat dollars or cryptocurrencies.\n\nVia the API, only `sandbox` banks can\
         \ be created. In order to enable a `production` bank please contact [Support](mailto:support@cybrid.app).\n\
-        \n## Attestation Identity Records\n\nAttestation Identity Records is a method\
-        \ the Cybrid Platform uses to verify the identity of a Bank's customers. Please\
-        \ see the documentation under the create Identity Record API for more technical\
-        \ detail.\n\nThis feature must specifically be enabled in the Bank's `features`\
-        \ array by including the `attestation_identity_records` flag. At present,\
-        \ attestation identity records is the supported method for verifying a customer's\
-        \ identity on the platform.\n\nPlease contact [Support](mailto:support@cybrid.app)\
-        \ to inquire about enabling this option for your Organization.\n\n\n\nRequired\
-        \ scope: **banks:execute**"
+        \n\n\nRequired scope: **banks:execute**"
       operationId: createBank
       parameters: []
       requestBody:
@@ -452,8 +444,7 @@ paths:
                 unsupported_value_5:
                   value:
                     status: 422
-                    error_message: Bank must be configured with attestation_identity_records
-                      or kyc_identity_verifications
+                    error_message: Bank must be configured with kyc_identity_verifications
                     message_code: unsupported_value
                 unsupported_value_6:
                   value:
@@ -6582,7 +6573,7 @@ components:
         features:
           description: The bank's enabled features.
           items:
-            description: "A combination of: attestation_identity_records, kyc_identity_verifications,\
+            description: "A combination of: kyc_identity_verifications, attestation_identity_records,\
               \ raw_routing_details, individual_customers, business_customers, accessible_identification_numbers,\
               \ and counterparty_external_accounts."
             type: string
@@ -6610,8 +6601,8 @@ components:
       type: string
     BankFeature:
       enum:
-      - attestation_identity_records
       - kyc_identity_verifications
+      - attestation_identity_records
       - raw_routing_details
       - individual_customers
       - business_customers
@@ -10153,6 +10144,8 @@ components:
           type: array
       type: object
     PostCustomer:
+      example:
+        type: individual
       properties:
         type:
           description: The customer's type.

@@ -15,8 +15,6 @@
 
 * `BUSINESS_CUSTOMERS` (value: `"business_customers"`)
 
-* `ACCESSIBLE_IDENTIFICATION_NUMBERS` (value: `"accessible_identification_numbers"`)
-
 * `COUNTERPARTY_EXTERNAL_ACCOUNTS` (value: `"counterparty_external_accounts"`)
 
 

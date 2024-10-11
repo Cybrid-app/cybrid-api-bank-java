@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.120.19
+  version: v0.121.0
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6574,8 +6574,8 @@ components:
           description: The bank's enabled features.
           items:
             description: "A combination of: kyc_identity_verifications, attestation_identity_records,\
-              \ raw_routing_details, individual_customers, business_customers, accessible_identification_numbers,\
-              \ and counterparty_external_accounts."
+              \ raw_routing_details, individual_customers, business_customers, and\
+              \ counterparty_external_accounts."
             type: string
           type: array
         created_at:
@@ -6606,7 +6606,6 @@ components:
       - raw_routing_details
       - individual_customers
       - business_customers
-      - accessible_identification_numbers
       - counterparty_external_accounts
       type: string
     BankList:
@@ -9989,6 +9988,7 @@ components:
         issuing_country_code:
           description: The ISO 3166 country 2-Alpha country code of the identification
             number issuer.
+          nullable: true
           type: string
         identification_number:
           description: The identification number.

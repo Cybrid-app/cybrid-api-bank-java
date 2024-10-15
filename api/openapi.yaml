@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.3
+  version: v0.121.4
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5781,44 +5781,49 @@ paths:
                 invalid_value_3:
                   value:
                     status: 422
-                    error_message: Participant types not supported
+                    error_message: Participants must be specified
                     message_code: invalid_value
                 invalid_value_4:
                   value:
                     status: 422
-                    error_message: Participants not found
+                    error_message: Participant types not supported
                     message_code: invalid_value
                 invalid_value_5:
                   value:
                     status: 422
-                    error_message: Participants have been frozen
+                    error_message: Participants not found
                     message_code: invalid_value
                 invalid_value_6:
                   value:
                     status: 422
-                    error_message: Participants have been rejected
+                    error_message: Participants have been frozen
                     message_code: invalid_value
                 invalid_value_7:
                   value:
                     status: 422
-                    error_message: Participants have not been verified
+                    error_message: Participants have been rejected
                     message_code: invalid_value
                 invalid_value_8:
                   value:
                     status: 422
-                    error_message: Send as account not found
+                    error_message: Participants have not been verified
                     message_code: invalid_value
                 invalid_value_9:
                   value:
                     status: 422
-                    error_message: Send as account not valid for transfer
+                    error_message: Send as account not found
                     message_code: invalid_value
                 invalid_value_10:
                   value:
                     status: 422
-                    error_message: Send as account cannot be defined for this transfer
+                    error_message: Send as account not valid for transfer
                     message_code: invalid_value
                 invalid_value_11:
+                  value:
+                    status: 422
+                    error_message: Send as account cannot be defined for this transfer
+                    message_code: invalid_value
+                invalid_value_12:
                   value:
                     status: 422
                     error_message: Amount not valid

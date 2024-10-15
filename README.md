@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.121.6
+- API version: v0.121.7
 
-- Build date: 2024-10-15T16:11:29.476006Z[Etc/UTC]
+- Build date: 2024-10-15T17:19:38.494710Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.121.6</version>
+  <version>v0.121.7</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.121.6"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.121.7"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.121.6.jar`
+- `target/cybrid-api-bank-java-v0.121.7.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -404,6 +404,8 @@ Class | Method | HTTP request | Description
  - [PaymentInstructionListBankModel](docs/PaymentInstructionListBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
  - [PostBankBankModel](docs/PostBankBankModel.md)
+ - [PostCounterpartyAddressBankModel](docs/PostCounterpartyAddressBankModel.md)
+ - [PostCounterpartyAliasesInnerBankModel](docs/PostCounterpartyAliasesInnerBankModel.md)
  - [PostCounterpartyBankModel](docs/PostCounterpartyBankModel.md)
  - [PostCounterpartyNameBankModel](docs/PostCounterpartyNameBankModel.md)
  - [PostCustomerAddressBankModel](docs/PostCustomerAddressBankModel.md)

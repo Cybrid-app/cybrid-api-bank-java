@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.6
+  version: v0.121.7
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10215,15 +10215,15 @@ components:
         name:
           $ref: '#/components/schemas/PostCounterparty_name'
         address:
-          $ref: '#/components/schemas/PostCustomer_address'
+          $ref: '#/components/schemas/PostCounterparty_address'
         aliases:
           description: The counterparty's aliases.
           items:
-            $ref: '#/components/schemas/Counterparty_aliases_inner'
+            $ref: '#/components/schemas/PostCounterparty_aliases_inner'
           nullable: true
           type: array
         date_of_birth:
-          description: The counterparty's date of birth.
+          description: The counterparty's date of birth; optional for individual counterparties..
           format: date
           nullable: true
           type: string
@@ -11386,19 +11386,56 @@ components:
       nullable: true
       properties:
         first:
-          description: The counterparty's first name.
+          description: The counterparty's first name; required for individual counterparties.
           nullable: true
           type: string
         middle:
-          description: The counterparty's middle name.
+          description: The counterparty's middle name; optional for individual counterparties.
           nullable: true
           type: string
         last:
-          description: The counterparty's last name.
+          description: The counterparty's last name; required for individual counterparties.
           nullable: true
           type: string
         full:
-          description: The counterparty's full name.
+          description: The counterparty's full name; required for business counterparties.
+          nullable: true
+          type: string
+      type: object
+    PostCounterparty_address:
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          type: string
+        subdivision:
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
+          nullable: true
+          type: string
+        postal_code:
+          description: The postal/post/zip code of the address; not used by all countries.
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          type: string
+      required:
+      - city
+      - country_code
+      - street
+      type: object
+    PostCounterparty_aliases_inner:
+      properties:
+        full:
+          description: The counterparty's full name; optional for business counterparties..
           nullable: true
           type: string
       type: object

@@ -2,14 +2,15 @@
 
 # PostCustomerNameBankModel
 
+The customer's name. Optional when type is individual.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**first** | **String** | The customer&#39;s first name. |  [optional] |
-|**middle** | **String** | The customer&#39;s middle name. |  [optional] |
-|**last** | **String** | The customer&#39;s last name. |  [optional] |
+|**first** | **String** | The customer&#39;s first name. Required when type is individual. |  [optional] |
+|**middle** | **String** | The customer&#39;s middle name. Optional when type is individual. |  [optional] |
+|**last** | **String** | The customer&#39;s last name. Required when type is individual. |  [optional] |
 
 
 

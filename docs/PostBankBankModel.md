@@ -2,17 +2,18 @@
 
 # PostBankBankModel
 
+Request body for bank creation.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** | The bank&#39;s name. |  |
-|**type** | [**TypeEnum**](#TypeEnum) | The bank&#39;s type. At present, only **sandbox** is supported. |  |
-|**supportedTradingSymbols** | **List&lt;String&gt;** | The bank&#39;s list of supported trading symbols. |  |
-|**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The bank&#39;s enabled features. |  |
-|**supportedFiatAccountAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat assets. |  |
-|**supportedCountryCodes** | **List&lt;String&gt;** | The bank&#39;s list of supported country codes. |  [optional] |
+|**type** | [**TypeEnum**](#TypeEnum) | The type of bank. |  |
+|**name** | **String** | The name of the bank. |  |
+|**supportedTradingSymbols** | **List&lt;String&gt;** | The trading symbols supported by the bank. |  |
+|**supportedFiatAccountAssets** | **List&lt;String&gt;** | The fiat account assets supported by the bank. |  |
+|**supportedCountryCodes** | **List&lt;String&gt;** | The country codes supported by the bank. |  |
+|**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The features supported by the bank. |  |
 
 
 

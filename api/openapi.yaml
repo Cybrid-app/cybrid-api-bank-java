@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.11
+  version: v0.121.12
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7679,6 +7679,7 @@ components:
       - invalidated
       type: string
     PostDepositBankAccount:
+      description: Request body for deposit bank account creation.
       properties:
         type:
           description: The account type. To generate deposit bank accounts with their
@@ -7705,21 +7706,26 @@ components:
           type: string
         parent_deposit_bank_account_guid:
           description: The unique identifier for the bank-level deposit bank account.
-            This is only required for sub-accounts.
+            This is only required for sub-accounts. Required when type is sub_account.
           maxLength: 32
           minLength: 32
           nullable: true
           type: string
         labels:
-          description: The labels associated with the address.
+          description: The labels associated with the bank account.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
       - account_guid
+      - type
       type: object
     PostInvoice:
+      description: Request body for invoice creation.
       properties:
         asset:
           description: The asset code the customer will receive the funds in.
@@ -7753,25 +7759,29 @@ components:
           nullable: true
           type: string
         labels:
-          description: The labels associated with the customer.
+          description: The labels associated with the invoice.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
       - asset
       type: object
     PostPaymentInstruction:
+      description: Request body for payment instruction creation.
       properties:
         invoice_guid:
           description: The invoice guid.
           maxLength: 32
-          minLength: 32
           type: string
         expected_behaviour:
           description: The optional expected behaviour to simulate.
           enum:
           - invoice_paid_immediately
+          nullable: true
           type: string
       required:
       - invoice_guid
@@ -8417,6 +8427,7 @@ components:
         $ref: '#/components/schemas/SymbolPrice'
       type: array
     PostQuote:
+      description: Request body for quote creation.
       properties:
         product_type:
           default: trading
@@ -8429,6 +8440,7 @@ components:
           - crypto_transfer
           - inter_account
           - lightning_transfer
+          nullable: true
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -8442,66 +8454,86 @@ components:
           minLength: 32
           nullable: true
           type: string
-        asset:
-          description: "The asset code the quote was requested for. Populated for\
-            \ funding, book transfer and crypto transfer quotes."
-          maxLength: 8
-          minLength: 1
-          type: string
-        network_address:
-          description: The network address to pay the invoice to. Populated for lightning_transfer
-            quotes.
-          nullable: true
-          type: string
-        symbol:
-          description: Symbol the quote is being requested for. Format is "asset-counter_asset"
-            in uppercase. See the Symbols API for a complete list of cryptocurrencies
-            supported. Populated for trade quotes.
-          maxLength: 16
-          minLength: 1
-          type: string
-        side:
-          description: "The direction for trade quotes: either 'buy' or 'sell'. The\
-            \ direction for funding quotes: either 'deposit' or 'withdrawal'. The\
-            \ direction for crypto transfer quotes: 'withdrawal'. Book transfers do\
-            \ not require a side. They are all 'deposit's. "
-          nullable: true
-          type: string
         receive_amount:
           description: "The amount to be received in base units of the currency: currency\
             \ is \"asset\" for buy and \"counter_asset\" for sell for trade quotes."
+          nullable: true
           type: integer
         deliver_amount:
           description: "The amount to be delivered in base units of the currency:\
             \ currency is \"counter_asset\" for buy and \"asset\" for sell for trade\
             \ quotes."
+          nullable: true
           type: integer
+        asset:
+          description: "The asset code the quote was requested for. Required when\
+            \ product_type is lightning_transfer, product_type is book_transfer, product_type\
+            \ is funding, product_type is crypto_transfer, or product_type is inter_account."
+          maxLength: 8
+          minLength: 1
+          nullable: true
+          type: string
+        network_address:
+          description: The network address to pay the invoice to. Required when product_type
+            is lightning_transfer.
+          maxLength: 512
+          nullable: true
+          type: string
         fees:
-          description: The custom fees associated with the quote
+          description: "The custom fees associated with the quote Optional when product_type\
+            \ is lightning_transfer, product_type is funding, product_type is trading,\
+            \ product_type is crypto_transfer, or product_type is trading_exit."
           items:
             $ref: '#/components/schemas/PostFee'
+          maxItems: 2
+          minItems: 0
+          nullable: true
           type: array
+        side:
+          description: "The direction for trade quotes: either 'buy' or 'sell'. The\
+            \ direction for funding quotes: either 'deposit' or 'withdrawal'. The\
+            \ direction for crypto transfer quotes: 'withdrawal'. Book transfers do\
+            \ not require a side. They are all 'deposit's.  Required when product_type\
+            \ is funding, product_type is trading, or product_type is crypto_transfer."
+          enum:
+          - deposit
+          - withdrawal
+          - buy
+          - sell
+          nullable: true
+          type: string
+        symbol:
+          description: Symbol the quote is being requested for. Format is "asset-counter_asset"
+            in uppercase. See the Symbols API for a complete list of cryptocurrencies
+            supported.  Required when product_type is trading.
+          maxLength: 16
+          minLength: 1
+          nullable: true
+          type: string
         reference_trade_guid:
           description: The guid of the related trade. Only present on `exit` trades.
+            Required when product_type is trading_exit.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         source_account_guid:
-          description: The source account's identifier. Required for inter-account
-            transfers.
+          description: The source account's identifier. Required when product_type
+            is inter_account.
           maxLength: 32
           minLength: 32
           nullable: true
           type: string
         destination_account_guid:
-          description: The destination account's identifier. Required for inter-account
-            transfers.
+          description: The destination account's identifier. Required when product_type
+            is inter_account.
           maxLength: 32
           minLength: 32
           nullable: true
           type: string
       type: object
     PostFee:
+      description: Request body for fee creation.
       properties:
         type:
           description: The fee's type
@@ -8511,11 +8543,13 @@ components:
           type: string
         spread_fee:
           description: "The percentage amount, in basis points, to apply when charging\
-            \ a fee."
+            \ a fee. Required when type is spread."
+          nullable: true
           type: integer
         fixed_fee:
           description: "The fixed amount to apply when charging a fee; for trades,\
-            \ the fiat asset is used."
+            \ the fiat asset is used. Required when type is fixed."
+          nullable: true
           type: integer
       required:
       - type
@@ -10088,24 +10122,40 @@ components:
       - deleted
       type: string
     PostBank:
+      description: Request body for bank creation.
       properties:
-        name:
-          description: The bank's name.
-          maxLength: 128
-          minLength: 1
-          type: string
         type:
-          description: "The bank's type. At present, only **sandbox** is supported."
+          description: The type of bank.
           enum:
           - sandbox
           type: string
+        name:
+          description: The name of the bank.
+          maxLength: 128
+          minLength: 1
+          type: string
         supported_trading_symbols:
-          description: The bank's list of supported trading symbols.
+          description: The trading symbols supported by the bank.
           items:
             type: string
+          maxItems: 50
+          type: array
+        supported_fiat_account_assets:
+          description: The fiat account assets supported by the bank.
+          items:
+            type: string
+          maxItems: 1
+          minItems: 1
+          type: array
+        supported_country_codes:
+          description: The country codes supported by the bank.
+          items:
+            type: string
+          maxItems: 1
+          minItems: 1
           type: array
         features:
-          description: The bank's enabled features.
+          description: The features supported by the bank.
           items:
             enum:
             - attestation_identity_records
@@ -10113,47 +10163,38 @@ components:
             - business_customers
             - individual_customers
             type: string
-          type: array
-        supported_fiat_account_assets:
-          description: The bank's list of supported fiat assets.
-          items:
-            type: string
-          maxItems: 1
-          minItems: 1
-          type: array
-        supported_country_codes:
-          description: The bank's list of supported country codes.
-          items:
-            type: string
-          maxItems: 1
-          minItems: 1
+          maxItems: 50
           type: array
       required:
       - features
       - name
+      - supported_country_codes
       - supported_fiat_account_assets
       - supported_trading_symbols
       - type
       type: object
     PatchBank:
+      description: Request body for bank modification.
       properties:
         name:
-          description: The bank's name.
+          description: The name of the bank.
           maxLength: 128
           minLength: 1
+          nullable: true
           type: string
         supported_trading_symbols:
-          description: The bank's list of supported trading symbols.
+          description: The trading symbols supported by the bank.
           items:
             type: string
+          maxItems: 50
+          nullable: true
           type: array
       type: object
     PostCustomer:
-      example:
-        type: individual
+      description: Request body for customer creation.
       properties:
         type:
-          description: The customer's type.
+          description: The type of customer.
           enum:
           - business
           - individual
@@ -10163,42 +10204,51 @@ components:
         address:
           $ref: '#/components/schemas/PostCustomer_address'
         date_of_birth:
-          description: The customer's date of birth.
+          description: The customer's date of birth. Optional when type is individual.
           format: date
           nullable: true
           type: string
         phone_number:
-          description: The customer's phone number.
+          description: The customer's phone number. Optional when type is individual.
           nullable: true
           type: string
         email_address:
-          description: The customer's email address.
+          description: The customer's email address. Optional when type is individual.
           nullable: true
           type: string
         identification_numbers:
-          description: The customer's identification numbers.
+          description: The customer's identification numbers. Optional when type is
+            individual.
           items:
             $ref: '#/components/schemas/PostIdentificationNumber'
+          maxItems: 10
+          minItems: 1
           nullable: true
           type: array
         labels:
           description: The labels associated with the customer.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
       - type
       type: object
     PatchCustomer:
+      description: Request body for customer modification.
       properties:
         state:
           description: The customer's state.
           enum:
           - unverified
+          nullable: true
           type: string
       type: object
     PostCounterparty:
+      description: Request body for counterparty creation.
       properties:
         type:
           description: The counterparty's type.
@@ -10212,31 +10262,38 @@ components:
           minLength: 32
           nullable: true
           type: string
-        name:
-          $ref: '#/components/schemas/PostCounterparty_name'
         address:
           $ref: '#/components/schemas/PostCounterparty_address'
+        name:
+          $ref: '#/components/schemas/PostCounterparty_name'
         aliases:
-          description: The counterparty's aliases.
+          description: The aliases of the counterparty. Optional when type is business.
           items:
             $ref: '#/components/schemas/PostCounterparty_aliases_inner'
+          maxItems: 1
+          minItems: 0
           nullable: true
           type: array
         date_of_birth:
-          description: The counterparty's date of birth; optional for individual counterparties..
+          description: The counterparty's date of birth. Optional when type is individual.
           format: date
           nullable: true
           type: string
         labels:
           description: The labels associated with the counterparty.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
+      - address
       - type
       type: object
     PostIdentityVerification:
+      description: Request body for identity verification creation.
       properties:
         type:
           description: The type of identity verification.
@@ -10245,69 +10302,9 @@ components:
           - bank_account
           - counterparty
           type: string
-        method:
-          description: The identity verification method.
-          enum:
-          - attested
-          - document_submission
-          - id_and_selfie
-          - tax_id_and_selfie
-          - business_registration
-          - plaid_identity_match
-          - attested_ownership
-          - account_ownership
-          - watchlists
-          type: string
         customer_guid:
           description: The customer's identifier.
           maxLength: 32
-          minLength: 32
-          nullable: true
-          type: string
-        counterparty_guid:
-          description: The counterparty's identifier.
-          maxLength: 32
-          minLength: 32
-          nullable: true
-          type: string
-        country_code:
-          description: "The ISO 3166 country 2-Alpha country the customer is being\
-            \ verified in; required when method is set to 'id_and_selfie'. If not\
-            \ present, will default to the Bank's configured country code."
-          maxLength: 2
-          minLength: 2
-          nullable: true
-          type: string
-        name:
-          $ref: '#/components/schemas/PostIdentityVerification_name'
-        address:
-          $ref: '#/components/schemas/PostIdentityVerification_address'
-        date_of_birth:
-          description: The customer's date of birth; required when type is set to
-            'kyc' and method is set to 'attested'.
-          format: date
-          nullable: true
-          type: string
-        phone_number:
-          description: The customer's phone number.
-          nullable: true
-          type: string
-        email_address:
-          description: The customer's email address.
-          nullable: true
-          type: string
-        identification_numbers:
-          description: The customer's identification numbers; required when type is
-            set to 'kyc' and method is set to 'attested'.
-          items:
-            $ref: '#/components/schemas/PostIdentificationNumber'
-          nullable: true
-          type: array
-        external_bank_account_guid:
-          description: The external bank account's identifier. Required for 'bank_account'
-            type.
-          maxLength: 32
-          minLength: 32
           nullable: true
           type: string
         expected_behaviours:
@@ -10318,12 +10315,74 @@ components:
             - failed_immediately
             - tax_id_not_checked
             type: string
+          maxItems: 50
+          nullable: true
           type: array
+        method:
+          description: "The identity verification method. Required when type is counterparty,\
+            \ type is kyc, or type is bank_account."
+          enum:
+          - watchlists
+          - attested
+          - document_submission
+          - id_and_selfie
+          - tax_id_and_selfie
+          - business_registration
+          - plaid_identity_match
+          - attested_ownership
+          - account_ownership
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The counterparty's identifier. Required when type is counterparty.
+          nullable: true
+          type: string
+        country_code:
+          description: "The ISO 3166 country 2-Alpha country the customer is being\
+            \ verified in. If not present, will default to the Bank's configured country\
+            \ code. Optional when type is kyc and method is id_and_selfie, type is\
+            \ kyc and method is tax_id_and_selfie, or type is kyc and method is business_registration."
+          nullable: true
+          type: string
+        name:
+          $ref: '#/components/schemas/PostIdentityVerification_name'
+        address:
+          $ref: '#/components/schemas/PostIdentityVerification_address'
+        date_of_birth:
+          description: The customer's date of birth. Required when type is kyc and
+            method is attested.
+          format: date
+          nullable: true
+          type: string
+        identification_numbers:
+          description: The customer's identification numbers. Required when type is
+            kyc and method is attested.
+          items:
+            $ref: '#/components/schemas/PostIdentificationNumber'
+          maxItems: 10
+          minItems: 1
+          nullable: true
+          type: array
+        external_bank_account_guid:
+          description: The external bank account's identifier. Required when type
+            is bank_account.
+          nullable: true
+          type: string
+        phone_number:
+          description: The customer's phone number. Optional when type is bank_account
+            and method is attested or type is bank_account and method is attested_ownership.
+          nullable: true
+          type: string
+        email_address:
+          description: The customer's email address. Optional when type is bank_account
+            and method is attested or type is bank_account and method is attested_ownership.
+          nullable: true
+          type: string
       required:
-      - method
       - type
       type: object
     PostIdentificationNumber:
+      description: Identification number details.
       properties:
         type:
           description: The source of the identification number.
@@ -10349,6 +10408,7 @@ components:
       - type
       type: object
     PostDepositAddress:
+      description: Request body for deposit address creation.
       properties:
         account_guid:
           description: The trading account guid.
@@ -10358,13 +10418,17 @@ components:
         labels:
           description: The labels associated with the address.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
       - account_guid
       type: object
     PostAccount:
+      description: Request body for account creation.
       properties:
         type:
           description: The account type.
@@ -10374,7 +10438,7 @@ components:
           - invoice_operations
           type: string
         customer_guid:
-          description: The customer identifier associated with the account.
+          description: TThe customer identifier associated with the account.
           maxLength: 32
           minLength: 32
           nullable: true
@@ -10392,7 +10456,10 @@ components:
         labels:
           description: The labels associated with the account.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
@@ -10401,6 +10468,7 @@ components:
       - type
       type: object
     PostWorkflow:
+      description: Request body for workflow creation.
       properties:
         type:
           description: The workflow type.
@@ -10408,52 +10476,57 @@ components:
           - plaid
           type: string
         kind:
-          description: The Plaid workflow kind.
+          description: The Plaid workflow kind. Required when type is plaid.
           enum:
           - link_token_create
           - link_token_update
+          nullable: true
           type: string
         customer_guid:
-          description: The customer identifier associated with the workflow.
+          description: The customer identifier associated with the workflow. Optional
+            when type is plaid and kind is link_token_create.
           maxLength: 32
-          minLength: 32
+          nullable: true
           type: string
         external_bank_account_guid:
           description: The external bank account identifier associated with the workflow.
+            Required when type is plaid and kind is link_token_update.
           maxLength: 32
-          minLength: 32
+          nullable: true
           type: string
         language:
-          description: The language to initialize Plaid link.
+          description: The language to initialize Plaid link. Required when type is
+            plaid.
           enum:
           - en
           - fr
           - es
           - nl
           - de
+          nullable: true
           type: string
         link_customization_name:
           description: The customization name for Plaid link. Currently only supports
-            the value "default".
+            the value "default". Required when type is plaid.
           maxLength: 128
-          minLength: 1
+          nullable: true
           type: string
         redirect_uri:
-          description: The redirect URI for Plaid link.
+          description: The redirect URI for Plaid link. Optional when type is plaid.
           maxLength: 128
-          minLength: 1
           nullable: true
           type: string
         android_package_name:
-          description: The Android package name for Plaid link.
+          description: The Android package name for Plaid link. Optional when type
+            is plaid.
           maxLength: 128
-          minLength: 1
           nullable: true
           type: string
       required:
       - type
       type: object
     PostTransfer:
+      description: Request body for transfer creation.
       properties:
         quote_guid:
           description: The associated quote's identifier.
@@ -10470,104 +10543,122 @@ components:
           - inter_account
           - lightning
           type: string
-        customer_guid:
-          description: The customer's identifier.
+        external_bank_account_guid:
+          description: The customer's 'plaid' or 'plaid_processor_token' external
+            bank account's identifier. Required when transfer_type is funding or transfer_type
+            is instant_funding.
           maxLength: 32
-          minLength: 32
+          nullable: true
           type: string
         fiat_account_guid:
           description: The identifier for the fiat account to use for the transfer.
-            Required if the customer or bank has multiple fiat accounts. Only valid
-            for funding transfers.
+            Required if the customer or bank has multiple fiat accounts. Optional
+            when transfer_type is funding.
           maxLength: 32
-          minLength: 32
           nullable: true
           type: string
-        customer_fiat_account_guid:
-          description: The identifier for the fiat account to use for the transfer.
-            Required if the customer has multiple fiat accounts. Only valid for instant
-            funding and lightning transfers.
+        send_as_deposit_bank_account_guid:
+          description: The deposit bank account's identifier. Only valid for withdrawals.
+            The deposit bank account must be owned by the customer or bank initiating
+            the transfer. Optional when transfer_type is funding.
           maxLength: 32
-          minLength: 32
+          nullable: true
+          type: string
+        payment_rail:
+          description: The desired payment rail to initiate the transfer for. Optional
+            when transfer_type is funding.
+          enum:
+          - ach
+          - eft
+          - wire
+          nullable: true
+          type: string
+        beneficiary_memo:
+          description: The memo to send to the counterparty. Optional when transfer_type
+            is funding.
+          nullable: true
+          type: string
+        source_participants:
+          description: "The source participants for the transfer. Optional when transfer_type\
+            \ is funding, transfer_type is instant_funding, transfer_type is book,\
+            \ transfer_type is crypto, or transfer_type is lightning."
+          items:
+            $ref: '#/components/schemas/PostTransferParticipant'
+          maxItems: 50
+          minItems: 0
+          nullable: true
+          type: array
+        destination_participants:
+          description: "The destination participants for the transfer. Optional when\
+            \ transfer_type is funding, transfer_type is instant_funding, transfer_type\
+            \ is book, transfer_type is crypto, or transfer_type is lightning."
+          items:
+            $ref: '#/components/schemas/PostTransferParticipant'
+          maxItems: 50
+          minItems: 0
+          nullable: true
+          type: array
+        expected_error:
+          description: "The optional expected error to simulate transfer failure.\
+            \ Optional when transfer_type is funding, transfer_type is instant_funding,\
+            \ transfer_type is book, transfer_type is crypto, transfer_type is inter_account,\
+            \ or transfer_type is lightning."
           nullable: true
           type: string
         bank_fiat_account_guid:
           description: The identifier for the fiat account to use for the transfer.
-            Required if the bank has multiple fiat accounts. Only valid for instant
-            funding and lightning transfers.
+            Required if the bank has multiple fiat accounts. Optional when transfer_type
+            is instant_funding or transfer_type is lightning.
           maxLength: 32
-          minLength: 32
+          nullable: true
+          type: string
+        customer_fiat_account_guid:
+          description: The identifier for the fiat account to use for the transfer.
+            Required if the customer has multiple fiat accounts. Optional when transfer_type
+            is instant_funding or transfer_type is lightning.
+          maxLength: 32
           nullable: true
           type: string
         source_account_guid:
-          description: The source account's identifier. Required for book transfers.
+          description: The source account's identifier. Required when transfer_type
+            is book or transfer_type is inter_account.
           maxLength: 32
-          minLength: 32
-          type: string
-        source_participants:
-          description: The source participants for the transfer. Not supported for
-            "inter_account" transfers.
-          items:
-            $ref: '#/components/schemas/PostTransferParticipant'
-          maxItems: 50
-          minItems: 0
           nullable: true
-          type: array
+          type: string
         destination_account_guid:
-          description: The destination account's identifier. Required for book transfers.
+          description: The destination account's identifier. Required when transfer_type
+            is book or transfer_type is inter_account.
           maxLength: 32
-          minLength: 32
-          type: string
-        destination_participants:
-          description: The destination participants for the transfer. Not supported
-            for "inter_account" transfers.
-          items:
-            $ref: '#/components/schemas/PostTransferParticipant'
-          maxItems: 50
-          minItems: 0
           nullable: true
-          type: array
-        external_wallet_guid:
-          description: The customer's external wallet's identifier.
-          maxLength: 32
-          minLength: 32
           type: string
-        external_bank_account_guid:
-          description: The customer's 'plaid' or 'plaid_processor_token' external
-            bank account's identifier.
+        external_wallet_guid:
+          description: The customer's external wallet's identifier. Required when
+            transfer_type is crypto.
           maxLength: 32
-          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The customer's identifier. Required when transfer_type is lightning.
+          maxLength: 32
+          nullable: true
           type: string
         network_fee_account_guid:
           description: "The network fee account's identifier. Required for network\
             \ fee transfers. Must be the identifier for the customer's or bank's fiat\
             \ or trading account. For customer's to pay the network fees, include\
             \ the customer's fiat or trading account guid. For bank's to pay the network\
-            \ fees, include the bank's fiat or trading account guid."
+            \ fees, include the bank's fiat or trading account guid. Required when\
+            \ transfer_type is lightning."
           maxLength: 32
-          minLength: 32
-          type: string
-        payment_rail:
-          description: "The desired payment rail to initiate the transfer for. Valid\
-            \ values are: ach, eft, wire. Valid for funding transfers only."
-          type: string
-        beneficiary_memo:
-          description: The memo to send to the counterparty.
-          maxLength: 128
-          minLength: 1
           nullable: true
-          type: string
-        send_as_deposit_bank_account_guid:
-          description: The deposit bank account's identifier. Optional for funding
-            transfers. Only valid for withdrawals. The deposit bank account must be
-            owned by the customer or bank initiating the transfer.
-          maxLength: 32
-          minLength: 32
           type: string
         labels:
           description: The labels associated with the transfer.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
@@ -10575,9 +10666,10 @@ components:
       - transfer_type
       type: object
     PostTransferParticipant:
+      description: Request body for a transfer participant.
       properties:
         type:
-          description: The type of participant
+          description: The type of participant.
           enum:
           - bank
           - customer
@@ -10597,6 +10689,7 @@ components:
       - type
       type: object
     PostTrade:
+      description: Request body for trade creation.
       properties:
         trade_type:
           default: platform
@@ -10604,6 +10697,7 @@ components:
           enum:
           - platform
           - exit
+          nullable: true
           type: string
         quote_guid:
           description: The associated quote's identifier.
@@ -10622,17 +10716,22 @@ components:
           enum:
           - expired_quote
           - non_sufficient_funds
+          nullable: true
           type: string
         labels:
           description: The labels associated with the trade.
           items:
+            maxLength: 64
+            minLength: 1
             type: string
+          maxItems: 8
           nullable: true
           type: array
       required:
       - quote_guid
       type: object
     PatchExternalBankAccount:
+      description: Request body for external bank account modification.
       properties:
         state:
           description: "The state of the external bank account. If set to \"completed,\"\
@@ -10647,6 +10746,7 @@ components:
       - state
       type: object
     PostExternalBankAccount:
+      description: Request body for external bank account creation.
       properties:
         name:
           description: The name of the account.
@@ -10669,48 +10769,54 @@ components:
         asset:
           description: The asset code. If not set will try and default to the Bank's
             configured fiat asset.
-          maxLength: 8
-          minLength: 1
           nullable: true
           type: string
         plaid_public_token:
           description: The public token for the account. Required for 'plaid' accounts.
+            Required when account_kind is plaid.
           maxLength: 128
           minLength: 1
           nullable: true
           type: string
         plaid_account_id:
           description: The account identifier in plaid. Required for 'plaid' accounts.
+            Required when account_kind is plaid.
           maxLength: 128
           minLength: 1
           nullable: true
           type: string
         plaid_processor_token:
           description: The Plaid processor token used to access the account. Required
-            for 'plaid_processor_token' accounts.
+            when account_kind is plaid_processor_token.
           maxLength: 128
           minLength: 1
           nullable: true
           type: string
         plaid_institution_id:
           description: Plaid's institution ID for the account's institution. Required
-            for 'plaid_processor_token' accounts.
+            when account_kind is plaid_processor_token.
           maxLength: 128
           minLength: 1
           nullable: true
           type: string
         plaid_account_mask:
-          description: The account mask for the account. Required for 'plaid_processor_token'
-            accounts.
+          description: The account mask for the account. Required when account_kind
+            is plaid_processor_token.
           maxLength: 128
           minLength: 1
           nullable: true
           type: string
         plaid_account_name:
-          description: The name of the account. Required for 'plaid_processor_token'
-            accounts.
+          description: The name of the account. Required when account_kind is plaid_processor_token.
           maxLength: 128
           minLength: 1
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The counterparty identifier. Optional when account_kind is
+            raw_routing_details.
+          maxLength: 32
+          minLength: 32
           nullable: true
           type: string
         counterparty_bank_account:
@@ -10721,23 +10827,19 @@ components:
           $ref: '#/components/schemas/PostExternalBankAccount_counterparty_address'
         counterparty_email_address:
           description: The counterparty's email address on their checking account.
-          nullable: true
-          type: string
-        counterparty_guid:
-          description: The counterparty identifier.
-          maxLength: 32
-          minLength: 32
+            Optional when account_kind is raw_routing_details and counterparty_guid
+            is not present.
           nullable: true
           type: string
       required:
       - account_kind
-      - asset
       - name
       type: object
     PostExternalWallet:
+      description: Request body for external wallet creation.
       properties:
         name:
-          description: The name of the account.
+          description: Name of the external wallet.
           maxLength: 128
           minLength: 1
           type: string
@@ -10834,7 +10936,8 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
           nullable: true
           type: string
         postal_code:
@@ -10922,7 +11025,8 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
           nullable: true
           type: string
         postal_code:
@@ -11008,7 +11112,8 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
           nullable: true
           type: string
         postal_code:
@@ -11087,7 +11192,8 @@ components:
           description: The city of the address.
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
           nullable: true
           type: string
         postal_code:
@@ -11240,7 +11346,8 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries.
           nullable: true
           type: string
         postal_code:
@@ -11338,72 +11445,57 @@ components:
           type: array
       type: object
     PostCustomer_name:
+      description: The customer's name. Optional when type is individual.
       nullable: true
       properties:
         first:
-          description: The customer's first name.
+          description: The customer's first name. Required when type is individual.
           nullable: true
           type: string
         middle:
-          description: The customer's middle name.
+          description: The customer's middle name. Optional when type is individual.
           nullable: true
           type: string
         last:
-          description: The customer's last name.
+          description: The customer's last name. Required when type is individual.
           nullable: true
           type: string
       type: object
     PostCustomer_address:
+      description: The customer's address. Optional when type is individual.
       nullable: true
       properties:
         street:
-          description: The first line of the address.
+          description: The first line of the address. Required when type is individual.
+          nullable: true
           type: string
         street2:
-          description: The optional second line of the address.
+          description: The optional second line of the address. Optional when type
+            is individual.
           nullable: true
           type: string
         city:
-          description: The city of the address.
+          description: The city of the address. Required when type is individual.
+          nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries. Optional when type is individual.
           nullable: true
           type: string
         postal_code:
           description: The postal/post/zip code of the address; not used by all countries.
+            Optional when type is individual.
           nullable: true
           type: string
         country_code:
-          description: The ISO 3166 country 2-Alpha country code of the address.
-          type: string
-      required:
-      - city
-      - country_code
-      - street
-      type: object
-    PostCounterparty_name:
-      nullable: true
-      properties:
-        first:
-          description: The counterparty's first name; required for individual counterparties.
-          nullable: true
-          type: string
-        middle:
-          description: The counterparty's middle name; optional for individual counterparties.
-          nullable: true
-          type: string
-        last:
-          description: The counterparty's last name; required for individual counterparties.
-          nullable: true
-          type: string
-        full:
-          description: The counterparty's full name; required for business counterparties.
+          description: The ISO 3166 country 2-Alpha country code of the address. Required
+            when type is individual.
           nullable: true
           type: string
       type: object
     PostCounterparty_address:
-      nullable: true
+      description: The address of the counterparty.
       properties:
         street:
           description: The first line of the address.
@@ -11432,138 +11524,201 @@ components:
       - country_code
       - street
       type: object
+    PostCounterparty_name:
+      description: The name of the counterparty. Required when type is business or
+        type is individual.
+      nullable: true
+      properties:
+        full:
+          description: The counterparty's full name. Required when type is business.
+          nullable: true
+          type: string
+        first:
+          description: The counterparty's first name. Required when type is individual.
+          nullable: true
+          type: string
+        middle:
+          description: The counterparty's middle name. Optional when type is individual.
+          nullable: true
+          type: string
+        last:
+          description: The counterparty's last name. Required when type is individual.
+          nullable: true
+          type: string
+      type: object
     PostCounterparty_aliases_inner:
       properties:
         full:
-          description: The counterparty's full name; optional for business counterparties..
+          description: The counterparty's full name. Required when type is business.
           nullable: true
           type: string
       type: object
     PostIdentityVerification_name:
-      description: The customer's name; required when method is set to 'attested'.
-        Either full or first and last are required.
+      description: "The customer's name. Required when type is kyc and method is attested,\
+        \ type is bank_account and method is attested, or type is bank_account and\
+        \ method is attested_ownership."
       nullable: true
       properties:
         first:
-          description: The customer's first name.
+          description: The customer's first name. Required when type is kyc and method
+            is attested. Optional when type is bank_account and method is attested
+            or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         middle:
-          description: The customer's middle name.
+          description: "The customer's middle name. Optional when type is kyc and\
+            \ method is attested, type is bank_account and method is attested, or\
+            \ type is bank_account and method is attested_ownership."
           nullable: true
           type: string
         last:
-          description: The customer's last name.
+          description: The customer's last name. Required when type is kyc and method
+            is attested. Optional when type is bank_account and method is attested
+            or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         full:
-          description: The customer's full name.
+          description: The customer's full name. Required when type is bank_account
+            and method is attested or type is bank_account and method is attested_ownership.
+            Optional when type is kyc and method is attested.
           nullable: true
           type: string
       type: object
     PostIdentityVerification_address:
-      description: The customer's address; required when method is set to 'attested'.
+      description: "The customer's address. Required when type is kyc and method is\
+        \ attested, type is bank_account and method is attested, or type is bank_account\
+        \ and method is attested_ownership."
       nullable: true
       properties:
         street:
-          description: The first line of the address.
+          description: "The first line of the address. Required when type is kyc and\
+            \ method is attested, type is bank_account and method is attested, or\
+            \ type is bank_account and method is attested_ownership."
+          nullable: true
           type: string
         street2:
-          description: The optional second line of the address.
+          description: "The optional second line of the address. Optional when type\
+            \ is kyc and method is attested, type is bank_account and method is attested,\
+            \ or type is bank_account and method is attested_ownership."
           nullable: true
           type: string
         city:
-          description: The city of the address.
+          description: "The city of the address. Required when type is kyc and method\
+            \ is attested, type is bank_account and method is attested, or type is\
+            \ bank_account and method is attested_ownership."
+          nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: "The ISO 3166-2 subdivision code of the address; not used by\
+            \ all countries. Optional when type is kyc and method is attested, type\
+            \ is bank_account and method is attested, or type is bank_account and\
+            \ method is attested_ownership."
           nullable: true
           type: string
         postal_code:
-          description: The postal/post/zip code of the address; not used by all countries.
+          description: "The postal/post/zip code of the address; not used by all countries.\
+            \ Optional when type is kyc and method is attested, type is bank_account\
+            \ and method is attested, or type is bank_account and method is attested_ownership."
           nullable: true
           type: string
         country_code:
-          description: The ISO 3166 country 2-Alpha country code of the address.
-          maxLength: 2
-          minLength: 2
+          description: "The ISO 3166 country 2-Alpha country code of the address.\
+            \ Required when type is kyc and method is attested, type is bank_account\
+            \ and method is attested, or type is bank_account and method is attested_ownership."
+          nullable: true
           type: string
-      required:
-      - city
-      - country_code
-      - street
       type: object
     PostExternalBankAccount_counterparty_bank_account:
-      description: The counterparty's checking bank account information.
+      description: The counterparty's checking bank account information. Required
+        when account_kind is raw_routing_details.
       nullable: true
       properties:
         routing_number_type:
-          description: The type of routing number.
+          description: The type of routing number. Required when account_kind is raw_routing_details.
           enum:
           - CPA
           - ABA
+          nullable: true
           type: string
         routing_number:
-          description: The routing number.
+          description: The routing number. Required when account_kind is raw_routing_details.
+          nullable: true
           type: string
         account_number:
-          description: The account number.
+          description: The account number. Required when account_kind is raw_routing_details.
+          nullable: true
           type: string
-      required:
-      - account_number
-      - routing_number
-      - routing_number_type
       type: object
     PostExternalBankAccount_counterparty_name:
-      description: The counterparty's name on their checking account.
+      description: The counterparty's name on their checking account. Required when
+        account_kind is raw_routing_details and counterparty_guid is not present.
       nullable: true
       properties:
         first:
-          description: The customer's first name. Used for individual accounts.
+          description: The counterparty's first name; used for individuals. Optional
+            when account_kind is raw_routing_details and counterparty_guid is not
+            present.
+          nullable: true
           type: string
         middle:
-          description: The customer's middle name. Used for individual accounts.
+          description: The counterparty's middle name; used for individuals. Optional
+            when account_kind is raw_routing_details and counterparty_guid is not
+            present.
           nullable: true
           type: string
         last:
-          description: The customer's last name. Used for individual accounts.
+          description: The counterparty's last name; used for individuals. Optional
+            when account_kind is raw_routing_details and counterparty_guid is not
+            present.
+          nullable: true
           type: string
         full:
-          description: The customers's full name on the account. Used for business
-            accounts.
+          description: The counterparty's full name; used for businesses. Optional
+            when account_kind is raw_routing_details and counterparty_guid is not
+            present.
+          nullable: true
           type: string
       type: object
     PostExternalBankAccount_counterparty_address:
-      description: The counterparty's address on their checking account.
+      description: The counterparty's address on their checking account. Required
+        when account_kind is raw_routing_details and counterparty_guid is not present.
       nullable: true
       properties:
         street:
-          description: The first line of the address.
+          description: The first line of the address. Required when account_kind is
+            raw_routing_details and counterparty_guid is not present.
+          nullable: true
           type: string
         street2:
-          description: The optional second line of the address.
+          description: The optional second line of the address. Optional when account_kind
+            is raw_routing_details and counterparty_guid is not present.
           nullable: true
           type: string
         city:
-          description: The city of the address.
+          description: The city of the address. Required when account_kind is raw_routing_details
+            and counterparty_guid is not present.
+          nullable: true
           type: string
         subdivision:
-          description: The provide/state/region of the address; not used by all countries.
+          description: The ISO 3166-2 subdivision code of the address; not used by
+            all countries. Optional when account_kind is raw_routing_details and counterparty_guid
+            is not present.
           nullable: true
           type: string
         postal_code:
           description: The postal/post/zip code of the address; not used by all countries.
+            Optional when account_kind is raw_routing_details and counterparty_guid
+            is not present.
           nullable: true
           type: string
         country_code:
-          description: The ISO 3166 country 2-Alpha country code of the address.
+          description: The ISO 3166 country 2-Alpha country code of the address. Required
+            when account_kind is raw_routing_details and counterparty_guid is not
+            present.
           maxLength: 2
           minLength: 2
+          nullable: true
           type: string
-      required:
-      - city
-      - country_code
-      - street
       type: object
   securitySchemes:
     oauth2:

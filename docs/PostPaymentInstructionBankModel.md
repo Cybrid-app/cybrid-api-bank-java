@@ -2,6 +2,7 @@
 
 # PostPaymentInstructionBankModel
 
+Request body for payment instruction creation.
 
 ## Properties
 

@@ -2,6 +2,7 @@
 
 # PostDepositAddressBankModel
 
+Request body for deposit address creation.
 
 ## Properties
 

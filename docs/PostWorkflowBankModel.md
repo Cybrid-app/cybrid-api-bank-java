@@ -2,19 +2,20 @@
 
 # PostWorkflowBankModel
 
+Request body for workflow creation.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | The workflow type. |  |
-|**kind** | [**KindEnum**](#KindEnum) | The Plaid workflow kind. |  [optional] |
-|**customerGuid** | **String** | The customer identifier associated with the workflow. |  [optional] |
-|**externalBankAccountGuid** | **String** | The external bank account identifier associated with the workflow. |  [optional] |
-|**language** | [**LanguageEnum**](#LanguageEnum) | The language to initialize Plaid link. |  [optional] |
-|**linkCustomizationName** | **String** | The customization name for Plaid link. Currently only supports the value \&quot;default\&quot;. |  [optional] |
-|**redirectUri** | **String** | The redirect URI for Plaid link. |  [optional] |
-|**androidPackageName** | **String** | The Android package name for Plaid link. |  [optional] |
+|**kind** | [**KindEnum**](#KindEnum) | The Plaid workflow kind. Required when type is plaid. |  [optional] |
+|**customerGuid** | **String** | The customer identifier associated with the workflow. Optional when type is plaid and kind is link_token_create. |  [optional] |
+|**externalBankAccountGuid** | **String** | The external bank account identifier associated with the workflow. Required when type is plaid and kind is link_token_update. |  [optional] |
+|**language** | [**LanguageEnum**](#LanguageEnum) | The language to initialize Plaid link. Required when type is plaid. |  [optional] |
+|**linkCustomizationName** | **String** | The customization name for Plaid link. Currently only supports the value \&quot;default\&quot;. Required when type is plaid. |  [optional] |
+|**redirectUri** | **String** | The redirect URI for Plaid link. Optional when type is plaid. |  [optional] |
+|**androidPackageName** | **String** | The Android package name for Plaid link. Optional when type is plaid. |  [optional] |
 
 
 

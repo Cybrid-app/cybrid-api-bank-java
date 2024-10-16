@@ -2,12 +2,13 @@
 
 # PostExternalWalletBankModel
 
+Request body for external wallet creation.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**name** | **String** | The name of the account. |  |
+|**name** | **String** | Name of the external wallet. |  |
 |**customerGuid** | **String** | The customer identifier. |  [optional] |
 |**asset** | **String** | The asset code. |  |
 |**address** | **String** | The blockchain wallet address for the wallet. |  |

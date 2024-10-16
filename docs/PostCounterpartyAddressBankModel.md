@@ -2,6 +2,7 @@
 
 # PostCounterpartyAddressBankModel
 
+The address of the counterparty.
 
 ## Properties
 

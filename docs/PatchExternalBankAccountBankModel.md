@@ -2,6 +2,7 @@
 
 # PatchExternalBankAccountBankModel
 
+Request body for external bank account modification.
 
 ## Properties
 

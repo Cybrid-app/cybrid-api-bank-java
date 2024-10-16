@@ -2,6 +2,7 @@
 
 # PostCounterpartyBankModel
 
+Request body for counterparty creation.
 
 ## Properties
 
@@ -9,10 +10,10 @@
 |------------ | ------------- | ------------- | -------------|
 |**type** | [**TypeEnum**](#TypeEnum) | The counterparty&#39;s type. |  |
 |**customerGuid** | **String** | The owning customer&#39;s identifier. |  [optional] |
+|**address** | [**PostCounterpartyAddressBankModel**](PostCounterpartyAddressBankModel.md) |  |  |
 |**name** | [**PostCounterpartyNameBankModel**](PostCounterpartyNameBankModel.md) |  |  [optional] |
-|**address** | [**PostCounterpartyAddressBankModel**](PostCounterpartyAddressBankModel.md) |  |  [optional] |
-|**aliases** | [**List&lt;PostCounterpartyAliasesInnerBankModel&gt;**](PostCounterpartyAliasesInnerBankModel.md) | The counterparty&#39;s aliases. |  [optional] |
-|**dateOfBirth** | **LocalDate** | The counterparty&#39;s date of birth; optional for individual counterparties.. |  [optional] |
+|**aliases** | [**List&lt;PostCounterpartyAliasesInnerBankModel&gt;**](PostCounterpartyAliasesInnerBankModel.md) | The aliases of the counterparty. Optional when type is business. |  [optional] |
+|**dateOfBirth** | **LocalDate** | The counterparty&#39;s date of birth. Optional when type is individual. |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the counterparty. |  [optional] |
 
 

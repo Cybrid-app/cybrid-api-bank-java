@@ -2,6 +2,7 @@
 
 # PostIdentificationNumberBankModel
 
+Identification number details.
 
 ## Properties
 

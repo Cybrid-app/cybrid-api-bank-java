@@ -2,6 +2,7 @@
 
 # PatchCustomerBankModel
 
+Request body for customer modification.
 
 ## Properties
 

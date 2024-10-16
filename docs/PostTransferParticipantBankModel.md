@@ -2,12 +2,13 @@
 
 # PostTransferParticipantBankModel
 
+Request body for a transfer participant.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**type** | [**TypeEnum**](#TypeEnum) | The type of participant |  |
+|**type** | [**TypeEnum**](#TypeEnum) | The type of participant. |  |
 |**amount** | **java.math.BigInteger** | The amount in base units of the asset. |  |
 |**guid** | **String** | The participant&#39;s identifier. |  |
 

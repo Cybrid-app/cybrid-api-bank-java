@@ -2,6 +2,7 @@
 
 # PostTradeBankModel
 
+Request body for trade creation.
 
 ## Properties
 

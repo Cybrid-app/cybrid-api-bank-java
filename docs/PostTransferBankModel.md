@@ -49,6 +49,7 @@ Request body for transfer creation.
 | ACH | &quot;ach&quot; |
 | EFT | &quot;eft&quot; |
 | WIRE | &quot;wire&quot; |
+| RTP | &quot;rtp&quot; |
 
 
 

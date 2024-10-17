@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.13
+  version: v0.121.15
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10599,13 +10599,6 @@ components:
           minItems: 0
           nullable: true
           type: array
-        expected_error:
-          description: "The optional expected error to simulate transfer failure.\
-            \ Optional when transfer_type is funding, transfer_type is instant_funding,\
-            \ transfer_type is book, transfer_type is crypto, transfer_type is inter_account,\
-            \ or transfer_type is lightning."
-          nullable: true
-          type: string
         bank_fiat_account_guid:
           description: The identifier for the fiat account to use for the transfer.
             Required if the bank has multiple fiat accounts. Optional when transfer_type

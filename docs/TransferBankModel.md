@@ -36,6 +36,7 @@
 |**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |
 |**paymentRail** | **String** | The rail the payment was done on. One of: ach, eft, wire, rtp |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |
+|**entries** | [**List&lt;TransferEntryBankModel&gt;**](TransferEntryBankModel.md) | Transfer entries associated with the batch transfer |  [optional] |
 
 
 

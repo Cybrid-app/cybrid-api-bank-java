@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.121.22
+- API version: v0.121.23
 
-- Build date: 2024-10-18T15:45:27.424914Z[Etc/UTC]
+- Build date: 2024-10-18T17:22:13.302139Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.121.22</version>
+  <version>v0.121.23</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.121.22"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.121.23"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.121.22.jar`
+- `target/cybrid-api-bank-java-v0.121.23.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -426,11 +426,15 @@ Class | Method | HTTP request | Description
  - [PostInvoiceBankModel](docs/PostInvoiceBankModel.md)
  - [PostPaymentInstructionBankModel](docs/PostPaymentInstructionBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
+ - [PostQuoteEntryBankModel](docs/PostQuoteEntryBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
  - [PostTransferBankModel](docs/PostTransferBankModel.md)
  - [PostTransferParticipantBankModel](docs/PostTransferParticipantBankModel.md)
  - [PostWorkflowBankModel](docs/PostWorkflowBankModel.md)
  - [QuoteBankModel](docs/QuoteBankModel.md)
+ - [QuoteEntryBankModel](docs/QuoteEntryBankModel.md)
+ - [QuoteEntryDestinationAccountBankModel](docs/QuoteEntryDestinationAccountBankModel.md)
+ - [QuoteEntrySourceAccountBankModel](docs/QuoteEntrySourceAccountBankModel.md)
  - [QuoteListBankModel](docs/QuoteListBankModel.md)
  - [QuoteSideBankModel](docs/QuoteSideBankModel.md)
  - [QuoteTypeBankModel](docs/QuoteTypeBankModel.md)
@@ -444,6 +448,8 @@ Class | Method | HTTP request | Description
  - [TransferAccountTypeBankModel](docs/TransferAccountTypeBankModel.md)
  - [TransferBankModel](docs/TransferBankModel.md)
  - [TransferDestinationAccountBankModel](docs/TransferDestinationAccountBankModel.md)
+ - [TransferEntryBankModel](docs/TransferEntryBankModel.md)
+ - [TransferEntryDestinationAccountBankModel](docs/TransferEntryDestinationAccountBankModel.md)
  - [TransferFailureCodeBankModel](docs/TransferFailureCodeBankModel.md)
  - [TransferListBankModel](docs/TransferListBankModel.md)
  - [TransferParticipantBankModel](docs/TransferParticipantBankModel.md)

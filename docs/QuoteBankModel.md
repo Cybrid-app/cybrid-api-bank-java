@@ -24,6 +24,7 @@
 |**networkFee** | **java.math.BigInteger** | The network fee in base units of network_fee_asset. Only present on &#x60;crypto_transfer&#x60; quotes. |  [optional] |
 |**networkFeeAsset** | **String** | The asset code of the network fee. |  [optional] |
 |**networkAddress** | **String** | The network address to pay the invoice to. Populated for lightning_transfer quotes. |  [optional] |
+|**entries** | [**List&lt;QuoteEntryBankModel&gt;**](QuoteEntryBankModel.md) | The quote entries for a batch transfer quote |  [optional] |
 
 
 

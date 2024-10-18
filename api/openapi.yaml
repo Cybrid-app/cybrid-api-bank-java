@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.22
+  version: v0.121.23
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8510,6 +8510,15 @@ components:
           minLength: 1
           nullable: true
           type: string
+        destination_accounts:
+          description: Destination accounts for batch transactions Optional when product_type
+            is crypto_transfer.
+          items:
+            $ref: '#/components/schemas/PostQuoteEntry'
+          maxItems: 20
+          minItems: 1
+          nullable: true
+          type: array
         reference_trade_guid:
           description: The guid of the related trade. Only present on `exit` trades.
             Required when product_type is trading_exit.
@@ -8531,6 +8540,32 @@ components:
           minLength: 32
           nullable: true
           type: string
+      type: object
+    PostQuoteEntry:
+      description: Request body for quote account creation.
+      properties:
+        type:
+          description: The type of account
+          enum:
+          - external_wallet
+          type: string
+        guid:
+          description: The guid of the account
+          type: string
+        receive_amount:
+          description: "The amount to be received in base units of the currency: currency\
+            \ is \"asset\" for buy and \"counter_asset\" for sell for trade quotes."
+          nullable: true
+          type: integer
+        deliver_amount:
+          description: "The amount to be delivered in base units of the currency:\
+            \ currency is \"counter_asset\" for buy and \"asset\" for sell for trade\
+            \ quotes."
+          nullable: true
+          type: integer
+      required:
+      - guid
+      - type
       type: object
     PostFee:
       description: Request body for fee creation.
@@ -8564,6 +8599,33 @@ components:
         issued_at: 2000-01-23T04:56:07.000+00:00
         network_fee_asset: network_fee_asset
         deliver_amount: 5
+        entries:
+        - fee: 2
+          source_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          receive_amount: 9
+          destination_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          deliver_amount: 3
+        - fee: 2
+          source_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          receive_amount: 9
+          destination_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          deliver_amount: 3
         product_type: product_type
         expires_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8658,6 +8720,42 @@ components:
             quotes.
           nullable: true
           type: string
+        entries:
+          description: The quote entries for a batch transfer quote
+          items:
+            $ref: '#/components/schemas/QuoteEntry'
+          nullable: true
+          type: array
+      type: object
+    QuoteEntry:
+      example:
+        fee: 2
+        source_account:
+          guid: guid
+          type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        receive_amount: 9
+        destination_account:
+          guid: guid
+          type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        deliver_amount: 3
+      properties:
+        source_account:
+          $ref: '#/components/schemas/QuoteEntry_source_account'
+        destination_account:
+          $ref: '#/components/schemas/QuoteEntry_destination_account'
+        receive_amount:
+          description: The amount to be received in base units of the currency
+          type: integer
+        deliver_amount:
+          description: The amount to be delivered in base units of the currency
+          type: integer
+        fee:
+          description: The fee associated with the account entry.
+          type: integer
       type: object
     QuoteType:
       enum:
@@ -8689,6 +8787,33 @@ components:
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
+          entries:
+          - fee: 2
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            receive_amount: 9
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            deliver_amount: 3
+          - fee: 2
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            receive_amount: 9
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            deliver_amount: 3
           product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8706,6 +8831,33 @@ components:
           issued_at: 2000-01-23T04:56:07.000+00:00
           network_fee_asset: network_fee_asset
           deliver_amount: 5
+          entries:
+          - fee: 2
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            receive_amount: 9
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            deliver_amount: 3
+          - fee: 2
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            receive_amount: 9
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            deliver_amount: 3
           product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8844,6 +8996,31 @@ components:
         labels:
         - labels
         - labels
+        entries:
+        - amount: 4
+          fee: 7
+          source_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          destination_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+        - amount: 4
+          fee: 7
+          source_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
+          destination_account:
+            guid: guid
+            type: type
+            bank_guid: bank_guid
+            customer_guid: customer_guid
         estimated_amount: 5
         guid: guid
         external_bank_account_guid: external_bank_account_guid
@@ -8996,6 +9173,44 @@ components:
             type: string
           nullable: true
           type: array
+        entries:
+          description: Transfer entries associated with the batch transfer
+          items:
+            $ref: '#/components/schemas/TransferEntry'
+          nullable: true
+          type: array
+      type: object
+    TransferEntry:
+      example:
+        amount: 4
+        fee: 7
+        source_account:
+          guid: guid
+          type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        destination_account:
+          guid: guid
+          type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+      properties:
+        amount:
+          description: The actual amount in base units of the asset.
+          nullable: true
+          type: integer
+        fee:
+          description: The fee associated with the transfer entry.
+          type: integer
+        source_account:
+          $ref: '#/components/schemas/QuoteEntry_source_account'
+        destination_account:
+          $ref: '#/components/schemas/TransferEntry_destination_account'
+      required:
+      - amount
+      - destination_account
+      - fee
+      - source_account
       type: object
     TransferParticipant:
       example:
@@ -9470,6 +9685,31 @@ components:
           labels:
           - labels
           - labels
+          entries:
+          - amount: 4
+            fee: 7
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+          - amount: 4
+            fee: 7
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -9521,6 +9761,31 @@ components:
           labels:
           - labels
           - labels
+          entries:
+          - amount: 4
+            fee: 7
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+          - amount: 4
+            fee: 7
+            source_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
+            destination_account:
+              guid: guid
+              type: type
+              bank_guid: bank_guid
+              customer_guid: customer_guid
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -10626,7 +10891,7 @@ components:
           nullable: true
           type: string
         external_wallet_guid:
-          description: The customer's external wallet's identifier. Required when
+          description: The customer's external wallet's identifier. Optional when
             transfer_type is crypto.
           maxLength: 32
           nullable: true
@@ -11229,6 +11494,67 @@ components:
       - routing_number
       - routing_number_type
       type: object
+    QuoteEntry_source_account:
+      description: The source account in the batch transfer entry.
+      example:
+        guid: guid
+        type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      nullable: true
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the transfer account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: The type of transfer account; one of external_wallet.
+          type: string
+        bank_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+      type: object
+    QuoteEntry_destination_account:
+      description: The destination account entry in the batch transfer.
+      example:
+        guid: guid
+        type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the transfer account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: "The type of transfer account; one of trading, fiat, external_bank_account,\
+            \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
+            \ or gas."
+          type: string
+        bank_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+      type: object
     WorkflowWithDetails_allOf:
       properties:
         plaid_link_token:
@@ -11270,6 +11596,38 @@ components:
       type: object
     Transfer_destination_account:
       description: The destination account in the transfer.
+      example:
+        guid: guid
+        type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
+      nullable: true
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the transfer account.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: "The type of transfer account; one of trading, fiat, external_bank_account,\
+            \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
+            \ or gas."
+          type: string
+        bank_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The account's identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+      type: object
+    TransferEntry_destination_account:
+      description: The destination account entry in the batch transfer.
       example:
         guid: guid
         type: type

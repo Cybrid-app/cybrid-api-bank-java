@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.30
+  version: v0.121.34
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -11831,18 +11831,24 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The ISO 3166-2 subdivision code of the address; not used by
-            all countries. Optional when type is individual.
+          description: "The ISO 3166-2 subdivision code of the address. Applicable\
+            \ only for countries that use subnational states, provinces, lands, oblasts\
+            \ or regions. Optional when type is individual."
+          maxLength: 3
+          minLength: 1
           nullable: true
           type: string
         postal_code:
-          description: The postal/post/zip code of the address; not used by all countries.
-            Optional when type is individual.
+          description: "The postal, zip or post code of the address. Applicable only\
+            \ for countries that use postal, zip or post codes. Optional when type\
+            \ is individual."
           nullable: true
           type: string
         country_code:
           description: The ISO 3166 country 2-Alpha country code of the address. Required
             when type is individual.
+          maxLength: 2
+          minLength: 2
           nullable: true
           type: string
       type: object
@@ -11860,16 +11866,22 @@ components:
           description: The city of the address.
           type: string
         subdivision:
-          description: The ISO 3166-2 subdivision code of the address; not used by
-            all countries.
+          description: "The ISO 3166-2 subdivision code of the address. Applicable\
+            \ only for countries that use subnational states, provinces, lands, oblasts\
+            \ or regions."
+          maxLength: 3
+          minLength: 1
           nullable: true
           type: string
         postal_code:
-          description: The postal/post/zip code of the address; not used by all countries.
+          description: "The postal, zip or post code of the address. Applicable only\
+            \ for countries that use postal, zip or post codes."
           nullable: true
           type: string
         country_code:
           description: The ISO 3166 country 2-Alpha country code of the address.
+          maxLength: 2
+          minLength: 2
           type: string
       required:
       - city
@@ -11961,22 +11973,28 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: "The ISO 3166-2 subdivision code of the address; not used by\
-            \ all countries. Optional when type is kyc and method is attested, type\
-            \ is bank_account and method is attested, or type is bank_account and\
-            \ method is attested_ownership."
+          description: "The ISO 3166-2 subdivision code of the address. Applicable\
+            \ only for countries that use subnational states, provinces, lands, oblasts\
+            \ or regions. Optional when type is kyc and method is attested, type is\
+            \ bank_account and method is attested, or type is bank_account and method\
+            \ is attested_ownership."
+          maxLength: 3
+          minLength: 1
           nullable: true
           type: string
         postal_code:
-          description: "The postal/post/zip code of the address; not used by all countries.\
-            \ Optional when type is kyc and method is attested, type is bank_account\
-            \ and method is attested, or type is bank_account and method is attested_ownership."
+          description: "The postal, zip or post code of the address. Applicable only\
+            \ for countries that use postal, zip or post codes. Optional when type\
+            \ is kyc and method is attested, type is bank_account and method is attested,\
+            \ or type is bank_account and method is attested_ownership."
           nullable: true
           type: string
         country_code:
           description: "The ISO 3166 country 2-Alpha country code of the address.\
             \ Required when type is kyc and method is attested, type is bank_account\
             \ and method is attested, or type is bank_account and method is attested_ownership."
+          maxLength: 2
+          minLength: 2
           nullable: true
           type: string
       type: object
@@ -12052,15 +12070,18 @@ components:
           nullable: true
           type: string
         subdivision:
-          description: The ISO 3166-2 subdivision code of the address; not used by
-            all countries. Optional when account_kind is raw_routing_details and counterparty_guid
-            is not present.
+          description: "The ISO 3166-2 subdivision code of the address. Applicable\
+            \ only for countries that use subnational states, provinces, lands, oblasts\
+            \ or regions. Optional when account_kind is raw_routing_details and counterparty_guid\
+            \ is not present."
+          maxLength: 3
+          minLength: 1
           nullable: true
           type: string
         postal_code:
-          description: The postal/post/zip code of the address; not used by all countries.
-            Optional when account_kind is raw_routing_details and counterparty_guid
-            is not present.
+          description: "The postal, zip or post code of the address. Applicable only\
+            \ for countries that use postal, zip or post codes. Optional when account_kind\
+            \ is raw_routing_details and counterparty_guid is not present."
           nullable: true
           type: string
         country_code:

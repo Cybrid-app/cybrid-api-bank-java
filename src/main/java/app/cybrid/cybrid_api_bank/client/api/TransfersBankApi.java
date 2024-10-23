@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-23T11:55:44.977072Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-10-23T13:40:16.434743Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -55,7 +55,6 @@ public class TransfersBankApi {
      * <p><b>201</b> - Transfer created
      * <p><b>401</b> - Unauthorized
      * <p><b>403</b> - Forbidden
-     * <p><b>400</b> - Bad Request
      * <p><b>409</b> - Conflict
      * <p><b>422</b> - Unprocessable Content
      * @param postTransferBankModel The postTransferBankModel parameter
@@ -97,7 +96,6 @@ public class TransfersBankApi {
      * <p><b>201</b> - Transfer created
      * <p><b>401</b> - Unauthorized
      * <p><b>403</b> - Forbidden
-     * <p><b>400</b> - Bad Request
      * <p><b>409</b> - Conflict
      * <p><b>422</b> - Unprocessable Content
      * @param postTransferBankModel The postTransferBankModel parameter

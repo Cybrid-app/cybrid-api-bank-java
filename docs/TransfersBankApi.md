@@ -85,7 +85,6 @@ public class Example {
 | **201** | Transfer created |  -  |
 | **401** | Unauthorized |  -  |
 | **403** | Forbidden |  -  |
-| **400** | Bad Request |  -  |
 | **409** | Conflict |  -  |
 | **422** | Unprocessable Content |  -  |
 

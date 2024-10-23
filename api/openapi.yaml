@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.121.34
+  version: v0.121.36
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5735,18 +5735,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Forbidden
-        "400":
-          content:
-            application/json:
-              examples:
-                invalid_parameter:
-                  value:
-                    status: 400
-                    error_message: Expected error invalid
-                    message_code: invalid_parameter
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: Bad Request
         "409":
           content:
             application/json:
@@ -5768,6 +5756,16 @@ paths:
                     status: 422
                     error_message: Transfer invalid
                     message_code: invalid_transfer
+                invalid_parameter_1:
+                  value:
+                    status: 422
+                    error_message: Expected behaviour invalid
+                    message_code: invalid_parameter
+                invalid_parameter_2:
+                  value:
+                    status: 422
+                    error_message: Quote invalid
+                    message_code: invalid_parameter
                 invalid_value_1:
                   value:
                     status: 422
@@ -5838,11 +5836,6 @@ paths:
                     status: 422
                     error_message: Quote expired
                     message_code: quote_expired
-                invalid_parameter:
-                  value:
-                    status: 422
-                    error_message: Quote invalid
-                    message_code: invalid_parameter
                 frozen_customer:
                   value:
                     status: 422
@@ -10911,6 +10904,17 @@ components:
           maxLength: 32
           nullable: true
           type: string
+        expected_behaviours:
+          description: The optional expected behaviour to simulate. Only applicable
+            for transfers under sandbox banks. The force_review behaviour will force
+            the transfer to be reviewed for funding and instant_funding transfers.
+          items:
+            enum:
+            - force_review
+            type: string
+          maxItems: 50
+          nullable: true
+          type: array
         labels:
           description: The labels associated with the transfer.
           items:

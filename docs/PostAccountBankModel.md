@@ -23,6 +23,7 @@ Request body for account creation.
 | TRADING | &quot;trading&quot; |
 | FIAT | &quot;fiat&quot; |
 | INVOICE_OPERATIONS | &quot;invoice_operations&quot; |
+| STORAGE | &quot;storage&quot; |
 
 
 

@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.122.20
+  version: v0.122.22
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5785,10 +5785,15 @@ paths:
           content:
             application/json:
               examples:
-                quote_already_exists:
+                quote_already_exists_1:
                   value:
                     status: 409
                     error_message: Transfer already exists for this quote
+                    message_code: quote_already_exists
+                quote_already_exists_2:
+                  value:
+                    status: 409
+                    error_message: Return already processed for this transfer
                     message_code: quote_already_exists
               schema:
                 $ref: '#/components/schemas/ErrorResponse'

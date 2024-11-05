@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.122.30
+  version: v0.122.31
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9077,6 +9077,7 @@ components:
           type: type
         transfer_type: transfer_type
         asset: asset
+        return_code: return_code
         estimated_network_fee: 7
         customer_guid: customer_guid
       properties:
@@ -9130,6 +9131,10 @@ components:
             \ internal_error, or invalid_address."
           nullable: true
           type: string
+        return_code:
+          description: The return code for reversed transfers
+          nullable: true
+          type: string
         amount:
           description: The actual amount in base units of the asset.
           nullable: true
@@ -9172,7 +9177,7 @@ components:
           nullable: true
           type: string
         reference_transfer_guid:
-          description: The guid of the related transfer. Only present on `funding_return`
+          description: The guid of the related transfer. Only present on return type
             transfers.
           maxLength: 32
           minLength: 32
@@ -9766,6 +9771,7 @@ components:
             type: type
           transfer_type: transfer_type
           asset: asset
+          return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid
         - transfer_details: "{}"
@@ -9842,6 +9848,7 @@ components:
             type: type
           transfer_type: transfer_type
           asset: asset
+          return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid
         page: 0

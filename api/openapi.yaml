@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.122.72
+  version: v0.123.2
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9320,6 +9320,7 @@ components:
       - invoice_operations
       - fee
       - gas
+      - storage
       type: string
     TransferFailureCode:
       enum:
@@ -11604,7 +11605,7 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
-            \ or gas."
+            \ gas, or storage."
           type: string
         bank_guid:
           description: The account's identifier.
@@ -11643,7 +11644,7 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
-            \ or gas."
+            \ gas, or storage."
           type: string
         bank_guid:
           description: The account's identifier.
@@ -11675,7 +11676,7 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
-            \ or gas."
+            \ gas, or storage."
           type: string
         bank_guid:
           description: The account's identifier.
@@ -11707,7 +11708,7 @@ components:
         type:
           description: "The type of transfer account; one of trading, fiat, external_bank_account,\
             \ external_wallet, one_time_address, reserve, invoice_operations, fee,\
-            \ or gas."
+            \ gas, or storage."
           type: string
         bank_guid:
           description: The account's identifier.

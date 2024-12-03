@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.12
+  version: v0.123.46
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -1185,9 +1185,14 @@ paths:
                 invalid_value_2:
                   value:
                     status: 422
-                    error_message: Identification number not supported
+                    error_message: Identification number missing
                     message_code: invalid_value
                 invalid_value_3:
+                  value:
+                    status: 422
+                    error_message: Identification number not supported
+                    message_code: invalid_value
+                invalid_value_4:
                   value:
                     status: 422
                     error_message: Address country code not supported
@@ -1923,8 +1928,8 @@ paths:
                 unprocessable_request:
                   value:
                     status: 422
-                    error_message: "Unable to process request: UnsupportedConfiguration\
-                      \ - Invalid type or parameters"
+                    error_message: "Unable to process request: UnsupportedCountry\
+                      \ - Country not supported"
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -3277,18 +3282,24 @@ paths:
         \ issue verifying the provided ID based on it being a paper replica |\n| database_check_failure\
         \ | Failure due to an issue verifying the provided information against authoritative\
         \ data sources |\n| selfie_failure | Failure due to an issue verifying the\
-        \ provided selfie photo |\n| country_comparison_check_failure | Failure due\
-        \ the customer verification being performed out of country |\n| duplicate_person_check_failure\
-        \ | Failure due to a customer already existing for this person |\n| prohibited_person_check_failure\
+        \ provided selfie photo |\n| selfie_quality_check_failure | Failure due to\
+        \ an issue verifying the provided selfie photo based on the image quality\
+        \ |\n| country_comparison_check_failure | Failure due the customer verification\
+        \ being performed out of country |\n| duplicate_person_check_failure | Failure\
+        \ due to a customer already existing for this person |\n| prohibited_person_check_failure\
         \ | Failure due to a person being on prohibited from accessing the service\
         \ |\n| name_check_failure | Failure due to an issue verifying the name of\
         \ the person |\n| address_check_failure | Failure due to an issue verifying\
-        \ the address of the person |\n| dob_check_failure | Failure due to an issue\
-        \ verifying the date of birth of the person |\n| id_number_check_failure |\
-        \ Failure due to an issue verifying an identification number of the person\
-        \ |\n| phone_number_check_failure | Failure due to an issue verifying the\
-        \ phone number of the person |\n| email_address_check_failure | Failure due\
-        \ to an issue verifying the email address of the person |\n| compliance_rejection\
+        \ the address of the person |\n| account_number_check_failure | Failure due\
+        \ to an issue verifying the account number of the person |\n| dob_check_failure\
+        \ | Failure due to an issue verifying the date of birth of the person |\n\
+        | id_number_check_failure | Failure due to an issue verifying an identification\
+        \ number of the person |\n| phone_number_check_failure | Failure due to an\
+        \ issue verifying the phone number of the person |\n| email_address_check_failure\
+        \ | Failure due to an issue verifying the email address of the person |\n\
+        | document_type_check_failure | Failure due to the type of document provided\
+        \ not being the correct type |\n| document_quality_check_failure | Failure\
+        \ due to an issue verifying the document based on the image quality |\n| compliance_rejection\
         \ | Failure due to compliance rejecting the identity verification |\n| plaid_failure\
         \ | Failure due to an issue interacting with Plaid |\n| plaid_item_login_required\
         \ | Failure due to the Plaid token for the account requiring re-login |\n\
@@ -8637,6 +8648,7 @@ components:
       example:
         symbol: symbol
         side: side
+        trade_guid: trade_guid
         fee: 2
         created_at: 2000-01-23T04:56:07.000+00:00
         network_fee: 7
@@ -8670,6 +8682,7 @@ components:
             bank_guid: bank_guid
             customer_guid: customer_guid
           deliver_amount: 3
+        transfer_guid: transfer_guid
         product_type: product_type
         expires_at: 2000-01-23T04:56:07.000+00:00
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8770,6 +8783,18 @@ components:
             $ref: '#/components/schemas/QuoteEntry'
           nullable: true
           type: array
+        trade_guid:
+          description: The unique identifier for the trade.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        transfer_guid:
+          description: The unique identifier for the transfer.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
       type: object
     QuoteEntry:
       example:
@@ -8825,6 +8850,7 @@ components:
         objects:
         - symbol: symbol
           side: side
+          trade_guid: trade_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
@@ -8858,6 +8884,7 @@ components:
               bank_guid: bank_guid
               customer_guid: customer_guid
             deliver_amount: 3
+          transfer_guid: transfer_guid
           product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -8869,6 +8896,7 @@ components:
           customer_guid: customer_guid
         - symbol: symbol
           side: side
+          trade_guid: trade_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
           network_fee: 7
@@ -8902,6 +8930,7 @@ components:
               bank_guid: bank_guid
               customer_guid: customer_guid
             deliver_amount: 3
+          transfer_guid: transfer_guid
           product_type: product_type
           expires_at: 2000-01-23T04:56:07.000+00:00
           updated_at: 2000-01-23T04:56:07.000+00:00

@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.60
+  version: v0.123.61
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -3282,20 +3282,21 @@ paths:
         \ issue verifying the provided ID based on it being a paper replica |\n| database_check_failure\
         \ | Failure due to an issue verifying the provided information against authoritative\
         \ data sources |\n| selfie_failure | Failure due to an issue verifying the\
-        \ provided selfie photo |\n| selfie_quality_check_failure | Failure due to\
-        \ an issue verifying the provided selfie photo based on the image quality\
-        \ |\n| country_comparison_check_failure | Failure due the customer verification\
-        \ being performed out of country |\n| duplicate_person_check_failure | Failure\
-        \ due to a customer already existing for this person |\n| prohibited_person_check_failure\
-        \ | Failure due to a person being on prohibited from accessing the service\
-        \ |\n| name_check_failure | Failure due to an issue verifying the name of\
-        \ the person |\n| address_check_failure | Failure due to an issue verifying\
-        \ the address of the person |\n| account_number_check_failure | Failure due\
-        \ to an issue verifying the account number of the person |\n| dob_check_failure\
-        \ | Failure due to an issue verifying the date of birth of the person |\n\
-        | id_number_check_failure | Failure due to an issue verifying an identification\
-        \ number of the person |\n| phone_number_check_failure | Failure due to an\
-        \ issue verifying the phone number of the person |\n| email_address_check_failure\
+        \ provided selfie photo |\n| selfie_pose_check_failure | Failure due to an\
+        \ issue verifying the provided selfie photo based on incorrect poses |\n|\
+        \ selfie_quality_check_failure | Failure due to an issue verifying the provided\
+        \ selfie photo based on the image quality |\n| country_comparison_check_failure\
+        \ | Failure due the customer verification being performed out of country |\n\
+        | duplicate_person_check_failure | Failure due to a customer already existing\
+        \ for this person |\n| prohibited_person_check_failure | Failure due to a\
+        \ person being on prohibited from accessing the service |\n| name_check_failure\
+        \ | Failure due to an issue verifying the name of the person |\n| address_check_failure\
+        \ | Failure due to an issue verifying the address of the person |\n| account_number_check_failure\
+        \ | Failure due to an issue verifying the account number of the person |\n\
+        | dob_check_failure | Failure due to an issue verifying the date of birth\
+        \ of the person |\n| id_number_check_failure | Failure due to an issue verifying\
+        \ an identification number of the person |\n| phone_number_check_failure |\
+        \ Failure due to an issue verifying the phone number of the person |\n| email_address_check_failure\
         \ | Failure due to an issue verifying the email address of the person |\n\
         | document_type_check_failure | Failure due to the type of document provided\
         \ not being the correct type |\n| document_quality_check_failure | Failure\

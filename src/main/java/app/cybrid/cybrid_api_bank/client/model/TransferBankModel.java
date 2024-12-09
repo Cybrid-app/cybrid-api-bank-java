@@ -2,7 +2,7 @@
  * Cybrid Bank API
  * # Cybrid API documentation  Welcome to Cybrid, an all-in-one crypto platform that enables you to easily **build** and **launch** white-label crypto products or services.  In these documents, you'll find details on how our REST API operates and generally how our platform functions.  If you're looking for our UI SDK Widgets for Web or Mobile (iOS/Android), generated API clients, or demo applications, head over to our [Github repo](https://github.com/Cybrid-app).  💡 We recommend bookmarking the [Cybrid LinkTree](https://linktr.ee/cybridtechnologies) which contains many helpful links to platform resources.  ## Getting Started  This is Cybrid's public interactive API documentation, which allows you to fully test our APIs. If you'd like to use a different tool to exercise our APIs, you can download the [Open API 3.0 yaml](https://bank.production.cybrid.app/api/schema/v1/swagger.yaml) for import.  If you're new to our APIs and the Cybrid Platform, follow the below guides to get set up and familiar with the platform:  1. [Introduction](https://docs.cybrid.xyz/docs/introduction) 2. [Platform Introduction](https://docs.cybrid.xyz/docs/how-is-cybrid-architected) 3. [Testing with Hosted Web Demo App](https://docs.cybrid.xyz/docs/testing-with-hosted-web-demo-app)  In [Getting Started in the Cybrid Sandbox](https://docs.cybrid.xyz/docs/how-do-i-get-started-with-the-sandbox), we walk you through how to use the [Cybrid Sandbox](https://id.sandbox.cybrid.app/) to create a test bank and generate API keys. In [Getting Ready for Trading](https://kb.cybrid.xyz/getting-ready-for-trading), we walk through creating customers, customer identities, accounts, as well as executing quotes and trades.  ## Working with the Cybrid Platform  There are three primary ways you can interact with the Cybrid platform:  1. Directly via our RESTful API (this documentation) 2. Using our API clients available in a variety of languages ([Angular](https://github.com/Cybrid-app/cybrid-api-bank-angular), [Java](https://github.com/Cybrid-app/cybrid-api-bank-java), [Kotlin](https://github.com/Cybrid-app/cybrid-api-bank-kotlin), [Python](https://github.com/Cybrid-app/cybrid-api-bank-python), [Ruby](https://github.com/Cybrid-app/cybrid-api-bank-ruby), [Swift](https://github.com/Cybrid-app/cybrid-api-bank-swift) or [Typescript](https://github.com/Cybrid-app/cybrid-api-bank-typescript)) 3. Integrating a platform specific SDK ([Web](https://github.com/Cybrid-app/cybrid-sdk-web), [Android](https://github.com/Cybrid-app/cybrid-sdk-android), [iOS](https://github.com/Cybrid-app/cybrid-sdk-ios))  Our complete set of APIs allows you to manage resources across three distinct areas: your `Organization`, your `Banks` and your `Identities`. For most of your testing and interaction you'll be using the `Bank` API, which is where the majority of APIs reside.  *The complete set of APIs can be found on the following pages:*  | API                                                              | Description                                                 | |------------------------------------------------------------------|-------------------------------------------------------------| | [Organization API](https://organization.production.cybrid.app/api/schema/swagger-ui)   | APIs to manage organizations                                | | [Bank API](https://bank.production.cybrid.app/api/schema/swagger-ui)                   | APIs to manage banks (and all downstream customer activity) | | [Identities API](https://id.production.cybrid.app/api/schema/swagger-ui)                       | APIs to manage organization and bank identities             |  For questions please contact [Support](mailto:support@cybrid.xyz) at any time for assistance, or contact the [Product Team](mailto:product@cybrid.xyz) for product suggestions.  ## Authenticating with the API  The Cybrid Platform uses OAuth 2.0 Bearer Tokens to authenticate requests to the platform. Credentials to create `Organization` and `Bank` tokens can be generated via the [Cybrid Sandbox](https://id.production.cybrid.app). Access tokens can be generated for a `Customer` as well via the [Cybrid IdP](https://id.production.cybrid.app) as well.  An `Organization` access token applies broadly to the whole Organization and all of its `Banks`, whereas, a `Bank` access token is specific to an individual Bank. `Customer` tokens, similarly, are scoped to a specific customer in a bank.  Both `Organization` and `Bank` tokens can be created using the OAuth Client Credential Grant flow. Each Organization and Bank has its own unique `Client ID` and `Secret` that allows for machine-to-machine authentication.  A `Bank` can then generate `Customer` access tokens via API using our [Identities API](https://id.production.cybrid.app/api/schema/swagger-ui).  <font color=\"orange\">**⚠️ Never share your Client ID or Secret publicly or in your source code repository.**</font>  Your `Client ID` and `Secret` can be exchanged for a time-limited `Bearer Token` by interacting with the Cybrid Identity Provider or through interacting with the **Authorize** button in this document.  The following curl command can be used to quickly generate a `Bearer Token` for use in testing the API or demo applications.  ``` # Example request when using Bank credentials curl -X POST https://id.production.cybrid.app/oauth/token -d '{     \"grant_type\": \"client_credentials\",     \"client_id\": \"<Your Client ID>\",     \"client_secret\": \"<Your Secret>\",     \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:write counterparties:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:write identity_verifications:execute\"   }' -H \"Content-Type: application/json\"  # When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read' ``` <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>  ## Authentication Scopes  The Cybrid platform supports the use of scopes to control the level of access a token is limited to. Scopes do not grant access to resources; instead, they provide limits, in support of the least privilege principal.  The following scopes are available on the platform and can be requested when generating either an Organization, Bank or Customer token. Generally speaking, the _Read_ scope is required to read and list resources, the _Write_ scope is required to update a resource and the _Execute_ scope is required to create a resource.  | Resource              | Read scope (Token Type)                                    | Write scope (Token Type)                      | Execute scope (Token Type)                       | |-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------| | Account               | accounts:read (Organization, Bank, Customer)               |                                               | accounts:execute (Bank, Customer)                | | Bank                  | banks:read (Organization, Bank)                            | banks:write (Organization, Bank)              | banks:execute (Organization)                     | | Customer              | customers:read (Organization, Bank, Customer)              | customers:write (Bank, Customer)              | customers:execute (Bank)                         | | Counterparty          | counterparties:read (Organization, Bank, Customer)         | counterparties:write (Bank, Customer)         | counterparties:execute (Bank)                    | | Deposit Address       | deposit_addresses:read (Organization, Bank, Customer)      | deposit_addresses:write (Bank, Customer)      | deposit_addresses:execute (Bank, Customer)       | | External Bank Account | external_bank_accounts:read (Organization, Bank, Customer) | external_bank_accounts:write (Bank, Customer) | external_bank_accounts:execute (Bank, Customer)  | | External Wallet       | external_wallet:read (Organization, Bank, Customer)        |                                               | external_wallet:execute (Bank, Customer)         | | Organization          | organizations:read (Organization)                          | organizations:write (Organization)            |                                                  | | User                  | users:read (Organization)                                  |                                               | users:execute (Organization)                     | | Price                 | prices:read (Bank, Customer)                               |                                               |                                                  | | Quote                 | quotes:read (Organization, Bank, Customer)                 |                                               | quotes:execute (Organization, Bank, Customer)    | | Trade                 | trades:read (Organization, Bank, Customer)                 |                                               | trades:execute (Organization, Bank, Customer)    | | Transfer              | transfers:read (Organization, Bank, Customer)              |                                               | transfers:execute (Organization, Bank, Customer) | | Workflow              | workflows:read (Organization, Bank, Customer)              |                                               | workflows:execute (Bank, Customer)               | | Invoice               | invoices:read (Organization, Bank, Customer)               | invoices:write (Bank, Customer)               | invoices:execute (Bank, Customer)                |  ## Available Endpoints  The available APIs for the [Identity](https://id.production.cybrid.app/api/schema/swagger-ui), [Organization](https://organization.production.cybrid.app/api/schema/swagger-ui) and [Bank](https://bank.production.cybrid.app/api/schema/swagger-ui) API services are listed below:  | API Service  | Model                | API Endpoint Path              | Description                                                                                       | |--------------|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------| | Identity     | Bank                 | /api/bank_applications         | Create and list banks                                                                             | | Identity     | CustomerToken        | /api/customer_tokens           | Create customer JWT access tokens                                                                 | | Identity     | Organization         | /api/organization_applications | Create and list organizations                                                                     | | Identity     | Organization         | /api/users                     | Create and list organization users                                                                | | Organization | Organization         | /api/organizations             | APIs to retrieve and update organization name                                                     | | Bank         | Account              | /api/accounts                  | Create and list accounts, which hold a specific asset for a customers                             | | Bank         | Asset                | /api/assets                    | Get a list of assets supported by the platform (ex: BTC, ETH)                                     | | Bank         | Bank                 | /api/banks                     | Create, update and list banks, the parent to customers, accounts, etc                             | | Bank         | Customer             | /api/customers                 | Create and list customers                                                                         | | Bank         | Counterparty         | /api/counterparties            | Create and list counterparties                                                                    | | Bank         | DepositAddress       | /api/deposit_addresses         | Create, get and list deposit addresses                                                            | | Bank         | ExternalBankAccount  | /api/external_bank_accounts    | Create, get and list external bank accounts, which connect customer bank accounts to the platform | | Bank         | ExternalWallet       | /api/external_wallets          | Create, get, list and delete external wallets, which connect customer wallets to the platform     | | Bank         | IdentityVerification | /api/identity_verifications    | Create and list identity verifications, which are performed on customers for KYC                  | | Bank         | Invoice              | /api/invoices                  | Create, get, cancel and list invoices                                                             | | Bank         | PaymentInstruction   | /api/payment_instructions      | Create, get and list payment instructions for invoices                                            | | Bank         | Price                | /api/prices                    | Get the current prices for assets on the platform                                                 | | Bank         | Quote                | /api/quotes                    | Create and list quotes, which are required to execute trades                                      | | Bank         | Symbol               | /api/symbols                   | Get a list of symbols supported for trade (ex: BTC-USD)                                           | | Bank         | Trade                | /api/trades                    | Create and list trades, which buy or sell cryptocurrency                                          | | Bank         | Transfer             | /api/transfers                 | Create, get and list transfers (e.g., funding, book)                                              | | Bank         | Workflow             | /api/workflows                 | Create, get and list workflows                                                                    |  ## Understanding Object Models & Endpoints  **Organizations**  An `Organization` is meant to represent the organization partnering with Cybrid to use our platform.  An `Organization` typically does not directly interact with `customers`. Instead, an Organization has one or more `banks`, which encompass the financial service offerings of the platform.  **Banks**  A `Bank` is owned by an `Organization` and can be thought of as an environment or container for `customers` and product offerings. Banks are created in either `Sandbox` or `Production` mode, where `Sandbox` is the environment that you would test, prototype and build in prior to moving to `Production`.  An `Organization` can have multiple `banks`, in either `Sandbox` or `Production` environments. A `Sandbox Bank` will be backed by stubbed data and process flows. For instance, funding source transfer processes as well as trades will be simulated rather than performed, however asset prices are representative of real-world values. You have an unlimited amount of simulated fiat currency for testing purposes.  **Customers**  `Customers` represent your banking users on the platform. At present, we offer support for `Individuals` as Customers.  `Customers` must be verified (i.e., KYC'd) in our system before they can play any part on the platform, which means they must have an associated and a passing `Identity Verification`. See the Identity Verifications section for more details on how a customer can be verified.  `Customers` must also have an `Account` to be able to transact, in the desired asset class. See the Accounts APIs for more details on setting up accounts for the customer. 
  *
- * The version of the OpenAPI document: v0.123.65
+ * The version of the OpenAPI document: v0.123.66
  * Contact: support@cybrid.app
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -29,6 +29,10 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.openapitools.jackson.nullable.JsonNullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -69,7 +73,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
   TransferBankModel.JSON_PROPERTY_ENTRIES
 })
 @JsonTypeName("Transfer")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-07T02:41:22.722963Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-12-09T14:06:16.920899Z[Etc/UTC]")
 public class TransferBankModel {
   public static final String JSON_PROPERTY_GUID = "guid";
   private String guid;
@@ -78,16 +82,16 @@ public class TransferBankModel {
   private String transferType;
 
   public static final String JSON_PROPERTY_BANK_GUID = "bank_guid";
-  private String bankGuid;
+  private JsonNullable<String> bankGuid = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private String customerGuid;
+  private JsonNullable<String> customerGuid = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_QUOTE_GUID = "quote_guid";
   private String quoteGuid;
 
   public static final String JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID = "external_bank_account_guid";
-  private String externalBankAccountGuid;
+  private JsonNullable<String> externalBankAccountGuid = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_ASSET = "asset";
   private String asset;
@@ -99,13 +103,13 @@ public class TransferBankModel {
   private String state;
 
   public static final String JSON_PROPERTY_FAILURE_CODE = "failure_code";
-  private String failureCode;
+  private JsonNullable<String> failureCode = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_RETURN_CODE = "return_code";
-  private String returnCode;
+  private JsonNullable<String> returnCode = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_AMOUNT = "amount";
-  private java.math.BigInteger amount;
+  private JsonNullable<java.math.BigInteger> amount = JsonNullable.<java.math.BigInteger>undefined();
 
   public static final String JSON_PROPERTY_ESTIMATED_AMOUNT = "estimated_amount";
   private java.math.BigInteger estimatedAmount;
@@ -114,37 +118,37 @@ public class TransferBankModel {
   private java.math.BigInteger fee;
 
   public static final String JSON_PROPERTY_ESTIMATED_NETWORK_FEE = "estimated_network_fee";
-  private java.math.BigInteger estimatedNetworkFee;
+  private JsonNullable<java.math.BigInteger> estimatedNetworkFee = JsonNullable.<java.math.BigInteger>undefined();
 
   public static final String JSON_PROPERTY_NETWORK_FEE = "network_fee";
-  private java.math.BigInteger networkFee;
+  private JsonNullable<java.math.BigInteger> networkFee = JsonNullable.<java.math.BigInteger>undefined();
 
   public static final String JSON_PROPERTY_NETWORK_FEE_ASSET = "network_fee_asset";
-  private String networkFeeAsset;
+  private JsonNullable<String> networkFeeAsset = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT = "network_fee_liability_amount";
-  private java.math.BigInteger networkFeeLiabilityAmount;
+  private JsonNullable<java.math.BigInteger> networkFeeLiabilityAmount = JsonNullable.<java.math.BigInteger>undefined();
 
   public static final String JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT_ASSET = "network_fee_liability_amount_asset";
-  private String networkFeeLiabilityAmountAsset;
+  private JsonNullable<String> networkFeeLiabilityAmountAsset = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_TXN_HASH = "txn_hash";
-  private String txnHash;
+  private JsonNullable<String> txnHash = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_REFERENCE_TRANSFER_GUID = "reference_transfer_guid";
-  private String referenceTransferGuid;
+  private JsonNullable<String> referenceTransferGuid = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_SOURCE_ACCOUNT = "source_account";
-  private TransferSourceAccountBankModel sourceAccount;
+  private JsonNullable<TransferSourceAccountBankModel> sourceAccount = JsonNullable.<TransferSourceAccountBankModel>undefined();
 
   public static final String JSON_PROPERTY_SOURCE_PARTICIPANTS = "source_participants";
-  private List<TransferParticipantBankModel> sourceParticipants = null;
+  private JsonNullable<List<TransferParticipantBankModel>> sourceParticipants = JsonNullable.<List<TransferParticipantBankModel>>undefined();
 
   public static final String JSON_PROPERTY_DESTINATION_ACCOUNT = "destination_account";
-  private TransferDestinationAccountBankModel destinationAccount;
+  private JsonNullable<TransferDestinationAccountBankModel> destinationAccount = JsonNullable.<TransferDestinationAccountBankModel>undefined();
 
   public static final String JSON_PROPERTY_DESTINATION_PARTICIPANTS = "destination_participants";
-  private List<TransferParticipantBankModel> destinationParticipants = null;
+  private JsonNullable<List<TransferParticipantBankModel>> destinationParticipants = JsonNullable.<List<TransferParticipantBankModel>>undefined();
 
   public static final String JSON_PROPERTY_CREATED_AT = "created_at";
   private OffsetDateTime createdAt;
@@ -153,16 +157,16 @@ public class TransferBankModel {
   private OffsetDateTime updatedAt;
 
   public static final String JSON_PROPERTY_TRANSFER_DETAILS = "transfer_details";
-  private Object transferDetails;
+  private JsonNullable<Object> transferDetails = JsonNullable.<Object>undefined();
 
   public static final String JSON_PROPERTY_PAYMENT_RAIL = "payment_rail";
-  private String paymentRail;
+  private JsonNullable<String> paymentRail = JsonNullable.<String>undefined();
 
   public static final String JSON_PROPERTY_LABELS = "labels";
-  private List<String> labels = null;
+  private JsonNullable<List<String>> labels = JsonNullable.<List<String>>undefined();
 
   public static final String JSON_PROPERTY_ENTRIES = "entries";
-  private List<TransferEntryBankModel> entries = null;
+  private JsonNullable<List<TransferEntryBankModel>> entries = JsonNullable.<List<TransferEntryBankModel>>undefined();
 
   public TransferBankModel() { 
   }
@@ -222,8 +226,8 @@ public class TransferBankModel {
 
 
   public TransferBankModel bankGuid(String bankGuid) {
+    this.bankGuid = JsonNullable.<String>of(bankGuid);
     
-    this.bankGuid = bankGuid;
     return this;
   }
 
@@ -233,24 +237,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The associated bank's identifier.")
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getBankGuid() {
-    return bankGuid;
+        return bankGuid.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_BANK_GUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBankGuid(String bankGuid) {
+
+  public JsonNullable<String> getBankGuid_JsonNullable() {
+    return bankGuid;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_BANK_GUID)
+  public void setBankGuid_JsonNullable(JsonNullable<String> bankGuid) {
     this.bankGuid = bankGuid;
+  }
+
+  public void setBankGuid(String bankGuid) {
+    this.bankGuid = JsonNullable.<String>of(bankGuid);
   }
 
 
   public TransferBankModel customerGuid(String customerGuid) {
+    this.customerGuid = JsonNullable.<String>of(customerGuid);
     
-    this.customerGuid = customerGuid;
     return this;
   }
 
@@ -260,18 +272,26 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The associated customer's identifier.")
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getCustomerGuid() {
-    return customerGuid;
+        return customerGuid.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setCustomerGuid(String customerGuid) {
+
+  public JsonNullable<String> getCustomerGuid_JsonNullable() {
+    return customerGuid;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
+  public void setCustomerGuid_JsonNullable(JsonNullable<String> customerGuid) {
     this.customerGuid = customerGuid;
+  }
+
+  public void setCustomerGuid(String customerGuid) {
+    this.customerGuid = JsonNullable.<String>of(customerGuid);
   }
 
 
@@ -303,8 +323,8 @@ public class TransferBankModel {
 
 
   public TransferBankModel externalBankAccountGuid(String externalBankAccountGuid) {
+    this.externalBankAccountGuid = JsonNullable.<String>of(externalBankAccountGuid);
     
-    this.externalBankAccountGuid = externalBankAccountGuid;
     return this;
   }
 
@@ -314,18 +334,26 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The associated external bank account's identifier.")
-  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getExternalBankAccountGuid() {
-    return externalBankAccountGuid;
+        return externalBankAccountGuid.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setExternalBankAccountGuid(String externalBankAccountGuid) {
+
+  public JsonNullable<String> getExternalBankAccountGuid_JsonNullable() {
+    return externalBankAccountGuid;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_EXTERNAL_BANK_ACCOUNT_GUID)
+  public void setExternalBankAccountGuid_JsonNullable(JsonNullable<String> externalBankAccountGuid) {
     this.externalBankAccountGuid = externalBankAccountGuid;
+  }
+
+  public void setExternalBankAccountGuid(String externalBankAccountGuid) {
+    this.externalBankAccountGuid = JsonNullable.<String>of(externalBankAccountGuid);
   }
 
 
@@ -411,8 +439,8 @@ public class TransferBankModel {
 
 
   public TransferBankModel failureCode(String failureCode) {
+    this.failureCode = JsonNullable.<String>of(failureCode);
     
-    this.failureCode = failureCode;
     return this;
   }
 
@@ -422,24 +450,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The failure code for failed transfers; one of non_sufficient_funds, refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection, cancelled, reversed, limit_exceeded, network_fee_too_low, amount_too_low, internal_error, or invalid_address.")
-  @JsonProperty(JSON_PROPERTY_FAILURE_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getFailureCode() {
-    return failureCode;
+        return failureCode.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_FAILURE_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setFailureCode(String failureCode) {
+
+  public JsonNullable<String> getFailureCode_JsonNullable() {
+    return failureCode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_FAILURE_CODE)
+  public void setFailureCode_JsonNullable(JsonNullable<String> failureCode) {
     this.failureCode = failureCode;
+  }
+
+  public void setFailureCode(String failureCode) {
+    this.failureCode = JsonNullable.<String>of(failureCode);
   }
 
 
   public TransferBankModel returnCode(String returnCode) {
+    this.returnCode = JsonNullable.<String>of(returnCode);
     
-    this.returnCode = returnCode;
     return this;
   }
 
@@ -449,24 +485,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The return code for reversed transfers")
-  @JsonProperty(JSON_PROPERTY_RETURN_CODE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getReturnCode() {
-    return returnCode;
+        return returnCode.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_RETURN_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setReturnCode(String returnCode) {
+
+  public JsonNullable<String> getReturnCode_JsonNullable() {
+    return returnCode;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_RETURN_CODE)
+  public void setReturnCode_JsonNullable(JsonNullable<String> returnCode) {
     this.returnCode = returnCode;
+  }
+
+  public void setReturnCode(String returnCode) {
+    this.returnCode = JsonNullable.<String>of(returnCode);
   }
 
 
   public TransferBankModel amount(java.math.BigInteger amount) {
+    this.amount = JsonNullable.<java.math.BigInteger>of(amount);
     
-    this.amount = amount;
     return this;
   }
 
@@ -476,18 +520,26 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The actual amount in base units of the asset.")
-  @JsonProperty(JSON_PROPERTY_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public java.math.BigInteger getAmount() {
-    return amount;
+        return amount.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAmount(java.math.BigInteger amount) {
+
+  public JsonNullable<java.math.BigInteger> getAmount_JsonNullable() {
+    return amount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_AMOUNT)
+  public void setAmount_JsonNullable(JsonNullable<java.math.BigInteger> amount) {
     this.amount = amount;
+  }
+
+  public void setAmount(java.math.BigInteger amount) {
+    this.amount = JsonNullable.<java.math.BigInteger>of(amount);
   }
 
 
@@ -546,8 +598,8 @@ public class TransferBankModel {
 
 
   public TransferBankModel estimatedNetworkFee(java.math.BigInteger estimatedNetworkFee) {
+    this.estimatedNetworkFee = JsonNullable.<java.math.BigInteger>of(estimatedNetworkFee);
     
-    this.estimatedNetworkFee = estimatedNetworkFee;
     return this;
   }
 
@@ -557,24 +609,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The estimated network fee in base units of network_fee_asset. Only present on `crypto` transfers.")
-  @JsonProperty(JSON_PROPERTY_ESTIMATED_NETWORK_FEE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public java.math.BigInteger getEstimatedNetworkFee() {
-    return estimatedNetworkFee;
+        return estimatedNetworkFee.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_ESTIMATED_NETWORK_FEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEstimatedNetworkFee(java.math.BigInteger estimatedNetworkFee) {
+
+  public JsonNullable<java.math.BigInteger> getEstimatedNetworkFee_JsonNullable() {
+    return estimatedNetworkFee;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ESTIMATED_NETWORK_FEE)
+  public void setEstimatedNetworkFee_JsonNullable(JsonNullable<java.math.BigInteger> estimatedNetworkFee) {
     this.estimatedNetworkFee = estimatedNetworkFee;
+  }
+
+  public void setEstimatedNetworkFee(java.math.BigInteger estimatedNetworkFee) {
+    this.estimatedNetworkFee = JsonNullable.<java.math.BigInteger>of(estimatedNetworkFee);
   }
 
 
   public TransferBankModel networkFee(java.math.BigInteger networkFee) {
+    this.networkFee = JsonNullable.<java.math.BigInteger>of(networkFee);
     
-    this.networkFee = networkFee;
     return this;
   }
 
@@ -584,24 +644,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The actual network fee in base units of network_fee_asset. Only present on `crypto` transfers that have successfully completed.")
-  @JsonProperty(JSON_PROPERTY_NETWORK_FEE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public java.math.BigInteger getNetworkFee() {
-    return networkFee;
+        return networkFee.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_NETWORK_FEE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNetworkFee(java.math.BigInteger networkFee) {
+
+  public JsonNullable<java.math.BigInteger> getNetworkFee_JsonNullable() {
+    return networkFee;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE)
+  public void setNetworkFee_JsonNullable(JsonNullable<java.math.BigInteger> networkFee) {
     this.networkFee = networkFee;
+  }
+
+  public void setNetworkFee(java.math.BigInteger networkFee) {
+    this.networkFee = JsonNullable.<java.math.BigInteger>of(networkFee);
   }
 
 
   public TransferBankModel networkFeeAsset(String networkFeeAsset) {
+    this.networkFeeAsset = JsonNullable.<String>of(networkFeeAsset);
     
-    this.networkFeeAsset = networkFeeAsset;
     return this;
   }
 
@@ -611,24 +679,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The asset code of the network fee. Only present on `crypto` transfers that have successfully completed.")
-  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_ASSET)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getNetworkFeeAsset() {
-    return networkFeeAsset;
+        return networkFeeAsset.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_NETWORK_FEE_ASSET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNetworkFeeAsset(String networkFeeAsset) {
+
+  public JsonNullable<String> getNetworkFeeAsset_JsonNullable() {
+    return networkFeeAsset;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_ASSET)
+  public void setNetworkFeeAsset_JsonNullable(JsonNullable<String> networkFeeAsset) {
     this.networkFeeAsset = networkFeeAsset;
+  }
+
+  public void setNetworkFeeAsset(String networkFeeAsset) {
+    this.networkFeeAsset = JsonNullable.<String>of(networkFeeAsset);
   }
 
 
   public TransferBankModel networkFeeLiabilityAmount(java.math.BigInteger networkFeeLiabilityAmount) {
+    this.networkFeeLiabilityAmount = JsonNullable.<java.math.BigInteger>of(networkFeeLiabilityAmount);
     
-    this.networkFeeLiabilityAmount = networkFeeLiabilityAmount;
     return this;
   }
 
@@ -638,24 +714,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The equivalent fiat network fee in base units of network_fee_liability_amount_asset. Only present on `crypto` transfers that have successfully completed.")
-  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public java.math.BigInteger getNetworkFeeLiabilityAmount() {
-    return networkFeeLiabilityAmount;
+        return networkFeeLiabilityAmount.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNetworkFeeLiabilityAmount(java.math.BigInteger networkFeeLiabilityAmount) {
+
+  public JsonNullable<java.math.BigInteger> getNetworkFeeLiabilityAmount_JsonNullable() {
+    return networkFeeLiabilityAmount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT)
+  public void setNetworkFeeLiabilityAmount_JsonNullable(JsonNullable<java.math.BigInteger> networkFeeLiabilityAmount) {
     this.networkFeeLiabilityAmount = networkFeeLiabilityAmount;
+  }
+
+  public void setNetworkFeeLiabilityAmount(java.math.BigInteger networkFeeLiabilityAmount) {
+    this.networkFeeLiabilityAmount = JsonNullable.<java.math.BigInteger>of(networkFeeLiabilityAmount);
   }
 
 
   public TransferBankModel networkFeeLiabilityAmountAsset(String networkFeeLiabilityAmountAsset) {
+    this.networkFeeLiabilityAmountAsset = JsonNullable.<String>of(networkFeeLiabilityAmountAsset);
     
-    this.networkFeeLiabilityAmountAsset = networkFeeLiabilityAmountAsset;
     return this;
   }
 
@@ -665,24 +749,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The fiat asset the network_fee_liability_amount is denominated in. Only present on `crypto` transfers that have successfully completed.")
-  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT_ASSET)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getNetworkFeeLiabilityAmountAsset() {
-    return networkFeeLiabilityAmountAsset;
+        return networkFeeLiabilityAmountAsset.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT_ASSET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setNetworkFeeLiabilityAmountAsset(String networkFeeLiabilityAmountAsset) {
+
+  public JsonNullable<String> getNetworkFeeLiabilityAmountAsset_JsonNullable() {
+    return networkFeeLiabilityAmountAsset;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_NETWORK_FEE_LIABILITY_AMOUNT_ASSET)
+  public void setNetworkFeeLiabilityAmountAsset_JsonNullable(JsonNullable<String> networkFeeLiabilityAmountAsset) {
     this.networkFeeLiabilityAmountAsset = networkFeeLiabilityAmountAsset;
+  }
+
+  public void setNetworkFeeLiabilityAmountAsset(String networkFeeLiabilityAmountAsset) {
+    this.networkFeeLiabilityAmountAsset = JsonNullable.<String>of(networkFeeLiabilityAmountAsset);
   }
 
 
   public TransferBankModel txnHash(String txnHash) {
+    this.txnHash = JsonNullable.<String>of(txnHash);
     
-    this.txnHash = txnHash;
     return this;
   }
 
@@ -692,24 +784,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The hash of the blockchain transaction")
-  @JsonProperty(JSON_PROPERTY_TXN_HASH)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getTxnHash() {
-    return txnHash;
+        return txnHash.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_TXN_HASH)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTxnHash(String txnHash) {
+
+  public JsonNullable<String> getTxnHash_JsonNullable() {
+    return txnHash;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TXN_HASH)
+  public void setTxnHash_JsonNullable(JsonNullable<String> txnHash) {
     this.txnHash = txnHash;
+  }
+
+  public void setTxnHash(String txnHash) {
+    this.txnHash = JsonNullable.<String>of(txnHash);
   }
 
 
   public TransferBankModel referenceTransferGuid(String referenceTransferGuid) {
+    this.referenceTransferGuid = JsonNullable.<String>of(referenceTransferGuid);
     
-    this.referenceTransferGuid = referenceTransferGuid;
     return this;
   }
 
@@ -719,24 +819,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The guid of the related transfer. Only present on return type transfers.")
-  @JsonProperty(JSON_PROPERTY_REFERENCE_TRANSFER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getReferenceTransferGuid() {
-    return referenceTransferGuid;
+        return referenceTransferGuid.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_REFERENCE_TRANSFER_GUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setReferenceTransferGuid(String referenceTransferGuid) {
+
+  public JsonNullable<String> getReferenceTransferGuid_JsonNullable() {
+    return referenceTransferGuid;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_REFERENCE_TRANSFER_GUID)
+  public void setReferenceTransferGuid_JsonNullable(JsonNullable<String> referenceTransferGuid) {
     this.referenceTransferGuid = referenceTransferGuid;
+  }
+
+  public void setReferenceTransferGuid(String referenceTransferGuid) {
+    this.referenceTransferGuid = JsonNullable.<String>of(referenceTransferGuid);
   }
 
 
   public TransferBankModel sourceAccount(TransferSourceAccountBankModel sourceAccount) {
+    this.sourceAccount = JsonNullable.<TransferSourceAccountBankModel>of(sourceAccount);
     
-    this.sourceAccount = sourceAccount;
     return this;
   }
 
@@ -746,32 +854,44 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_SOURCE_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public TransferSourceAccountBankModel getSourceAccount() {
-    return sourceAccount;
+        return sourceAccount.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_SOURCE_ACCOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceAccount(TransferSourceAccountBankModel sourceAccount) {
+
+  public JsonNullable<TransferSourceAccountBankModel> getSourceAccount_JsonNullable() {
+    return sourceAccount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SOURCE_ACCOUNT)
+  public void setSourceAccount_JsonNullable(JsonNullable<TransferSourceAccountBankModel> sourceAccount) {
     this.sourceAccount = sourceAccount;
+  }
+
+  public void setSourceAccount(TransferSourceAccountBankModel sourceAccount) {
+    this.sourceAccount = JsonNullable.<TransferSourceAccountBankModel>of(sourceAccount);
   }
 
 
   public TransferBankModel sourceParticipants(List<TransferParticipantBankModel> sourceParticipants) {
+    this.sourceParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(sourceParticipants);
     
-    this.sourceParticipants = sourceParticipants;
     return this;
   }
 
   public TransferBankModel addSourceParticipantsItem(TransferParticipantBankModel sourceParticipantsItem) {
-    if (this.sourceParticipants == null) {
-      this.sourceParticipants = new ArrayList<>();
+    if (this.sourceParticipants == null || !this.sourceParticipants.isPresent()) {
+      this.sourceParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(new ArrayList<>());
     }
-    this.sourceParticipants.add(sourceParticipantsItem);
+    try {
+      this.sourceParticipants.get().add(sourceParticipantsItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -781,24 +901,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The participants in the source account.")
-  @JsonProperty(JSON_PROPERTY_SOURCE_PARTICIPANTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public List<TransferParticipantBankModel> getSourceParticipants() {
-    return sourceParticipants;
+        return sourceParticipants.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_SOURCE_PARTICIPANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setSourceParticipants(List<TransferParticipantBankModel> sourceParticipants) {
+
+  public JsonNullable<List<TransferParticipantBankModel>> getSourceParticipants_JsonNullable() {
+    return sourceParticipants;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_SOURCE_PARTICIPANTS)
+  public void setSourceParticipants_JsonNullable(JsonNullable<List<TransferParticipantBankModel>> sourceParticipants) {
     this.sourceParticipants = sourceParticipants;
+  }
+
+  public void setSourceParticipants(List<TransferParticipantBankModel> sourceParticipants) {
+    this.sourceParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(sourceParticipants);
   }
 
 
   public TransferBankModel destinationAccount(TransferDestinationAccountBankModel destinationAccount) {
+    this.destinationAccount = JsonNullable.<TransferDestinationAccountBankModel>of(destinationAccount);
     
-    this.destinationAccount = destinationAccount;
     return this;
   }
 
@@ -808,32 +936,44 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
-  @JsonProperty(JSON_PROPERTY_DESTINATION_ACCOUNT)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public TransferDestinationAccountBankModel getDestinationAccount() {
-    return destinationAccount;
+        return destinationAccount.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_DESTINATION_ACCOUNT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDestinationAccount(TransferDestinationAccountBankModel destinationAccount) {
+
+  public JsonNullable<TransferDestinationAccountBankModel> getDestinationAccount_JsonNullable() {
+    return destinationAccount;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESTINATION_ACCOUNT)
+  public void setDestinationAccount_JsonNullable(JsonNullable<TransferDestinationAccountBankModel> destinationAccount) {
     this.destinationAccount = destinationAccount;
+  }
+
+  public void setDestinationAccount(TransferDestinationAccountBankModel destinationAccount) {
+    this.destinationAccount = JsonNullable.<TransferDestinationAccountBankModel>of(destinationAccount);
   }
 
 
   public TransferBankModel destinationParticipants(List<TransferParticipantBankModel> destinationParticipants) {
+    this.destinationParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(destinationParticipants);
     
-    this.destinationParticipants = destinationParticipants;
     return this;
   }
 
   public TransferBankModel addDestinationParticipantsItem(TransferParticipantBankModel destinationParticipantsItem) {
-    if (this.destinationParticipants == null) {
-      this.destinationParticipants = new ArrayList<>();
+    if (this.destinationParticipants == null || !this.destinationParticipants.isPresent()) {
+      this.destinationParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(new ArrayList<>());
     }
-    this.destinationParticipants.add(destinationParticipantsItem);
+    try {
+      this.destinationParticipants.get().add(destinationParticipantsItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -843,18 +983,26 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The participants in the source account.")
-  @JsonProperty(JSON_PROPERTY_DESTINATION_PARTICIPANTS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public List<TransferParticipantBankModel> getDestinationParticipants() {
-    return destinationParticipants;
+        return destinationParticipants.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_DESTINATION_PARTICIPANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setDestinationParticipants(List<TransferParticipantBankModel> destinationParticipants) {
+
+  public JsonNullable<List<TransferParticipantBankModel>> getDestinationParticipants_JsonNullable() {
+    return destinationParticipants;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_DESTINATION_PARTICIPANTS)
+  public void setDestinationParticipants_JsonNullable(JsonNullable<List<TransferParticipantBankModel>> destinationParticipants) {
     this.destinationParticipants = destinationParticipants;
+  }
+
+  public void setDestinationParticipants(List<TransferParticipantBankModel> destinationParticipants) {
+    this.destinationParticipants = JsonNullable.<List<TransferParticipantBankModel>>of(destinationParticipants);
   }
 
 
@@ -913,8 +1061,8 @@ public class TransferBankModel {
 
 
   public TransferBankModel transferDetails(Object transferDetails) {
+    this.transferDetails = JsonNullable.<Object>of(transferDetails);
     
-    this.transferDetails = transferDetails;
     return this;
   }
 
@@ -924,24 +1072,32 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The raw details on the transfer from the bank.")
-  @JsonProperty(JSON_PROPERTY_TRANSFER_DETAILS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public Object getTransferDetails() {
-    return transferDetails;
+        return transferDetails.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_TRANSFER_DETAILS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setTransferDetails(Object transferDetails) {
+
+  public JsonNullable<Object> getTransferDetails_JsonNullable() {
+    return transferDetails;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_TRANSFER_DETAILS)
+  public void setTransferDetails_JsonNullable(JsonNullable<Object> transferDetails) {
     this.transferDetails = transferDetails;
+  }
+
+  public void setTransferDetails(Object transferDetails) {
+    this.transferDetails = JsonNullable.<Object>of(transferDetails);
   }
 
 
   public TransferBankModel paymentRail(String paymentRail) {
+    this.paymentRail = JsonNullable.<String>of(paymentRail);
     
-    this.paymentRail = paymentRail;
     return this;
   }
 
@@ -951,32 +1107,44 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The rail the payment was done on. One of: ach, eft, wire, rtp")
-  @JsonProperty(JSON_PROPERTY_PAYMENT_RAIL)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public String getPaymentRail() {
-    return paymentRail;
+        return paymentRail.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_PAYMENT_RAIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setPaymentRail(String paymentRail) {
+
+  public JsonNullable<String> getPaymentRail_JsonNullable() {
+    return paymentRail;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_PAYMENT_RAIL)
+  public void setPaymentRail_JsonNullable(JsonNullable<String> paymentRail) {
     this.paymentRail = paymentRail;
+  }
+
+  public void setPaymentRail(String paymentRail) {
+    this.paymentRail = JsonNullable.<String>of(paymentRail);
   }
 
 
   public TransferBankModel labels(List<String> labels) {
+    this.labels = JsonNullable.<List<String>>of(labels);
     
-    this.labels = labels;
     return this;
   }
 
   public TransferBankModel addLabelsItem(String labelsItem) {
-    if (this.labels == null) {
-      this.labels = new ArrayList<>();
+    if (this.labels == null || !this.labels.isPresent()) {
+      this.labels = JsonNullable.<List<String>>of(new ArrayList<>());
     }
-    this.labels.add(labelsItem);
+    try {
+      this.labels.get().add(labelsItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -986,32 +1154,44 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "The labels associated with the transfer.")
-  @JsonProperty(JSON_PROPERTY_LABELS)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public List<String> getLabels() {
-    return labels;
+        return labels.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_LABELS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setLabels(List<String> labels) {
+
+  public JsonNullable<List<String>> getLabels_JsonNullable() {
+    return labels;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_LABELS)
+  public void setLabels_JsonNullable(JsonNullable<List<String>> labels) {
     this.labels = labels;
+  }
+
+  public void setLabels(List<String> labels) {
+    this.labels = JsonNullable.<List<String>>of(labels);
   }
 
 
   public TransferBankModel entries(List<TransferEntryBankModel> entries) {
+    this.entries = JsonNullable.<List<TransferEntryBankModel>>of(entries);
     
-    this.entries = entries;
     return this;
   }
 
   public TransferBankModel addEntriesItem(TransferEntryBankModel entriesItem) {
-    if (this.entries == null) {
-      this.entries = new ArrayList<>();
+    if (this.entries == null || !this.entries.isPresent()) {
+      this.entries = JsonNullable.<List<TransferEntryBankModel>>of(new ArrayList<>());
     }
-    this.entries.add(entriesItem);
+    try {
+      this.entries.get().add(entriesItem);
+    } catch (java.util.NoSuchElementException e) {
+      // this can never happen, as we make sure above that the value is present
+    }
     return this;
   }
 
@@ -1021,18 +1201,26 @@ public class TransferBankModel {
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "Transfer entries associated with the batch transfer")
-  @JsonProperty(JSON_PROPERTY_ENTRIES)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  @JsonIgnore
 
   public List<TransferEntryBankModel> getEntries() {
-    return entries;
+        return entries.orElse(null);
   }
-
 
   @JsonProperty(JSON_PROPERTY_ENTRIES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setEntries(List<TransferEntryBankModel> entries) {
+
+  public JsonNullable<List<TransferEntryBankModel>> getEntries_JsonNullable() {
+    return entries;
+  }
+  
+  @JsonProperty(JSON_PROPERTY_ENTRIES)
+  public void setEntries_JsonNullable(JsonNullable<List<TransferEntryBankModel>> entries) {
     this.entries = entries;
+  }
+
+  public void setEntries(List<TransferEntryBankModel> entries) {
+    this.entries = JsonNullable.<List<TransferEntryBankModel>>of(entries);
   }
 
 
@@ -1047,40 +1235,51 @@ public class TransferBankModel {
     TransferBankModel transfer = (TransferBankModel) o;
     return Objects.equals(this.guid, transfer.guid) &&
         Objects.equals(this.transferType, transfer.transferType) &&
-        Objects.equals(this.bankGuid, transfer.bankGuid) &&
-        Objects.equals(this.customerGuid, transfer.customerGuid) &&
+        equalsNullable(this.bankGuid, transfer.bankGuid) &&
+        equalsNullable(this.customerGuid, transfer.customerGuid) &&
         Objects.equals(this.quoteGuid, transfer.quoteGuid) &&
-        Objects.equals(this.externalBankAccountGuid, transfer.externalBankAccountGuid) &&
+        equalsNullable(this.externalBankAccountGuid, transfer.externalBankAccountGuid) &&
         Objects.equals(this.asset, transfer.asset) &&
         Objects.equals(this.side, transfer.side) &&
         Objects.equals(this.state, transfer.state) &&
-        Objects.equals(this.failureCode, transfer.failureCode) &&
-        Objects.equals(this.returnCode, transfer.returnCode) &&
-        Objects.equals(this.amount, transfer.amount) &&
+        equalsNullable(this.failureCode, transfer.failureCode) &&
+        equalsNullable(this.returnCode, transfer.returnCode) &&
+        equalsNullable(this.amount, transfer.amount) &&
         Objects.equals(this.estimatedAmount, transfer.estimatedAmount) &&
         Objects.equals(this.fee, transfer.fee) &&
-        Objects.equals(this.estimatedNetworkFee, transfer.estimatedNetworkFee) &&
-        Objects.equals(this.networkFee, transfer.networkFee) &&
-        Objects.equals(this.networkFeeAsset, transfer.networkFeeAsset) &&
-        Objects.equals(this.networkFeeLiabilityAmount, transfer.networkFeeLiabilityAmount) &&
-        Objects.equals(this.networkFeeLiabilityAmountAsset, transfer.networkFeeLiabilityAmountAsset) &&
-        Objects.equals(this.txnHash, transfer.txnHash) &&
-        Objects.equals(this.referenceTransferGuid, transfer.referenceTransferGuid) &&
-        Objects.equals(this.sourceAccount, transfer.sourceAccount) &&
-        Objects.equals(this.sourceParticipants, transfer.sourceParticipants) &&
-        Objects.equals(this.destinationAccount, transfer.destinationAccount) &&
-        Objects.equals(this.destinationParticipants, transfer.destinationParticipants) &&
+        equalsNullable(this.estimatedNetworkFee, transfer.estimatedNetworkFee) &&
+        equalsNullable(this.networkFee, transfer.networkFee) &&
+        equalsNullable(this.networkFeeAsset, transfer.networkFeeAsset) &&
+        equalsNullable(this.networkFeeLiabilityAmount, transfer.networkFeeLiabilityAmount) &&
+        equalsNullable(this.networkFeeLiabilityAmountAsset, transfer.networkFeeLiabilityAmountAsset) &&
+        equalsNullable(this.txnHash, transfer.txnHash) &&
+        equalsNullable(this.referenceTransferGuid, transfer.referenceTransferGuid) &&
+        equalsNullable(this.sourceAccount, transfer.sourceAccount) &&
+        equalsNullable(this.sourceParticipants, transfer.sourceParticipants) &&
+        equalsNullable(this.destinationAccount, transfer.destinationAccount) &&
+        equalsNullable(this.destinationParticipants, transfer.destinationParticipants) &&
         Objects.equals(this.createdAt, transfer.createdAt) &&
         Objects.equals(this.updatedAt, transfer.updatedAt) &&
-        Objects.equals(this.transferDetails, transfer.transferDetails) &&
-        Objects.equals(this.paymentRail, transfer.paymentRail) &&
-        Objects.equals(this.labels, transfer.labels) &&
-        Objects.equals(this.entries, transfer.entries);
+        equalsNullable(this.transferDetails, transfer.transferDetails) &&
+        equalsNullable(this.paymentRail, transfer.paymentRail) &&
+        equalsNullable(this.labels, transfer.labels) &&
+        equalsNullable(this.entries, transfer.entries);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(guid, transferType, bankGuid, customerGuid, quoteGuid, externalBankAccountGuid, asset, side, state, failureCode, returnCode, amount, estimatedAmount, fee, estimatedNetworkFee, networkFee, networkFeeAsset, networkFeeLiabilityAmount, networkFeeLiabilityAmountAsset, txnHash, referenceTransferGuid, sourceAccount, sourceParticipants, destinationAccount, destinationParticipants, createdAt, updatedAt, transferDetails, paymentRail, labels, entries);
+    return Objects.hash(guid, transferType, hashCodeNullable(bankGuid), hashCodeNullable(customerGuid), quoteGuid, hashCodeNullable(externalBankAccountGuid), asset, side, state, hashCodeNullable(failureCode), hashCodeNullable(returnCode), hashCodeNullable(amount), estimatedAmount, fee, hashCodeNullable(estimatedNetworkFee), hashCodeNullable(networkFee), hashCodeNullable(networkFeeAsset), hashCodeNullable(networkFeeLiabilityAmount), hashCodeNullable(networkFeeLiabilityAmountAsset), hashCodeNullable(txnHash), hashCodeNullable(referenceTransferGuid), hashCodeNullable(sourceAccount), hashCodeNullable(sourceParticipants), hashCodeNullable(destinationAccount), hashCodeNullable(destinationParticipants), createdAt, updatedAt, hashCodeNullable(transferDetails), hashCodeNullable(paymentRail), hashCodeNullable(labels), hashCodeNullable(entries));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

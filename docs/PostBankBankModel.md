@@ -14,6 +14,7 @@ Request body for bank creation.
 |**supportedFiatAccountAssets** | **List&lt;String&gt;** | The fiat account assets supported by the bank. |  |
 |**supportedCountryCodes** | **List&lt;String&gt;** | The country codes supported by the bank. |  |
 |**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The features supported by the bank. |  |
+|**corsAllowedOrigins** | **List&lt;String&gt;** | The list of allowed CORS origin URIs. |  [optional] |
 
 
 

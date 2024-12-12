@@ -15,6 +15,7 @@
 |**supportedFiatAccountAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat symbols. |  [optional] |
 |**supportedCountryCodes** | **List&lt;String&gt;** | The bank&#39;s list of supported country codes. |  [optional] |
 |**features** | **List&lt;String&gt;** | The bank&#39;s enabled features. |  |
+|**corsAllowedOrigins** | **List&lt;String&gt;** | The bank&#39;s list of CORS allowed origins. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 

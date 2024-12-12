@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.82
+  version: v0.123.83
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -451,6 +451,11 @@ paths:
                     status: 422
                     error_message: Bank must be configured with individual_customers
                       or business_customers
+                    message_code: unsupported_value
+                unsupported_value_7:
+                  value:
+                    status: 422
+                    error_message: CORS allowed origins must all be valid HTTPS URIs.
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -6582,6 +6587,9 @@ components:
         features:
         - features
         - features
+        cors_allowed_origins:
+        - cors_allowed_origins
+        - cors_allowed_origins
         updated_at: 2000-01-23T04:56:07.000+00:00
         name: name
         guid: guid
@@ -6639,6 +6647,11 @@ components:
               \ counterparty_external_accounts."
             type: string
           type: array
+        cors_allowed_origins:
+          description: The bank's list of CORS allowed origins.
+          items:
+            type: string
+          type: array
         created_at:
           description: ISO8601 datetime the record was created at.
           format: date-time
@@ -6677,6 +6690,9 @@ components:
         - features:
           - features
           - features
+          cors_allowed_origins:
+          - cors_allowed_origins
+          - cors_allowed_origins
           updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
@@ -6695,6 +6711,9 @@ components:
         - features:
           - features
           - features
+          cors_allowed_origins:
+          - cors_allowed_origins
+          - cors_allowed_origins
           updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
@@ -10513,6 +10532,13 @@ components:
             type: string
           maxItems: 50
           type: array
+        cors_allowed_origins:
+          description: The list of allowed CORS origin URIs.
+          items:
+            type: string
+          maxItems: 50
+          nullable: true
+          type: array
       required:
       - features
       - name
@@ -10532,6 +10558,13 @@ components:
           type: string
         supported_trading_symbols:
           description: The trading symbols supported by the bank.
+          items:
+            type: string
+          maxItems: 50
+          nullable: true
+          type: array
+        cors_allowed_origins:
+          description: The list of allowed CORS origin URIs.
           items:
             type: string
           maxItems: 50

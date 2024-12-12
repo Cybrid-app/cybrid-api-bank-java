@@ -19,8 +19,8 @@ Request body for identity verification creation.
 |**dateOfBirth** | **LocalDate** | The customer&#39;s date of birth. Required when type is kyc and method is attested. |  [optional] |
 |**identificationNumbers** | [**List&lt;PostIdentificationNumberBankModel&gt;**](PostIdentificationNumberBankModel.md) | The customer&#39;s identification numbers. Required when type is kyc and method is attested. |  [optional] |
 |**externalBankAccountGuid** | **String** | The external bank account&#39;s identifier. Required when type is bank_account. |  [optional] |
-|**phoneNumber** | **String** | The customer&#39;s phone number. Optional when type is bank_account and method is attested or type is bank_account and method is attested_ownership. |  [optional] |
-|**emailAddress** | **String** | The customer&#39;s email address. Optional when type is bank_account and method is attested or type is bank_account and method is attested_ownership. |  [optional] |
+|**phoneNumber** | **String** | The customer&#39;s phone number. Optional when type is bank_account and method is attested_ownership. |  [optional] |
+|**emailAddress** | **String** | The customer&#39;s email address. Optional when type is bank_account and method is attested_ownership. |  [optional] |
 
 
 

@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.78
+  version: v0.123.80
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10718,12 +10718,12 @@ components:
           type: string
         phone_number:
           description: The customer's phone number. Optional when type is bank_account
-            and method is attested or type is bank_account and method is attested_ownership.
+            and method is attested_ownership.
           nullable: true
           type: string
         email_address:
           description: The customer's email address. Optional when type is bank_account
-            and method is attested or type is bank_account and method is attested_ownership.
+            and method is attested_ownership.
           nullable: true
           type: string
       required:
@@ -12013,66 +12013,57 @@ components:
           type: string
       type: object
     PostIdentityVerification_name:
-      description: "The customer's name. Required when type is kyc and method is attested,\
-        \ type is bank_account and method is attested, or type is bank_account and\
-        \ method is attested_ownership."
+      description: The customer's name. Required when type is kyc and method is attested
+        or type is bank_account and method is attested_ownership.
       nullable: true
       properties:
         first:
           description: The customer's first name. Required when type is kyc and method
-            is attested. Optional when type is bank_account and method is attested
-            or type is bank_account and method is attested_ownership.
+            is attested. Optional when type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         middle:
-          description: "The customer's middle name. Optional when type is kyc and\
-            \ method is attested, type is bank_account and method is attested, or\
-            \ type is bank_account and method is attested_ownership."
+          description: The customer's middle name. Optional when type is kyc and method
+            is attested or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         last:
           description: The customer's last name. Required when type is kyc and method
-            is attested. Optional when type is bank_account and method is attested
-            or type is bank_account and method is attested_ownership.
+            is attested. Optional when type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         full:
           description: The customer's full name. Required when type is bank_account
-            and method is attested or type is bank_account and method is attested_ownership.
-            Optional when type is kyc and method is attested.
+            and method is attested_ownership. Optional when type is kyc and method
+            is attested.
           nullable: true
           type: string
       type: object
     PostIdentityVerification_address:
-      description: "The customer's address. Required when type is kyc and method is\
-        \ attested, type is bank_account and method is attested, or type is bank_account\
-        \ and method is attested_ownership."
+      description: The customer's address. Required when type is kyc and method is
+        attested or type is bank_account and method is attested_ownership.
       nullable: true
       properties:
         street:
-          description: "The first line of the address. Required when type is kyc and\
-            \ method is attested, type is bank_account and method is attested, or\
-            \ type is bank_account and method is attested_ownership."
+          description: The first line of the address. Required when type is kyc and
+            method is attested or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         street2:
-          description: "The optional second line of the address. Optional when type\
-            \ is kyc and method is attested, type is bank_account and method is attested,\
-            \ or type is bank_account and method is attested_ownership."
+          description: The optional second line of the address. Optional when type
+            is kyc and method is attested or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         city:
-          description: "The city of the address. Required when type is kyc and method\
-            \ is attested, type is bank_account and method is attested, or type is\
-            \ bank_account and method is attested_ownership."
+          description: The city of the address. Required when type is kyc and method
+            is attested or type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         subdivision:
           description: "The ISO 3166-2 subdivision code of the address. Applicable\
             \ only for countries that use subnational states, provinces, lands, oblasts\
-            \ or regions. Optional when type is kyc and method is attested, type is\
-            \ bank_account and method is attested, or type is bank_account and method\
-            \ is attested_ownership."
+            \ or regions. Optional when type is kyc and method is attested or type\
+            \ is bank_account and method is attested_ownership."
           maxLength: 3
           minLength: 1
           nullable: true
@@ -12080,14 +12071,14 @@ components:
         postal_code:
           description: "The postal, zip or post code of the address. Applicable only\
             \ for countries that use postal, zip or post codes. Optional when type\
-            \ is kyc and method is attested, type is bank_account and method is attested,\
-            \ or type is bank_account and method is attested_ownership."
+            \ is kyc and method is attested or type is bank_account and method is\
+            \ attested_ownership."
           nullable: true
           type: string
         country_code:
-          description: "The ISO 3166 country 2-Alpha country code of the address.\
-            \ Required when type is kyc and method is attested, type is bank_account\
-            \ and method is attested, or type is bank_account and method is attested_ownership."
+          description: The ISO 3166 country 2-Alpha country code of the address. Required
+            when type is kyc and method is attested or type is bank_account and method
+            is attested_ownership.
           maxLength: 2
           minLength: 2
           nullable: true

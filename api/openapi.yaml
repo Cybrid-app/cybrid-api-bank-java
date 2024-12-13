@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.86
+  version: v0.123.87
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5689,7 +5689,7 @@ paths:
       x-accepts: application/json
     post:
       description: "Creates a transfer.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
-        | storing | The Platform is storing the trade details in our private store\
+        | storing | The Platform is storing the transfer details in our private store\
         \ |\n| reviewing | The Platform is reviewing the transfer for compliance |\n\
         | pending | The Platform is executing the transfer |\n| completed | The Platform\
         \ has successfully completed the transfer |\n| failed | The Platform was not\

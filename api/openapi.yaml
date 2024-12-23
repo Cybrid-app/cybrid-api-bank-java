@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.101
+  version: v0.123.103
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10962,7 +10962,7 @@ components:
           nullable: true
           type: string
         source_participants:
-          description: "The source participants for the transfer. Optional when transfer_type\
+          description: "The source participants for the transfer. Required when transfer_type\
             \ is funding, transfer_type is instant_funding, transfer_type is book,\
             \ transfer_type is crypto, or transfer_type is lightning."
           items:
@@ -10972,7 +10972,7 @@ components:
           nullable: true
           type: array
         destination_participants:
-          description: "The destination participants for the transfer. Optional when\
+          description: "The destination participants for the transfer. Required when\
             \ transfer_type is funding, transfer_type is instant_funding, transfer_type\
             \ is book, transfer_type is crypto, or transfer_type is lightning."
           items:

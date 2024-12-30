@@ -10,7 +10,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 ## listPrices
 
-> List&lt;SymbolPriceBankModel&gt; listPrices(symbol, bankGuid)
+> List&lt;SymbolPriceBankModel&gt; listPrices(symbol, tradingSymbol, payoutSymbol, payoutCountryCode, payoutParticipantsType, payoutRoute, bankGuid)
 
 Get Price
 
@@ -41,10 +41,15 @@ public class Example {
         oauth2.setAccessToken("YOUR ACCESS TOKEN");
 
         PricesBankApi apiInstance = new PricesBankApi(defaultClient);
-        String symbol = "symbol_example"; // String | Comma separated symbols to list prices for.
+        String symbol = "symbol_example"; // String | Comma separated trading symbols to list prices for.
+        String tradingSymbol = "tradingSymbol_example"; // String | Comma separated trading symbols to list prices for.
+        String payoutSymbol = "payoutSymbol_example"; // String | Comma separated payout symbols to list prices for.
+        String payoutCountryCode = "payoutCountryCode_example"; // String | Comma separated payout country codes to list prices for.
+        String payoutParticipantsType = "payoutParticipantsType_example"; // String | Comma separated payout participants types to list prices for.
+        String payoutRoute = "payoutRoute_example"; // String | Comma separated payout routes to list prices for.
         String bankGuid = "bankGuid_example"; // String | The bank identifier to retrieve prices for.
         try {
-            List<SymbolPriceBankModel> result = apiInstance.listPrices(symbol, bankGuid);
+            List<SymbolPriceBankModel> result = apiInstance.listPrices(symbol, tradingSymbol, payoutSymbol, payoutCountryCode, payoutParticipantsType, payoutRoute, bankGuid);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PricesBankApi#listPrices");
@@ -62,7 +67,12 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **symbol** | **String**| Comma separated symbols to list prices for. | [optional] |
+| **symbol** | **String**| Comma separated trading symbols to list prices for. | [optional] |
+| **tradingSymbol** | **String**| Comma separated trading symbols to list prices for. | [optional] |
+| **payoutSymbol** | **String**| Comma separated payout symbols to list prices for. | [optional] |
+| **payoutCountryCode** | **String**| Comma separated payout country codes to list prices for. | [optional] |
+| **payoutParticipantsType** | **String**| Comma separated payout participants types to list prices for. | [optional] |
+| **payoutRoute** | **String**| Comma separated payout routes to list prices for. | [optional] |
 | **bankGuid** | **String**| The bank identifier to retrieve prices for. | [optional] |
 
 ### Return type

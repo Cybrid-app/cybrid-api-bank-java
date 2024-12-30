@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.113
+  version: v0.123.114
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -439,20 +439,26 @@ paths:
                 unsupported_value_4:
                   value:
                     status: 422
-                    error_message: Country code not supported
+                    error_message: Payout symbols contain an asset that is not configured
+                      as supported
                     message_code: unsupported_value
                 unsupported_value_5:
                   value:
                     status: 422
-                    error_message: Bank must be configured with kyc_identity_verifications
+                    error_message: Country code not supported
                     message_code: unsupported_value
                 unsupported_value_6:
+                  value:
+                    status: 422
+                    error_message: Bank must be configured with kyc_identity_verifications
+                    message_code: unsupported_value
+                unsupported_value_7:
                   value:
                     status: 422
                     error_message: Bank must be configured with individual_customers
                       or business_customers
                     message_code: unsupported_value
-                unsupported_value_7:
+                unsupported_value_8:
                   value:
                     status: 422
                     error_message: CORS allowed origins must all be valid HTTPS URIs.
@@ -631,10 +637,15 @@ paths:
           content:
             application/json:
               examples:
-                unsupported_value:
+                unsupported_value_1:
                   value:
                     status: 422
                     error_message: Trading symbol not supported
+                    message_code: unsupported_value
+                unsupported_value_2:
+                  value:
+                    status: 422
+                    error_message: Payout symbol not supported
                     message_code: unsupported_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -4572,10 +4583,50 @@ paths:
         \ supported.\n\n\n\nRequired scope: **prices:read**"
       operationId: listPrices
       parameters:
-      - description: Comma separated symbols to list prices for.
+      - description: Comma separated trading symbols to list prices for.
         explode: true
         in: query
         name: symbol
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated trading symbols to list prices for.
+        explode: true
+        in: query
+        name: trading_symbol
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated payout symbols to list prices for.
+        explode: true
+        in: query
+        name: payout_symbol
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated payout country codes to list prices for.
+        explode: true
+        in: query
+        name: payout_country_code
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated payout participants types to list prices for.
+        explode: true
+        in: query
+        name: payout_participants_type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated payout routes to list prices for.
+        explode: true
+        in: query
+        name: payout_route
         required: false
         schema:
           type: string
@@ -8464,16 +8515,24 @@ components:
     SymbolPrice:
       example:
         symbol: symbol
+        country_code: country_code
+        participants_type: participants_type
+        route: route
         sell_price: 6
         sell_price_last_updated_at: 2000-01-23T04:56:07.000+00:00
         buy_price: 0
         buy_price_last_updated_at: 2000-01-23T04:56:07.000+00:00
+        type: type
       properties:
         symbol:
           description: "The trade symbol the pricing is related to. Format is asset-counter_asset,\
             \ e.g., BTC-USD."
           maxLength: 16
           minLength: 1
+          type: string
+        type:
+          description: The type of price; one of trading or payout.
+          nullable: true
           type: string
         buy_price:
           description: The purchase price (in base units) for the asset denominated
@@ -8493,6 +8552,21 @@ components:
         sell_price_last_updated_at:
           description: ISO8601 datetime the sale price was generated at.
           format: date-time
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the price.
+          maxLength: 2
+          minLength: 2
+          nullable: true
+          type: string
+        participants_type:
+          description: "The type of participants the price is for; one of C2C, C2B,\
+            \ B2C, or B2B."
+          nullable: true
+          type: string
+        route:
+          description: The route the price is for; one of bank_account or mobile_wallet.
           nullable: true
           type: string
       type: object
@@ -10507,6 +10581,14 @@ components:
             type: string
           maxItems: 50
           type: array
+        supported_payout_symbols:
+          description: The payout symbols supported by the bank. This is not yet supported
+            and should be nil or empty.
+          items:
+            type: object
+          maxItems: 50
+          nullable: true
+          type: array
         supported_fiat_account_assets:
           description: The fiat account assets supported by the bank.
           items:
@@ -10560,6 +10642,14 @@ components:
           description: The trading symbols supported by the bank.
           items:
             type: string
+          maxItems: 50
+          nullable: true
+          type: array
+        supported_payout_symbols:
+          description: The payout symbols supported by the bank. This is not yet supported
+            and should be nil or empty.
+          items:
+            type: object
           maxItems: 50
           nullable: true
           type: array

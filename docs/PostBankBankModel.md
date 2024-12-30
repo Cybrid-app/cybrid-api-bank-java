@@ -11,6 +11,7 @@ Request body for bank creation.
 |**type** | [**TypeEnum**](#TypeEnum) | The type of bank. |  |
 |**name** | **String** | The name of the bank. |  |
 |**supportedTradingSymbols** | **List&lt;String&gt;** | The trading symbols supported by the bank. |  |
+|**supportedPayoutSymbols** | **List&lt;Object&gt;** | The payout symbols supported by the bank. This is not yet supported and should be nil or empty. |  [optional] |
 |**supportedFiatAccountAssets** | **List&lt;String&gt;** | The fiat account assets supported by the bank. |  |
 |**supportedCountryCodes** | **List&lt;String&gt;** | The country codes supported by the bank. |  |
 |**features** | [**List&lt;FeaturesEnum&gt;**](#List&lt;FeaturesEnum&gt;) | The features supported by the bank. |  |

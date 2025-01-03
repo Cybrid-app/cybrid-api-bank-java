@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.119
+  version: v0.123.120
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10380,7 +10380,6 @@ components:
           description: The bank identifier.
           maxLength: 32
           minLength: 32
-          nullable: true
           type: string
         customer_guid:
           description: The customer identifier.
@@ -10521,6 +10520,7 @@ components:
           description: The customer identifier.
           maxLength: 32
           minLength: 32
+          nullable: true
           type: string
         address:
           description: The blockchain wallet address for the wallet.

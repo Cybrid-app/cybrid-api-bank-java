@@ -12,6 +12,7 @@
 |**name** | **String** | The bank&#39;s name. |  |
 |**type** | **String** | The bank type; one of sandbox or production. |  |
 |**supportedTradingSymbols** | **List&lt;String&gt;** | The bank&#39;s list of supported trading symbols. |  [optional] |
+|**supportedPayoutSymbols** | [**List&lt;BankSupportedPayoutSymbolsInnerBankModel&gt;**](BankSupportedPayoutSymbolsInnerBankModel.md) | The bank&#39;s list of supported payout symbols. |  [optional] |
 |**supportedFiatAccountAssets** | **List&lt;String&gt;** | The bank&#39;s list of supported fiat symbols. |  [optional] |
 |**supportedCountryCodes** | **List&lt;String&gt;** | The bank&#39;s list of supported country codes. |  [optional] |
 |**features** | **List&lt;String&gt;** | The bank&#39;s enabled features. |  |

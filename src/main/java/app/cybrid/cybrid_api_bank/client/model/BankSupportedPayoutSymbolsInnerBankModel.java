@@ -22,162 +22,141 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
- * The destination account in the transfer.
+ * BankSupportedPayoutSymbolsInnerBankModel
  */
-@ApiModel(description = "The destination account in the transfer.")
 @JsonPropertyOrder({
-  TransferDestinationAccountBankModel.JSON_PROPERTY_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_TYPE,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_BANK_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_CUSTOMER_GUID
+  BankSupportedPayoutSymbolsInnerBankModel.JSON_PROPERTY_SYMBOL,
+  BankSupportedPayoutSymbolsInnerBankModel.JSON_PROPERTY_COUNTRY_CODE,
+  BankSupportedPayoutSymbolsInnerBankModel.JSON_PROPERTY_PARTICIPANTS_TYPE,
+  BankSupportedPayoutSymbolsInnerBankModel.JSON_PROPERTY_ROUTE
 })
-@JsonTypeName("Transfer_destination_account")
+@JsonTypeName("Bank_supported_payout_symbols_inner")
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-04T17:35:02.923355Z[Etc/UTC]")
-public class TransferDestinationAccountBankModel {
-  public static final String JSON_PROPERTY_GUID = "guid";
-  private String guid;
+public class BankSupportedPayoutSymbolsInnerBankModel {
+  public static final String JSON_PROPERTY_SYMBOL = "symbol";
+  private String symbol;
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private String type;
+  public static final String JSON_PROPERTY_COUNTRY_CODE = "country_code";
+  private String countryCode;
 
-  public static final String JSON_PROPERTY_BANK_GUID = "bank_guid";
-  private JsonNullable<String> bankGuid = JsonNullable.<String>undefined();
+  public static final String JSON_PROPERTY_PARTICIPANTS_TYPE = "participants_type";
+  private String participantsType;
 
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private JsonNullable<String> customerGuid = JsonNullable.<String>undefined();
+  public static final String JSON_PROPERTY_ROUTE = "route";
+  private String route;
 
-  public TransferDestinationAccountBankModel() { 
+  public BankSupportedPayoutSymbolsInnerBankModel() { 
   }
 
-  public TransferDestinationAccountBankModel guid(String guid) {
+  public BankSupportedPayoutSymbolsInnerBankModel symbol(String symbol) {
     
-    this.guid = guid;
+    this.symbol = symbol;
     return this;
   }
 
    /**
-   * Auto-generated unique identifier for the transfer account.
-   * @return guid
+   * The payout symbol code.
+   * @return symbol
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Auto-generated unique identifier for the transfer account.")
-  @JsonProperty(JSON_PROPERTY_GUID)
+  @ApiModelProperty(value = "The payout symbol code.")
+  @JsonProperty(JSON_PROPERTY_SYMBOL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getGuid() {
-    return guid;
+  public String getSymbol() {
+    return symbol;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_GUID)
+  @JsonProperty(JSON_PROPERTY_SYMBOL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setGuid(String guid) {
-    this.guid = guid;
+  public void setSymbol(String symbol) {
+    this.symbol = symbol;
   }
 
 
-  public TransferDestinationAccountBankModel type(String type) {
+  public BankSupportedPayoutSymbolsInnerBankModel countryCode(String countryCode) {
     
-    this.type = type;
+    this.countryCode = countryCode;
     return this;
   }
 
    /**
-   * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, gas, or storage.
-   * @return type
+   * The ISO 3166 country 2-Alpha country code of the payout symbol.
+   * @return countryCode
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, gas, or storage.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
+  @ApiModelProperty(value = "The ISO 3166 country 2-Alpha country code of the payout symbol.")
+  @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public String getType() {
-    return type;
+  public String getCountryCode() {
+    return countryCode;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TYPE)
+  @JsonProperty(JSON_PROPERTY_COUNTRY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setType(String type) {
-    this.type = type;
+  public void setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
   }
 
 
-  public TransferDestinationAccountBankModel bankGuid(String bankGuid) {
-    this.bankGuid = JsonNullable.<String>of(bankGuid);
+  public BankSupportedPayoutSymbolsInnerBankModel participantsType(String participantsType) {
     
+    this.participantsType = participantsType;
     return this;
   }
 
    /**
-   * The account&#39;s identifier.
-   * @return bankGuid
+   * The participants type; one of C2C, C2B, B2C, or B2B.
+   * @return participantsType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonIgnore
-
-  public String getBankGuid() {
-        return bankGuid.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
+  @ApiModelProperty(value = "The participants type; one of C2C, C2B, B2C, or B2B.")
+  @JsonProperty(JSON_PROPERTY_PARTICIPANTS_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getBankGuid_JsonNullable() {
-    return bankGuid;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  public void setBankGuid_JsonNullable(JsonNullable<String> bankGuid) {
-    this.bankGuid = bankGuid;
-  }
-
-  public void setBankGuid(String bankGuid) {
-    this.bankGuid = JsonNullable.<String>of(bankGuid);
+  public String getParticipantsType() {
+    return participantsType;
   }
 
 
-  public TransferDestinationAccountBankModel customerGuid(String customerGuid) {
-    this.customerGuid = JsonNullable.<String>of(customerGuid);
+  @JsonProperty(JSON_PROPERTY_PARTICIPANTS_TYPE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setParticipantsType(String participantsType) {
+    this.participantsType = participantsType;
+  }
+
+
+  public BankSupportedPayoutSymbolsInnerBankModel route(String route) {
     
+    this.route = route;
     return this;
   }
 
    /**
-   * The account&#39;s identifier.
-   * @return customerGuid
+   * The payout symbol route; one of bank_account or mobile_wallet.
+   * @return route
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonIgnore
-
-  public String getCustomerGuid() {
-        return customerGuid.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
+  @ApiModelProperty(value = "The payout symbol route; one of bank_account or mobile_wallet.")
+  @JsonProperty(JSON_PROPERTY_ROUTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
-  public JsonNullable<String> getCustomerGuid_JsonNullable() {
-    return customerGuid;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  public void setCustomerGuid_JsonNullable(JsonNullable<String> customerGuid) {
-    this.customerGuid = customerGuid;
+  public String getRoute() {
+    return route;
   }
 
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = JsonNullable.<String>of(customerGuid);
+
+  @JsonProperty(JSON_PROPERTY_ROUTE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
+  public void setRoute(String route) {
+    this.route = route;
   }
 
 
@@ -189,37 +168,26 @@ public class TransferDestinationAccountBankModel {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TransferDestinationAccountBankModel transferDestinationAccount = (TransferDestinationAccountBankModel) o;
-    return Objects.equals(this.guid, transferDestinationAccount.guid) &&
-        Objects.equals(this.type, transferDestinationAccount.type) &&
-        equalsNullable(this.bankGuid, transferDestinationAccount.bankGuid) &&
-        equalsNullable(this.customerGuid, transferDestinationAccount.customerGuid);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+    BankSupportedPayoutSymbolsInnerBankModel bankSupportedPayoutSymbolsInner = (BankSupportedPayoutSymbolsInnerBankModel) o;
+    return Objects.equals(this.symbol, bankSupportedPayoutSymbolsInner.symbol) &&
+        Objects.equals(this.countryCode, bankSupportedPayoutSymbolsInner.countryCode) &&
+        Objects.equals(this.participantsType, bankSupportedPayoutSymbolsInner.participantsType) &&
+        Objects.equals(this.route, bankSupportedPayoutSymbolsInner.route);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(guid, type, hashCodeNullable(bankGuid), hashCodeNullable(customerGuid));
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(symbol, countryCode, participantsType, route);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class TransferDestinationAccountBankModel {\n");
-    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    bankGuid: ").append(toIndentedString(bankGuid)).append("\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
+    sb.append("class BankSupportedPayoutSymbolsInnerBankModel {\n");
+    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    countryCode: ").append(toIndentedString(countryCode)).append("\n");
+    sb.append("    participantsType: ").append(toIndentedString(participantsType)).append("\n");
+    sb.append("    route: ").append(toIndentedString(route)).append("\n");
     sb.append("}");
     return sb.toString();
   }

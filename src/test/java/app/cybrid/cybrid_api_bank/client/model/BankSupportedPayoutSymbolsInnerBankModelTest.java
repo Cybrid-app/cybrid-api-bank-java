@@ -13,8 +13,6 @@
 
 package app.cybrid.cybrid_api_bank.client.model;
 
-import java.util.Objects;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,218 +20,55 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.openapitools.jackson.nullable.JsonNullable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.openapitools.jackson.nullable.JsonNullable;
-import java.util.NoSuchElementException;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 
 /**
- * The destination account in the transfer.
+ * Model tests for BankSupportedPayoutSymbolsInnerBankModel
  */
-@ApiModel(description = "The destination account in the transfer.")
-@JsonPropertyOrder({
-  TransferDestinationAccountBankModel.JSON_PROPERTY_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_TYPE,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_BANK_GUID,
-  TransferDestinationAccountBankModel.JSON_PROPERTY_CUSTOMER_GUID
-})
-@JsonTypeName("Transfer_destination_account")
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-04T17:35:02.923355Z[Etc/UTC]")
-public class TransferDestinationAccountBankModel {
-  public static final String JSON_PROPERTY_GUID = "guid";
-  private String guid;
+public class BankSupportedPayoutSymbolsInnerBankModelTest {
+    private final BankSupportedPayoutSymbolsInnerBankModel model = new BankSupportedPayoutSymbolsInnerBankModel();
 
-  public static final String JSON_PROPERTY_TYPE = "type";
-  private String type;
-
-  public static final String JSON_PROPERTY_BANK_GUID = "bank_guid";
-  private JsonNullable<String> bankGuid = JsonNullable.<String>undefined();
-
-  public static final String JSON_PROPERTY_CUSTOMER_GUID = "customer_guid";
-  private JsonNullable<String> customerGuid = JsonNullable.<String>undefined();
-
-  public TransferDestinationAccountBankModel() { 
-  }
-
-  public TransferDestinationAccountBankModel guid(String guid) {
-    
-    this.guid = guid;
-    return this;
-  }
-
-   /**
-   * Auto-generated unique identifier for the transfer account.
-   * @return guid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Auto-generated unique identifier for the transfer account.")
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getGuid() {
-    return guid;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setGuid(String guid) {
-    this.guid = guid;
-  }
-
-
-  public TransferDestinationAccountBankModel type(String type) {
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, gas, or storage.
-   * @return type
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The type of transfer account; one of trading, fiat, external_bank_account, external_wallet, one_time_address, reserve, invoice_operations, fee, gas, or storage.")
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public String getType() {
-    return type;
-  }
-
-
-  @JsonProperty(JSON_PROPERTY_TYPE)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setType(String type) {
-    this.type = type;
-  }
-
-
-  public TransferDestinationAccountBankModel bankGuid(String bankGuid) {
-    this.bankGuid = JsonNullable.<String>of(bankGuid);
-    
-    return this;
-  }
-
-   /**
-   * The account&#39;s identifier.
-   * @return bankGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonIgnore
-
-  public String getBankGuid() {
-        return bankGuid.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<String> getBankGuid_JsonNullable() {
-    return bankGuid;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_BANK_GUID)
-  public void setBankGuid_JsonNullable(JsonNullable<String> bankGuid) {
-    this.bankGuid = bankGuid;
-  }
-
-  public void setBankGuid(String bankGuid) {
-    this.bankGuid = JsonNullable.<String>of(bankGuid);
-  }
-
-
-  public TransferDestinationAccountBankModel customerGuid(String customerGuid) {
-    this.customerGuid = JsonNullable.<String>of(customerGuid);
-    
-    return this;
-  }
-
-   /**
-   * The account&#39;s identifier.
-   * @return customerGuid
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "The account's identifier.")
-  @JsonIgnore
-
-  public String getCustomerGuid() {
-        return customerGuid.orElse(null);
-  }
-
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-
-  public JsonNullable<String> getCustomerGuid_JsonNullable() {
-    return customerGuid;
-  }
-  
-  @JsonProperty(JSON_PROPERTY_CUSTOMER_GUID)
-  public void setCustomerGuid_JsonNullable(JsonNullable<String> customerGuid) {
-    this.customerGuid = customerGuid;
-  }
-
-  public void setCustomerGuid(String customerGuid) {
-    this.customerGuid = JsonNullable.<String>of(customerGuid);
-  }
-
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
+    /**
+     * Model tests for BankSupportedPayoutSymbolsInnerBankModel
+     */
+    @Test
+    public void testBankSupportedPayoutSymbolsInnerBankModel() {
+        // TODO: test BankSupportedPayoutSymbolsInnerBankModel
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
     }
-    TransferDestinationAccountBankModel transferDestinationAccount = (TransferDestinationAccountBankModel) o;
-    return Objects.equals(this.guid, transferDestinationAccount.guid) &&
-        Objects.equals(this.type, transferDestinationAccount.type) &&
-        equalsNullable(this.bankGuid, transferDestinationAccount.bankGuid) &&
-        equalsNullable(this.customerGuid, transferDestinationAccount.customerGuid);
-  }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(guid, type, hashCodeNullable(bankGuid), hashCodeNullable(customerGuid));
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
+    /**
+     * Test the property 'countryCode'
+     */
+    @Test
+    public void countryCodeTest() {
+        // TODO: test countryCode
     }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
-  }
 
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class TransferDestinationAccountBankModel {\n");
-    sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    bankGuid: ").append(toIndentedString(bankGuid)).append("\n");
-    sb.append("    customerGuid: ").append(toIndentedString(customerGuid)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
+    /**
+     * Test the property 'participantsType'
+     */
+    @Test
+    public void participantsTypeTest() {
+        // TODO: test participantsType
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+     * Test the property 'route'
+     */
+    @Test
+    public void routeTest() {
+        // TODO: test route
+    }
 
 }
-

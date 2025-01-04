@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.120
+  version: v0.123.121
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6635,6 +6635,15 @@ components:
       type: object
     Bank:
       example:
+        supported_payout_symbols:
+        - symbol: symbol
+          country_code: country_code
+          participants_type: participants_type
+          route: route
+        - symbol: symbol
+          country_code: country_code
+          participants_type: participants_type
+          route: route
         features:
         - features
         - features
@@ -6679,6 +6688,11 @@ components:
           description: The bank's list of supported trading symbols.
           items:
             type: string
+          type: array
+        supported_payout_symbols:
+          description: The bank's list of supported payout symbols.
+          items:
+            $ref: '#/components/schemas/Bank_supported_payout_symbols_inner'
           type: array
         supported_fiat_account_assets:
           description: The bank's list of supported fiat symbols.
@@ -6738,7 +6752,16 @@ components:
         per_page: 0
         total: 0
         objects:
-        - features:
+        - supported_payout_symbols:
+          - symbol: symbol
+            country_code: country_code
+            participants_type: participants_type
+            route: route
+          - symbol: symbol
+            country_code: country_code
+            participants_type: participants_type
+            route: route
+          features:
           - features
           - features
           cors_allowed_origins:
@@ -6759,7 +6782,16 @@ components:
           supported_country_codes:
           - supported_country_codes
           - supported_country_codes
-        - features:
+        - supported_payout_symbols:
+          - symbol: symbol
+            country_code: country_code
+            participants_type: participants_type
+            route: route
+          - symbol: symbol
+            country_code: country_code
+            participants_type: participants_type
+            route: route
+          features:
           - features
           - features
           cors_allowed_origins:
@@ -11366,6 +11398,26 @@ components:
       - error_message
       - message_code
       - status
+      type: object
+    Bank_supported_payout_symbols_inner:
+      example:
+        symbol: symbol
+        country_code: country_code
+        participants_type: participants_type
+        route: route
+      properties:
+        symbol:
+          description: The payout symbol code.
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the payout symbol.
+          type: string
+        participants_type:
+          description: "The participants type; one of C2C, C2B, B2C, or B2B."
+          type: string
+        route:
+          description: The payout symbol route; one of bank_account or mobile_wallet.
+          type: string
       type: object
     Counterparty_name:
       description: The counterparty's name. Only available for GET operations when

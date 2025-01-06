@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.123
+  version: v0.123.124
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -12222,7 +12222,7 @@ components:
       type: object
     PostIdentityVerification_address:
       description: The customer's address. Required when type is kyc and method is
-        attested or type is bank_account and method is attested_ownership.
+        attested. Optional when type is bank_account and method is attested_ownership.
       nullable: true
       properties:
         street:

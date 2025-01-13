@@ -211,7 +211,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.139
+  version: v0.123.140
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7436,8 +7436,8 @@ components:
           type: string
         method:
           description: "The identity verification method; one of attested, document_submission,\
-            \ id_and_selfie, tax_id_and_selfie, business_registration, plaid_identity_match,\
-            \ attested_ownership, account_ownership, or watchlists."
+            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_ownership,\
+            \ account_ownership, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7498,7 +7498,6 @@ components:
       - id_and_selfie
       - tax_id_and_selfie
       - business_registration
-      - plaid_identity_match
       - attested_ownership
       - account_ownership
       - watchlists
@@ -7594,8 +7593,8 @@ components:
           type: string
         method:
           description: "The identity verification method; one of attested, document_submission,\
-            \ id_and_selfie, tax_id_and_selfie, business_registration, plaid_identity_match,\
-            \ attested_ownership, account_ownership, or watchlists."
+            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_ownership,\
+            \ account_ownership, or watchlists."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -10832,7 +10831,6 @@ components:
           - id_and_selfie
           - tax_id_and_selfie
           - business_registration
-          - plaid_identity_match
           - attested_ownership
           - account_ownership
           nullable: true

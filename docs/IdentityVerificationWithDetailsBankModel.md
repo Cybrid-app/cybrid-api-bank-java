@@ -9,7 +9,7 @@
 |------------ | ------------- | ------------- | -------------|
 |**guid** | **String** | Auto-generated unique identifier for the identity verification. |  [optional] |
 |**type** | **String** | The identity verification type; one of kyc, bank_account, or counterparty. |  [optional] |
-|**method** | **String** | The identity verification method; one of attested, document_submission, id_and_selfie, tax_id_and_selfie, business_registration, plaid_identity_match, attested_ownership, account_ownership, or watchlists. |  [optional] |
+|**method** | **String** | The identity verification method; one of attested, document_submission, id_and_selfie, tax_id_and_selfie, business_registration, attested_ownership, account_ownership, or watchlists. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
 |**customerGuid** | **String** | The identity verification&#39;s identifier. |  [optional] |

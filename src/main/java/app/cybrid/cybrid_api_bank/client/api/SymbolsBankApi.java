@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-10T22:57:18.209891Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-01-13T16:20:56.097669Z[Etc/UTC]")
 public class SymbolsBankApi {
     private ApiClient apiClient;
 
@@ -48,7 +48,7 @@ public class SymbolsBankApi {
 
     /**
      * Get Symbols list
-     * Retrieves a listing of symbols.
+     * Retrieves a listing of symbols.Required scope: **prices:read**
      * <p><b>200</b> - get list of symbols
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * @return List&lt;String&gt;
@@ -79,7 +79,7 @@ public class SymbolsBankApi {
 
     /**
      * Get Symbols list
-     * Retrieves a listing of symbols.
+     * Retrieves a listing of symbols.Required scope: **prices:read**
      * <p><b>200</b> - get list of symbols
      * <p><b>401</b> - Unauthorized - Authentication failed, 
      * @return List&lt;String&gt;

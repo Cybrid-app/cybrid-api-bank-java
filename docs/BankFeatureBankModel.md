@@ -9,6 +9,8 @@
 
 * `ATTESTATION_IDENTITY_RECORDS` (value: `"attestation_identity_records"`)
 
+* `ATTESTATION_IDENTITY_RECORDS_V2` (value: `"attestation_identity_records_v2"`)
+
 * `RAW_ROUTING_DETAILS` (value: `"raw_routing_details"`)
 
 * `INDIVIDUAL_CUSTOMERS` (value: `"individual_customers"`)

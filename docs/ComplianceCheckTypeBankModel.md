@@ -11,6 +11,8 @@
 
 * `BUSINESS_TAX_ID_VERIFICATION` (value: `"business_tax_id_verification"`)
 
+* `BUSINESS_ATTESTED` (value: `"business_attested"`)
+
 * `PERSON_ATTESTED` (value: `"person_attested"`)
 
 * `PERSON_TAX_ID_ATTESTED` (value: `"person_tax_id_attested"`)

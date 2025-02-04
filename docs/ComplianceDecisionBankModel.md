@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**type** | **String** | The type of verification check; one of business_watchlists, business_verification, business_tax_id_verification, person_attested, person_tax_id_attested, person_watchlists, person_verification, person_authentication, person_gov_id_verification, person_tax_id_verification, external_bank_account_verification, or external_bank_account_attested. |  |
+|**type** | **String** | The type of verification check; one of business_watchlists, business_verification, business_tax_id_verification, business_attested, person_attested, person_tax_id_attested, person_watchlists, person_verification, person_authentication, person_gov_id_verification, person_tax_id_verification, external_bank_account_verification, or external_bank_account_attested. |  |
 |**state** | **String** | The state of the verification check; one of passed, failed, expired, or invalidated. |  |
 |**failureCodes** | **List&lt;String&gt;** | The reason codes explaining the outcome. |  [optional] |
 

@@ -25,6 +25,8 @@ Identification number details.
 | SOCIAL_SECURITY_NUMBER | &quot;social_security_number&quot; |
 | TAX_IDENTIFICATION_NUMBER | &quot;tax_identification_number&quot; |
 | IDENTIFICATION_CARD | &quot;identification_card&quot; |
+| EMPLOYER_IDENTIFICATION_NUMBER | &quot;employer_identification_number&quot; |
+| BUSINESS_REGISTRATION_NUMBER | &quot;business_registration_number&quot; |
 
 
 

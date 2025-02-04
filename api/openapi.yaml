@@ -73,27 +73,28 @@ info:
     \ external_bank_accounts:execute external_wallets:read external_wallets:execute\
     \ workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute\
     \ deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write\
-    \ invoices:execute identity_verifications:read identity_verifications:write identity_verifications:execute\"\
-    \n  }' -H \"Content-Type: application/json\"\n\n# When using Organization credentials\
-    \ set `scope` to 'organizations:read organizations:write organization_applications:execute\
-    \ banks:read banks:write banks:execute bank_applications:execute users:read users:execute\
-    \ counterparties:read customers:read accounts:read prices:read quotes:execute\
-    \ quotes:read trades:execute trades:read transfers:read transfers:execute external_bank_accounts:read\
-    \ external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read\
-    \ invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read\
-    \ subscription_events:execute identity_verifications:read'\n```\n<font color=\"\
-    orange\">**⚠️ Note: The above curl will create a bearer token with full scope\
-    \ access. Delete scopes if you'd like to restrict access.**</font>\n\n## Authentication\
-    \ Scopes\n\nThe Cybrid platform supports the use of scopes to control the level\
-    \ of access a token is limited to. Scopes do not grant access to resources; instead,\
-    \ they provide limits, in support of the least privilege principal.\n\nThe following\
-    \ scopes are available on the platform and can be requested when generating either\
-    \ an Organization, Bank or Customer token. Generally speaking, the _Read_ scope\
-    \ is required to read and list resources, the _Write_ scope is required to update\
-    \ a resource and the _Execute_ scope is required to create a resource.\n\n| Resource\
-    \              | Read scope (Token Type)                                    |\
-    \ Write scope (Token Type)                      | Execute scope (Token Type) \
-    \                      |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
+    \ invoices:execute identity_verifications:read identity_verifications:write identity_verifications:execute\
+    \ files:read files:execute\"\n  }' -H \"Content-Type: application/json\"\n\n#\
+    \ When using Organization credentials set `scope` to 'organizations:read organizations:write\
+    \ organization_applications:execute banks:read banks:write banks:execute bank_applications:execute\
+    \ users:read users:execute counterparties:read customers:read accounts:read prices:read\
+    \ quotes:execute quotes:read trades:execute trades:read transfers:read transfers:execute\
+    \ external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read\
+    \ deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write\
+    \ subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read\
+    \ files:read files:execute'\n```\n<font color=\"orange\">**⚠️ Note: The above\
+    \ curl will create a bearer token with full scope access. Delete scopes if you'd\
+    \ like to restrict access.**</font>\n\n## Authentication Scopes\n\nThe Cybrid\
+    \ platform supports the use of scopes to control the level of access a token is\
+    \ limited to. Scopes do not grant access to resources; instead, they provide limits,\
+    \ in support of the least privilege principal.\n\nThe following scopes are available\
+    \ on the platform and can be requested when generating either an Organization,\
+    \ Bank or Customer token. Generally speaking, the _Read_ scope is required to\
+    \ read and list resources, the _Write_ scope is required to update a resource\
+    \ and the _Execute_ scope is required to create a resource.\n\n| Resource    \
+    \          | Read scope (Token Type)                                    | Write\
+    \ scope (Token Type)                      | Execute scope (Token Type)       \
+    \                |\n|-----------------------|------------------------------------------------------------|-----------------------------------------------|--------------------------------------------------|\n\
     | Account               | accounts:read (Organization, Bank, Customer)       \
     \        |                                               | accounts:execute (Bank,\
     \ Customer)                |\n| Bank                  | banks:read (Organization,\
@@ -211,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.153
+  version: v0.123.203
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4575,6 +4576,336 @@ paths:
       tags:
       - Accounts
       x-accepts: application/json
+  /api/files:
+    get:
+      description: "Retrieves a list of files.\n\nRequired scope: **files:read**"
+      operationId: listFiles
+      parameters:
+      - description: The page index to retrieve.
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPage'
+        style: form
+      - description: The number of entities per page to return.
+        explode: true
+        in: query
+        name: per_page
+        required: false
+        schema:
+          $ref: '#/components/schemas/ListRequestPerPage'
+        style: form
+      - description: Comma separated file_guids to list files for.
+        explode: true
+        in: query
+        name: guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated file types to list files for.
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated file states to list files for.
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated bank_guids to list files for.
+        explode: true
+        in: query
+        name: bank_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated customer_guids to list files for.
+        explode: true
+        in: query
+        name: customer_guid
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformFileList'
+          description: get list of files
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_value:
+                  value:
+                    status: 400
+                    error_message: comma separated types must be at the most 4096
+                      characters long
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: files:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - accounts:read
+      summary: List Files
+      tags:
+      - Files
+      x-accepts: application/json
+    post:
+      description: "Creates a file.\n\n#### This feature is currently in preview mode\
+        \ and is not yet available for partner use.\n\n## Data\n\nThe attribute contains\
+        \ the base64 encoded file content. The value needs to be smaller than 10MB\
+        \ otherwise the Platform will reject the request. To upload files larger than\
+        \ 10MB do not provide the content and use the returned upload URL to provide\
+        \ the file.\n\n## State\n\n| State | Description |\n|-------|-------------|\n\
+        | storing | The Platform is storing the file in our private store |\n| completed\
+        \ | The Platform has completed storing the file |\n| failed | The Platform\
+        \ failed to store the file |\n\n\n\nRequired scope: **files:execute**"
+      operationId: createFile
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostFile'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformFile'
+          description: file created
+        "400":
+          content:
+            application/json:
+              examples:
+                missing_parameter:
+                  value:
+                    status: 400
+                    error_message: "Missing parameter. Required: type, customer_guid,\
+                      \ content_type, filename"
+                    message_code: missing_parameter
+                invalid_parameter_value:
+                  value:
+                    status: 400
+                    error_message: "Invalid value exception. Parameter: content_type\
+                      \ supported values: [\"[\\\"image/jpeg\\\", \\\"image/png\\\"\
+                      , \\\"application/pdf\\\"]\"] "
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid requests
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: files:execute"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+      security:
+      - BearerAuth: []
+        oauth2:
+        - files:execute
+      summary: Create File
+      tags:
+      - Files
+      x-content-type: application/json
+      x-accepts: application/json
+  /api/files/{file_guid}:
+    get:
+      description: "Retrieves a file.\n\nRequired scope: **files:read**"
+      operationId: getFile
+      parameters:
+      - description: Identifier for the file.
+        explode: false
+        in: path
+        name: file_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlatformFile'
+          description: file found
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: bank or organization"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+                malformed_auth_header:
+                  value:
+                    status: 401
+                    error_message: Authorization header is malformed.
+                    message_code: authentication_malformed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: "Unauthorized - Authentication failed, "
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: files:read"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid scope
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: file not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: file not found
+      security:
+      - BearerAuth: []
+        oauth2:
+        - files:read
+      summary: Get File
+      tags:
+      - Files
+      x-accepts: application/json
   /api/prices:
     get:
       description: "Retrieves a listing of symbol prices.\n\n## Symbols\n\nSymbol\
@@ -6046,16 +6377,21 @@ paths:
                     status: 422
                     error_message: External bank account invalid
                     message_code: invalid_external_bank_account
-                invalid_external_bank_account_3:
+                invalid_external_wallet_1:
                   value:
                     status: 422
                     error_message: External wallet not found
-                    message_code: invalid_external_bank_account
-                invalid_external_bank_account_4:
+                    message_code: invalid_external_wallet
+                invalid_external_wallet_2:
                   value:
                     status: 422
                     error_message: External wallet invalid
-                    message_code: invalid_external_bank_account
+                    message_code: invalid_external_wallet
+                invalid_external_wallet_3:
+                  value:
+                    status: 422
+                    error_message: external_wallet_guid is required
+                    message_code: invalid_external_wallet
                 no_fee_account:
                   value:
                     status: 422
@@ -6709,8 +7045,8 @@ components:
           description: The bank's enabled features.
           items:
             description: "A combination of: kyc_identity_verifications, attestation_identity_records,\
-              \ raw_routing_details, individual_customers, business_customers, and\
-              \ counterparty_external_accounts."
+              \ attestation_identity_records_v2, raw_routing_details, individual_customers,\
+              \ business_customers, and counterparty_external_accounts."
             type: string
           type: array
         cors_allowed_origins:
@@ -6743,6 +7079,7 @@ components:
       enum:
       - kyc_identity_verifications
       - attestation_identity_records
+      - attestation_identity_records_v2
       - raw_routing_details
       - individual_customers
       - business_customers
@@ -7436,8 +7773,8 @@ components:
           type: string
         method:
           description: "The identity verification method; one of attested, document_submission,\
-            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_ownership,\
-            \ account_ownership, or watchlists."
+            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_id_and_selfie,\
+            \ attested_business_registration, watchlists, attested_ownership, or account_ownership."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7498,9 +7835,11 @@ components:
       - id_and_selfie
       - tax_id_and_selfie
       - business_registration
+      - attested_id_and_selfie
+      - attested_business_registration
+      - watchlists
       - attested_ownership
       - account_ownership
-      - watchlists
       type: string
     IdentityVerificationState:
       enum:
@@ -7593,8 +7932,8 @@ components:
           type: string
         method:
           description: "The identity verification method; one of attested, document_submission,\
-            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_ownership,\
-            \ account_ownership, or watchlists."
+            \ id_and_selfie, tax_id_and_selfie, business_registration, attested_id_and_selfie,\
+            \ attested_business_registration, watchlists, attested_ownership, or account_ownership."
           type: string
         created_at:
           description: ISO8601 datetime the record was created at.
@@ -7745,10 +8084,10 @@ components:
       properties:
         type:
           description: "The type of compliance check; one of business_watchlists,\
-            \ business_verification, business_tax_id_verification, person_attested,\
-            \ person_tax_id_attested, person_watchlists, person_verification, person_authentication,\
-            \ person_gov_id_verification, person_tax_id_verification, external_bank_account_verification,\
-            \ or external_bank_account_attested."
+            \ business_verification, business_tax_id_verification, business_attested,\
+            \ person_attested, person_tax_id_attested, person_watchlists, person_verification,\
+            \ person_authentication, person_gov_id_verification, person_tax_id_verification,\
+            \ external_bank_account_verification, or external_bank_account_attested."
           type: string
         outcome:
           description: "The outcome of the compliance check; one of passed, failed,\
@@ -7769,6 +8108,7 @@ components:
       - business_watchlists
       - business_verification
       - business_tax_id_verification
+      - business_attested
       - person_attested
       - person_tax_id_attested
       - person_watchlists
@@ -7795,10 +8135,10 @@ components:
       properties:
         type:
           description: "The type of verification check; one of business_watchlists,\
-            \ business_verification, business_tax_id_verification, person_attested,\
-            \ person_tax_id_attested, person_watchlists, person_verification, person_authentication,\
-            \ person_gov_id_verification, person_tax_id_verification, external_bank_account_verification,\
-            \ or external_bank_account_attested."
+            \ business_verification, business_tax_id_verification, business_attested,\
+            \ person_attested, person_tax_id_attested, person_watchlists, person_verification,\
+            \ person_authentication, person_gov_id_verification, person_tax_id_verification,\
+            \ external_bank_account_verification, or external_bank_account_attested."
           type: string
         state:
           description: "The state of the verification check; one of passed, failed,\
@@ -7819,6 +8159,7 @@ components:
       - business_watchlists
       - business_verification
       - business_tax_id_verification
+      - business_attested
       - person_attested
       - person_tax_id_attested
       - person_watchlists
@@ -10494,7 +10835,7 @@ components:
         type:
           description: "The source of the identification number; one of drivers_license,\
             \ passport, passport_card, residence_card, social_security_number, tax_identification_number,\
-            \ or identification_card."
+            \ identification_card, employer_identification_number, or business_registration_number."
           type: string
         issuing_country_code:
           description: The ISO 3166 country 2-Alpha country code of the identification
@@ -10640,6 +10981,7 @@ components:
           items:
             enum:
             - attestation_identity_records
+            - attestation_identity_records_v2
             - kyc_identity_verifications
             - business_customers
             - individual_customers
@@ -10702,32 +11044,43 @@ components:
           - business
           - individual
           type: string
-        name:
-          $ref: '#/components/schemas/PostCustomer_name'
         address:
           $ref: '#/components/schemas/PostCustomer_address'
-        date_of_birth:
-          description: The customer's date of birth. Optional when type is individual.
-          format: date
-          nullable: true
-          type: string
         phone_number:
-          description: The customer's phone number. Optional when type is individual.
+          description: The customer's phone number.
           nullable: true
           type: string
         email_address:
-          description: The customer's email address. Optional when type is individual.
+          description: The customer's email address.
           nullable: true
           type: string
         identification_numbers:
-          description: The customer's identification numbers. Optional when type is
-            individual.
+          description: The customer's identification numbers.
           items:
             $ref: '#/components/schemas/PostIdentificationNumber'
           maxItems: 10
           minItems: 1
           nullable: true
           type: array
+        name:
+          $ref: '#/components/schemas/PostCustomer_name'
+        date_of_birth:
+          description: The customer's date of birth. Optional when type is individual.
+          format: date
+          nullable: true
+          type: string
+        aliases:
+          description: The aliases of the customer. Optional when type is business.
+          items:
+            $ref: '#/components/schemas/PostCustomer_aliases_inner'
+          maxItems: 1
+          minItems: 0
+          nullable: true
+          type: array
+        website:
+          description: The customer's website. Optional when type is business.
+          nullable: true
+          type: string
         labels:
           description: The labels associated with the customer.
           items:
@@ -10806,7 +11159,8 @@ components:
           - counterparty
           type: string
         customer_guid:
-          description: The customer's identifier.
+          description: The customer's identifier. Required when type is kyc and method
+            is attested_business_registration or type is kyc and method is attested_id_and_selfie.
           maxLength: 32
           nullable: true
           type: string
@@ -10831,6 +11185,8 @@ components:
           - id_and_selfie
           - tax_id_and_selfie
           - business_registration
+          - attested_id_and_selfie
+          - attested_business_registration
           - attested_ownership
           - account_ownership
           nullable: true
@@ -10852,32 +11208,88 @@ components:
           $ref: '#/components/schemas/PostIdentityVerification_address'
         date_of_birth:
           description: The customer's date of birth. Required when type is kyc and
-            method is attested.
+            method is attested or type is kyc and method is attested_id_and_selfie.
           format: date
           nullable: true
           type: string
         identification_numbers:
-          description: The customer's identification numbers. Required when type is
-            kyc and method is attested.
+          description: "The customer's identification numbers. Required when type\
+            \ is kyc and method is attested, type is kyc and method is attested_business_registration,\
+            \ or type is kyc and method is attested_id_and_selfie."
           items:
             $ref: '#/components/schemas/PostIdentificationNumber'
           maxItems: 10
           minItems: 1
           nullable: true
           type: array
-        external_bank_account_guid:
-          description: The external bank account's identifier. Required when type
-            is bank_account.
+        aliases:
+          description: The aliases of the customer. Optional when type is kyc and
+            method is attested_business_registration.
+          items:
+            $ref: '#/components/schemas/PostIdentityVerification_aliases_inner'
+          minItems: 0
           nullable: true
-          type: string
+          type: array
         phone_number:
-          description: The customer's phone number. Optional when type is bank_account
-            and method is attested_ownership.
+          description: The customer's phone number. Required when type is kyc and
+            method is attested_business_registration or type is kyc and method is
+            attested_id_and_selfie. Optional when type is bank_account and method
+            is attested_ownership.
           nullable: true
           type: string
         email_address:
-          description: The customer's email address. Optional when type is bank_account
-            and method is attested_ownership.
+          description: The customer's email address. Required when type is kyc and
+            method is attested_business_registration or type is kyc and method is
+            attested_id_and_selfie. Optional when type is bank_account and method
+            is attested_ownership.
+          nullable: true
+          type: string
+        website:
+          description: The customer's website. Required when type is kyc and method
+            is attested_business_registration.
+          nullable: true
+          type: string
+        nature_of_business:
+          description: The customer's nature of business. Required when type is kyc
+            and method is attested_business_registration.
+          nullable: true
+          type: string
+        director_customer_guids:
+          description: The customer guids of the directors of the business Required
+            when type is kyc and method is attested_business_registration.
+          items:
+            type: string
+          maxItems: 50
+          minItems: 1
+          nullable: true
+          type: array
+        ultimate_beneficial_owners:
+          description: The ultimate beneficial owners of the business with 10% or
+            more ownership Required when type is kyc and method is attested_business_registration.
+          items:
+            $ref: '#/components/schemas/PostUltimateBeneficialOwner'
+          maxItems: 50
+          minItems: 1
+          nullable: true
+          type: array
+        supporting_file_guids:
+          description: File guids supporting the verification Required when type is
+            kyc and method is attested_business_registration or type is kyc and method
+            is attested_id_and_selfie.
+          items:
+            type: string
+          maxItems: 10
+          minItems: 1
+          nullable: true
+          type: array
+        occupation:
+          description: The customer's occupation. Required when type is kyc and method
+            is attested_id_and_selfie.
+          nullable: true
+          type: string
+        external_bank_account_guid:
+          description: The external bank account's identifier. Required when type
+            is bank_account.
           nullable: true
           type: string
       required:
@@ -10896,6 +11308,8 @@ components:
           - social_security_number
           - tax_identification_number
           - identification_card
+          - employer_identification_number
+          - business_registration_number
           type: string
         issuing_country_code:
           description: The ISO 3166 country 2-Alpha country code of the identification
@@ -10907,6 +11321,70 @@ components:
       required:
       - identification_number
       - issuing_country_code
+      - type
+      type: object
+    PostUltimateBeneficialOwner:
+      description: Identification number details.
+      properties:
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        ownership_percentage:
+          description: The ownership percentage.
+          type: number
+      required:
+      - customer_guid
+      - ownership_percentage
+      type: object
+    PostFile:
+      description: Request body for a new file.
+      properties:
+        type:
+          description: The type of file.
+          enum:
+          - drivers_license_front
+          - drivers_license_back
+          - passport
+          - identification_card
+          - residence_card
+          - selfie
+          - selfie_left
+          - selfie_right
+          - utility_bill
+          - bank_statement
+          - property_tax
+          - tax_document
+          - ein_letter
+          - incorporation_certificate
+          type: string
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        filename:
+          description: The name of the file.
+          maxLength: 128
+          minLength: 1
+          type: string
+        content_type:
+          description: The content type of the file.
+          enum:
+          - image/jpeg
+          - image/png
+          - application/pdf
+          type: string
+        data:
+          description: Base64 encoded file content
+          maxLength: 10485760
+          nullable: true
+          type: string
+      required:
+      - content_type
+      - customer_guid
+      - filename
       - type
       type: object
     PostDepositAddress:
@@ -11381,6 +11859,113 @@ components:
       - address
       - asset
       - name
+      type: object
+    PlatformFile:
+      example:
+        completed_at: 2000-01-23T04:56:07.000+00:00
+        failure_code: failure_code
+        content_type: image/jpeg
+        file_type: drivers_license_front
+        guid: guid
+        failed_at: 2000-01-23T04:56:07.000+00:00
+        state: storing
+      properties:
+        guid:
+          description: The unique identifier for the file.
+          maxLength: 32
+          minLength: 32
+          type: string
+        file_type:
+          description: "The file type; one of drivers_license_front, drivers_license_back,\
+            \ passport, identification_card, residence_card, selfie, selfie_left,\
+            \ selfie_right, utility_bill, bank_statement, property_tax, tax_document,\
+            \ ein_letter, or incorporation_certificate."
+          enum:
+          - drivers_license_front
+          - drivers_license_back
+          - passport
+          - identification_card
+          - residence_card
+          - selfie
+          - selfie_left
+          - selfie_right
+          - utility_bill
+          - bank_statement
+          - property_tax
+          - tax_document
+          - ein_letter
+          - incorporation_certificate
+          type: string
+        content_type:
+          description: "The media type; one of image/jpeg, image/png, or application/pdf."
+          enum:
+          - image/jpeg
+          - image/png
+          - application/pdf
+          type: string
+        completed_at:
+          description: The ISO8601 datetime the file was completed at.
+          format: date-time
+          type: string
+        failed_at:
+          description: The ISO8601 datetime the file failed at.
+          format: date-time
+          type: string
+        state:
+          description: "The state of the file. One of storing, completed, or failed."
+          enum:
+          - storing
+          - completed
+          - failed
+          type: string
+        failure_code:
+          description: The failure code for failed files.
+          nullable: true
+          type: string
+      type: object
+    PlatformFileList:
+      example:
+        per_page: 0
+        total: 0
+        objects:
+        - completed_at: 2000-01-23T04:56:07.000+00:00
+          failure_code: failure_code
+          content_type: image/jpeg
+          file_type: drivers_license_front
+          guid: guid
+          failed_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+        - completed_at: 2000-01-23T04:56:07.000+00:00
+          failure_code: failure_code
+          content_type: image/jpeg
+          file_type: drivers_license_front
+          guid: guid
+          failed_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+        page: 0
+      properties:
+        total:
+          description: The total number of records available.
+          minimum: 0
+          type: integer
+        page:
+          description: The page index to retrieve.
+          minimum: 0
+          type: integer
+        per_page:
+          description: The number of entities per page to return.
+          minimum: 0
+          type: integer
+        objects:
+          description: Array of file entities
+          items:
+            $ref: '#/components/schemas/PlatformFile'
+          type: array
+      required:
+      - objects
+      - page
+      - per_page
+      - total
       type: object
     ErrorResponse:
       properties:
@@ -12071,8 +12656,46 @@ components:
           nullable: true
           type: array
       type: object
+    PostCustomer_address:
+      description: The customer's address.
+      nullable: true
+      properties:
+        street:
+          description: The first line of the address.
+          type: string
+        street2:
+          description: The optional second line of the address.
+          nullable: true
+          type: string
+        city:
+          description: The city of the address.
+          type: string
+        subdivision:
+          description: "The ISO 3166-2 subdivision code of the address. Applicable\
+            \ only for countries that use subnational states, provinces, lands, oblasts\
+            \ or regions."
+          maxLength: 3
+          minLength: 1
+          nullable: true
+          type: string
+        postal_code:
+          description: "The postal, zip or post code of the address. Applicable only\
+            \ for countries that use postal, zip or post codes."
+          nullable: true
+          type: string
+        country_code:
+          description: The ISO 3166 country 2-Alpha country code of the address.
+          maxLength: 2
+          minLength: 2
+          type: string
+      required:
+      - city
+      - country_code
+      - street
+      type: object
     PostCustomer_name:
-      description: The customer's name. Optional when type is individual.
+      description: The customer's name. Optional when type is individual or type is
+        business.
       nullable: true
       properties:
         first:
@@ -12087,43 +12710,15 @@ components:
           description: The customer's last name. Required when type is individual.
           nullable: true
           type: string
+        full:
+          description: The customer's full name. Required when type is business.
+          nullable: true
+          type: string
       type: object
-    PostCustomer_address:
-      description: The customer's address. Optional when type is individual.
-      nullable: true
+    PostCustomer_aliases_inner:
       properties:
-        street:
-          description: The first line of the address. Required when type is individual.
-          nullable: true
-          type: string
-        street2:
-          description: The optional second line of the address. Optional when type
-            is individual.
-          nullable: true
-          type: string
-        city:
-          description: The city of the address. Required when type is individual.
-          nullable: true
-          type: string
-        subdivision:
-          description: "The ISO 3166-2 subdivision code of the address. Applicable\
-            \ only for countries that use subnational states, provinces, lands, oblasts\
-            \ or regions. Optional when type is individual."
-          maxLength: 3
-          minLength: 1
-          nullable: true
-          type: string
-        postal_code:
-          description: "The postal, zip or post code of the address. Applicable only\
-            \ for countries that use postal, zip or post codes. Optional when type\
-            \ is individual."
-          nullable: true
-          type: string
-        country_code:
-          description: The ISO 3166 country 2-Alpha country code of the address. Required
-            when type is individual.
-          maxLength: 2
-          minLength: 2
+        full:
+          description: The customer's full name. Required when type is business.
           nullable: true
           type: string
       type: object
@@ -12193,57 +12788,72 @@ components:
           type: string
       type: object
     PostIdentityVerification_name:
-      description: The customer's name. Required when type is kyc and method is attested
-        or type is bank_account and method is attested_ownership.
+      description: "The customer's name. Required when type is kyc and method is attested,\
+        \ type is kyc and method is attested_business_registration, type is kyc and\
+        \ method is attested_id_and_selfie, or type is bank_account and method is\
+        \ attested_ownership."
       nullable: true
       properties:
         first:
           description: The customer's first name. Required when type is kyc and method
-            is attested. Optional when type is bank_account and method is attested_ownership.
+            is attested or type is kyc and method is attested_id_and_selfie. Optional
+            when type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         middle:
-          description: The customer's middle name. Optional when type is kyc and method
-            is attested or type is bank_account and method is attested_ownership.
+          description: "The customer's middle name. Optional when type is kyc and\
+            \ method is attested, type is kyc and method is attested_id_and_selfie,\
+            \ or type is bank_account and method is attested_ownership."
           nullable: true
           type: string
         last:
           description: The customer's last name. Required when type is kyc and method
-            is attested. Optional when type is bank_account and method is attested_ownership.
+            is attested or type is kyc and method is attested_id_and_selfie. Optional
+            when type is bank_account and method is attested_ownership.
           nullable: true
           type: string
         full:
-          description: The customer's full name. Required when type is bank_account
-            and method is attested_ownership. Optional when type is kyc and method
-            is attested.
+          description: The customer's full name. Required when type is kyc and method
+            is attested_business_registration or type is bank_account and method is
+            attested_ownership. Optional when type is kyc and method is attested or
+            type is kyc and method is attested_id_and_selfie.
           nullable: true
           type: string
       type: object
     PostIdentityVerification_address:
-      description: The customer's address. Required when type is kyc and method is
-        attested. Optional when type is bank_account and method is attested_ownership.
+      description: "The customer's address. Required when type is kyc and method is\
+        \ attested, type is kyc and method is attested_business_registration, or type\
+        \ is kyc and method is attested_id_and_selfie. Optional when type is bank_account\
+        \ and method is attested_ownership."
       nullable: true
       properties:
         street:
-          description: The first line of the address. Required when type is kyc and
-            method is attested or type is bank_account and method is attested_ownership.
+          description: "The first line of the address. Required when type is kyc and\
+            \ method is attested, type is kyc and method is attested_business_registration,\
+            \ type is kyc and method is attested_id_and_selfie, or type is bank_account\
+            \ and method is attested_ownership."
           nullable: true
           type: string
         street2:
-          description: The optional second line of the address. Optional when type
-            is kyc and method is attested or type is bank_account and method is attested_ownership.
+          description: "The optional second line of the address. Optional when type\
+            \ is kyc and method is attested, type is kyc and method is attested_business_registration,\
+            \ type is kyc and method is attested_id_and_selfie, or type is bank_account\
+            \ and method is attested_ownership."
           nullable: true
           type: string
         city:
-          description: The city of the address. Required when type is kyc and method
-            is attested or type is bank_account and method is attested_ownership.
+          description: "The city of the address. Required when type is kyc and method\
+            \ is attested, type is kyc and method is attested_business_registration,\
+            \ type is kyc and method is attested_id_and_selfie, or type is bank_account\
+            \ and method is attested_ownership."
           nullable: true
           type: string
         subdivision:
           description: "The ISO 3166-2 subdivision code of the address. Applicable\
             \ only for countries that use subnational states, provinces, lands, oblasts\
-            \ or regions. Optional when type is kyc and method is attested or type\
-            \ is bank_account and method is attested_ownership."
+            \ or regions. Optional when type is kyc and method is attested, type is\
+            \ kyc and method is attested_business_registration, type is kyc and method\
+            \ is attested_id_and_selfie, or type is bank_account and method is attested_ownership."
           maxLength: 3
           minLength: 1
           nullable: true
@@ -12251,16 +12861,26 @@ components:
         postal_code:
           description: "The postal, zip or post code of the address. Applicable only\
             \ for countries that use postal, zip or post codes. Optional when type\
-            \ is kyc and method is attested or type is bank_account and method is\
-            \ attested_ownership."
+            \ is kyc and method is attested, type is kyc and method is attested_business_registration,\
+            \ type is kyc and method is attested_id_and_selfie, or type is bank_account\
+            \ and method is attested_ownership."
           nullable: true
           type: string
         country_code:
-          description: The ISO 3166 country 2-Alpha country code of the address. Required
-            when type is kyc and method is attested or type is bank_account and method
-            is attested_ownership.
+          description: "The ISO 3166 country 2-Alpha country code of the address.\
+            \ Required when type is kyc and method is attested, type is kyc and method\
+            \ is attested_business_registration, type is kyc and method is attested_id_and_selfie,\
+            \ or type is bank_account and method is attested_ownership."
           maxLength: 2
           minLength: 2
+          nullable: true
+          type: string
+      type: object
+    PostIdentityVerification_aliases_inner:
+      properties:
+        full:
+          description: The customer's full name. Required when type is kyc and method
+            is attested_business_registration.
           nullable: true
           type: string
       type: object
@@ -12399,6 +13019,8 @@ components:
             identity_verifications:read: identity_verifications read
             identity_verifications:write: identity_verifications write
             identity_verifications:execute: identity_verifications execute
+            files:read: files read
+            files:execute: files execute
           tokenUrl: https://id.production.cybrid.app/oauth/token
       type: oauth2
     BearerAuth:

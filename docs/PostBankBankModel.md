@@ -32,6 +32,7 @@ Request body for bank creation.
 | Name | Value |
 |---- | -----|
 | ATTESTATION_IDENTITY_RECORDS | &quot;attestation_identity_records&quot; |
+| ATTESTATION_IDENTITY_RECORDS_V2 | &quot;attestation_identity_records_v2&quot; |
 | KYC_IDENTITY_VERIFICATIONS | &quot;kyc_identity_verifications&quot; |
 | BUSINESS_CUSTOMERS | &quot;business_customers&quot; |
 | INDIVIDUAL_CUSTOMERS | &quot;individual_customers&quot; |

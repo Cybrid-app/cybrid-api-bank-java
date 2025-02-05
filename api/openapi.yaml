@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.205
+  version: v0.123.206
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6412,6 +6412,11 @@ paths:
                     status: 422
                     error_message: Invalid direction for payment rail
                     message_code: invalid_payment_rail_for_direction
+                not_implemented:
+                  value:
+                    status: 422
+                    error_message: Invalid call method
+                    message_code: not_implemented
                 no_fiat_account:
                   value:
                     status: 422

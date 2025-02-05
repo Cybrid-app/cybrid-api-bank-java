@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.208
+  version: v0.123.211
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10963,7 +10963,7 @@ components:
           description: The payout symbols supported by the bank. This is not yet supported
             and should be nil or empty.
           items:
-            type: object
+            $ref: '#/components/schemas/PostSupportedPayoutSymbols'
           maxItems: 50
           nullable: true
           type: array
@@ -11028,7 +11028,7 @@ components:
           description: The payout symbols supported by the bank. This is not yet supported
             and should be nil or empty.
           items:
-            type: object
+            $ref: '#/components/schemas/PostSupportedPayoutSymbols'
           maxItems: 50
           nullable: true
           type: array
@@ -11411,6 +11411,42 @@ components:
           type: array
       required:
       - account_guid
+      type: object
+    PostSupportedPayoutSymbols:
+      description: Supported payout symbols details.
+      properties:
+        primary_asset:
+          description: "The primary asset of the payout symbol, e.g., MXN."
+          type: string
+        counter_asset:
+          description: "The counter asset of the payout symbol, e.g., USD."
+          type: string
+        country_code:
+          description: "The ISO 3166 country 2-Alpha country code is permitted in,\
+            \ e.g., MX."
+          maxLength: 2
+          minLength: 2
+          type: string
+        participants_type:
+          description: The participants the symbol is permitted for.
+          enum:
+          - C2C
+          - C2B
+          - B2C
+          - B2B
+          type: string
+        route:
+          description: The route the symbol is permitted for.
+          enum:
+          - bank_account
+          - mobile_wallet
+          type: string
+      required:
+      - counter_asset
+      - country_code
+      - participants_type
+      - primary_asset
+      - route
       type: object
     PostAccount:
       description: Request body for account creation.

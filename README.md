@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.208
+- API version: v0.123.211
 
-- Build date: 2025-02-05T14:45:07.813979Z[Etc/UTC]
+- Build date: 2025-02-05T18:42:28.491107Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.208</version>
+  <version>v0.123.211</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.208"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.211"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.208.jar`
+- `target/cybrid-api-bank-java-v0.123.211.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -436,6 +436,7 @@ Class | Method | HTTP request | Description
  - [PostPaymentInstructionBankModel](docs/PostPaymentInstructionBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
  - [PostQuoteEntryBankModel](docs/PostQuoteEntryBankModel.md)
+ - [PostSupportedPayoutSymbolsBankModel](docs/PostSupportedPayoutSymbolsBankModel.md)
  - [PostTradeBankModel](docs/PostTradeBankModel.md)
  - [PostTransferBankModel](docs/PostTransferBankModel.md)
  - [PostTransferParticipantBankModel](docs/PostTransferParticipantBankModel.md)

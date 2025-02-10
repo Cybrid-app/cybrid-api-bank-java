@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.221
+  version: v0.123.222
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -862,6 +862,11 @@ paths:
                     status: 422
                     error_message: Customer not found
                     message_code: no_customer
+                invalid_value:
+                  value:
+                    status: 422
+                    error_message: Country code not supported
+                    message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Unprocessable Content

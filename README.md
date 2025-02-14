@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.233
+- API version: v0.123.234
 
-- Build date: 2025-02-14T13:34:49.284409Z[Etc/UTC]
+- Build date: 2025-02-14T20:19:18.979257Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.233</version>
+  <version>v0.123.234</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.233"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.234"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.233.jar`
+- `target/cybrid-api-bank-java-v0.123.234.jar`
 - `target/lib/*.jar`
 
 ## Getting Started

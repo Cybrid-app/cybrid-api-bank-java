@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.236
+  version: v0.123.237
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -5531,7 +5531,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at start date inclusive lower bound, ISO8601."
+      - description: "Created at start date-time inclusive lower bound, ISO8601."
         explode: true
         in: query
         name: created_at_gte
@@ -5539,7 +5539,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at end date exclusive upper bound, ISO8601."
+      - description: "Created at end date-time exclusive upper bound, ISO8601."
         explode: true
         in: query
         name: created_at_lt
@@ -5547,7 +5547,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Updated at start date inclusive lower bound, ISO8601."
+      - description: "Updated at start date-time inclusive lower bound, ISO8601."
         explode: true
         in: query
         name: updated_at_gte
@@ -5555,7 +5555,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Updated at end date exclusive upper bound, ISO8601."
+      - description: "Updated at end date-time exclusive upper bound, ISO8601."
         explode: true
         in: query
         name: updated_at_lt
@@ -5965,7 +5965,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at start date inclusive lower bound, ISO8601"
+      - description: "Created at start date-time inclusive lower bound, ISO8601"
         explode: true
         in: query
         name: created_at_gte
@@ -5973,7 +5973,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at end date exclusive upper bound, ISO8601."
+      - description: "Created at end date-time exclusive upper bound, ISO8601."
         explode: true
         in: query
         name: created_at_lt
@@ -5981,7 +5981,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at start date inclusive lower bound, ISO8601"
+      - description: "Created at start date-time inclusive lower bound, ISO8601"
         explode: true
         in: query
         name: updated_at_gte
@@ -5989,7 +5989,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: "Created at end date exclusive upper bound, ISO8601."
+      - description: "Created at end date-time exclusive upper bound, ISO8601."
         explode: true
         in: query
         name: updated_at_lt

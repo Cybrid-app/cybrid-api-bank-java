@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-18T16:20:44.637733Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-18T16:58:19.655546Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -189,10 +189,10 @@ public class TransfersBankApi {
      * @param side Comma separated sides to list transfers for.
      * @param label Comma separated labels to list transfers for.
      * @param txnHash Comma separated transaction hashes to list transfers for.
-     * @param createdAtGte Created at start date inclusive lower bound, ISO8601
-     * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
-     * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
-     * @param updatedAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param createdAtGte Created at start date-time inclusive lower bound, ISO8601
+     * @param createdAtLt Created at end date-time exclusive upper bound, ISO8601.
+     * @param updatedAtGte Created at start date-time inclusive lower bound, ISO8601
+     * @param updatedAtLt Created at end date-time exclusive upper bound, ISO8601.
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
@@ -253,10 +253,10 @@ public class TransfersBankApi {
      * @param side Comma separated sides to list transfers for.
      * @param label Comma separated labels to list transfers for.
      * @param txnHash Comma separated transaction hashes to list transfers for.
-     * @param createdAtGte Created at start date inclusive lower bound, ISO8601
-     * @param createdAtLt Created at end date exclusive upper bound, ISO8601.
-     * @param updatedAtGte Created at start date inclusive lower bound, ISO8601
-     * @param updatedAtLt Created at end date exclusive upper bound, ISO8601.
+     * @param createdAtGte Created at start date-time inclusive lower bound, ISO8601
+     * @param createdAtLt Created at end date-time exclusive upper bound, ISO8601.
+     * @param updatedAtGte Created at start date-time inclusive lower bound, ISO8601
+     * @param updatedAtLt Created at end date-time exclusive upper bound, ISO8601.
      * @return TransferListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */

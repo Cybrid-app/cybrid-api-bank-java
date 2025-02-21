@@ -25,7 +25,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T16:48:19.031086Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-02-21T19:11:15.180796Z[Etc/UTC]")
 public class AssetsBankApi {
     private ApiClient apiClient;
 
@@ -52,10 +52,11 @@ public class AssetsBankApi {
      * <p><b>200</b> - get list of assets
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param code Comma separated codes to list assets for.
      * @return AssetListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec listAssetsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    private ResponseSpec listAssetsRequestCreation(java.math.BigInteger page, java.math.BigInteger perPage, String code) throws WebClientResponseException {
         Object postBody = null;
         // create path and map variables
         final Map<String, Object> pathParams = new HashMap<String, Object>();
@@ -67,6 +68,7 @@ public class AssetsBankApi {
 
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "page", page));
         queryParams.putAll(apiClient.parameterToMultiValueMap(null, "per_page", perPage));
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "code", code));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -87,16 +89,17 @@ public class AssetsBankApi {
      * <p><b>200</b> - get list of assets
      * @param page The page index to retrieve.
      * @param perPage The number of entities per page to return.
+     * @param code Comma separated codes to list assets for.
      * @return AssetListBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<AssetListBankModel> listAssets(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<AssetListBankModel> listAssets(java.math.BigInteger page, java.math.BigInteger perPage, String code) throws WebClientResponseException {
         ParameterizedTypeReference<AssetListBankModel> localVarReturnType = new ParameterizedTypeReference<AssetListBankModel>() {};
-        return listAssetsRequestCreation(page, perPage).bodyToMono(localVarReturnType);
+        return listAssetsRequestCreation(page, perPage, code).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<AssetListBankModel>> listAssetsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage) throws WebClientResponseException {
+    public Mono<ResponseEntity<AssetListBankModel>> listAssetsWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String code) throws WebClientResponseException {
         ParameterizedTypeReference<AssetListBankModel> localVarReturnType = new ParameterizedTypeReference<AssetListBankModel>() {};
-        return listAssetsRequestCreation(page, perPage).toEntity(localVarReturnType);
+        return listAssetsRequestCreation(page, perPage, code).toEntity(localVarReturnType);
     }
 }

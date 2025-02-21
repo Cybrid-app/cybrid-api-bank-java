@@ -10,7 +10,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 
 ## listAssets
 
-> AssetListBankModel listAssets(page, perPage)
+> AssetListBankModel listAssets(page, perPage, code)
 
 Get assets list
 
@@ -34,8 +34,9 @@ public class Example {
         AssetsBankApi apiInstance = new AssetsBankApi(defaultClient);
         java.math.BigInteger page = new java.math.BigInteger(); // java.math.BigInteger | The page index to retrieve.
         java.math.BigInteger perPage = new java.math.BigInteger(); // java.math.BigInteger | The number of entities per page to return.
+        String code = "code_example"; // String | Comma separated codes to list assets for.
         try {
-            AssetListBankModel result = apiInstance.listAssets(page, perPage);
+            AssetListBankModel result = apiInstance.listAssets(page, perPage, code);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling AssetsBankApi#listAssets");
@@ -55,6 +56,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **page** | **java.math.BigInteger**| The page index to retrieve. | [optional] |
 | **perPage** | **java.math.BigInteger**| The number of entities per page to return. | [optional] |
+| **code** | **String**| Comma separated codes to list assets for. | [optional] |
 
 ### Return type
 

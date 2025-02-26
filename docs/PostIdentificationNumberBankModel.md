@@ -22,6 +22,7 @@ Identification number details.
 | PASSPORT | &quot;passport&quot; |
 | PASSPORT_CARD | &quot;passport_card&quot; |
 | RESIDENCE_CARD | &quot;residence_card&quot; |
+| VISA | &quot;visa&quot; |
 | SOCIAL_SECURITY_NUMBER | &quot;social_security_number&quot; |
 | TAX_IDENTIFICATION_NUMBER | &quot;tax_identification_number&quot; |
 | IDENTIFICATION_CARD | &quot;identification_card&quot; |

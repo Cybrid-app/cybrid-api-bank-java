@@ -23,9 +23,11 @@ Request body for a new file.
 | DRIVERS_LICENSE_FRONT | &quot;drivers_license_front&quot; |
 | DRIVERS_LICENSE_BACK | &quot;drivers_license_back&quot; |
 | PASSPORT | &quot;passport&quot; |
+| VISA | &quot;visa&quot; |
 | IDENTIFICATION_CARD | &quot;identification_card&quot; |
 | RESIDENCE_CARD | &quot;residence_card&quot; |
 | SELFIE | &quot;selfie&quot; |
+| SELFIE_VIDEO | &quot;selfie_video&quot; |
 | SELFIE_LEFT | &quot;selfie_left&quot; |
 | SELFIE_RIGHT | &quot;selfie_right&quot; |
 | UTILITY_BILL | &quot;utility_bill&quot; |
@@ -44,6 +46,7 @@ Request body for a new file.
 | IMAGE_JPEG | &quot;image/jpeg&quot; |
 | IMAGE_PNG | &quot;image/png&quot; |
 | APPLICATION_PDF | &quot;application/pdf&quot; |
+| VIDEO_MP4 | &quot;video/mp4&quot; |
 
 
 

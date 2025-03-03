@@ -32,10 +32,10 @@ Request body for quote creation.
 | TRADING | &quot;trading&quot; |
 | TRADING_EXIT | &quot;trading_exit&quot; |
 | FUNDING | &quot;funding&quot; |
-| BOOK_TRANSFER | &quot;book_transfer&quot; |
 | CRYPTO_TRANSFER | &quot;crypto_transfer&quot; |
 | INTER_ACCOUNT | &quot;inter_account&quot; |
 | LIGHTNING_TRANSFER | &quot;lightning_transfer&quot; |
+| BOOK_TRANSFER | &quot;book_transfer&quot; |
 
 
 

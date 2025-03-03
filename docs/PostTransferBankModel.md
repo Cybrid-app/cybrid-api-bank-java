@@ -34,11 +34,11 @@ Request body for transfer creation.
 | Name | Value |
 |---- | -----|
 | FUNDING | &quot;funding&quot; |
-| BOOK | &quot;book&quot; |
 | CRYPTO | &quot;crypto&quot; |
 | INSTANT_FUNDING | &quot;instant_funding&quot; |
 | INTER_ACCOUNT | &quot;inter_account&quot; |
 | LIGHTNING | &quot;lightning&quot; |
+| BOOK | &quot;book&quot; |
 
 
 

@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.266
+  version: v0.123.267
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8976,10 +8976,10 @@ components:
           - trading
           - trading_exit
           - funding
-          - book_transfer
           - crypto_transfer
           - inter_account
           - lightning_transfer
+          - book_transfer
           nullable: true
           type: string
         bank_guid:
@@ -9185,7 +9185,7 @@ components:
           type: string
         product_type:
           description: "The type of product the quote is for; one of trading, trading_exit,\
-            \ funding, book_transfer, crypto_transfer, inter_account, or lightning_transfer."
+            \ funding, crypto_transfer, inter_account, or lightning_transfer."
           type: string
         bank_guid:
           description: The unique identifier for the bank.
@@ -9316,7 +9316,6 @@ components:
       - trading
       - trading_exit
       - funding
-      - book_transfer
       - crypto_transfer
       - inter_account
       - lightning_transfer
@@ -11576,11 +11575,11 @@ components:
           description: The type of transfer.
           enum:
           - funding
-          - book
           - crypto
           - instant_funding
           - inter_account
           - lightning
+          - book
           type: string
         external_bank_account_guid:
           description: The customer's 'plaid' or 'plaid_processor_token' external

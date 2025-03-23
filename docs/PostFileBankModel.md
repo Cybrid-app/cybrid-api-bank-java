@@ -36,6 +36,8 @@ Request body for a new file.
 | TAX_DOCUMENT | &quot;tax_document&quot; |
 | EIN_LETTER | &quot;ein_letter&quot; |
 | INCORPORATION_CERTIFICATE | &quot;incorporation_certificate&quot; |
+| PERSONA_INQUIRY_REPORT | &quot;persona_inquiry_report&quot; |
+| PERSONA_INQUIRY_EXPORT | &quot;persona_inquiry_export&quot; |
 
 
 
@@ -46,6 +48,7 @@ Request body for a new file.
 | IMAGE_JPEG | &quot;image/jpeg&quot; |
 | IMAGE_PNG | &quot;image/png&quot; |
 | APPLICATION_PDF | &quot;application/pdf&quot; |
+| APPLICATION_JSON | &quot;application/json&quot; |
 | VIDEO_MP4 | &quot;video/mp4&quot; |
 
 

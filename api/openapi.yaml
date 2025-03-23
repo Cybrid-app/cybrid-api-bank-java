@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.317
+  version: v0.123.318
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4767,7 +4767,8 @@ paths:
                     status: 400
                     error_message: "Invalid value exception. Parameter: content_type\
                       \ supported values: [\"[\\\"image/jpeg\\\", \\\"image/png\\\"\
-                      , \\\"application/pdf\\\", \\\"video/mp4\\\"]\"] "
+                      , \\\"application/pdf\\\", \\\"application/json\\\", \\\"video/mp4\\\
+                      \"]\"] "
                     message_code: invalid_value
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -11378,6 +11379,8 @@ components:
           - tax_document
           - ein_letter
           - incorporation_certificate
+          - persona_inquiry_report
+          - persona_inquiry_export
           type: string
         customer_guid:
           description: The customer identifier.
@@ -11395,6 +11398,7 @@ components:
           - image/jpeg
           - image/png
           - application/pdf
+          - application/json
           - video/mp4
           type: string
         data:
@@ -11921,8 +11925,8 @@ components:
       example:
         completed_at: 2000-01-23T04:56:07.000+00:00
         failure_code: failure_code
-        content_type: image/jpeg
-        file_type: drivers_license_front
+        content_type: content_type
+        file_type: file_type
         guid: guid
         failed_at: 2000-01-23T04:56:07.000+00:00
         state: storing
@@ -11936,33 +11940,12 @@ components:
           description: "The file type; one of drivers_license_front, drivers_license_back,\
             \ passport, visa, identification_card, residence_card, selfie, selfie_video,\
             \ selfie_left, selfie_right, utility_bill, bank_statement, property_tax,\
-            \ tax_document, ein_letter, or incorporation_certificate."
-          enum:
-          - drivers_license_front
-          - drivers_license_back
-          - passport
-          - visa
-          - identification_card
-          - residence_card
-          - selfie
-          - selfie_video
-          - selfie_left
-          - selfie_right
-          - utility_bill
-          - bank_statement
-          - property_tax
-          - tax_document
-          - ein_letter
-          - incorporation_certificate
+            \ tax_document, ein_letter, incorporation_certificate, persona_inquiry_report,\
+            \ or persona_inquiry_export."
           type: string
         content_type:
           description: "The media type; one of image/jpeg, image/png, application/pdf,\
-            \ or video/mp4."
-          enum:
-          - image/jpeg
-          - image/png
-          - application/pdf
-          - video/mp4
+            \ application/json, or video/mp4."
           type: string
         completed_at:
           description: The ISO8601 datetime the file was completed at.
@@ -11991,15 +11974,15 @@ components:
         objects:
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
-          content_type: image/jpeg
-          file_type: drivers_license_front
+          content_type: content_type
+          file_type: file_type
           guid: guid
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
-          content_type: image/jpeg
-          file_type: drivers_license_front
+          content_type: content_type
+          file_type: file_type
           guid: guid
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing

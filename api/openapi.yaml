@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.379
+  version: v0.123.381
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8919,7 +8919,7 @@ components:
         symbol:
           description: "The trade symbol the pricing is related to. Format is asset-counter_asset,\
             \ e.g., BTC-USD."
-          maxLength: 16
+          maxLength: 24
           minLength: 1
           type: string
         type:
@@ -9047,7 +9047,7 @@ components:
           description: Symbol the quote is being requested for. Format is "asset-counter_asset"
             in uppercase. See the Symbols API for a complete list of cryptocurrencies
             supported.  Required when product_type is trading.
-          maxLength: 16
+          maxLength: 24
           minLength: 1
           nullable: true
           type: string
@@ -9201,7 +9201,7 @@ components:
         symbol:
           description: Symbol the quote was requested for. Format is "asset-counter_asset"
             in uppercase. Populated for trade quotes.
-          maxLength: 16
+          maxLength: 24
           minLength: 1
           nullable: true
           type: string

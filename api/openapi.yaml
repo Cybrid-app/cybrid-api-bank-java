@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.389
+  version: v0.123.390
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6199,16 +6199,16 @@ paths:
           content:
             application/json:
               examples:
-                quote_already_exists_1:
+                quote_already_exists:
                   value:
                     status: 409
                     error_message: Transfer already exists for this quote
                     message_code: quote_already_exists
-                quote_already_exists_2:
+                transfer_already_returned:
                   value:
                     status: 409
                     error_message: Return already processed for this transfer
-                    message_code: quote_already_exists
+                    message_code: transfer_already_returned
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Conflict
@@ -6259,34 +6259,39 @@ paths:
                 invalid_value_6:
                   value:
                     status: 422
-                    error_message: Amount not valid
+                    error_message: Transfer association is not valid
                     message_code: invalid_value
                 invalid_value_7:
                   value:
                     status: 422
-                    error_message: Participants must be specified
+                    error_message: Amount not valid
                     message_code: invalid_value
                 invalid_value_8:
                   value:
                     status: 422
-                    error_message: Participant types not supported
+                    error_message: Participants must be specified
                     message_code: invalid_value
                 invalid_value_9:
                   value:
                     status: 422
-                    error_message: Participants not found
+                    error_message: Participant types not supported
                     message_code: invalid_value
                 invalid_value_10:
                   value:
                     status: 422
-                    error_message: Participants have been frozen
+                    error_message: Participants not found
                     message_code: invalid_value
                 invalid_value_11:
                   value:
                     status: 422
-                    error_message: Participants have been rejected
+                    error_message: Participants have been frozen
                     message_code: invalid_value
                 invalid_value_12:
+                  value:
+                    status: 422
+                    error_message: Participants have been rejected
+                    message_code: invalid_value
+                invalid_value_13:
                   value:
                     status: 422
                     error_message: Participants have not been verified

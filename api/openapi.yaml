@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.384
+  version: v0.123.385
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -6244,52 +6244,52 @@ paths:
                 invalid_value_3:
                   value:
                     status: 422
-                    error_message: Participants must be specified
+                    error_message: Send as account not found
                     message_code: invalid_value
                 invalid_value_4:
                   value:
                     status: 422
-                    error_message: Participant types not supported
+                    error_message: Send as account not valid for transfer
                     message_code: invalid_value
                 invalid_value_5:
                   value:
                     status: 422
-                    error_message: Participants not found
+                    error_message: Send as account cannot be defined for this transfer
                     message_code: invalid_value
                 invalid_value_6:
                   value:
                     status: 422
-                    error_message: Participants have been frozen
+                    error_message: Amount not valid
                     message_code: invalid_value
                 invalid_value_7:
                   value:
                     status: 422
-                    error_message: Participants have been rejected
+                    error_message: Participants must be specified
                     message_code: invalid_value
                 invalid_value_8:
                   value:
                     status: 422
-                    error_message: Participants have not been verified
+                    error_message: Participant types not supported
                     message_code: invalid_value
                 invalid_value_9:
                   value:
                     status: 422
-                    error_message: Send as account not found
+                    error_message: Participants not found
                     message_code: invalid_value
                 invalid_value_10:
                   value:
                     status: 422
-                    error_message: Send as account not valid for transfer
+                    error_message: Participants have been frozen
                     message_code: invalid_value
                 invalid_value_11:
                   value:
                     status: 422
-                    error_message: Send as account cannot be defined for this transfer
+                    error_message: Participants have been rejected
                     message_code: invalid_value
                 invalid_value_12:
                   value:
                     status: 422
-                    error_message: Amount not valid
+                    error_message: Participants have not been verified
                     message_code: invalid_value
                 no_quote:
                   value:
@@ -6547,6 +6547,139 @@ paths:
       summary: Get Transfer
       tags:
       - Transfers
+      x-accepts: application/json
+    patch:
+      description: "Update a transfer.\n\nRequired scope: **transfers:write**"
+      operationId: updateTransfer
+      parameters:
+      - description: Identifier for the transfer.
+        explode: false
+        in: path
+        name: transfer_guid
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchTransfer'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: Transfer updated
+        "401":
+          content:
+            application/json:
+              examples:
+                invalid_subject:
+                  value:
+                    status: 401
+                    error_message: "Invalid Subject type. Required: organization or\
+                      \ bank or customer"
+                    message_code: invalid_subject
+                invalid_signature:
+                  value:
+                    status: 401
+                    error_message: Signature verification raised
+                    message_code: authentication_failed
+                invalid_audience:
+                  value:
+                    status: 401
+                    error_message: Invalid audience
+                    message_code: authentication_failed
+                invalid_issuer:
+                  value:
+                    status: 401
+                    error_message: Invalid issuer
+                    message_code: authentication_failed
+                expired_signature:
+                  value:
+                    status: 401
+                    error_message: Signature has expired
+                    message_code: authentication_failed
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              examples:
+                invalid_scope:
+                  value:
+                    status: 403
+                    error_message: "Invalid scopes. Required: transfers:write"
+                    message_code: invalid_scopes
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              examples:
+                not_found:
+                  value:
+                    status: 404
+                    error_message: Transfer not found
+                    message_code: not_found
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              examples:
+                invalid_value_1:
+                  value:
+                    status: 422
+                    error_message: Participants must be specified
+                    message_code: invalid_value
+                invalid_value_2:
+                  value:
+                    status: 422
+                    error_message: Participant types not supported
+                    message_code: invalid_value
+                invalid_value_3:
+                  value:
+                    status: 422
+                    error_message: Participants not found
+                    message_code: invalid_value
+                invalid_value_4:
+                  value:
+                    status: 422
+                    error_message: Participants have been frozen
+                    message_code: invalid_value
+                invalid_value_5:
+                  value:
+                    status: 422
+                    error_message: Participants have been rejected
+                    message_code: invalid_value
+                invalid_value_6:
+                  value:
+                    status: 422
+                    error_message: Participants have not been verified
+                    message_code: invalid_value
+                invalid_value_7:
+                  value:
+                    status: 422
+                    error_message: Participants already set
+                    message_code: invalid_value
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unprocessable Content
+      security:
+      - BearerAuth: []
+        oauth2:
+        - transfers:write
+      summary: Patch Transfer
+      tags:
+      - Transfers
+      x-content-type: application/json
       x-accepts: application/json
   /api/workflows:
     get:
@@ -11565,6 +11698,49 @@ components:
           nullable: true
           type: string
       required:
+      - type
+      type: object
+    PatchTransfer:
+      description: Request body for transfer modification.
+      properties:
+        source_participants:
+          description: The source participants for the transfer.
+          items:
+            $ref: '#/components/schemas/PatchTransferParticipant'
+          maxItems: 100
+          minItems: 0
+          nullable: true
+          type: array
+        destination_participants:
+          description: The destination participants for the transfer.
+          items:
+            $ref: '#/components/schemas/PatchTransferParticipant'
+          maxItems: 100
+          minItems: 0
+          nullable: true
+          type: array
+      type: object
+    PatchTransferParticipant:
+      description: Request body for a transfer participant.
+      properties:
+        type:
+          description: The type of participant.
+          enum:
+          - bank
+          - customer
+          - counterparty
+          type: string
+        amount:
+          description: The amount in base units of the asset.
+          type: integer
+        guid:
+          description: The participant's identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+      required:
+      - amount
+      - guid
       - type
       type: object
     PostTransfer:

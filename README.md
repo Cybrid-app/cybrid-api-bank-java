@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.384
+- API version: v0.123.385
 
-- Build date: 2025-04-14T15:53:52.710714Z[Etc/UTC]
+- Build date: 2025-04-15T11:59:57.577452Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.384</version>
+  <version>v0.123.385</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.384"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.385"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.384.jar`
+- `target/cybrid-api-bank-java-v0.123.385.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -322,6 +322,7 @@ Class | Method | HTTP request | Description
 *TransfersBankApi* | [**createTransfer**](docs/TransfersBankApi.md#createTransfer) | **POST** /api/transfers | Create Transfer
 *TransfersBankApi* | [**getTransfer**](docs/TransfersBankApi.md#getTransfer) | **GET** /api/transfers/{transfer_guid} | Get Transfer
 *TransfersBankApi* | [**listTransfers**](docs/TransfersBankApi.md#listTransfers) | **GET** /api/transfers | Get transfers list
+*TransfersBankApi* | [**updateTransfer**](docs/TransfersBankApi.md#updateTransfer) | **PATCH** /api/transfers/{transfer_guid} | Patch Transfer
 *WorkflowsBankApi* | [**createWorkflow**](docs/WorkflowsBankApi.md#createWorkflow) | **POST** /api/workflows | Create Workflow
 *WorkflowsBankApi* | [**getWorkflow**](docs/WorkflowsBankApi.md#getWorkflow) | **GET** /api/workflows/{workflow_guid} | Get Workflow
 *WorkflowsBankApi* | [**listWorkflows**](docs/WorkflowsBankApi.md#listWorkflows) | **GET** /api/workflows | Get workflows list
@@ -404,6 +405,8 @@ Class | Method | HTTP request | Description
  - [PatchBankBankModel](docs/PatchBankBankModel.md)
  - [PatchCustomerBankModel](docs/PatchCustomerBankModel.md)
  - [PatchExternalBankAccountBankModel](docs/PatchExternalBankAccountBankModel.md)
+ - [PatchTransferBankModel](docs/PatchTransferBankModel.md)
+ - [PatchTransferParticipantBankModel](docs/PatchTransferParticipantBankModel.md)
  - [PaymentInstructionBankModel](docs/PaymentInstructionBankModel.md)
  - [PaymentInstructionListBankModel](docs/PaymentInstructionListBankModel.md)
  - [PlatformFileBankModel](docs/PlatformFileBankModel.md)

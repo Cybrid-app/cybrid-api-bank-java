@@ -7,6 +7,7 @@ All URIs are relative to *https://bank.sandbox.cybrid.app*
 | [**createTransfer**](TransfersBankApi.md#createTransfer) | **POST** /api/transfers | Create Transfer |
 | [**getTransfer**](TransfersBankApi.md#getTransfer) | **GET** /api/transfers/{transfer_guid} | Get Transfer |
 | [**listTransfers**](TransfersBankApi.md#listTransfers) | **GET** /api/transfers | Get transfers list |
+| [**updateTransfer**](TransfersBankApi.md#updateTransfer) | **PATCH** /api/transfers/{transfer_guid} | Patch Transfer |
 
 
 
@@ -271,4 +272,85 @@ public class Example {
 | **400** | Invalid requests |  -  |
 | **401** | Unauthorized - Authentication failed,  |  -  |
 | **403** | Invalid scope |  -  |
+
+
+## updateTransfer
+
+> TransferBankModel updateTransfer(transferGuid, patchTransferBankModel)
+
+Patch Transfer
+
+Update a transfer.  Required scope: **transfers:write**
+
+### Example
+
+```java
+// Import classes:
+import app.cybrid.cybrid_api_bank.client.ApiClient;
+import app.cybrid.cybrid_api_bank.client.ApiException;
+import app.cybrid.cybrid_api_bank.client.Configuration;
+import app.cybrid.cybrid_api_bank.client.auth.*;
+import app.cybrid.cybrid_api_bank.client.models.*;
+import app.cybrid.cybrid_api_bank.client.api.TransfersBankApi;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setBasePath("https://bank.sandbox.cybrid.app");
+        
+        // Configure HTTP bearer authorization: BearerAuth
+        HttpBearerAuth BearerAuth = (HttpBearerAuth) defaultClient.getAuthentication("BearerAuth");
+        BearerAuth.setBearerToken("BEARER TOKEN");
+
+        // Configure OAuth2 access token for authorization: oauth2
+        OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+        oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+        TransfersBankApi apiInstance = new TransfersBankApi(defaultClient);
+        String transferGuid = "transferGuid_example"; // String | Identifier for the transfer.
+        PatchTransferBankModel patchTransferBankModel = new PatchTransferBankModel(); // PatchTransferBankModel | 
+        try {
+            TransferBankModel result = apiInstance.updateTransfer(transferGuid, patchTransferBankModel);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling TransfersBankApi#updateTransfer");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **transferGuid** | **String**| Identifier for the transfer. | |
+| **patchTransferBankModel** | [**PatchTransferBankModel**](PatchTransferBankModel.md)|  | |
+
+### Return type
+
+[**TransferBankModel**](TransferBankModel.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth), [oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Transfer updated |  -  |
+| **401** | Unauthorized |  -  |
+| **403** | Forbidden |  -  |
+| **404** | Not Found |  -  |
+| **422** | Unprocessable Content |  -  |
 

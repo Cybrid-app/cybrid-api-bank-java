@@ -3,6 +3,7 @@ package app.cybrid.cybrid_api_bank.client.api;
 import app.cybrid.cybrid_api_bank.client.ApiClient;
 
 import app.cybrid.cybrid_api_bank.client.model.ErrorResponseBankModel;
+import app.cybrid.cybrid_api_bank.client.model.PatchTransferBankModel;
 import app.cybrid.cybrid_api_bank.client.model.PostTransferBankModel;
 import app.cybrid.cybrid_api_bank.client.model.TransferBankModel;
 import app.cybrid.cybrid_api_bank.client.model.TransferListBankModel;
@@ -28,7 +29,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-14T15:53:52.710714Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-15T11:59:57.577452Z[Etc/UTC]")
 public class TransfersBankApi {
     private ApiClient apiClient;
 
@@ -268,5 +269,75 @@ public class TransfersBankApi {
     public Mono<ResponseEntity<TransferListBankModel>> listTransfersWithHttpInfo(java.math.BigInteger page, java.math.BigInteger perPage, String guid, String transferType, String bankGuid, String customerGuid, String accountGuid, String state, String side, String label, String txnHash, String createdAtGte, String createdAtLt, String updatedAtGte, String updatedAtLt) throws WebClientResponseException {
         ParameterizedTypeReference<TransferListBankModel> localVarReturnType = new ParameterizedTypeReference<TransferListBankModel>() {};
         return listTransfersRequestCreation(page, perPage, guid, transferType, bankGuid, customerGuid, accountGuid, state, side, label, txnHash, createdAtGte, createdAtLt, updatedAtGte, updatedAtLt).toEntity(localVarReturnType);
+    }
+    /**
+     * Patch Transfer
+     * Update a transfer.  Required scope: **transfers:write**
+     * <p><b>200</b> - Transfer updated
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>404</b> - Not Found
+     * <p><b>422</b> - Unprocessable Content
+     * @param transferGuid Identifier for the transfer.
+     * @param patchTransferBankModel The patchTransferBankModel parameter
+     * @return TransferBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    private ResponseSpec updateTransferRequestCreation(String transferGuid, PatchTransferBankModel patchTransferBankModel) throws WebClientResponseException {
+        Object postBody = patchTransferBankModel;
+        // verify the required parameter 'transferGuid' is set
+        if (transferGuid == null) {
+            throw new WebClientResponseException("Missing the required parameter 'transferGuid' when calling updateTransfer", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // verify the required parameter 'patchTransferBankModel' is set
+        if (patchTransferBankModel == null) {
+            throw new WebClientResponseException("Missing the required parameter 'patchTransferBankModel' when calling updateTransfer", HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), null, null, null);
+        }
+        // create path and map variables
+        final Map<String, Object> pathParams = new HashMap<String, Object>();
+
+        pathParams.put("transfer_guid", transferGuid);
+
+        final MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+        final HttpHeaders headerParams = new HttpHeaders();
+        final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
+        final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        final String[] localVarAccepts = { 
+            "application/json"
+        };
+        final List<MediaType> localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
+        final String[] localVarContentTypes = { 
+            "application/json"
+        };
+        final MediaType localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
+
+        String[] localVarAuthNames = new String[] { "BearerAuth", "oauth2" };
+
+        ParameterizedTypeReference<TransferBankModel> localVarReturnType = new ParameterizedTypeReference<TransferBankModel>() {};
+        return apiClient.invokeAPI("/api/transfers/{transfer_guid}", HttpMethod.PATCH, pathParams, queryParams, postBody, headerParams, cookieParams, formParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    }
+
+    /**
+     * Patch Transfer
+     * Update a transfer.  Required scope: **transfers:write**
+     * <p><b>200</b> - Transfer updated
+     * <p><b>401</b> - Unauthorized
+     * <p><b>403</b> - Forbidden
+     * <p><b>404</b> - Not Found
+     * <p><b>422</b> - Unprocessable Content
+     * @param transferGuid Identifier for the transfer.
+     * @param patchTransferBankModel The patchTransferBankModel parameter
+     * @return TransferBankModel
+     * @throws WebClientResponseException if an error occurs while attempting to invoke the API
+     */
+    public Mono<TransferBankModel> updateTransfer(String transferGuid, PatchTransferBankModel patchTransferBankModel) throws WebClientResponseException {
+        ParameterizedTypeReference<TransferBankModel> localVarReturnType = new ParameterizedTypeReference<TransferBankModel>() {};
+        return updateTransferRequestCreation(transferGuid, patchTransferBankModel).bodyToMono(localVarReturnType);
+    }
+
+    public Mono<ResponseEntity<TransferBankModel>> updateTransferWithHttpInfo(String transferGuid, PatchTransferBankModel patchTransferBankModel) throws WebClientResponseException {
+        ParameterizedTypeReference<TransferBankModel> localVarReturnType = new ParameterizedTypeReference<TransferBankModel>() {};
+        return updateTransferRequestCreation(transferGuid, patchTransferBankModel).toEntity(localVarReturnType);
     }
 }

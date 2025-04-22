@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-22T18:42:52.445786Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-22T22:03:59.409143Z[Etc/UTC]")
 public class FilesBankApi {
     private ApiClient apiClient;
 
@@ -117,10 +117,11 @@ public class FilesBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - file not found
      * @param fileGuid Identifier for the file.
+     * @param includeDownloadUrl Include download information in response.
      * @return PlatformFileBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    private ResponseSpec getFileRequestCreation(String fileGuid) throws WebClientResponseException {
+    private ResponseSpec getFileRequestCreation(String fileGuid, String includeDownloadUrl) throws WebClientResponseException {
         Object postBody = null;
         // verify the required parameter 'fileGuid' is set
         if (fileGuid == null) {
@@ -135,6 +136,8 @@ public class FilesBankApi {
         final HttpHeaders headerParams = new HttpHeaders();
         final MultiValueMap<String, String> cookieParams = new LinkedMultiValueMap<String, String>();
         final MultiValueMap<String, Object> formParams = new LinkedMultiValueMap<String, Object>();
+
+        queryParams.putAll(apiClient.parameterToMultiValueMap(null, "include_download_url", includeDownloadUrl));
 
         final String[] localVarAccepts = { 
             "application/json"
@@ -157,17 +160,18 @@ public class FilesBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - file not found
      * @param fileGuid Identifier for the file.
+     * @param includeDownloadUrl Include download information in response.
      * @return PlatformFileBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
-    public Mono<PlatformFileBankModel> getFile(String fileGuid) throws WebClientResponseException {
+    public Mono<PlatformFileBankModel> getFile(String fileGuid, String includeDownloadUrl) throws WebClientResponseException {
         ParameterizedTypeReference<PlatformFileBankModel> localVarReturnType = new ParameterizedTypeReference<PlatformFileBankModel>() {};
-        return getFileRequestCreation(fileGuid).bodyToMono(localVarReturnType);
+        return getFileRequestCreation(fileGuid, includeDownloadUrl).bodyToMono(localVarReturnType);
     }
 
-    public Mono<ResponseEntity<PlatformFileBankModel>> getFileWithHttpInfo(String fileGuid) throws WebClientResponseException {
+    public Mono<ResponseEntity<PlatformFileBankModel>> getFileWithHttpInfo(String fileGuid, String includeDownloadUrl) throws WebClientResponseException {
         ParameterizedTypeReference<PlatformFileBankModel> localVarReturnType = new ParameterizedTypeReference<PlatformFileBankModel>() {};
-        return getFileRequestCreation(fileGuid).toEntity(localVarReturnType);
+        return getFileRequestCreation(fileGuid, includeDownloadUrl).toEntity(localVarReturnType);
     }
     /**
      * List Files

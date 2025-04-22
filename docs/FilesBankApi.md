@@ -90,7 +90,7 @@ public class Example {
 
 ## getFile
 
-> PlatformFileBankModel getFile(fileGuid)
+> PlatformFileBankModel getFile(fileGuid, includeDownloadUrl)
 
 Get File
 
@@ -122,8 +122,9 @@ public class Example {
 
         FilesBankApi apiInstance = new FilesBankApi(defaultClient);
         String fileGuid = "fileGuid_example"; // String | Identifier for the file.
+        String includeDownloadUrl = "includeDownloadUrl_example"; // String | Include download information in response.
         try {
-            PlatformFileBankModel result = apiInstance.getFile(fileGuid);
+            PlatformFileBankModel result = apiInstance.getFile(fileGuid, includeDownloadUrl);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling FilesBankApi#getFile");
@@ -142,6 +143,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **fileGuid** | **String**| Identifier for the file. | |
+| **includeDownloadUrl** | **String**| Include download information in response. | [optional] |
 
 ### Return type
 

@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.420
+- API version: v0.123.423
 
-- Build date: 2025-04-23T22:53:47.031334Z[Etc/UTC]
+- Build date: 2025-04-24T21:51:50.826518Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.420</version>
+  <version>v0.123.423</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.420"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.423"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.420.jar`
+- `target/cybrid-api-bank-java-v0.123.423.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -390,6 +390,7 @@ Class | Method | HTTP request | Description
  - [ExternalWalletStateBankModel](docs/ExternalWalletStateBankModel.md)
  - [IdentificationNumberBankModel](docs/IdentificationNumberBankModel.md)
  - [IdentityVerificationBankModel](docs/IdentityVerificationBankModel.md)
+ - [IdentityVerificationDocumentBankModel](docs/IdentityVerificationDocumentBankModel.md)
  - [IdentityVerificationListBankModel](docs/IdentityVerificationListBankModel.md)
  - [IdentityVerificationMethodBankModel](docs/IdentityVerificationMethodBankModel.md)
  - [IdentityVerificationOutcomeBankModel](docs/IdentityVerificationOutcomeBankModel.md)

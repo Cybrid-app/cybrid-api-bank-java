@@ -23,6 +23,7 @@
 |**personaInquiryId** | **String** | The Persona identifier of the backing inquiry. |  [optional] |
 |**personaState** | **String** | The Persona state of the backing inquiry; one of waiting, pending, reviewing, processing, expired, completed, or unknown. |  [optional] |
 |**pii** | [**IdentityVerificationWithDetailsPiiBankModel**](IdentityVerificationWithDetailsPiiBankModel.md) |  |  [optional] |
+|**documents** | [**List&lt;IdentityVerificationDocumentBankModel&gt;**](IdentityVerificationDocumentBankModel.md) | The documents associated with the identity verification. |  [optional] |
 
 
 

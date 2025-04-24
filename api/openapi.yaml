@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.420
+  version: v0.123.423
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8037,6 +8037,45 @@ components:
         - failure_codes
         - failure_codes
         method: method
+        documents:
+        - validated: true
+          guid: guid
+          files:
+          - completed_at: 2000-01-23T04:56:07.000+00:00
+            failure_code: failure_code
+            content_type: content_type
+            guid: guid
+            failed_at: 2000-01-23T04:56:07.000+00:00
+            state: storing
+            type: type
+          - completed_at: 2000-01-23T04:56:07.000+00:00
+            failure_code: failure_code
+            content_type: content_type
+            guid: guid
+            failed_at: 2000-01-23T04:56:07.000+00:00
+            state: storing
+            type: type
+          type: type
+          expiration_date: 2000-01-23
+        - validated: true
+          guid: guid
+          files:
+          - completed_at: 2000-01-23T04:56:07.000+00:00
+            failure_code: failure_code
+            content_type: content_type
+            guid: guid
+            failed_at: 2000-01-23T04:56:07.000+00:00
+            state: storing
+            type: type
+          - completed_at: 2000-01-23T04:56:07.000+00:00
+            failure_code: failure_code
+            content_type: content_type
+            guid: guid
+            failed_at: 2000-01-23T04:56:07.000+00:00
+            state: storing
+            type: type
+          type: type
+          expiration_date: 2000-01-23
         created_at: 2000-01-23T04:56:07.000+00:00
         type: type
         compliance_decisions:
@@ -8161,6 +8200,57 @@ components:
           type: string
         pii:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii'
+        documents:
+          description: The documents associated with the identity verification.
+          items:
+            $ref: '#/components/schemas/IdentityVerificationDocument'
+          type: array
+      type: object
+    IdentityVerificationDocument:
+      example:
+        validated: true
+        guid: guid
+        files:
+        - completed_at: 2000-01-23T04:56:07.000+00:00
+          failure_code: failure_code
+          content_type: content_type
+          guid: guid
+          failed_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+          type: type
+        - completed_at: 2000-01-23T04:56:07.000+00:00
+          failure_code: failure_code
+          content_type: content_type
+          guid: guid
+          failed_at: 2000-01-23T04:56:07.000+00:00
+          state: storing
+          type: type
+        type: type
+        expiration_date: 2000-01-23
+      properties:
+        guid:
+          description: Auto-generated unique identifier for the document.
+          maxLength: 32
+          minLength: 32
+          type: string
+        type:
+          description: "The document type; one of drivers_license, passport, passport_card,\
+            \ residence_card, visa, social_security_number, tax_identification_number,\
+            \ selfie, proof_of_address, formation_document, or employer_identification_number."
+          type: string
+        validated:
+          description: Whether the document has been validated.
+          type: boolean
+        expiration_date:
+          description: The document expiration date.
+          format: date
+          nullable: true
+          type: string
+        files:
+          description: The files associated with the document.
+          items:
+            $ref: '#/components/schemas/PlatformFile'
+          type: array
       type: object
     IdentityVerificationList:
       example:
@@ -11520,6 +11610,7 @@ components:
           - selfie_left
           - selfie_right
           - utility_bill
+          - proof_of_address
           - bank_statement
           - property_tax
           - tax_document
@@ -12115,21 +12206,21 @@ components:
         completed_at: 2000-01-23T04:56:07.000+00:00
         failure_code: failure_code
         content_type: content_type
-        file_type: file_type
         guid: guid
         failed_at: 2000-01-23T04:56:07.000+00:00
         state: storing
+        type: type
       properties:
         guid:
           description: The unique identifier for the file.
           maxLength: 32
           minLength: 32
           type: string
-        file_type:
+        type:
           description: "The file type; one of drivers_license_front, drivers_license_back,\
             \ passport, visa, identification_card, residence_card, selfie, selfie_video,\
-            \ selfie_left, selfie_right, utility_bill, bank_statement, property_tax,\
-            \ tax_document, ein_letter, incorporation_certificate, persona_inquiry_report,\
+            \ selfie_left, selfie_right, utility_bill, proof_of_address, bank_statement,\
+            \ property_tax, tax_document, ein_letter, incorporation_certificate, persona_inquiry_report,\
             \ or persona_inquiry_export."
           type: string
         content_type:
@@ -12164,17 +12255,17 @@ components:
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
-          file_type: file_type
           guid: guid
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
+          type: type
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
-          file_type: file_type
           guid: guid
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
+          type: type
         page: 0
       properties:
         total:

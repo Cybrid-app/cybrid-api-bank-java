@@ -31,6 +31,7 @@ Request body for a new file.
 | SELFIE_LEFT | &quot;selfie_left&quot; |
 | SELFIE_RIGHT | &quot;selfie_right&quot; |
 | UTILITY_BILL | &quot;utility_bill&quot; |
+| PROOF_OF_ADDRESS | &quot;proof_of_address&quot; |
 | BANK_STATEMENT | &quot;bank_statement&quot; |
 | PROPERTY_TAX | &quot;property_tax&quot; |
 | TAX_DOCUMENT | &quot;tax_document&quot; |

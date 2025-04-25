@@ -12,6 +12,7 @@
 |**amount** | **java.math.BigInteger** | The limit amount for the asset. |  [optional] |
 |**interval** | **java.math.BigInteger** | The limit interval in seconds for the asset. |  [optional] |
 |**activities** | **List&lt;String&gt;** | The activities associated with the limit. |  [optional] |
+|**sides** | **List&lt;String&gt;** | The sides associated with the limit. |  [optional] |
 
 
 

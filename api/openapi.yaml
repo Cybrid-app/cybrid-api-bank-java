@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.423
+  version: v0.123.426
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7058,12 +7058,18 @@ components:
       - crypto
       type: string
     ActivityType:
-      description: 'The activity type '
+      description: The activity type
       enum:
       - trading
       - funding
       - book_transfer
       - crypto_transfer
+      type: string
+    ActivitySide:
+      description: The activity side
+      enum:
+      - deposit
+      - withdrawal
       type: string
     ActivityLimit:
       example:
@@ -7072,6 +7078,9 @@ components:
         - activities
         - activities
         name: name
+        sides:
+        - sides
+        - sides
         interval: 5
         asset: asset
       properties:
@@ -7092,6 +7101,12 @@ components:
           items:
             description: "The activity type; one of trading, funding, book_transfer,\
               \ or crypto_transfer."
+            type: string
+          type: array
+        sides:
+          description: The sides associated with the limit.
+          items:
+            description: The activity side; one of deposit or withdrawal.
             type: string
           type: array
       type: object
@@ -7632,6 +7647,9 @@ components:
           - activities
           - activities
           name: name
+          sides:
+          - sides
+          - sides
           interval: 5
           asset: asset
         - amount: 5
@@ -7639,6 +7657,9 @@ components:
           - activities
           - activities
           name: name
+          sides:
+          - sides
+          - sides
           interval: 5
           asset: asset
         bank_guid: bank_guid
@@ -7799,6 +7820,9 @@ components:
             - activities
             - activities
             name: name
+            sides:
+            - sides
+            - sides
             interval: 5
             asset: asset
           - amount: 5
@@ -7806,6 +7830,9 @@ components:
             - activities
             - activities
             name: name
+            sides:
+            - sides
+            - sides
             interval: 5
             asset: asset
           bank_guid: bank_guid
@@ -7866,6 +7893,9 @@ components:
             - activities
             - activities
             name: name
+            sides:
+            - sides
+            - sides
             interval: 5
             asset: asset
           - amount: 5
@@ -7873,6 +7903,9 @@ components:
             - activities
             - activities
             name: name
+            sides:
+            - sides
+            - sides
             interval: 5
             asset: asset
           bank_guid: bank_guid

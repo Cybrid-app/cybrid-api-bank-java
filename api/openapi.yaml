@@ -212,7 +212,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.444
+  version: v0.123.445
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8077,14 +8077,22 @@ components:
           - completed_at: 2000-01-23T04:56:07.000+00:00
             failure_code: failure_code
             content_type: content_type
+            download_expires_at: 2000-01-23T04:56:07.000+00:00
+            upload_expires_at: 2000-01-23T04:56:07.000+00:00
+            download_url: https://openapi-generator.tech
             guid: guid
+            upload_url: https://openapi-generator.tech
             failed_at: 2000-01-23T04:56:07.000+00:00
             state: storing
             type: type
           - completed_at: 2000-01-23T04:56:07.000+00:00
             failure_code: failure_code
             content_type: content_type
+            download_expires_at: 2000-01-23T04:56:07.000+00:00
+            upload_expires_at: 2000-01-23T04:56:07.000+00:00
+            download_url: https://openapi-generator.tech
             guid: guid
+            upload_url: https://openapi-generator.tech
             failed_at: 2000-01-23T04:56:07.000+00:00
             state: storing
             type: type
@@ -8096,14 +8104,22 @@ components:
           - completed_at: 2000-01-23T04:56:07.000+00:00
             failure_code: failure_code
             content_type: content_type
+            download_expires_at: 2000-01-23T04:56:07.000+00:00
+            upload_expires_at: 2000-01-23T04:56:07.000+00:00
+            download_url: https://openapi-generator.tech
             guid: guid
+            upload_url: https://openapi-generator.tech
             failed_at: 2000-01-23T04:56:07.000+00:00
             state: storing
             type: type
           - completed_at: 2000-01-23T04:56:07.000+00:00
             failure_code: failure_code
             content_type: content_type
+            download_expires_at: 2000-01-23T04:56:07.000+00:00
+            upload_expires_at: 2000-01-23T04:56:07.000+00:00
+            download_url: https://openapi-generator.tech
             guid: guid
+            upload_url: https://openapi-generator.tech
             failed_at: 2000-01-23T04:56:07.000+00:00
             state: storing
             type: type
@@ -8247,14 +8263,22 @@ components:
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
+          download_expires_at: 2000-01-23T04:56:07.000+00:00
+          upload_expires_at: 2000-01-23T04:56:07.000+00:00
+          download_url: https://openapi-generator.tech
           guid: guid
+          upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
           type: type
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
+          download_expires_at: 2000-01-23T04:56:07.000+00:00
+          upload_expires_at: 2000-01-23T04:56:07.000+00:00
+          download_url: https://openapi-generator.tech
           guid: guid
+          upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
           type: type
@@ -12239,7 +12263,11 @@ components:
         completed_at: 2000-01-23T04:56:07.000+00:00
         failure_code: failure_code
         content_type: content_type
+        download_expires_at: 2000-01-23T04:56:07.000+00:00
+        upload_expires_at: 2000-01-23T04:56:07.000+00:00
+        download_url: https://openapi-generator.tech
         guid: guid
+        upload_url: https://openapi-generator.tech
         failed_at: 2000-01-23T04:56:07.000+00:00
         state: storing
         type: type
@@ -12279,6 +12307,26 @@ components:
           description: The failure code for failed files.
           nullable: true
           type: string
+        upload_url:
+          description: The URL to upload the file to.
+          format: uri
+          nullable: true
+          type: string
+        upload_expires_at:
+          description: The ISO8601 datetime the upload URL expires at.
+          format: date-time
+          nullable: true
+          type: string
+        download_url:
+          description: The URL to download the file from.
+          format: uri
+          nullable: true
+          type: string
+        download_expires_at:
+          description: The ISO8601 datetime the download URL expires at.
+          format: date-time
+          nullable: true
+          type: string
       type: object
     PlatformFileList:
       example:
@@ -12288,14 +12336,22 @@ components:
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
+          download_expires_at: 2000-01-23T04:56:07.000+00:00
+          upload_expires_at: 2000-01-23T04:56:07.000+00:00
+          download_url: https://openapi-generator.tech
           guid: guid
+          upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
           type: type
         - completed_at: 2000-01-23T04:56:07.000+00:00
           failure_code: failure_code
           content_type: content_type
+          download_expires_at: 2000-01-23T04:56:07.000+00:00
+          upload_expires_at: 2000-01-23T04:56:07.000+00:00
+          download_url: https://openapi-generator.tech
           guid: guid
+          upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
           type: type

@@ -14,6 +14,10 @@
 |**failedAt** | **OffsetDateTime** | The ISO8601 datetime the file failed at. |  [optional] |
 |**state** | [**StateEnum**](#StateEnum) | The state of the file. One of storing, completed, or failed. |  [optional] |
 |**failureCode** | **String** | The failure code for failed files. |  [optional] |
+|**uploadUrl** | **URI** | The URL to upload the file to. |  [optional] |
+|**uploadExpiresAt** | **OffsetDateTime** | The ISO8601 datetime the upload URL expires at. |  [optional] |
+|**downloadUrl** | **URI** | The URL to download the file from. |  [optional] |
+|**downloadExpiresAt** | **OffsetDateTime** | The ISO8601 datetime the download URL expires at. |  [optional] |
 
 
 

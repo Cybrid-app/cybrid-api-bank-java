@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.449
+- API version: v0.123.450
 
-- Build date: 2025-05-05T17:53:42.217986Z[Etc/UTC]
+- Build date: 2025-05-05T19:10:23.038855Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -70,10 +70,10 @@ curl -X POST https://id.production.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:write counterparties:execute customers:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:write identity_verifications:execute files:read files:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:pii:read counterparties:write counterparties:execute customers:read customers:pii:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:pii:read identity_verifications:write identity_verifications:execute files:read files:pii:read files:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read customers:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read files:read files:execute'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read counterparties:pii:read customers:read customers:pii:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_bank_accounts:pii:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read identity_verifications:pii:read files:read files:pii:read files:execute'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.449</version>
+  <version>v0.123.450</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.449"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.450"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.449.jar`
+- `target/cybrid-api-bank-java-v0.123.450.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -502,9 +502,11 @@ Authentication schemes defined for the API:
   - accounts:read: accounts read
   - accounts:execute: accounts execute
   - counterparties:read: counterparties read
+  - counterparties:pii:read: counterparties pii read
   - counterparties:write: counterparties write
   - counterparties:execute: counterparties execute
   - customers:read: customers read
+  - customers:pii:read: customers pii read
   - customers:write: customers write
   - customers:execute: customers execute
   - prices:read: prices read
@@ -516,6 +518,7 @@ Authentication schemes defined for the API:
   - transfers:read: transfers read
   - transfers:write: transfers write
   - external_bank_accounts:read: external_bank_accounts read
+  - external_bank_accounts:pii:read: external_bank_accounts pii read
   - external_bank_accounts:write: external_bank_accounts write
   - external_bank_accounts:execute: external_bank_accounts execute
   - external_wallets:read: external_wallets read
@@ -530,9 +533,11 @@ Authentication schemes defined for the API:
   - invoices:write: invoices write
   - invoices:execute: invoices execute
   - identity_verifications:read: identity_verifications read
+  - identity_verifications:pii:read: identity_verifications pii read
   - identity_verifications:write: identity_verifications write
   - identity_verifications:execute: identity_verifications execute
   - files:read: files read
+  - files:pii:read: files pii read
   - files:execute: files execute
 
 

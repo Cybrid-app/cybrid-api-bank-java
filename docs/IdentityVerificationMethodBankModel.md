@@ -9,6 +9,8 @@
 
 * `DOCUMENT_SUBMISSION` (value: `"document_submission"`)
 
+* `ENHANCED_DUE_DILIGENCE` (value: `"enhanced_due_diligence"`)
+
 * `ID_AND_SELFIE` (value: `"id_and_selfie"`)
 
 * `TAX_ID_AND_SELFIE` (value: `"tax_id_and_selfie"`)

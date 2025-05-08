@@ -58,6 +58,7 @@ Request body for identity verification creation.
 | WATCHLISTS | &quot;watchlists&quot; |
 | ATTESTED | &quot;attested&quot; |
 | DOCUMENT_SUBMISSION | &quot;document_submission&quot; |
+| ENHANCED_DUE_DILIGENCE | &quot;enhanced_due_diligence&quot; |
 | ID_AND_SELFIE | &quot;id_and_selfie&quot; |
 | TAX_ID_AND_SELFIE | &quot;tax_id_and_selfie&quot; |
 | BUSINESS_REGISTRATION | &quot;business_registration&quot; |

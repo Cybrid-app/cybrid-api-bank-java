@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.469
+  version: v0.123.470
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -11832,8 +11832,9 @@ components:
           nullable: true
           type: string
         link_customization_name:
-          description: The customization name for Plaid link. Currently only supports
-            the value "default". Required when type is plaid.
+          description: "The customization name for Plaid link. For English, use \"\
+            default\". For Spanish, use \"spanish_customization\". Required when type\
+            \ is plaid."
           maxLength: 128
           nullable: true
           type: string

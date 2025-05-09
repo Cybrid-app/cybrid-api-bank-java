@@ -23,6 +23,7 @@ Request body for a new file.
 | DRIVERS_LICENSE_FRONT | &quot;drivers_license_front&quot; |
 | DRIVERS_LICENSE_BACK | &quot;drivers_license_back&quot; |
 | PASSPORT | &quot;passport&quot; |
+| PASSPORT_CARD | &quot;passport_card&quot; |
 | VISA | &quot;visa&quot; |
 | IDENTIFICATION_CARD | &quot;identification_card&quot; |
 | RESIDENCE_CARD | &quot;residence_card&quot; |

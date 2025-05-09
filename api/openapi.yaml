@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.470
+  version: v0.123.471
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8287,8 +8287,8 @@ components:
           type: string
         type:
           description: "The file type; one of drivers_license_front, drivers_license_back,\
-            \ passport, identification_card, residence_card, selfie, selfie_video,\
-            \ selfie_left, selfie_right, proof_of_address, or incorporation_certificate."
+            \ passport, passport_card, identification_card, residence_card, selfie,\
+            \ selfie_video, selfie_left, selfie_right, proof_of_address, or incorporation_certificate."
           type: string
         content_type:
           description: "The media type; one of image/jpeg, image/png, application/pdf,\
@@ -11649,6 +11649,7 @@ components:
           - drivers_license_front
           - drivers_license_back
           - passport
+          - passport_card
           - visa
           - identification_card
           - residence_card
@@ -12271,10 +12272,10 @@ components:
           type: string
         type:
           description: "The file type; one of drivers_license_front, drivers_license_back,\
-            \ passport, visa, identification_card, residence_card, selfie, selfie_video,\
-            \ selfie_left, selfie_right, utility_bill, proof_of_address, bank_statement,\
-            \ property_tax, tax_document, ein_letter, incorporation_certificate, persona_inquiry_report,\
-            \ or persona_inquiry_export."
+            \ passport, passport_card, visa, identification_card, residence_card,\
+            \ selfie, selfie_video, selfie_left, selfie_right, utility_bill, proof_of_address,\
+            \ bank_statement, property_tax, tax_document, ein_letter, incorporation_certificate,\
+            \ persona_inquiry_report, or persona_inquiry_export."
           type: string
         content_type:
           description: "The media type; one of image/jpeg, image/png, application/pdf,\

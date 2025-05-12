@@ -28,7 +28,7 @@ import org.springframework.http.ResponseEntity;
 import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-12T12:37:24.091457Z[Etc/UTC]")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-05-12T13:59:07.695083Z[Etc/UTC]")
 public class FilesBankApi {
     private ApiClient apiClient;
 
@@ -117,7 +117,7 @@ public class FilesBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - file not found
      * @param fileGuid Identifier for the file.
-     * @param includeDownloadUrl Include download information in response.
+     * @param includeDownloadUrl Include download information in response. Note, the files:pii:read scope is required if this parameter is set.
      * @return PlatformFileBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */
@@ -160,7 +160,7 @@ public class FilesBankApi {
      * <p><b>403</b> - Invalid scope
      * <p><b>404</b> - file not found
      * @param fileGuid Identifier for the file.
-     * @param includeDownloadUrl Include download information in response.
+     * @param includeDownloadUrl Include download information in response. Note, the files:pii:read scope is required if this parameter is set.
      * @return PlatformFileBankModel
      * @throws WebClientResponseException if an error occurs while attempting to invoke the API
      */

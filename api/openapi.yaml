@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.474
+  version: v0.123.475
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -4847,7 +4847,8 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Include download information in response.
+      - description: "Include download information in response. Note, the files:pii:read\
+          \ scope is required if this parameter is set."
         explode: true
         in: query
         name: include_download_url

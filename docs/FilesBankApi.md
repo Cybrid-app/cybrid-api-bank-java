@@ -122,7 +122,7 @@ public class Example {
 
         FilesBankApi apiInstance = new FilesBankApi(defaultClient);
         String fileGuid = "fileGuid_example"; // String | Identifier for the file.
-        String includeDownloadUrl = "includeDownloadUrl_example"; // String | Include download information in response.
+        String includeDownloadUrl = "includeDownloadUrl_example"; // String | Include download information in response. Note, the files:pii:read scope is required if this parameter is set.
         try {
             PlatformFileBankModel result = apiInstance.getFile(fileGuid, includeDownloadUrl);
             System.out.println(result);
@@ -143,7 +143,7 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **fileGuid** | **String**| Identifier for the file. | |
-| **includeDownloadUrl** | **String**| Include download information in response. | [optional] |
+| **includeDownloadUrl** | **String**| Include download information in response. Note, the files:pii:read scope is required if this parameter is set. | [optional] |
 
 ### Return type
 

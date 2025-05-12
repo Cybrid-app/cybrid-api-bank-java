@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.475
+  version: v0.123.476
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8103,6 +8103,33 @@ components:
             type: type
           type: type
           expiration_date: 2000-01-23
+        supporting_files:
+        - validated: true
+          guid: guid
+          files:
+          - filename: filename
+            content_type: content_type
+            guid: guid
+            type: type
+          - filename: filename
+            content_type: content_type
+            guid: guid
+            type: type
+          type: type
+          expiration_date: 2000-01-23
+        - validated: true
+          guid: guid
+          files:
+          - filename: filename
+            content_type: content_type
+            guid: guid
+            type: type
+          - filename: filename
+            content_type: content_type
+            guid: guid
+            type: type
+          type: type
+          expiration_date: 2000-01-23
         created_at: 2000-01-23T04:56:07.000+00:00
         type: type
         compliance_decisions:
@@ -8230,6 +8257,12 @@ components:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii'
         documents:
           description: The documents associated with the identity verification.
+          items:
+            $ref: '#/components/schemas/IdentityVerificationDocument'
+          type: array
+        supporting_files:
+          description: The supporting documents associated with the attested identity
+            verification.
           items:
             $ref: '#/components/schemas/IdentityVerificationDocument'
           type: array
@@ -12253,8 +12286,10 @@ components:
       type: object
     PlatformFile:
       example:
-        completed_at: 2000-01-23T04:56:07.000+00:00
         failure_code: failure_code
+        organization_guid: organization_guid
+        type: type
+        completed_at: 2000-01-23T04:56:07.000+00:00
         filename: filename
         content_type: content_type
         download_expires_at: 2000-01-23T04:56:07.000+00:00
@@ -12264,12 +12299,30 @@ components:
         upload_url: https://openapi-generator.tech
         failed_at: 2000-01-23T04:56:07.000+00:00
         state: storing
-        type: type
+        bank_guid: bank_guid
+        customer_guid: customer_guid
       properties:
         guid:
           description: The unique identifier for the file.
           maxLength: 32
           minLength: 32
+          type: string
+        organization_guid:
+          description: The organization identifier.
+          maxLength: 32
+          minLength: 32
+          type: string
+        bank_guid:
+          description: The bank identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        customer_guid:
+          description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
           type: string
         type:
           description: "The file type; one of drivers_license_front, drivers_license_back,\
@@ -12330,8 +12383,10 @@ components:
         per_page: 0
         total: 0
         objects:
-        - completed_at: 2000-01-23T04:56:07.000+00:00
-          failure_code: failure_code
+        - failure_code: failure_code
+          organization_guid: organization_guid
+          type: type
+          completed_at: 2000-01-23T04:56:07.000+00:00
           filename: filename
           content_type: content_type
           download_expires_at: 2000-01-23T04:56:07.000+00:00
@@ -12341,9 +12396,12 @@ components:
           upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
+          bank_guid: bank_guid
+          customer_guid: customer_guid
+        - failure_code: failure_code
+          organization_guid: organization_guid
           type: type
-        - completed_at: 2000-01-23T04:56:07.000+00:00
-          failure_code: failure_code
+          completed_at: 2000-01-23T04:56:07.000+00:00
           filename: filename
           content_type: content_type
           download_expires_at: 2000-01-23T04:56:07.000+00:00
@@ -12353,7 +12411,8 @@ components:
           upload_url: https://openapi-generator.tech
           failed_at: 2000-01-23T04:56:07.000+00:00
           state: storing
-          type: type
+          bank_guid: bank_guid
+          customer_guid: customer_guid
         page: 0
       properties:
         total:

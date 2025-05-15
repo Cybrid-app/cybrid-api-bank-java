@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.485
+  version: v0.123.486
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8177,6 +8177,15 @@ components:
           type: type
           outcome: outcome
         outcome: outcome
+        business_associates:
+        - persona_state: persona_state
+          role: role
+          email_address: email_address
+          persona_inquiry_id: persona_inquiry_id
+        - persona_state: persona_state
+          role: role
+          email_address: email_address
+          persona_inquiry_id: persona_inquiry_id
         customer_guid: customer_guid
       properties:
         guid:
@@ -8253,6 +8262,11 @@ components:
             \ pending, reviewing, processing, expired, completed, or unknown."
           nullable: true
           type: string
+        business_associates:
+          description: List of associates declared for the business customer.
+          items:
+            $ref: '#/components/schemas/IdentityVerificationBusinessAssociate'
+          type: array
         pii:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii'
         documents:
@@ -8330,6 +8344,28 @@ components:
           type: string
         filename:
           description: The name of the file.
+          type: string
+      type: object
+    IdentityVerificationBusinessAssociate:
+      example:
+        persona_state: persona_state
+        role: role
+        email_address: email_address
+        persona_inquiry_id: persona_inquiry_id
+      properties:
+        persona_inquiry_id:
+          description: The Persona identifier of the business associate backing inquiry.
+          type: string
+        persona_state:
+          description: "The Persona state of the backing inquiry; one of waiting,\
+            \ pending, reviewing, processing, expired, completed, or unknown."
+          nullable: true
+          type: string
+        role:
+          description: The business associate role; one of director or owner.
+          type: string
+        email_address:
+          description: The business associate email address.
           type: string
       type: object
     IdentityVerificationList:

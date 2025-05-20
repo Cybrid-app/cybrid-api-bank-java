@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.499
+  version: v0.123.500
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9943,6 +9943,7 @@ components:
           type: type
         transfer_type: transfer_type
         asset: asset
+        deposit_address_guid: deposit_address_guid
         return_code: return_code
         estimated_network_fee: 7
         customer_guid: customer_guid
@@ -10065,6 +10066,12 @@ components:
             $ref: '#/components/schemas/TransferParticipant'
           nullable: true
           type: array
+        deposit_address_guid:
+          description: The guid of the deposit address. Only present on crypto deposits.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         created_at:
           description: ISO8601 datetime the record was created at.
           format: date-time
@@ -10638,6 +10645,7 @@ components:
             type: type
           transfer_type: transfer_type
           asset: asset
+          deposit_address_guid: deposit_address_guid
           return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid
@@ -10715,6 +10723,7 @@ components:
             type: type
           transfer_type: transfer_type
           asset: asset
+          deposit_address_guid: deposit_address_guid
           return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid

@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.525
+- API version: v0.123.526
 
-- Build date: 2025-05-26T18:22:44.557403Z[Etc/UTC]
+- Build date: 2025-05-26T19:11:56.313112Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.525</version>
+  <version>v0.123.526</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.525"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.526"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.525.jar`
+- `target/cybrid-api-bank-java-v0.123.526.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -402,6 +402,7 @@ Class | Method | HTTP request | Description
  - [IdentityVerificationTypeBankModel](docs/IdentityVerificationTypeBankModel.md)
  - [IdentityVerificationWithDetailsBankModel](docs/IdentityVerificationWithDetailsBankModel.md)
  - [IdentityVerificationWithDetailsPiiAddressBankModel](docs/IdentityVerificationWithDetailsPiiAddressBankModel.md)
+ - [IdentityVerificationWithDetailsPiiAliasesInnerBankModel](docs/IdentityVerificationWithDetailsPiiAliasesInnerBankModel.md)
  - [IdentityVerificationWithDetailsPiiBankModel](docs/IdentityVerificationWithDetailsPiiBankModel.md)
  - [IdentityVerificationWithDetailsPiiNameBankModel](docs/IdentityVerificationWithDetailsPiiNameBankModel.md)
  - [InvoiceBankModel](docs/InvoiceBankModel.md)

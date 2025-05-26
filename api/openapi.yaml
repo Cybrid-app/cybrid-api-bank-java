@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.525
+  version: v0.123.526
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -8145,6 +8145,10 @@ components:
           type: type
         persona_state: persona_state
         pii:
+          website: website
+          aliases:
+          - full: full
+          - full: full
           address:
             subdivision: subdivision
             country_code: country_code
@@ -8153,6 +8157,8 @@ components:
             street2: street2
             postal_code: postal_code
           email_address: email_address
+          occupation: occupation
+          nature_of_business: nature_of_business
           date_of_birth: 2000-01-23
           name:
             middle: middle
@@ -8160,6 +8166,13 @@ components:
             first: first
             full: full
           phone_number: phone_number
+          identification_numbers:
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
+          - identification_number: identification_number
+            issuing_country_code: issuing_country_code
+            type: type
         updated_at: 2000-01-23T04:56:07.000+00:00
         persona_inquiry_id: persona_inquiry_id
         guid: guid
@@ -8182,10 +8195,12 @@ components:
           role: role
           email_address: email_address
           persona_inquiry_id: persona_inquiry_id
+          customer_guid: customer_guid
         - persona_state: persona_state
           role: role
           email_address: email_address
           persona_inquiry_id: persona_inquiry_id
+          customer_guid: customer_guid
         customer_guid: customer_guid
       properties:
         guid:
@@ -8352,20 +8367,32 @@ components:
         role: role
         email_address: email_address
         persona_inquiry_id: persona_inquiry_id
+        customer_guid: customer_guid
       properties:
         persona_inquiry_id:
           description: The Persona identifier of the business associate backing inquiry.
+            Available only for attested_business_registration verification method
+          nullable: true
           type: string
         persona_state:
           description: "The Persona state of the backing inquiry; one of waiting,\
-            \ pending, reviewing, processing, expired, completed, or unknown."
+            \ pending, reviewing, processing, expired, completed, or unknown. Available\
+            \ only for attested_business_registration verification method"
+          nullable: true
+          type: string
+        customer_guid:
+          description: The business associate's customer identifier. Available only
+            for attested_business_registration verification method
+          maxLength: 32
+          minLength: 32
           nullable: true
           type: string
         role:
           description: The business associate role; one of director or owner.
           type: string
         email_address:
-          description: The business associate email address.
+          description: The business associate email address. Available only for business_registration
+            verification method
           type: string
       type: object
     IdentityVerificationList:
@@ -12741,6 +12768,15 @@ components:
           nullable: true
           type: string
       type: object
+    IdentityVerificationWithDetails_pii_aliases_inner:
+      example:
+        full: full
+      properties:
+        full:
+          description: The full name.
+          nullable: true
+          type: string
+      type: object
     IdentityVerificationWithDetails_pii_address:
       description: The attested address.
       example:
@@ -12788,6 +12824,10 @@ components:
       description: The personally identifiable information associated with the identity
         verification.
       example:
+        website: website
+        aliases:
+        - full: full
+        - full: full
         address:
           subdivision: subdivision
           country_code: country_code
@@ -12796,6 +12836,8 @@ components:
           street2: street2
           postal_code: postal_code
         email_address: email_address
+        occupation: occupation
+        nature_of_business: nature_of_business
         date_of_birth: 2000-01-23
         name:
           middle: middle
@@ -12803,10 +12845,23 @@ components:
           first: first
           full: full
         phone_number: phone_number
+        identification_numbers:
+        - identification_number: identification_number
+          issuing_country_code: issuing_country_code
+          type: type
+        - identification_number: identification_number
+          issuing_country_code: issuing_country_code
+          type: type
       nullable: true
       properties:
         name:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii_name'
+        aliases:
+          description: The business attested aliases.
+          items:
+            $ref: '#/components/schemas/IdentityVerificationWithDetails_pii_aliases_inner'
+          nullable: true
+          type: array
         address:
           $ref: '#/components/schemas/IdentityVerificationWithDetails_pii_address'
         date_of_birth:
@@ -12822,6 +12877,24 @@ components:
           description: The attested email address.
           nullable: true
           type: string
+        occupation:
+          description: The attested occupation.
+          nullable: true
+          type: string
+        website:
+          description: The attested website.
+          nullable: true
+          type: string
+        nature_of_business:
+          description: The attested nature of business.
+          nullable: true
+          type: string
+        identification_numbers:
+          description: The attested identification numbers.
+          items:
+            $ref: '#/components/schemas/IdentificationNumber'
+          nullable: true
+          type: array
       type: object
     DepositBankAccount_counterparty_address:
       description: The counterparty's address on the account.

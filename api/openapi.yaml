@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.521
+  version: v0.123.522
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10329,25 +10329,27 @@ components:
         per_page: 0
         total: 0
         objects:
-        - environment: environment
+        - counterparty_guid: counterparty_guid
           failure_code: failure_code
           address: address
+          created_at: 2000-01-23T04:56:07.000+00:00
+          environment: environment
           updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
           state: state
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
-        - environment: environment
+        - counterparty_guid: counterparty_guid
           failure_code: failure_code
           address: address
+          created_at: 2000-01-23T04:56:07.000+00:00
+          environment: environment
           updated_at: 2000-01-23T04:56:07.000+00:00
           name: name
           guid: guid
-          created_at: 2000-01-23T04:56:07.000+00:00
           tag: tag
           state: state
           asset: asset
@@ -10383,7 +10385,8 @@ components:
         per_page: 0
         total: 0
         objects:
-        - failure_code: failure_code
+        - counterparty_guid: counterparty_guid
+          failure_code: failure_code
           balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           account_kind: account_kind
@@ -10462,7 +10465,8 @@ components:
           asset: asset
           bank_guid: bank_guid
           customer_guid: customer_guid
-        - failure_code: failure_code
+        - counterparty_guid: counterparty_guid
+          failure_code: failure_code
           balance_updated_at: 2000-01-23T04:56:07.000+00:00
           created_at: 2000-01-23T04:56:07.000+00:00
           account_kind: account_kind
@@ -11025,6 +11029,7 @@ components:
       type: string
     ExternalBankAccount:
       example:
+        counterparty_guid: counterparty_guid
         failure_code: failure_code
         balance_updated_at: 2000-01-23T04:56:07.000+00:00
         created_at: 2000-01-23T04:56:07.000+00:00
@@ -11139,6 +11144,12 @@ components:
           minLength: 32
           nullable: true
           type: string
+        counterparty_guid:
+          description: The counterparty identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
         created_at:
           description: ISO8601 datetime the record was created at.
           format: date-time
@@ -11231,13 +11242,14 @@ components:
       type: object
     ExternalWallet:
       example:
-        environment: environment
+        counterparty_guid: counterparty_guid
         failure_code: failure_code
         address: address
+        created_at: 2000-01-23T04:56:07.000+00:00
+        environment: environment
         updated_at: 2000-01-23T04:56:07.000+00:00
         name: name
         guid: guid
-        created_at: 2000-01-23T04:56:07.000+00:00
         tag: tag
         state: state
         asset: asset
@@ -11270,6 +11282,12 @@ components:
           type: string
         customer_guid:
           description: The customer identifier.
+          maxLength: 32
+          minLength: 32
+          nullable: true
+          type: string
+        counterparty_guid:
+          description: The counterparty identifier.
           maxLength: 32
           minLength: 32
           nullable: true

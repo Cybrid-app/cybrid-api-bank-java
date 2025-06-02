@@ -215,7 +215,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.542
+  version: v0.123.543
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -9896,6 +9896,7 @@ components:
       - $ref: '#/components/schemas/WorkflowWithDetails_allOf'
     Transfer:
       example:
+        hold_duration: 4
         transfer_details: "{}"
         quote_guid: quote_guid
         fee: 2
@@ -9907,6 +9908,7 @@ components:
           customer_guid: customer_guid
         payment_rail: payment_rail
         network_fee_asset: network_fee_asset
+        hold_started_at: 2000-01-23T04:56:07.000+00:00
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
         txn_hash: txn_hash
@@ -9934,8 +9936,8 @@ components:
         - labels
         - labels
         entries:
-        - amount: 4
-          fee: 7
+        - amount: 7
+          fee: 1
           source_account:
             guid: guid
             type: type
@@ -9946,8 +9948,8 @@ components:
             type: type
             bank_guid: bank_guid
             customer_guid: customer_guid
-        - amount: 4
-          fee: 7
+        - amount: 7
+          fee: 1
           source_account:
             guid: guid
             type: type
@@ -10107,6 +10109,16 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
+        hold_started_at:
+          description: ISO8601 datetime the transfer hold was started at.
+          format: date-time
+          nullable: true
+          type: string
+        hold_duration:
+          description: The approximate time (in seconds) that the transfer will be
+            held for.
+          nullable: true
+          type: integer
         transfer_details:
           description: The raw details on the transfer from the bank.
           nullable: true
@@ -10131,8 +10143,8 @@ components:
       type: object
     TransferEntry:
       example:
-        amount: 4
-        fee: 7
+        amount: 7
+        fee: 1
         source_account:
           guid: guid
           type: type
@@ -10602,7 +10614,8 @@ components:
         per_page: 0
         total: 0
         objects:
-        - transfer_details: "{}"
+        - hold_duration: 4
+          transfer_details: "{}"
           quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -10613,6 +10626,7 @@ components:
             customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
+          hold_started_at: 2000-01-23T04:56:07.000+00:00
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
@@ -10640,8 +10654,8 @@ components:
           - labels
           - labels
           entries:
-          - amount: 4
-            fee: 7
+          - amount: 7
+            fee: 1
             source_account:
               guid: guid
               type: type
@@ -10652,8 +10666,8 @@ components:
               type: type
               bank_guid: bank_guid
               customer_guid: customer_guid
-          - amount: 4
-            fee: 7
+          - amount: 7
+            fee: 1
             source_account:
               guid: guid
               type: type
@@ -10680,7 +10694,8 @@ components:
           return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid
-        - transfer_details: "{}"
+        - hold_duration: 4
+          transfer_details: "{}"
           quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -10691,6 +10706,7 @@ components:
             customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
+          hold_started_at: 2000-01-23T04:56:07.000+00:00
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
@@ -10718,8 +10734,8 @@ components:
           - labels
           - labels
           entries:
-          - amount: 4
-            fee: 7
+          - amount: 7
+            fee: 1
             source_account:
               guid: guid
               type: type
@@ -10730,8 +10746,8 @@ components:
               type: type
               bank_guid: bank_guid
               customer_guid: customer_guid
-          - amount: 4
-            fee: 7
+          - amount: 7
+            fee: 1
             source_account:
               guid: guid
               type: type

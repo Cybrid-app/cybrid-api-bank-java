@@ -2,9 +2,9 @@
 
 Cybrid Bank API
 
-- API version: v0.123.548
+- API version: v0.123.550
 
-- Build date: 2025-06-03T17:31:01.263768Z[Etc/UTC]
+- Build date: 2025-06-04T18:10:44.967161Z[Etc/UTC]
 
 # Cybrid API documentation
 
@@ -70,10 +70,10 @@ curl -X POST https://id.production.cybrid.app/oauth/token -d '{
     \"grant_type\": \"client_credentials\",
     \"client_id\": \"<Your Client ID>\",
     \"client_secret\": \"<Your Secret>\",
-    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:pii:read counterparties:write counterparties:execute customers:read customers:pii:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:pii:read identity_verifications:write identity_verifications:execute files:read files:pii:read files:execute\"
+    \"scope\": \"banks:read banks:write bank_applications:execute accounts:read accounts:execute counterparties:read counterparties:pii:read counterparties:write counterparties:execute customers:read customers:pii:read customers:write customers:execute prices:read quotes:execute quotes:read trades:execute trades:read transfers:execute transfers:read transfers:write external_bank_accounts:read external_bank_accounts:pii:read external_bank_accounts:write external_bank_accounts:execute external_wallets:read external_wallets:execute workflows:read workflows:execute deposit_addresses:read deposit_addresses:execute deposit_bank_accounts:read deposit_bank_accounts:execute invoices:read invoices:write invoices:execute identity_verifications:read identity_verifications:pii:read identity_verifications:write identity_verifications:execute persona_sessions:execute files:read files:pii:read files:execute\"
   }' -H \"Content-Type: application/json\"
 
-# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read counterparties:pii:read customers:read customers:pii:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_bank_accounts:pii:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read identity_verifications:pii:read identity_verifications:execute files:read files:pii:read files:execute'
+# When using Organization credentials set `scope` to 'organizations:read organizations:write organization_applications:execute banks:read banks:write banks:execute bank_applications:execute users:read users:execute counterparties:read counterparties:pii:read customers:read customers:pii:read accounts:read prices:read quotes:execute quotes:read trades:execute trades:read transfers:read transfers:write transfers:execute external_bank_accounts:read external_bank_accounts:pii:read external_wallets:read workflows:read deposit_addresses:read deposit_bank_accounts:read invoices:read subscriptions:read subscriptions:write subscriptions:execute subscription_events:read subscription_events:execute identity_verifications:read identity_verifications:pii:read identity_verifications:execute persona_sessions:execute files:read files:pii:read files:execute'
 ```
 <font color=\"orange\">**⚠️ Note: The above curl will create a bearer token with full scope access. Delete scopes if you'd like to restrict access.**</font>
 
@@ -187,7 +187,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>app.cybrid</groupId>
   <artifactId>cybrid-api-bank-java</artifactId>
-  <version>v0.123.548</version>
+  <version>v0.123.550</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -203,7 +203,7 @@ Add this dependency to your project's build file:
   }
 
   dependencies {
-     implementation "app.cybrid:cybrid-api-bank-java:v0.123.548"
+     implementation "app.cybrid:cybrid-api-bank-java:v0.123.550"
   }
 ```
 
@@ -217,7 +217,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-- `target/cybrid-api-bank-java-v0.123.548.jar`
+- `target/cybrid-api-bank-java-v0.123.550.jar`
 - `target/lib/*.jar`
 
 ## Getting Started
@@ -311,6 +311,7 @@ Class | Method | HTTP request | Description
 *PaymentInstructionsBankApi* | [**createPaymentInstruction**](docs/PaymentInstructionsBankApi.md#createPaymentInstruction) | **POST** /api/payment_instructions | Create Payment Instruction
 *PaymentInstructionsBankApi* | [**getPaymentInstruction**](docs/PaymentInstructionsBankApi.md#getPaymentInstruction) | **GET** /api/payment_instructions/{payment_instruction_guid} | Get Payment Instruction
 *PaymentInstructionsBankApi* | [**listPaymentInstructions**](docs/PaymentInstructionsBankApi.md#listPaymentInstructions) | **GET** /api/payment_instructions | List Payment Instructions
+*PersonaSessionsBankApi* | [**createPersonaSession**](docs/PersonaSessionsBankApi.md#createPersonaSession) | **POST** /api/persona_sessions | Create Persona Session
 *PricesBankApi* | [**listPrices**](docs/PricesBankApi.md#listPrices) | **GET** /api/prices | Get Price
 *QuotesBankApi* | [**createQuote**](docs/QuotesBankApi.md#createQuote) | **POST** /api/quotes | Create Quote
 *QuotesBankApi* | [**getQuote**](docs/QuotesBankApi.md#getQuote) | **GET** /api/quotes/{quote_guid} | Get Quote
@@ -414,6 +415,7 @@ Class | Method | HTTP request | Description
  - [PatchTransferParticipantBankModel](docs/PatchTransferParticipantBankModel.md)
  - [PaymentInstructionBankModel](docs/PaymentInstructionBankModel.md)
  - [PaymentInstructionListBankModel](docs/PaymentInstructionListBankModel.md)
+ - [PersonaSessionBankModel](docs/PersonaSessionBankModel.md)
  - [PlatformFileBankModel](docs/PlatformFileBankModel.md)
  - [PlatformFileListBankModel](docs/PlatformFileListBankModel.md)
  - [PostAccountBankModel](docs/PostAccountBankModel.md)
@@ -442,6 +444,7 @@ Class | Method | HTTP request | Description
  - [PostIdentityVerificationNameBankModel](docs/PostIdentityVerificationNameBankModel.md)
  - [PostInvoiceBankModel](docs/PostInvoiceBankModel.md)
  - [PostPaymentInstructionBankModel](docs/PostPaymentInstructionBankModel.md)
+ - [PostPersonaSessionBankModel](docs/PostPersonaSessionBankModel.md)
  - [PostQuoteBankModel](docs/PostQuoteBankModel.md)
  - [PostQuoteEntryBankModel](docs/PostQuoteEntryBankModel.md)
  - [PostSupportedPayoutSymbolsBankModel](docs/PostSupportedPayoutSymbolsBankModel.md)
@@ -539,6 +542,7 @@ Authentication schemes defined for the API:
   - identity_verifications:pii:read: identity_verifications pii read
   - identity_verifications:write: identity_verifications write
   - identity_verifications:execute: identity_verifications execute
+  - persona_sessions:execute: persona_sessions execute
   - files:read: files read
   - files:pii:read: files pii read
   - files:execute: files execute

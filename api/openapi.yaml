@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.575
+  version: v0.123.577
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -7187,8 +7187,12 @@ components:
         - sides
         - sides
         interval: 5
+        type: type
         asset: asset
       properties:
+        type:
+          description: "The type of the limit; one of rolling, daily, weekly, or monthly."
+          type: string
         name:
           description: The name of the limit.
           type: string
@@ -7200,6 +7204,7 @@ components:
           type: integer
         interval:
           description: The limit interval in seconds for the asset.
+          nullable: true
           type: integer
         activities:
           description: The activities associated with the limit.
@@ -7756,6 +7761,7 @@ components:
           - sides
           - sides
           interval: 5
+          type: type
           asset: asset
         - amount: 5
           activities:
@@ -7766,6 +7772,7 @@ components:
           - sides
           - sides
           interval: 5
+          type: type
           asset: asset
         bank_guid: bank_guid
       properties:
@@ -7929,6 +7936,7 @@ components:
             - sides
             - sides
             interval: 5
+            type: type
             asset: asset
           - amount: 5
             activities:
@@ -7939,6 +7947,7 @@ components:
             - sides
             - sides
             interval: 5
+            type: type
             asset: asset
           bank_guid: bank_guid
         - website: website
@@ -8002,6 +8011,7 @@ components:
             - sides
             - sides
             interval: 5
+            type: type
             asset: asset
           - amount: 5
             activities:
@@ -8012,6 +8022,7 @@ components:
             - sides
             - sides
             interval: 5
+            type: type
             asset: asset
           bank_guid: bank_guid
         page: 0

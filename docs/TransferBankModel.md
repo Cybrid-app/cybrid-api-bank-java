@@ -35,8 +35,7 @@
 |**depositAddressGuid** | **String** | The guid of the deposit address. Only present on crypto deposits. |  [optional] |
 |**createdAt** | **OffsetDateTime** | ISO8601 datetime the record was created at. |  [optional] |
 |**updatedAt** | **OffsetDateTime** | ISO8601 datetime the record was last updated at. |  [optional] |
-|**holdStartedAt** | **OffsetDateTime** | ISO8601 datetime the transfer hold was started at. |  [optional] |
-|**holdDuration** | **java.math.BigInteger** | The approximate time (in seconds) that the transfer will be held for. |  [optional] |
+|**holdDetails** | [**TransferHoldDetailsBankModel**](TransferHoldDetailsBankModel.md) |  |  [optional] |
 |**transferDetails** | **Object** | The raw details on the transfer from the bank. |  [optional] |
 |**paymentRail** | **String** | The rail the payment was done on. One of: ach, eft, wire, rtp |  [optional] |
 |**labels** | **List&lt;String&gt;** | The labels associated with the transfer. |  [optional] |

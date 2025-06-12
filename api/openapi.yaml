@@ -216,7 +216,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.cybrid.xyz/tos
   title: Cybrid Bank API
-  version: v0.123.578
+  version: v0.123.579
 servers:
 - description: Sandbox environment is simulated money movement
   url: https://bank.sandbox.cybrid.app
@@ -10041,7 +10041,6 @@ components:
       type: object
     Transfer:
       example:
-        hold_duration: 4
         transfer_details: "{}"
         quote_guid: quote_guid
         fee: 2
@@ -10053,7 +10052,6 @@ components:
           customer_guid: customer_guid
         payment_rail: payment_rail
         network_fee_asset: network_fee_asset
-        hold_started_at: 2000-01-23T04:56:07.000+00:00
         network_fee_liability_amount_asset: network_fee_liability_amount_asset
         updated_at: 2000-01-23T04:56:07.000+00:00
         txn_hash: txn_hash
@@ -10105,6 +10103,12 @@ components:
             type: type
             bank_guid: bank_guid
             customer_guid: customer_guid
+        hold_details:
+          duration: 4
+          started_at: 2000-01-23T04:56:07.000+00:00
+          applicable_types:
+          - applicable_types
+          - applicable_types
         estimated_amount: 5
         guid: guid
         external_bank_account_guid: external_bank_account_guid
@@ -10254,16 +10258,8 @@ components:
           description: ISO8601 datetime the record was last updated at.
           format: date-time
           type: string
-        hold_started_at:
-          description: ISO8601 datetime the transfer hold was started at.
-          format: date-time
-          nullable: true
-          type: string
-        hold_duration:
-          description: The approximate time (in seconds) that the transfer will be
-            held for.
-          nullable: true
-          type: integer
+        hold_details:
+          $ref: '#/components/schemas/Transfer_hold_details'
         transfer_details:
           description: The raw details on the transfer from the bank.
           nullable: true
@@ -10759,8 +10755,7 @@ components:
         per_page: 0
         total: 0
         objects:
-        - hold_duration: 4
-          transfer_details: "{}"
+        - transfer_details: "{}"
           quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -10771,7 +10766,6 @@ components:
             customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
-          hold_started_at: 2000-01-23T04:56:07.000+00:00
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
@@ -10823,6 +10817,12 @@ components:
               type: type
               bank_guid: bank_guid
               customer_guid: customer_guid
+          hold_details:
+            duration: 4
+            started_at: 2000-01-23T04:56:07.000+00:00
+            applicable_types:
+            - applicable_types
+            - applicable_types
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -10839,8 +10839,7 @@ components:
           return_code: return_code
           estimated_network_fee: 7
           customer_guid: customer_guid
-        - hold_duration: 4
-          transfer_details: "{}"
+        - transfer_details: "{}"
           quote_guid: quote_guid
           fee: 2
           created_at: 2000-01-23T04:56:07.000+00:00
@@ -10851,7 +10850,6 @@ components:
             customer_guid: customer_guid
           payment_rail: payment_rail
           network_fee_asset: network_fee_asset
-          hold_started_at: 2000-01-23T04:56:07.000+00:00
           network_fee_liability_amount_asset: network_fee_liability_amount_asset
           updated_at: 2000-01-23T04:56:07.000+00:00
           txn_hash: txn_hash
@@ -10903,6 +10901,12 @@ components:
               type: type
               bank_guid: bank_guid
               customer_guid: customer_guid
+          hold_details:
+            duration: 4
+            started_at: 2000-01-23T04:56:07.000+00:00
+            applicable_types:
+            - applicable_types
+            - applicable_types
           estimated_amount: 5
           guid: guid
           external_bank_account_guid: external_bank_account_guid
@@ -13251,6 +13255,34 @@ components:
           description: The account's identifier.
           maxLength: 32
           minLength: 32
+          nullable: true
+          type: string
+      type: object
+    Transfer_hold_details:
+      description: The hold details if a transfer is or will be placed on a hold.
+      example:
+        duration: 4
+        started_at: 2000-01-23T04:56:07.000+00:00
+        applicable_types:
+        - applicable_types
+        - applicable_types
+      nullable: true
+      properties:
+        applicable_types:
+          description: The list of hold types that are applicable for the transfer;
+            one of administrative or non_administrative.
+          items:
+            type: string
+          nullable: true
+          type: array
+        duration:
+          description: The approximate time (in seconds) that the transfer will be
+            held for.
+          nullable: true
+          type: integer
+        started_at:
+          description: ISO8601 datetime the transfer hold was started at.
+          format: date-time
           nullable: true
           type: string
       type: object

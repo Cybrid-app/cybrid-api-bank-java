@@ -29,5 +29,11 @@
 
 * `INVALID_ADDRESS` (value: `"invalid_address"`)
 
+* `INVALID_DESTINATION` (value: `"invalid_destination"`)
+
+* `CUSTOMER_ACTION_REQUIRED` (value: `"customer_action_required"`)
+
+* `EXTERNAL_VENDOR_ERROR` (value: `"external_vendor_error"`)
+
 
 

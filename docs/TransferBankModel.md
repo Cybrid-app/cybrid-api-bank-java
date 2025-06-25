@@ -15,7 +15,7 @@
 |**externalBankAccountGuid** | **String** | The associated external bank account&#39;s identifier. |  [optional] |
 |**asset** | **String** | The asset the transfer is related to, e.g., USD. |  [optional] |
 |**side** | **String** | The direction of the quote; one of deposit or withdrawal. |  [optional] |
-|**state** | **String** | The state of the transfer; one of storing, pending, reviewing, completed, or failed. |  [optional] |
+|**state** | **String** | The state of the transfer; one of storing, pending, holding, reviewing, completed, or failed. |  [optional] |
 |**failureCode** | **String** | The failure code for failed transfers; one of non_sufficient_funds, refresh_required, party_name_invalid, payment_rail_invalid, compliance_rejection, cancelled, reversed, limit_exceeded, network_fee_too_low, amount_too_low, internal_error, invalid_address, invalid_destination, customer_action_required, or external_vendor_error. |  [optional] |
 |**returnCode** | **String** | The return code for reversed transfers |  [optional] |
 |**amount** | **java.math.BigInteger** | The actual amount in base units of the asset. |  [optional] |

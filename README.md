@@ -1,3 +1,16 @@
+> [!WARNING]
+> **This client is deprecated and no longer maintained.** It hasn't been published since mid-2025 and won't get further releases or security fixes. This repository will be archived.
+>
+> Use one of the supported Cybrid API clients instead:
+>
+> - Python: [`cybrid-api-bank-python`](https://pypi.org/project/cybrid-api-bank-python/)
+> - Ruby: [`cybrid_api_bank_ruby`](https://rubygems.org/gems/cybrid_api_bank_ruby)
+> - TypeScript: [`@cybrid/cybrid-api-bank-typescript`](https://www.npmjs.com/package/@cybrid/cybrid-api-bank-typescript)
+> - Angular: [`@cybrid/cybrid-api-bank-angular`](https://www.npmjs.com/package/@cybrid/cybrid-api-bank-angular)
+> - Swift: [`CybridApiBankSwift`](https://github.com/Cybrid-app/cybrid-api-bank-swift)
+>
+> API reference: https://docs.cybrid.xyz
+
 # cybrid-api-bank-java
 
 Cybrid Bank API
